@@ -468,6 +468,7 @@ public class Login extends HttpServlet {
         WebserverSystemException {
 
         response.reset();
+        response.setContentType("text/html");
 
         // add escidoc cookie
         response.addCookie(UserHandleCookieUtil.createAuthCookie(handle));
@@ -488,6 +489,7 @@ public class Login extends HttpServlet {
         }
 
         if (redirectUrlWithHandle == null) {
+            response.setContentType("text/html");
             sendResponse(response, getAuthenticatedPage(null));
         }
         else {
@@ -732,6 +734,7 @@ public class Login extends HttpServlet {
         // as redirect with POST is prohibited?
         // Or should a form be returned and the user posts the handle back to
         // the application (similar to Shibboleth's Browser/Post profile)?
+
         response.setStatus(HttpServletResponse.SC_SEE_OTHER);
         response.setHeader("Location", redirectUrl);
         response.flushBuffer();
