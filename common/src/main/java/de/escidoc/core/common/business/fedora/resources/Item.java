@@ -50,14 +50,17 @@ import de.escidoc.core.common.util.stax.handler.DcReadHandler;
 import de.escidoc.core.common.util.stax.handler.RelsExtRefListExtractor;
 import de.escidoc.core.common.util.stax.handler.item.RemoveObjectRelationHandlerNew;
 import de.escidoc.core.common.util.xml.XmlUtility;
+import de.escidoc.core.common.util.xml.Elements;
 import de.escidoc.core.common.util.xml.stax.events.Attribute;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElementWithChildElements;
+
 import org.fcrepo.server.types.gen.DatastreamControlGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLStreamException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -622,11 +625,21 @@ public class Item extends GenericVersionableResourcePid implements ItemInterface
 
                     final Map<String, String> mdProperties = ds.getProperties();
                     if (mdProperties != null) {
+                        Collection<String> componentIds = new ArrayList<String>();
                         if (mdProperties.containsKey("nsUri")) {
                             final String nsUri = mdProperties.get("nsUri");
+                            try {
+                                componentIds = this.getComponentIds();
+                            }
+                            catch (XmlParserSystemException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                            }
                             final String dcNewContent =
                                 XmlUtility.createDC(nsUri, ds.toStringUTF8(), getId(),
-                                    getResourcePropertiesValue(PropertyMapKeys.CURRENT_VERSION_CONTENT_MODEL_ID));
+                                    getResourcePropertiesValue(PropertyMapKeys.CURRENT_VERSION_CONTENT_MODEL_ID),
+                                    getResourcePropertiesValue(PropertyMapKeys.OBJECT_PID), componentIds,
+                                    checkVisibility(componentIds));
 
                             if (dcNewContent != null && dcNewContent.trim().length() > 0) {
                                 final Datastream dcNew;
@@ -1073,5 +1086,67 @@ public class Item extends GenericVersionableResourcePid implements ItemInterface
         catch (final StreamNotFoundException e1) {
             throw new IntegritySystemException(e1);
         }
+    }
+
+    private String checkVisibility(Collection<String> componentIds) throws FedoraSystemException {
+
+        String[] visibilities = { "private", "audience", "public" };
+        List<String> visibilitiesToUse = Arrays.asList(visibilities);
+
+        String[] contentCategories =
+            { "http://purl.org/escidoc/metadata/ves/content-categories/any-fulltext",
+                "http://purl.org/escidoc/metadata/ves/content-categories/publisher-version",
+                "http://purl.org/escidoc/metadata/ves/content-categories/post-print",
+                "http://purl.org/escidoc/metadata/ves/content-categories/pre-print" };
+        List<String> contentCategoriesToUse = Arrays.asList(contentCategories);
+
+        int visibilityIndex = 0;
+
+        try {
+            for (String id : componentIds) {
+                Component c;
+
+                c = this.getComponent(id);
+
+                //String contentCategory = c.getProperty(Elements.ELEMENT_COMPONENT_CONTENT_CATEGORY);
+                String contentCategory =
+                    c.getResourceProperties().get(TripleStoreUtility.PROP_COMPONENT_CONTENT_CATEGORY);
+
+                if (!contentCategoriesToUse.contains(contentCategory))
+                    continue;
+                String visibility = c.getResourceProperties().get(TripleStoreUtility.PROP_VISIBILITY);
+
+                if ("public".equals(visibility))
+                    return visibility;
+
+                int currentIndex = visibilitiesToUse.indexOf(visibility);
+
+                if (currentIndex > visibilityIndex) {
+                    visibilityIndex = currentIndex;
+                }
+
+            }
+        }
+        catch (ComponentNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (WebserverSystemException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (TripleStoreSystemException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IntegritySystemException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (XmlParserSystemException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return visibilities[visibilityIndex];
     }
 }

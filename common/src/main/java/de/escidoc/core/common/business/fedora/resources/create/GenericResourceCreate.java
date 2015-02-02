@@ -80,6 +80,20 @@ public abstract class GenericResourceCreate {
     }
 
     /**
+     * Get DC with PID.
+     *
+     * @param mdRecord       Metadata record which is to map to DC.
+     * @param contentModelId ID of the content model to look for transformation instruction.
+     * @return DC or null if default metadata is missing).
+     * @throws WebserverSystemException Thrown if an error occurs during DC creation.
+     * @throws EncodingSystemException  Thrown if the conversion to default encoding failed.
+     */
+    public String getDC(final MdRecordCreate mdRecord, final String contentModelId, final String pid)
+        throws WebserverSystemException, EncodingSystemException {
+        return XmlUtility.createDC(mdRecord.getNameSpace(), mdRecord.getContent(), this.objid, contentModelId, pid);
+    }
+
+    /**
      * Check status of a Context. An invalidStatusException is thrown if the Context has not the requested status.
      *
      * @param contextId The Id of the Context.

@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +55,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.pool.impl.StackKeyedObjectPool;
 import org.codehaus.stax2.XMLOutputFactory2;
 import org.joda.time.DateTime;
@@ -2586,12 +2588,62 @@ public final class XmlUtility {
         final String nsUri, final String mdRecordXml, final CharSequence objID, final String contentModelID)
         throws WebserverSystemException {
 
+        return createDC(nsUri, mdRecordXml, objID, contentModelID, "", new ArrayList<String>(), "");
+    }
+
+    /**
+     * Create the content of the DC datastream to store in Fedora.
+     *
+     * @param nsUri          nsUri of the md record. Through this URI is the mapping schema selected.
+     * @param mdRecordXml    Xml representation of the md record to parse.
+     * @param objID          The objid of the Fedora object. A triple is created with this objid.
+     * @param contentModelID The objid of the content-model.
+     * @param pid			 The persistent identifier.	
+     * @return The content of the DC datastream or null if content is empty.
+     * @throws WebserverSystemException If an error occurs.
+     */
+    public static String createDC(
+        final String nsUri, final String mdRecordXml, final CharSequence objID, final String contentModelID,
+        final String pid) throws WebserverSystemException {
+
+        return createDC(nsUri, mdRecordXml, objID, contentModelID, pid, new ArrayList<String>(), "");
+    }
+
+    /**
+     * Create the content of the DC datastream to store in Fedora.
+     *
+     * @param nsUri          nsUri of the md record. Through this URI is the mapping schema selected.
+     * @param mdRecordXml    Xml representation of the md record to parse.
+     * @param objID          The objid of the Fedora object. A triple is created with this objid.
+     * @param contentModelID The objid of the content-model.
+     * @param pid			 The persistent identifier.
+     * @param components	 The List of component object identidiers.
+     * @param				 The highest visibility of the components in the order 'private', 'audience', 'public'
+     * @return The content of the DC datastream or null if content is empty.
+     * @throws WebserverSystemException If an error occurs.
+     */
+    public static String createDC(
+        final String nsUri, final String mdRecordXml, final CharSequence objID, final String contentModelID,
+        final String pid, final Collection<String> componentIds, final String visibility)
+        throws WebserverSystemException {
+
+        LOGGER.info("createDC with objID <" + objID + "> contentModelID <" + contentModelID + "> pid <" + pid
+            + "> componentIds <" + StringUtils.join(componentIds, ',') + "> visibility <" + visibility + ">");
         String result = null;
 
         Transformer t = null;
         final String transformerKey = nsUri + ';' + contentModelID;
         try {
             t = (Transformer) TRANSFORMER_POOL.borrowObject(transformerKey);
+            if (pid != null && pid.length() > 0) {
+                t.setParameter("PID", pid);
+            }
+            if (componentIds != null && componentIds.size() > 0) {
+                t.setParameter("COMPONENT_IDS", StringUtils.join(componentIds, ','));
+            }
+            if (visibility != null && visibility.length() > 0) {
+                t.setParameter("VISIBILITY", visibility);
+            }
             if (objID != null && objID.length() > 0) {
                 t.setParameter("ID", objID);
             }
@@ -2654,5 +2706,4 @@ public final class XmlUtility {
         }
         return xhh.getHash();
     }
-
 }
