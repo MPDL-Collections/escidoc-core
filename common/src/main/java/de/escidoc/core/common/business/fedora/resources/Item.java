@@ -23,6 +23,24 @@
  */
 package de.escidoc.core.common.business.fedora.resources;
 
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.xml.stream.XMLStreamException;
+
+import org.fcrepo.server.types.gen.DatastreamControlGroup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.PropertyMapKeys;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
@@ -50,28 +68,9 @@ import de.escidoc.core.common.util.stax.handler.DcReadHandler;
 import de.escidoc.core.common.util.stax.handler.RelsExtRefListExtractor;
 import de.escidoc.core.common.util.stax.handler.item.RemoveObjectRelationHandlerNew;
 import de.escidoc.core.common.util.xml.XmlUtility;
-import de.escidoc.core.common.util.xml.Elements;
 import de.escidoc.core.common.util.xml.stax.events.Attribute;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElementWithChildElements;
-
-import org.fcrepo.server.types.gen.DatastreamControlGroup;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.xml.stream.XMLStreamException;
-
-import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * Implementation of a Fedora Item Object which consist of datastreams managed in Fedora Digital Repository System.
@@ -636,10 +635,14 @@ public class Item extends GenericVersionableResourcePid implements ItemInterface
                                 e1.printStackTrace();
                             }
                             final String dcNewContent =
-                                XmlUtility.createDC(nsUri, ds.toStringUTF8(), getId(),
-                                    getResourcePropertiesValue(PropertyMapKeys.CURRENT_VERSION_CONTENT_MODEL_ID),
-                                    getResourcePropertiesValue(PropertyMapKeys.OBJECT_PID), componentIds,
-                                    checkVisibility(componentIds));
+                                XmlUtility
+                                    .createDC(
+                                        nsUri,
+                                        ds.toStringUTF8(),
+                                        getId(),
+                                        getResourcePropertiesValue(PropertyMapKeys.CURRENT_VERSION_CONTENT_MODEL_ID),
+                                        getResourcePropertiesValue(PropertyMapKeys.OBJECT_PID) != null ? getResourcePropertiesValue(PropertyMapKeys.OBJECT_PID) : "",
+                                        componentIds, checkVisibility(componentIds));
 
                             if (dcNewContent != null && dcNewContent.trim().length() > 0) {
                                 final Datastream dcNew;
@@ -685,6 +688,91 @@ public class Item extends GenericVersionableResourcePid implements ItemInterface
             this.mdRecords.put(name, ds);
             ds.persist(false);
         }
+    }
+
+    @Override
+    public void setMdRecord(String name, Datastream ds, boolean forceUpdate) throws WebserverSystemException,
+        EncodingSystemException, IntegritySystemException, FedoraSystemException, TripleStoreSystemException {
+        // check if the metadata datastream is set, is equal to ds and save to
+        // fedora
+
+        // don't trust the handler
+        // ds.addAlternateId("metadata");
+        final String type = ds.getAlternateIDs().get(1);
+        final String schema = ds.getAlternateIDs().get(2);
+
+        if (!"escidoc".equals(name)) {
+            return;
+        }
+
+        try {
+            if (forceUpdate && "escidoc".equals(name)) {
+
+                final Map<String, String> mdProperties = ds.getProperties();
+                if (mdProperties != null) {
+                    Collection<String> componentIds = new ArrayList<String>();
+                    if (mdProperties.containsKey("nsUri")) {
+                        final String nsUri = mdProperties.get("nsUri");
+                        try {
+                            componentIds = this.getComponentIds();
+                        }
+                        catch (XmlParserSystemException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                        final String dcNewContent =
+                            XmlUtility
+                                .createDC(
+                                    nsUri,
+                                    ds.toStringUTF8(),
+                                    getId(),
+                                    getResourcePropertiesValue(PropertyMapKeys.CURRENT_VERSION_CONTENT_MODEL_ID),
+                                    getResourcePropertiesValue(PropertyMapKeys.OBJECT_PID) != null ? getResourcePropertiesValue(PropertyMapKeys.OBJECT_PID) : "",
+                                    componentIds, checkVisibility(componentIds));
+
+                        if (dcNewContent != null && dcNewContent.trim().length() > 0) {
+                            final Datastream dcNew;
+                            try {
+                                dcNew =
+                                    new Datastream("DC", getId(), dcNewContent.getBytes(XmlUtility.CHARACTER_ENCODING),
+                                        Datastream.MIME_TYPE_TEXT_XML);
+                            }
+                            catch (final UnsupportedEncodingException e) {
+                                throw new EncodingSystemException(e);
+                            }
+                            setDc(dcNew);
+                        }
+                    }
+                    else {
+                        throw new IntegritySystemException("namespace uri of 'escidoc' metadata"
+                            + " is not set in datastream.");
+                    }
+                }
+                else {
+                    throw new IntegritySystemException("Properties of 'md-record' datastream"
+                        + " with the name 'escidoc' does not exist");
+                }
+            }
+
+            // isNew does not indicate that the datastream does not exist
+            // in fedora, it may be deleted
+            this.mdRecords.put(name, ds);
+            ds.merge();
+        }
+        catch (final FedoraSystemException e) {
+            if (LOGGER.isWarnEnabled()) {
+                LOGGER.warn("Error on getting MD-records.");
+            }
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Error on getting MD-records.", e);
+            }
+            // this is not an update; its a create
+            ds.addAlternateId(type);
+            ds.addAlternateId(schema);
+            this.mdRecords.put(name, ds);
+            ds.persist(false);
+        }
+
     }
 
     @Deprecated

@@ -98,4 +98,16 @@ public interface ItemInterface extends VersionableResource {
      * @throws SystemException  Thrown in case of an internal error.
      */
     void setMdRecord(final String name, final Datastream ds) throws LockingException, SystemException;
+
+    /**
+     * Sets the metadata datastream specified by <code>name</code> and saves it in fedora. If the datastream is already
+     * set and unchanged, nothing will be done.
+     *
+     * @param name The name of a matadata datastream.
+     * @param ds   A metadata datastreams of this resource.
+     * @throws LockingException Thrown if resource is locked.
+     * @throws SystemException  Thrown in case of an internal error.
+     */
+    void setMdRecord(final String name, final Datastream ds, final boolean forceUpdate) throws LockingException,
+        SystemException;
 }

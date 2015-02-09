@@ -797,8 +797,8 @@ public class IndexingHandler implements ResourceListener {
             boolean running = true;
             while (running) {
                 handler.resetNoOfDocumentTerms();
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("getIds scan query <"
+                if (LOGGER.isInfoEnabled()) {
+                    LOGGER.info("getIds scan query <"
                         + EscidocConfiguration.getInstance().get(EscidocConfiguration.SRW_URL) + "/search/" + indexName
                         + Constants.SRW_TERM_MATCHER.reset(query).replaceFirst(lastTerm) + ">");
                 }

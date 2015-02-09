@@ -287,9 +287,7 @@ public class ItemCreate extends GenericResourceCreate {
             final MdRecordCreate mdRecord = getMetadataRecord(XmlTemplateProvider.DEFAULT_METADATA_FOR_DC_MAPPING);
             if (mdRecord != null) {
                 try {
-                    this.dcXml =
-                        getDC(mdRecord, this.properties.getObjectProperties().getContentModelId(), this.properties
-                            .getObjectProperties().getPid());
+                    this.dcXml = getDC(mdRecord, this.properties.getObjectProperties().getContentModelId());
                 }
                 catch (final Exception e) {
                     LOGGER.info("DC mapping of to create resource failed. " + e);

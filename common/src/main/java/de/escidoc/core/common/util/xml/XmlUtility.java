@@ -2598,24 +2598,6 @@ public final class XmlUtility {
      * @param mdRecordXml    Xml representation of the md record to parse.
      * @param objID          The objid of the Fedora object. A triple is created with this objid.
      * @param contentModelID The objid of the content-model.
-     * @param pid			 The persistent identifier.	
-     * @return The content of the DC datastream or null if content is empty.
-     * @throws WebserverSystemException If an error occurs.
-     */
-    public static String createDC(
-        final String nsUri, final String mdRecordXml, final CharSequence objID, final String contentModelID,
-        final String pid) throws WebserverSystemException {
-
-        return createDC(nsUri, mdRecordXml, objID, contentModelID, pid, new ArrayList<String>(), "");
-    }
-
-    /**
-     * Create the content of the DC datastream to store in Fedora.
-     *
-     * @param nsUri          nsUri of the md record. Through this URI is the mapping schema selected.
-     * @param mdRecordXml    Xml representation of the md record to parse.
-     * @param objID          The objid of the Fedora object. A triple is created with this objid.
-     * @param contentModelID The objid of the content-model.
      * @param pid			 The persistent identifier.
      * @param components	 The List of component object identidiers.
      * @param				 The highest visibility of the components in the order 'private', 'audience', 'public'
@@ -2635,13 +2617,13 @@ public final class XmlUtility {
         final String transformerKey = nsUri + ';' + contentModelID;
         try {
             t = (Transformer) TRANSFORMER_POOL.borrowObject(transformerKey);
-            if (pid != null && pid.length() > 0) {
+            if (pid != null) {
                 t.setParameter("PID", pid);
             }
-            if (componentIds != null && componentIds.size() > 0) {
+            if (componentIds != null) {
                 t.setParameter("COMPONENT_IDS", StringUtils.join(componentIds, ','));
             }
-            if (visibility != null && visibility.length() > 0) {
+            if (visibility != null) {
                 t.setParameter("VISIBILITY", visibility);
             }
             if (objID != null && objID.length() > 0) {
@@ -2650,6 +2632,12 @@ public final class XmlUtility {
             else {
                 t.clearParameters();
             }
+
+            LOGGER.info("create DC Parameter PID set to <" + t.getParameter("PID") + ">");
+            LOGGER.info("create DC Parameter COMPONENT_IDS set to <" + t.getParameter("COMPONENT_IDS") + ">");
+            LOGGER.info("create DC Parameter VISIBILITY set to <" + t.getParameter("VISIBILITY") + ">");
+            LOGGER.info("create DC Parameter ID set to <" + t.getParameter("ID") + ">");
+
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             t.transform(new StreamSource(new ByteArrayInputStream(mdRecordXml.getBytes(CHARACTER_ENCODING))),
                 new StreamResult(out));
