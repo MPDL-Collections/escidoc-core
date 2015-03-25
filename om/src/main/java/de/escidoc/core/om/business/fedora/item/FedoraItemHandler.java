@@ -154,6 +154,8 @@ import de.escidoc.core.om.business.stax.handler.item.ItemUpdateHandler;
  */
 public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInterface {
 
+    private static final String ESCIDOC_METADATA_NAME = "escidoc";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(FedoraItemHandler.class);
 
     private FedoraContentRelationHandler contentRelationHandler;
@@ -343,7 +345,7 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
             }
             final Map<String, ByteArrayOutputStream> mdRecordsStreams =
                 (Map<String, ByteArrayOutputStream>) streams.get("md-records");
-            if (mdRecordsStreams != null && !mdRecordsStreams.containsKey("escidoc") && !origin) {
+            if (mdRecordsStreams != null && !mdRecordsStreams.containsKey(ESCIDOC_METADATA_NAME) && !origin) {
                 throw new MissingMdRecordException("No escidoc internal metadata found " + "(md-record/@name='escidoc'");
             }
             final Map<String, Map<String, String>> mdRecordsAttributes = mdHandler.getMetadataAttributes();
@@ -673,17 +675,20 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
             XmlUtility.handleUnexpectedStaxParserException(e.getMessage(), e);
         }
 
-        final Map mds = (Map) me.getOutputStreams().get("md-records");
+        final Map<String, ByteArrayOutputStream> mds =
+            (Map<String, ByteArrayOutputStream>) me.getOutputStreams().get("md-records");
         // there is only one md-record (root element is md-record)
-        final ByteArrayOutputStream mdXml = (ByteArrayOutputStream) mds.get(mdRecordId);
-        final Map<String, Map<String, String>> mdAttributes = mdHandler.getMetadataAttributes();
-        final Map<String, String> mdRecordAttributes = mdAttributes.get(mdRecordId);
-        try {
-            setMetadataRecord(mdRecordId, mdXml.toString(XmlUtility.CHARACTER_ENCODING), mdRecordAttributes);
-        }
-        catch (final UnsupportedEncodingException e) {
-            throw new EncodingSystemException(e.getMessage(), e);
-        }
+        //        final ByteArrayOutputStream mdXml = (ByteArrayOutputStream) mds.get(mdRecordId);
+
+        //        final Map<String, Map<String, String>> mdAttributes = mdHandler.getMetadataAttributes();
+        //        final Map<String, String> mdRecordAttributes = mdAttributes.get(mdRecordId);
+        //setMetadataRecord(mdRecordId, mdXml.toString(XmlUtility.CHARACTER_ENCODING), mdRecordAttributes);
+
+        final Map<String, Map<String, String>> mdRecordsAttributes = mdHandler.getMetadataAttributes();
+        final String escidocMdNsUri = mdHandler.getEscidocMdRecordNameSpace();
+        setMetadataRecords(mds, mdRecordsAttributes, escidocMdNsUri);
+
+        // TODO        getItem().setMdRecord("escidoc", ds, true);
 
         final String endTimestamp = getItem().getLastFedoraModificationDate();
         if (!startTimestamp.equals(endTimestamp)) {
@@ -1256,31 +1261,49 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
                     + "' and can not be " + Constants.STATUS_RELEASED + '.');
             }
 
-            // set status "released"
-            // only renew the timestamp and set status with version entry
-            makeVersion(taskParameter.getComment(), Constants.STATUS_RELEASED);
-            getItem().setLatestReleasePid();
-            getItem().persist();
+            // force an update of the metadata with name 'escidoc' to trigger a rebuild of the dc datastream. This is necessary for the Open Aire stuff of PubMan.
+            try {
+                updateEscidocMetadataRecords(id, this.retrieveMdRecord(id, ESCIDOC_METADATA_NAME));
 
-            // notify indexer
-            // getUtility().notifyIndexerAddPublication(getItem().getHref());
+                // set status "released"
+                // only renew the timestamp and set status with version entry
+                makeVersion(taskParameter.getComment(), Constants.STATUS_RELEASED);
+                getItem().setLatestReleasePid();
+                getItem().persist();
 
-            fireItemModified(getItem().getId());
-            // find surrogate items which reference this item by a floating
-            // reference, recache them and if necessary reindex them.
-            final List<String> surrogateItemIds = getTripleStoreUtility().getSurrogates(getItem().getId());
-            final Collection<String> referencedSurrogateItemIds = new ArrayList<String>();
-            for (final String surrogateId : surrogateItemIds) {
-                final String versionId =
-                    getTripleStoreUtility().getRelation(surrogateId, TripleStoreUtility.PROP_ORIGIN_VERSION);
-                if (versionId == null) {
-                    setOriginId(getItem().getId());
-                    setOriginItem(getItem());
-                    referencedSurrogateItemIds.add(surrogateId);
+                fireItemModified(getItem().getId(), retrieve(getItem().getId()));
+
+                // find surrogate items which reference this item by a floating
+                // reference, recache them and if necessary reindex them.
+                final List<String> surrogateItemIds = getTripleStoreUtility().getSurrogates(getItem().getId());
+                final Collection<String> referencedSurrogateItemIds = new ArrayList<String>();
+                for (final String surrogateId : surrogateItemIds) {
+                    final String versionId =
+                        getTripleStoreUtility().getRelation(surrogateId, TripleStoreUtility.PROP_ORIGIN_VERSION);
+                    if (versionId == null) {
+                        setOriginId(getItem().getId());
+                        setOriginItem(getItem());
+                        referencedSurrogateItemIds.add(surrogateId);
+                    }
                 }
+                // run item recaching/reindexing asynchronously
+                queueItemsModified(referencedSurrogateItemIds);
             }
-            // run item recaching/reindexing asynchronously
-            queueItemsModified(referencedSurrogateItemIds);
+            catch (XmlSchemaValidationException e) {
+                LOGGER.warn("XmlSchemaValidationException caught in updateEscidocMetadataRecords ", e);
+            }
+            catch (XmlSchemaNotFoundException e) {
+                LOGGER.warn("XmlSchemaValidationException caught in updateEscidocMetadataRecords ", e);
+            }
+            catch (InvalidContentException e) {
+                LOGGER.warn("InvalidContentException caught in updateEscidocMetadataRecords ", e);
+            }
+            catch (MdRecordNotFoundException e) {
+                LOGGER.warn("MdRecordNotFoundException caught in updateEscidocMetadataRecords ", e);
+            }
+            catch (AuthorizationException e) {
+                LOGGER.warn("AuthorizationException caught in updateEscidocMetadataRecords ", e);
+            }
         }
 
         String ret = getUtility().prepareReturnXmlFromLastModificationDate(getItem().getLastModificationDate());
@@ -1935,7 +1958,7 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
                 final ByteArrayOutputStream stream = mdMap.get(name);
                 final byte[] xmlBytes = stream.toByteArray();
                 HashMap<String, String> mdProperties = null;
-                if ("escidoc".equals(name)) {
+                if (ESCIDOC_METADATA_NAME.equals(name)) {
                     mdProperties = new HashMap<String, String>();
                     mdProperties.put("nsUri", escidocMdRecordnsUri);
 
@@ -1950,6 +1973,46 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
             }
             getItem().setMdRecords(dsMap);
         }
+    }
+
+    /**
+     * Creates Datastream objects from the ByteArrayOutputStreams in <code>mdMap</code> and calls Item.setMdRecords with
+     * a HashMap which contains the metadata datastreams as Datastream objects.
+     *
+     * @param mdMap           A HashMap which contains the metadata datastreams as ByteArrayOutputStream.
+     * @param mdAttributesMap A HashMap which contains the metadata attributes.
+     * @param escidocMdRecordnsUri
+     * @throws de.escidoc.core.common.exceptions.system.WebserverSystemException
+     * @throws de.escidoc.core.common.exceptions.system.TripleStoreSystemException
+     * @throws de.escidoc.core.common.exceptions.system.FedoraSystemException
+     * @throws de.escidoc.core.common.exceptions.system.IntegritySystemException
+     * @throws de.escidoc.core.common.exceptions.system.EncodingSystemException
+     */
+    private void setEscidocMetadataRecords(
+        final Map<String, ByteArrayOutputStream> mdMap, final Map<String, Map<String, String>> mdAttributesMap,
+        final String escidocMdRecordnsUri) throws WebserverSystemException, IntegritySystemException,
+        FedoraSystemException, TripleStoreSystemException, EncodingSystemException {
+
+        final ByteArrayOutputStream stream = mdMap.get(ESCIDOC_METADATA_NAME);
+
+        if (stream == null) {
+            throw new IntegritySystemException("No stream found in escidoc metadata");
+        }
+
+        final byte[] xmlBytes = stream.toByteArray();
+        HashMap<String, String> mdProperties = new HashMap<String, String>();
+        mdProperties.put("nsUri", escidocMdRecordnsUri);
+
+        Datastream ds =
+            new Datastream(ESCIDOC_METADATA_NAME, getItem().getId(), xmlBytes, Datastream.MIME_TYPE_TEXT_XML, mdProperties);
+                
+        final Map<String, String> mdRecordAttributes = mdAttributesMap.get(ESCIDOC_METADATA_NAME);
+
+        ds.addAlternateId(Datastream.METADATA_ALTERNATE_ID);
+        ds.addAlternateId(mdRecordAttributes.get("type"));
+        ds.addAlternateId(mdRecordAttributes.get("schema"));
+
+        getItem().setMdRecord(ESCIDOC_METADATA_NAME, ds, true);
     }
 
     /**
@@ -2387,5 +2450,77 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
         }
 
         return origin;
+    }
+
+    public String updateEscidocMetadataRecords(final String id, final String xmlData) throws ItemNotFoundException,
+        XmlSchemaNotFoundException, LockingException, XmlCorruptedException, XmlSchemaValidationException,
+        InvalidContentException, MdRecordNotFoundException, ReadonlyViolationException,
+        MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidStatusException,
+        ReadonlyVersionException, AuthorizationException, EncodingSystemException, IntegritySystemException,
+        FedoraSystemException, TripleStoreSystemException, XmlParserSystemException, WebserverSystemException {
+
+        setItem(id);
+        final String startTimestamp = getItem().getLastFedoraModificationDate();
+
+        final StaxParser sp = new StaxParser();
+        final OptimisticLockingHandler olh =
+            new OptimisticLockingHandler(getItem().getId(), Constants.ITEM_OBJECT_TYPE, getItem()
+                .getLastModificationDate());
+        sp.addHandler(olh);
+        final MdRecordsUpdateHandler mdHandler = new MdRecordsUpdateHandler("", sp);
+        sp.addHandler(mdHandler);
+
+        final MultipleExtractor me = new MultipleExtractor("/md-record", "name", sp);
+        sp.addHandler(me);
+
+        try {
+            sp.parse(xmlData);
+        }
+        catch (final OptimisticLockingException e) {
+            throw e;
+        }
+        catch (final WebserverSystemException e) {
+            throw e;
+        }
+        catch (final InvalidContentException e) {
+            throw e;
+        }
+        catch (final TripleStoreSystemException e) {
+            throw e;
+        }
+        catch (final EncodingSystemException e) {
+            throw e;
+        }
+        catch (final XmlParserSystemException e) {
+            throw e;
+        }
+        catch (final XMLStreamException e) {
+            throw new XmlParserSystemException(e);
+        }
+        catch (final Exception e) {
+            XmlUtility.handleUnexpectedStaxParserException("", e);
+        }
+        sp.clearHandlerChain();
+
+        final Map<String, ByteArrayOutputStream> mds =
+            (Map<String, ByteArrayOutputStream>) me.getOutputStreams().get("md-records");
+
+        final Map<String, Map<String, String>> mdRecordsAttributes = mdHandler.getMetadataAttributes();
+        final String escidocMdNsUri = mdHandler.getEscidocMdRecordNameSpace();
+        setEscidocMetadataRecords(mds, mdRecordsAttributes, escidocMdNsUri);
+
+        final String endTimestamp = getItem().getLastFedoraModificationDate();
+        if (!startTimestamp.equals(endTimestamp)) {
+            LOGGER.info("updateDC timestamp difference!!");
+        }
+        final String newMdRecord;
+        try {
+            newMdRecord = retrieveMdRecord(getItem().getId(), ESCIDOC_METADATA_NAME);
+        }
+        catch (final MdRecordNotFoundException e) {
+            throw new IntegritySystemException("After succesfully update metadata.", e);
+        }
+
+        return newMdRecord;
     }
 }
