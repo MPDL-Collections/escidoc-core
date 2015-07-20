@@ -116,6 +116,23 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>2.3.2</version>
 				</plugin>
+				<plugin>
+				    <groupId>org.jacoco</groupId>
+				    <artifactId>jacoco-maven-plugin</artifactId>
+				    <version>0.6.0.201210061924</version>
+				    <configuration>
+				        <destFile>${sonar.jacoco.reportPath}</destFile>
+				        <append>true</append>
+				    </configuration>
+				    <executions>
+				        <execution>
+				            <id>agent</id>
+				            <goals>
+				                <goal>prepare-agent</goal>
+				            </goals>
+				        </execution>
+				    </executions>
+				</plugin>
 				
 
 			</plugins>
@@ -986,6 +1003,12 @@
 		<cargo.wait>false</cargo.wait>
 		<cargo.jvmdebug></cargo.jvmdebug>
 		<cargo.ucldebug></cargo.ucldebug>
+		
+		<!-- Sonar -->
+	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+	    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+	    <sonar.language>java</sonar.language>
 
 		<!-- escidoc.oracle.host>localhost</escidoc.oracle.host> <escidoc.oracle.port>1521</escidoc.oracle.port> 
 			<escidoc.oracle.database>XE</escidoc.oracle.database> <escidoc.default.tablespace>USERS</escidoc.default.tablespace> 
