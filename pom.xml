@@ -2235,6 +2235,20 @@
 												<ignore />
 											</action>
 										</pluginExecution>
+										<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>org.zeroturnaround</groupId>
+											<artifactId>jrebel-maven-plugin</artifactId>
+											<versionRange>[1.1.3,)</versionRange>
+											<goals>
+												<goal>generate</goal>
+												<goal>generate-liverebel-xml</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore />
+										</action>
+										</pluginExecution>
 									</pluginExecutions>
 								</lifecycleMappingMetadata>
 							</configuration>
