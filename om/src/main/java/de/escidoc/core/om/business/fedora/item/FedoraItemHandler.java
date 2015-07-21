@@ -2004,8 +2004,9 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
         mdProperties.put("nsUri", escidocMdRecordnsUri);
 
         Datastream ds =
-            new Datastream(ESCIDOC_METADATA_NAME, getItem().getId(), xmlBytes, Datastream.MIME_TYPE_TEXT_XML, mdProperties);
-                
+            new Datastream(ESCIDOC_METADATA_NAME, getItem().getId(), xmlBytes, Datastream.MIME_TYPE_TEXT_XML,
+                mdProperties);
+
         final Map<String, String> mdRecordAttributes = mdAttributesMap.get(ESCIDOC_METADATA_NAME);
 
         ds.addAlternateId(Datastream.METADATA_ALTERNATE_ID);

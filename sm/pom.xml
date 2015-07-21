@@ -28,6 +28,7 @@
 						<configuration>
 							<sources>
 								<source>target/generated-sources</source>
+								<source>target/hibernate3/generated-sources</source>
 							</sources>
 						</configuration>
 					</execution>
