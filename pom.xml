@@ -1020,6 +1020,22 @@
 			<triplestore.oracle.database>XE</triplestore.oracle.database> <triplestore.database.user>riTriples</triplestore.database.user> 
 			<triplestore.database.password>riTriples</triplestore.database.password> 
 			<triplestore.default.tablespace>USERS</triplestore.default.tablespace> <triplestore.temp.tablespace>TEMP</triplestore.temp.tablespace -->
+			
+		<!-- Sonar -->
+	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+	    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+	    <sonar.language>java</sonar.language>
+	    
+	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+	
+		<jacoco.version>0.7.1.201405082137</jacoco.version>
+	    <jacoco.outputDir>${project.build.directory}/jacoco</jacoco.outputDir>
+	    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
+	    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
+	    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
+	    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>	
 	</properties>
 
 	<dependencies>
@@ -2264,21 +2280,7 @@
 		          http://localhost:9000/sonar
 		        </sonar.host.url>
 		        
-		        <!-- Sonar -->
-			    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-			    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-			    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
-			    <sonar.language>java</sonar.language>
-			    
-			    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-			    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-			
-				<jacoco.version>0.7.1.201405082137</jacoco.version>
-			    <jacoco.outputDir>${project.build.directory}/jacoco</jacoco.outputDir>
-			    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
-			    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
-			    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
-			    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+		        
 		    </properties>
 		</profile>
 			      
