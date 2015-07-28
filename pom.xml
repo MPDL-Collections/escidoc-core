@@ -119,7 +119,7 @@
 				<plugin>
 				    <groupId>org.jacoco</groupId>
 				    <artifactId>jacoco-maven-plugin</artifactId>
-				    <version>0.6.0.201210061924</version>
+				    <version>0.7.1.201405082137</version>
 				    <configuration>
 				        <destFile>${sonar.jacoco.reportPath}</destFile>
 				        <append>true</append>
@@ -130,8 +130,15 @@
 				            <goals>
 				                <goal>prepare-agent</goal>
 				            </goals>
-				        </execution>
-				    </executions>
+				        </execution>				    
+					     <execution>
+				            <id>default-report</id>
+				            <phase>prepare-package</phase>
+				            <goals>
+				              <goal>report</goal>
+				            </goals>
+	          			</execution>
+          			</executions>
 				</plugin>
 				
 				<plugin>
@@ -1005,12 +1012,6 @@
 		<cargo.wait>false</cargo.wait>
 		<cargo.jvmdebug></cargo.jvmdebug>
 		<cargo.ucldebug></cargo.ucldebug>
-		
-		<!-- Sonar -->
-	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-	    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
-	    <sonar.language>java</sonar.language>
 
 		<!-- escidoc.oracle.host>localhost</escidoc.oracle.host> <escidoc.oracle.port>1521</escidoc.oracle.port> 
 			<escidoc.oracle.database>XE</escidoc.oracle.database> <escidoc.default.tablespace>USERS</escidoc.default.tablespace> 
@@ -2252,17 +2253,32 @@
 		        <activeByDefault>false</activeByDefault>
 		    </activation>
 		    <properties>
-		        <!-- EXAMPLE FOR MYSQL -->
+
 		        <sonar.jdbc.url>
 		          jdbc:postgresql://localhost:5432/sonar
 		        </sonar.jdbc.url>
 		        <sonar.jdbc.username>sonar</sonar.jdbc.username>
 		        <sonar.jdbc.password>sonar</sonar.jdbc.password>
 		
-		        <!-- optional URL to server. Default value is http://localhost:9000 -->
 		        <sonar.host.url>
 		          http://localhost:9000/sonar
 		        </sonar.host.url>
+		        
+		        <!-- Sonar -->
+			    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+			    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+			    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+			    <sonar.language>java</sonar.language>
+			    
+			    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+			    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+			
+				<jacoco.version>0.7.1.201405082137</jacoco.version>
+			    <jacoco.outputDir>${project.build.directory}/jacoco</jacoco.outputDir>
+			    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
+			    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
+			    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
+			    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
 		    </properties>
 		</profile>
 			      
