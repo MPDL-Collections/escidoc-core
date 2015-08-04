@@ -651,7 +651,7 @@ public class Login extends HttpServlet {
     private void initFileContent(final String templateFileName) throws IOException {
 
         final StringBuilder result = new StringBuilder();
-        final InputStream inputStream = this.getClass().getResourceAsStream(templateFileName);
+        final InputStream inputStream = this.getServletContext().getResourceAsStream(templateFileName);
         if (inputStream == null) {
             throw new IOException(StringUtility.format("Template not found", templateFileName));
         }

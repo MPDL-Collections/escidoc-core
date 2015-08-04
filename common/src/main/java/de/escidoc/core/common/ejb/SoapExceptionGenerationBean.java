@@ -19,6 +19,19 @@
  */
 package de.escidoc.core.common.ejb;
 
+import java.rmi.RemoteException;
+
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.access.BeanFactoryLocator;
+import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.application.ApplicationException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidAggregationTypeException;
@@ -118,17 +131,6 @@ import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 import de.escidoc.core.common.service.interfaces.SoapExceptionGenerationInterface;
 import de.escidoc.core.common.util.service.UserContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
 
 public class SoapExceptionGenerationBean implements SessionBean {
 
@@ -152,25 +154,25 @@ public class SoapExceptionGenerationBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final void generateExceptions(final SecurityContext securityContext) throws EscidocException,
+    public void generateExceptions(final SecurityContext securityContext) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,
         MissingAttributeValueException, MissingElementValueException, MissingParameterException,
         RuleViolationException, InvalidContextException, InvalidContextStatusException,
@@ -208,7 +210,7 @@ public class SoapExceptionGenerationBean implements SessionBean {
         service.generateExceptions();
     }
 
-    public final void generateExceptions(final String authHandle, final Boolean restAccess) throws EscidocException,
+    public void generateExceptions(final String authHandle, final Boolean restAccess) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,
         MissingAttributeValueException, MissingElementValueException, MissingParameterException,
         RuleViolationException, InvalidContextException, InvalidContextStatusException,

@@ -59,25 +59,25 @@ public class UserGroupHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String create(final String xmlData, final SecurityContext securityContext)
+    public String create(final String xmlData, final SecurityContext securityContext)
         throws UniqueConstraintViolationException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -89,7 +89,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
-    public final String create(final String xmlData, final String authHandle, final Boolean restAccess)
+    public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws UniqueConstraintViolationException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -102,9 +102,8 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
-    public final void delete(final String groupId, final SecurityContext securityContext)
-        throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException {
+    public void delete(final String groupId, final SecurityContext securityContext) throws UserGroupNotFoundException,
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -114,7 +113,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.delete(groupId);
     }
 
-    public final void delete(final String groupId, final String authHandle, final Boolean restAccess)
+    public void delete(final String groupId, final String authHandle, final Boolean restAccess)
         throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -127,7 +126,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.delete(groupId);
     }
 
-    public final String retrieve(final String groupId, final SecurityContext securityContext)
+    public String retrieve(final String groupId, final SecurityContext securityContext)
         throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -139,7 +138,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieve(groupId);
     }
 
-    public final String retrieve(final String groupId, final String authHandle, final Boolean restAccess)
+    public String retrieve(final String groupId, final String authHandle, final Boolean restAccess)
         throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -152,7 +151,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieve(groupId);
     }
 
-    public final String update(final String groupId, final String xmlData, final SecurityContext securityContext)
+    public String update(final String groupId, final String xmlData, final SecurityContext securityContext)
         throws UserGroupNotFoundException, UniqueConstraintViolationException, XmlCorruptedException,
         XmlSchemaValidationException, MissingMethodParameterException, MissingAttributeValueException,
         OptimisticLockingException, AuthenticationException, AuthorizationException, SystemException {
@@ -165,8 +164,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.update(groupId, xmlData);
     }
 
-    public final String update(
-        final String groupId, final String xmlData, final String authHandle, final Boolean restAccess)
+    public String update(final String groupId, final String xmlData, final String authHandle, final Boolean restAccess)
         throws UserGroupNotFoundException, UniqueConstraintViolationException, XmlCorruptedException,
         XmlSchemaValidationException, MissingMethodParameterException, MissingAttributeValueException,
         OptimisticLockingException, AuthenticationException, AuthorizationException, SystemException {
@@ -180,7 +178,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.update(groupId, xmlData);
     }
 
-    public final void activate(final String groupId, final String taskParam, final SecurityContext securityContext)
+    public void activate(final String groupId, final String taskParam, final SecurityContext securityContext)
         throws AlreadyActiveException, UserGroupNotFoundException, XmlCorruptedException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
         AuthenticationException, AuthorizationException, SystemException {
@@ -193,8 +191,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.activate(groupId, taskParam);
     }
 
-    public final void activate(
-        final String groupId, final String taskParam, final String authHandle, final Boolean restAccess)
+    public void activate(final String groupId, final String taskParam, final String authHandle, final Boolean restAccess)
         throws AlreadyActiveException, UserGroupNotFoundException, XmlCorruptedException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
         AuthenticationException, AuthorizationException, SystemException {
@@ -208,7 +205,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.activate(groupId, taskParam);
     }
 
-    public final void deactivate(final String groupId, final String taskParam, final SecurityContext securityContext)
+    public void deactivate(final String groupId, final String taskParam, final SecurityContext securityContext)
         throws AlreadyDeactiveException, UserGroupNotFoundException, XmlCorruptedException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
         AuthenticationException, AuthorizationException, SystemException {
@@ -221,7 +218,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.deactivate(groupId, taskParam);
     }
 
-    public final void deactivate(
+    public void deactivate(
         final String groupId, final String taskParam, final String authHandle, final Boolean restAccess)
         throws AlreadyDeactiveException, UserGroupNotFoundException, XmlCorruptedException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
@@ -236,7 +233,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.deactivate(groupId, taskParam);
     }
 
-    public final String retrieveCurrentGrants(final String userGroupId, final SecurityContext securityContext)
+    public String retrieveCurrentGrants(final String userGroupId, final SecurityContext securityContext)
         throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -248,9 +245,9 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveCurrentGrants(userGroupId);
     }
 
-    public final String retrieveCurrentGrants(
-        final String userGroupId, final String authHandle, final Boolean restAccess) throws UserGroupNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
+    public String retrieveCurrentGrants(final String userGroupId, final String authHandle, final Boolean restAccess)
+        throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
+        AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(authHandle);
             UserContext.setRestAccess(restAccess);
@@ -261,7 +258,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveCurrentGrants(userGroupId);
     }
 
-    public final String createGrant(final String groupId, final String grantXML, final SecurityContext securityContext)
+    public String createGrant(final String groupId, final String grantXML, final SecurityContext securityContext)
         throws AlreadyExistsException, UserGroupNotFoundException, InvalidScopeException, RoleNotFoundException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -274,7 +271,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.createGrant(groupId, grantXML);
     }
 
-    public final String createGrant(
+    public String createGrant(
         final String groupId, final String grantXML, final String authHandle, final Boolean restAccess)
         throws AlreadyExistsException, UserGroupNotFoundException, InvalidScopeException, RoleNotFoundException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
@@ -289,7 +286,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.createGrant(groupId, grantXML);
     }
 
-    public final void revokeGrant(
+    public void revokeGrant(
         final String groupId, final String grantId, final String taskParam, final SecurityContext securityContext)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
@@ -303,7 +300,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.revokeGrant(groupId, grantId, taskParam);
     }
 
-    public final void revokeGrant(
+    public void revokeGrant(
         final String groupId, final String grantId, final String taskParam, final String authHandle,
         final Boolean restAccess) throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException,
         XmlCorruptedException, MissingAttributeValueException, MissingMethodParameterException,
@@ -318,7 +315,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.revokeGrant(groupId, grantId, taskParam);
     }
 
-    public final String retrieveGrant(final String groupId, final String grantId, final SecurityContext securityContext)
+    public String retrieveGrant(final String groupId, final String grantId, final SecurityContext securityContext)
         throws UserGroupNotFoundException, GrantNotFoundException, MissingMethodParameterException,
         AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -330,7 +327,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveGrant(groupId, grantId);
     }
 
-    public final String retrieveGrant(
+    public String retrieveGrant(
         final String groupId, final String grantId, final String authHandle, final Boolean restAccess)
         throws UserGroupNotFoundException, GrantNotFoundException, MissingMethodParameterException,
         AuthenticationException, AuthorizationException, SystemException {
@@ -344,7 +341,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveGrant(groupId, grantId);
     }
 
-    public final void revokeGrants(final String groupId, final String taskParam, final SecurityContext securityContext)
+    public void revokeGrants(final String groupId, final String taskParam, final SecurityContext securityContext)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -357,7 +354,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.revokeGrants(groupId, taskParam);
     }
 
-    public final void revokeGrants(
+    public void revokeGrants(
         final String groupId, final String taskParam, final String authHandle, final Boolean restAccess)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
@@ -372,7 +369,7 @@ public class UserGroupHandlerBean implements SessionBean {
         service.revokeGrants(groupId, taskParam);
     }
 
-    public final String retrieveResources(final String groupId, final SecurityContext securityContext)
+    public String retrieveResources(final String groupId, final SecurityContext securityContext)
         throws UserGroupNotFoundException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -383,7 +380,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveResources(groupId);
     }
 
-    public final String retrieveResources(final String groupId, final String authHandle, final Boolean restAccess)
+    public String retrieveResources(final String groupId, final String authHandle, final Boolean restAccess)
         throws UserGroupNotFoundException, SystemException {
         try {
             UserContext.setUserContext(authHandle);
@@ -395,7 +392,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveResources(groupId);
     }
 
-    public final String retrieveUserGroups(final Map filter, final SecurityContext securityContext)
+    public String retrieveUserGroups(final Map filter, final SecurityContext securityContext)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException,
         InvalidSearchQueryException, SystemException {
         try {
@@ -407,7 +404,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveUserGroups(filter);
     }
 
-    public final String retrieveUserGroups(final Map filter, final String authHandle, final Boolean restAccess)
+    public String retrieveUserGroups(final Map filter, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException,
         InvalidSearchQueryException, SystemException {
         try {
@@ -420,7 +417,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.retrieveUserGroups(filter);
     }
 
-    public final String addSelectors(final String groupId, final String taskParam, final SecurityContext securityContext)
+    public String addSelectors(final String groupId, final String taskParam, final SecurityContext securityContext)
         throws OrganizationalUnitNotFoundException, UserAccountNotFoundException, UserGroupNotFoundException,
         InvalidContentException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException, OptimisticLockingException, XmlCorruptedException, XmlSchemaValidationException,
@@ -434,7 +431,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.addSelectors(groupId, taskParam);
     }
 
-    public final String addSelectors(
+    public String addSelectors(
         final String groupId, final String taskParam, final String authHandle, final Boolean restAccess)
         throws OrganizationalUnitNotFoundException, UserAccountNotFoundException, UserGroupNotFoundException,
         InvalidContentException, MissingMethodParameterException, SystemException, AuthenticationException,
@@ -450,8 +447,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.addSelectors(groupId, taskParam);
     }
 
-    public final String removeSelectors(
-        final String groupId, final String taskParam, final SecurityContext securityContext)
+    public String removeSelectors(final String groupId, final String taskParam, final SecurityContext securityContext)
         throws XmlCorruptedException, XmlSchemaValidationException, AuthenticationException, AuthorizationException,
         SystemException, UserGroupNotFoundException, OptimisticLockingException, MissingMethodParameterException,
         UserAccountNotFoundException, OrganizationalUnitNotFoundException {
@@ -464,7 +460,7 @@ public class UserGroupHandlerBean implements SessionBean {
         return service.removeSelectors(groupId, taskParam);
     }
 
-    public final String removeSelectors(
+    public String removeSelectors(
         final String groupId, final String taskParam, final String authHandle, final Boolean restAccess)
         throws XmlCorruptedException, XmlSchemaValidationException, AuthenticationException, AuthorizationException,
         SystemException, UserGroupNotFoundException, OptimisticLockingException, MissingMethodParameterException,

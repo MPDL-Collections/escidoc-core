@@ -18,7 +18,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.escidoc.core</groupId>
+	<groupId>org.escidoc.core.wildfly</groupId>
 	<artifactId>eSciDocCore</artifactId>
 	<packaging>pom</packaging>
 	<name>eSciDoc Core</name>
@@ -499,8 +499,8 @@
 					</dependency>
 					<dependency>
 						<groupId>org.springframework.security</groupId>
-						<artifactId>spring-security-core</artifactId>
-						<version>2.0.5.RELEASE</version>
+						<artifactId>spring-security-web</artifactId>
+						<version>3.2.8.RELEASE</version>
 						<exclusions>
 							<exclusion>
 								<groupId>commons-logging</groupId>
@@ -934,14 +934,14 @@
 	</distributionManagement>
 
 	<properties>
-		<java.source.version>1.6</java.source.version>
-		<java.target.version>1.6</java.target.version>
+		<java.source.version>1.7</java.source.version>
+		<java.target.version>1.7</java.target.version>
 		<environment>development</environment>
 		<springDefaultLazyInit>true</springDefaultLazyInit>
 		<slf4j.version>1.6.1</slf4j.version>
 		<log4j.version>1.2.16</log4j.version>
 		<aspectj.version>1.6.10</aspectj.version>
-		<spring.version>3.0.7.RELEASE</spring.version>
+		<spring.version>3.2.14.RELEASE</spring.version>
 		<camel.version>2.4.0</camel.version>
 		<activemq.version>5.3.2</activemq.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
@@ -958,8 +958,6 @@
 		<escidoc.saxon.version>1.0.7</escidoc.saxon.version>
 		<migration-tool.version>1.3.5</migration-tool.version>
 		<escidoc.oaiprovider.version>0.0.10</escidoc.oaiprovider.version>
-		<java.source.version>1.6</java.source.version>
-		<java.target.version>1.6</java.target.version>
 		<!-- <jaxb.xsd.folder>src/main/resources/xsd</jaxb.xsd.folder> <jaxb.xjb.folder>src/main/resources/META-INF/bindings</jaxb.xjb.folder> 
 			<jaxb.temporary.folder>target/generated-sources/resources/jaxb</jaxb.temporary.folder> -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -1092,27 +1090,35 @@
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-jpa_1.0_spec</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-ee</artifactId>
+			<version>8.2.0.Final</version>
+			<scope>provided</scope>
+		</dependency>
 
-		<!-- TODO: Delete this dependency after refectoring. -->
+		<!-- 
 		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jboss</artifactId>
 		</dependency>
-		<!-- TODO: Delete this dependency after refectoring. -->
+		
 		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jboss-system</artifactId>
 		</dependency>
-		<!-- TODO: Delete this dependency after refectoring. -->
+		
 		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jbossall-client</artifactId>
 		</dependency>
-		<!-- TODO: Delete this dependency after refectoring. -->
+		
 		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jbosssx</artifactId>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>net.sourceforge.findbugs</groupId>
 			<artifactId>annotations</artifactId>
@@ -1222,35 +1228,35 @@
 				<scope>provided</scope>
 			</dependency>
 
-			<!-- TODO: Delete this dependency after refectoring. -->
+			<!-- 
 			<dependency>
 				<groupId>jboss</groupId>
 				<artifactId>jboss</artifactId>
 				<version>4.2.3.GA</version>
 				<scope>provided</scope>
 			</dependency>
-			<!-- TODO: Delete this dependency after refectoring. -->
+			
 			<dependency>
 				<groupId>jboss</groupId>
 				<artifactId>jboss-system</artifactId>
 				<version>4.3.0.GA_CP03</version>
 				<scope>provided</scope>
 			</dependency>
-			<!-- TODO: Delete this dependency after refectoring. -->
+			
 			<dependency>
 				<groupId>jboss</groupId>
 				<artifactId>jbossall-client</artifactId>
 				<version>4.2.2.GA</version>
 				<scope>provided</scope>
 			</dependency>
-			<!-- TODO: Delete this dependency after refectoring. -->
+			
 			<dependency>
 				<groupId>jboss</groupId>
 				<artifactId>jbosssx</artifactId>
 				<version>3.2.3</version>
 				<scope>provided</scope>
 			</dependency>
-
+			-->
 			<!-- Commons Libraries -->
 			<dependency>
 				<groupId>commons-lang</groupId>
@@ -1551,7 +1557,6 @@
 				<artifactId>xalan</artifactId>
 				<!-- JBoss 4.2.3 xalan version -->
 				<version>2.7.0</version>
-				<scope>provided</scope>
 				<exclusions>
 					<exclusion>
 						<groupId>xml-apis</groupId>
@@ -1587,8 +1592,8 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-core</artifactId>
-				<version>2.0.5.RELEASE</version>
+				<artifactId>spring-security-web</artifactId>
+				<version>3.2.8.RELEASE</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>
@@ -1726,7 +1731,6 @@
 				<artifactId>xercesImpl</artifactId>
 				<!-- JBoss 4.2.3 xercesImpl version -->
 				<version>2.7.1</version>
-				<scope>provided</scope>
 				<exclusions>
 					<exclusion>
 						<groupId>xml-apis</groupId>
@@ -1787,125 +1791,125 @@
 
 			<!-- Internal Modules -->
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>common</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>cmm</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>aa</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>om</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>oum</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>adm</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>oai</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>sb</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>sm</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>st</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>tme</artifactId>
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>common-remote</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>escidoc-core-war</artifactId>
 				<type>war</type>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>axis</artifactId>
 				<type>war</type>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>jms-server</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>http-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>statistic-service-spec</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>statistic-service-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>index-service-spec</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>index-service-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>purge-service-spec</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc.core</groupId>
+				<groupId>org.escidoc.core.wildfly</groupId>
 				<artifactId>purge-service-impl</artifactId>
 				<version>${project.version}</version>
 			</dependency>

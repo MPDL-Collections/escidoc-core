@@ -38,25 +38,25 @@ public class IngestHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String ingest(final String xmlData, final SecurityContext securityContext) throws EscidocException,
+    public String ingest(final String xmlData, final SecurityContext securityContext) throws EscidocException,
         SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -67,7 +67,7 @@ public class IngestHandlerBean implements SessionBean {
         return service.ingest(xmlData);
     }
 
-    public final String ingest(final String xmlData, final String authHandle, final Boolean restAccess)
+    public String ingest(final String xmlData, final String authHandle, final Boolean restAccess)
         throws EscidocException, SystemException {
         try {
             UserContext.setUserContext(authHandle);

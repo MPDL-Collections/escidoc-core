@@ -4,12 +4,12 @@
 
   <parent>
     <artifactId>eSciDocCore</artifactId>
-    <groupId>org.escidoc.core</groupId>
+    <groupId>org.escidoc.core.wildfly</groupId>
     <version>1.3.10-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.escidoc.core</groupId>
+  <groupId>org.escidoc.core.wildfly</groupId>
   <artifactId>assembly</artifactId>
   <packaging>pom</packaging>
   <name>ZIP, etc. Assembly</name>

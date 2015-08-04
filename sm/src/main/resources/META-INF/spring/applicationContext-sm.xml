@@ -271,7 +271,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                 <prop key="hibernate.cache.provider_class">
                     org.hibernate.cache.HashtableCacheProvider
                 </prop>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.show_sql">false</prop> 
                 <prop key="jta.UserTransaction">${escidoc-core.jta.UserTransaction}</prop>
                 <prop key="hibernate.connection.release_mode">auto</prop>
             </props>

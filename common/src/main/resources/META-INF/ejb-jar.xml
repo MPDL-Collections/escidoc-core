@@ -41,7 +41,7 @@
       	 <service-endpoint>de.escidoc.core.common.service.SoapExceptionGenerationService</service-endpoint>
          <ejb-class>de.escidoc.core.common.ejb.SoapExceptionGenerationBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

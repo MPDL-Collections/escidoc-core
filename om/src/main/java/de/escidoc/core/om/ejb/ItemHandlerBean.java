@@ -78,7 +78,7 @@ public class ItemHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
@@ -87,22 +87,22 @@ public class ItemHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String create(final String xmlData, final SecurityContext securityContext)
-        throws MissingContentException, ContextNotFoundException, ContentModelNotFoundException,
-        ReadonlyElementViolationException, MissingAttributeValueException, MissingElementValueException,
-        ReadonlyAttributeViolationException, AuthenticationException, AuthorizationException, XmlCorruptedException,
-        XmlSchemaValidationException, MissingMethodParameterException, FileNotFoundException, SystemException,
-        InvalidContentException, ReferencedResourceNotFoundException, RelationPredicateNotFoundException,
-        MissingMdRecordException, InvalidStatusException {
+    public String create(final String xmlData, final SecurityContext securityContext) throws MissingContentException,
+        ContextNotFoundException, ContentModelNotFoundException, ReadonlyElementViolationException,
+        MissingAttributeValueException, MissingElementValueException, ReadonlyAttributeViolationException,
+        AuthenticationException, AuthorizationException, XmlCorruptedException, XmlSchemaValidationException,
+        MissingMethodParameterException, FileNotFoundException, SystemException, InvalidContentException,
+        ReferencedResourceNotFoundException, RelationPredicateNotFoundException, MissingMdRecordException,
+        InvalidStatusException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -112,7 +112,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
-    public final String create(final String xmlData, final String authHandle, final Boolean restAccess)
+    public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws MissingContentException, ContextNotFoundException, ContentModelNotFoundException,
         ReadonlyElementViolationException, MissingAttributeValueException, MissingElementValueException,
         ReadonlyAttributeViolationException, AuthenticationException, AuthorizationException, XmlCorruptedException,
@@ -129,7 +129,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
-    public final void delete(final String id, final SecurityContext securityContext) throws ItemNotFoundException,
+    public void delete(final String id, final SecurityContext securityContext) throws ItemNotFoundException,
         AlreadyPublishedException, LockingException, AuthenticationException, AuthorizationException,
         InvalidStatusException, MissingMethodParameterException, SystemException {
         try {
@@ -141,7 +141,7 @@ public class ItemHandlerBean implements SessionBean {
         service.delete(id);
     }
 
-    public final void delete(final String id, final String authHandle, final Boolean restAccess)
+    public void delete(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AlreadyPublishedException, LockingException, AuthenticationException,
         AuthorizationException, InvalidStatusException, MissingMethodParameterException, SystemException {
         try {
@@ -154,7 +154,7 @@ public class ItemHandlerBean implements SessionBean {
         service.delete(id);
     }
 
-    public final String retrieve(final String id, final SecurityContext securityContext) throws ItemNotFoundException,
+    public String retrieve(final String id, final SecurityContext securityContext) throws ItemNotFoundException,
         ComponentNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -166,7 +166,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
-    public final String retrieve(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
         try {
@@ -179,7 +179,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
-    public final String update(final String id, final String xmlData, final SecurityContext securityContext)
+    public String update(final String id, final String xmlData, final SecurityContext securityContext)
         throws ItemNotFoundException, FileNotFoundException, InvalidContextException, InvalidStatusException,
         LockingException, NotPublishedException, MissingLicenceException, ComponentNotFoundException,
         MissingContentException, AuthenticationException, AuthorizationException, InvalidXmlException,
@@ -196,7 +196,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
-    public final String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
+    public String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, FileNotFoundException, InvalidContextException, InvalidStatusException,
         LockingException, NotPublishedException, MissingLicenceException, ComponentNotFoundException,
         MissingContentException, AuthenticationException, AuthorizationException, InvalidXmlException,
@@ -214,7 +214,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
-    public final String createComponent(final String id, final String xmlData, final SecurityContext securityContext)
+    public String createComponent(final String id, final String xmlData, final SecurityContext securityContext)
         throws MissingContentException, ItemNotFoundException, ComponentNotFoundException, LockingException,
         MissingElementValueException, AuthenticationException, AuthorizationException, InvalidStatusException,
         MissingMethodParameterException, FileNotFoundException, InvalidXmlException, InvalidContentException,
@@ -228,7 +228,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.createComponent(id, xmlData);
     }
 
-    public final String createComponent(
+    public String createComponent(
         final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws MissingContentException, ItemNotFoundException, ComponentNotFoundException, LockingException,
         MissingElementValueException, AuthenticationException, AuthorizationException, InvalidStatusException,
@@ -244,10 +244,9 @@ public class ItemHandlerBean implements SessionBean {
         return service.createComponent(id, xmlData);
     }
 
-    public final String retrieveComponent(
-        final String id, final String componentId, final SecurityContext securityContext) throws ItemNotFoundException,
-        ComponentNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
-        SystemException {
+    public String retrieveComponent(final String id, final String componentId, final SecurityContext securityContext)
+        throws ItemNotFoundException, ComponentNotFoundException, AuthenticationException, AuthorizationException,
+        MissingMethodParameterException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -257,7 +256,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponent(id, componentId);
     }
 
-    public final String retrieveComponent(
+    public String retrieveComponent(
         final String id, final String componentId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -271,7 +270,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponent(id, componentId);
     }
 
-    public final String retrieveComponentMdRecords(
+    public String retrieveComponentMdRecords(
         final String id, final String componentId, final SecurityContext securityContext) throws ItemNotFoundException,
         ComponentNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
@@ -284,7 +283,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponentMdRecords(id, componentId);
     }
 
-    public final String retrieveComponentMdRecords(
+    public String retrieveComponentMdRecords(
         final String id, final String componentId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -298,7 +297,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponentMdRecords(id, componentId);
     }
 
-    public final String retrieveComponentMdRecord(
+    public String retrieveComponentMdRecord(
         final String id, final String componentId, final String mdRecordId, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, ComponentNotFoundException,
         MdRecordNotFoundException, MissingMethodParameterException, SystemException {
@@ -311,7 +310,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponentMdRecord(id, componentId, mdRecordId);
     }
 
-    public final String retrieveComponentMdRecord(
+    public String retrieveComponentMdRecord(
         final String id, final String componentId, final String mdRecordId, final String authHandle,
         final Boolean restAccess) throws ItemNotFoundException, AuthenticationException, AuthorizationException,
         ComponentNotFoundException, MdRecordNotFoundException, MissingMethodParameterException, SystemException {
@@ -325,7 +324,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponentMdRecord(id, componentId, mdRecordId);
     }
 
-    public final String updateComponent(
+    public String updateComponent(
         final String id, final String componentId, final String xmlData, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, FileNotFoundException,
         MissingAttributeValueException, AuthenticationException, AuthorizationException, InvalidStatusException,
@@ -340,7 +339,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.updateComponent(id, componentId, xmlData);
     }
 
-    public final String updateComponent(
+    public String updateComponent(
         final String id, final String componentId, final String xmlData, final String authHandle,
         final Boolean restAccess) throws ItemNotFoundException, ComponentNotFoundException, LockingException,
         FileNotFoundException, MissingAttributeValueException, AuthenticationException, AuthorizationException,
@@ -357,7 +356,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.updateComponent(id, componentId, xmlData);
     }
 
-    public final String retrieveComponents(final String id, final SecurityContext securityContext)
+    public String retrieveComponents(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, ComponentNotFoundException,
         MissingMethodParameterException, SystemException {
         try {
@@ -369,7 +368,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponents(id);
     }
 
-    public final String retrieveComponents(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveComponents(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, ComponentNotFoundException,
         MissingMethodParameterException, SystemException {
         try {
@@ -382,7 +381,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponents(id);
     }
 
-    public final String retrieveComponentProperties(
+    public String retrieveComponentProperties(
         final String id, final String componentId, final SecurityContext securityContext) throws ItemNotFoundException,
         ComponentNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
@@ -395,7 +394,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponentProperties(id, componentId);
     }
 
-    public final String retrieveComponentProperties(
+    public String retrieveComponentProperties(
         final String id, final String componentId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -409,11 +408,10 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveComponentProperties(id, componentId);
     }
 
-    public final String createMetadataRecord(
-        final String id, final String xmlData, final SecurityContext securityContext) throws ItemNotFoundException,
-        ComponentNotFoundException, XmlSchemaNotFoundException, LockingException, MissingAttributeValueException,
-        AuthenticationException, AuthorizationException, InvalidStatusException, MissingMethodParameterException,
-        SystemException, InvalidXmlException {
+    public String createMetadataRecord(final String id, final String xmlData, final SecurityContext securityContext)
+        throws ItemNotFoundException, ComponentNotFoundException, XmlSchemaNotFoundException, LockingException,
+        MissingAttributeValueException, AuthenticationException, AuthorizationException, InvalidStatusException,
+        MissingMethodParameterException, SystemException, InvalidXmlException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -423,7 +421,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.createMetadataRecord(id, xmlData);
     }
 
-    public final String createMetadataRecord(
+    public String createMetadataRecord(
         final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, XmlSchemaNotFoundException, LockingException,
         MissingAttributeValueException, AuthenticationException, AuthorizationException, InvalidStatusException,
@@ -438,7 +436,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.createMetadataRecord(id, xmlData);
     }
 
-    public final String createMdRecord(final String id, final String xmlData, final SecurityContext securityContext)
+    public String createMdRecord(final String id, final String xmlData, final SecurityContext securityContext)
         throws ItemNotFoundException, SystemException, InvalidXmlException, LockingException,
         MissingAttributeValueException, InvalidStatusException, ComponentNotFoundException,
         MissingMethodParameterException, AuthorizationException, AuthenticationException {
@@ -451,7 +449,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.createMdRecord(id, xmlData);
     }
 
-    public final String createMdRecord(
+    public String createMdRecord(
         final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, SystemException, InvalidXmlException, LockingException,
         MissingAttributeValueException, InvalidStatusException, ComponentNotFoundException,
@@ -466,7 +464,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.createMdRecord(id, xmlData);
     }
 
-    public final EscidocBinaryContent retrieveContent(
+    public EscidocBinaryContent retrieveContent(
         final String id, final String contentId, final SecurityContext securityContext) throws ItemNotFoundException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         InvalidStatusException, ResourceNotFoundException, ComponentNotFoundException {
@@ -479,7 +477,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContent(id, contentId);
     }
 
-    public final EscidocBinaryContent retrieveContent(
+    public EscidocBinaryContent retrieveContent(
         final String id, final String contentId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException, InvalidStatusException, ResourceNotFoundException, ComponentNotFoundException {
@@ -493,7 +491,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContent(id, contentId);
     }
 
-    public final EscidocBinaryContent retrieveContentStreamContent(
+    public EscidocBinaryContent retrieveContentStreamContent(
         final String itemId, final String name, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, ItemNotFoundException, SystemException,
         ContentStreamNotFoundException {
@@ -506,7 +504,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContentStreamContent(itemId, name);
     }
 
-    public final EscidocBinaryContent retrieveContentStreamContent(
+    public EscidocBinaryContent retrieveContentStreamContent(
         final String itemId, final String name, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException, ItemNotFoundException,
         SystemException, ContentStreamNotFoundException {
@@ -520,7 +518,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContentStreamContent(itemId, name);
     }
 
-    public final EscidocBinaryContent retrieveContent(
+    public EscidocBinaryContent retrieveContent(
         final String id, final String contentId, final String transformer, final String param,
         final SecurityContext securityContext) throws ItemNotFoundException, ComponentNotFoundException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
@@ -534,7 +532,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContent(id, contentId, transformer, param);
     }
 
-    public final EscidocBinaryContent retrieveContent(
+    public EscidocBinaryContent retrieveContent(
         final String id, final String contentId, final String transformer, final String param, final String authHandle,
         final Boolean restAccess) throws ItemNotFoundException, ComponentNotFoundException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, InvalidStatusException {
@@ -548,7 +546,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContent(id, contentId, transformer, param);
     }
 
-    public final EscidocServiceRedirectInterface redirectContentService(
+    public EscidocServiceRedirectInterface redirectContentService(
         final String id, final String contentId, final String transformer, final String clientService,
         final SecurityContext securityContext) throws ItemNotFoundException, ComponentNotFoundException,
         AuthorizationException, MissingMethodParameterException, SystemException, InvalidStatusException {
@@ -561,7 +559,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.redirectContentService(id, contentId, transformer, clientService);
     }
 
-    public final EscidocServiceRedirectInterface redirectContentService(
+    public EscidocServiceRedirectInterface redirectContentService(
         final String id, final String contentId, final String transformer, final String clientService,
         final String authHandle, final Boolean restAccess) throws ItemNotFoundException, ComponentNotFoundException,
         AuthorizationException, MissingMethodParameterException, SystemException, InvalidStatusException {
@@ -575,7 +573,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.redirectContentService(id, contentId, transformer, clientService);
     }
 
-    public final String retrieveMdRecord(final String id, final String mdRecordId, final SecurityContext securityContext)
+    public String retrieveMdRecord(final String id, final String mdRecordId, final SecurityContext securityContext)
         throws ItemNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
         try {
@@ -587,7 +585,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveMdRecord(id, mdRecordId);
     }
 
-    public final String retrieveMdRecord(
+    public String retrieveMdRecord(
         final String id, final String mdRecordId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -601,7 +599,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveMdRecord(id, mdRecordId);
     }
 
-    public final String retrieveMdRecordContent(
+    public String retrieveMdRecordContent(
         final String id, final String mdRecordId, final SecurityContext securityContext) throws ItemNotFoundException,
         MdRecordNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
@@ -614,7 +612,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveMdRecordContent(id, mdRecordId);
     }
 
-    public final String retrieveMdRecordContent(
+    public String retrieveMdRecordContent(
         final String id, final String mdRecordId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -628,7 +626,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveMdRecordContent(id, mdRecordId);
     }
 
-    public final String retrieveDcRecordContent(final String id, final SecurityContext securityContext)
+    public String retrieveDcRecordContent(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
         MdRecordNotFoundException, SystemException {
         try {
@@ -640,7 +638,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveDcRecordContent(id);
     }
 
-    public final String retrieveDcRecordContent(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveDcRecordContent(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
         MdRecordNotFoundException, SystemException {
         try {
@@ -653,7 +651,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveDcRecordContent(id);
     }
 
-    public final String updateMdRecord(
+    public String updateMdRecord(
         final String id, final String mdRecordId, final String xmlData, final SecurityContext securityContext)
         throws ItemNotFoundException, XmlSchemaNotFoundException, LockingException, InvalidContentException,
         MdRecordNotFoundException, AuthenticationException, AuthorizationException, InvalidStatusException,
@@ -671,7 +669,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.updateMdRecord(id, mdRecordId, xmlData);
     }
 
-    public final String updateMdRecord(
+    public String updateMdRecord(
         final String id, final String mdRecordId, final String xmlData, final String authHandle,
         final Boolean restAccess) throws ItemNotFoundException, XmlSchemaNotFoundException, LockingException,
         InvalidContentException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
@@ -687,7 +685,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.updateMdRecord(id, mdRecordId, xmlData);
     }
 
-    public final String retrieveMdRecords(final String id, final SecurityContext securityContext)
+    public String retrieveMdRecords(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -699,7 +697,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveMdRecords(id);
     }
 
-    public final String retrieveMdRecords(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveMdRecords(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -712,7 +710,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveMdRecords(id);
     }
 
-    public final String retrieveContentStreams(final String id, final SecurityContext securityContext)
+    public String retrieveContentStreams(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -724,7 +722,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContentStreams(id);
     }
 
-    public final String retrieveContentStreams(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveContentStreams(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -737,7 +735,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContentStreams(id);
     }
 
-    public final String retrieveContentStream(final String id, final String name, final SecurityContext securityContext)
+    public String retrieveContentStream(final String id, final String name, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException, ContentStreamNotFoundException {
         try {
@@ -749,7 +747,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContentStream(id, name);
     }
 
-    public final String retrieveContentStream(
+    public String retrieveContentStream(
         final String id, final String name, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException, ContentStreamNotFoundException {
@@ -763,7 +761,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveContentStream(id, name);
     }
 
-    public final String retrieveProperties(final String id, final SecurityContext securityContext)
+    public String retrieveProperties(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -775,7 +773,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
-    public final String retrieveProperties(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveProperties(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -788,7 +786,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
-    public final String retrieveResources(final String id, final SecurityContext securityContext)
+    public String retrieveResources(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -800,7 +798,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
-    public final String retrieveResources(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveResources(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -813,7 +811,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
-    public final EscidocBinaryContent retrieveResource(
+    public EscidocBinaryContent retrieveResource(
         final String id, final String resourceName, final Map parameters, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException, OperationNotFoundException {
@@ -826,7 +824,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveResource(id, resourceName, parameters);
     }
 
-    public final EscidocBinaryContent retrieveResource(
+    public EscidocBinaryContent retrieveResource(
         final String id, final String resourceName, final Map parameters, final String authHandle,
         final Boolean restAccess) throws ItemNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException, OperationNotFoundException {
@@ -840,7 +838,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveResource(id, resourceName, parameters);
     }
 
-    public final String retrieveVersionHistory(final String id, final SecurityContext securityContext)
+    public String retrieveVersionHistory(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -852,7 +850,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveVersionHistory(id);
     }
 
-    public final String retrieveVersionHistory(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveVersionHistory(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -865,9 +863,8 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveVersionHistory(id);
     }
 
-    public final String retrieveParents(final String id, final SecurityContext securityContext)
-        throws ItemNotFoundException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        SystemException {
+    public String retrieveParents(final String id, final SecurityContext securityContext) throws ItemNotFoundException,
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -877,7 +874,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveParents(id);
     }
 
-    public final String retrieveParents(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveParents(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
         SystemException {
         try {
@@ -890,7 +887,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveParents(id);
     }
 
-    public final String retrieveRelations(final String id, final SecurityContext securityContext)
+    public String retrieveRelations(final String id, final SecurityContext securityContext)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -902,7 +899,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveRelations(id);
     }
 
-    public final String retrieveRelations(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveRelations(final String id, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, AuthenticationException, AuthorizationException, MissingMethodParameterException,
         SystemException {
         try {
@@ -915,7 +912,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveRelations(id);
     }
 
-    public final String release(final String id, final String lastModified, final SecurityContext securityContext)
+    public String release(final String id, final String lastModified, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, InvalidStatusException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException {
@@ -928,8 +925,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.release(id, lastModified);
     }
 
-    public final String release(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String release(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, InvalidStatusException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException {
@@ -943,7 +939,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.release(id, lastModified);
     }
 
-    public final String submit(final String id, final String lastModified, final SecurityContext securityContext)
+    public String submit(final String id, final String lastModified, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, InvalidStatusException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException {
@@ -956,8 +952,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.submit(id, lastModified);
     }
 
-    public final String submit(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String submit(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, InvalidStatusException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException {
@@ -971,7 +966,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.submit(id, lastModified);
     }
 
-    public final String revise(final String id, final String lastModified, final SecurityContext securityContext)
+    public String revise(final String id, final String lastModified, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, ItemNotFoundException, ComponentNotFoundException,
         LockingException, InvalidStatusException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidContentException,
@@ -985,8 +980,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.revise(id, lastModified);
     }
 
-    public final String revise(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String revise(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ItemNotFoundException, ComponentNotFoundException,
         LockingException, InvalidStatusException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidContentException,
@@ -1001,7 +995,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.revise(id, lastModified);
     }
 
-    public final String withdraw(final String id, final String lastModified, final SecurityContext securityContext)
+    public String withdraw(final String id, final String lastModified, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, NotPublishedException, LockingException,
         AlreadyWithdrawnException, AuthenticationException, AuthorizationException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, ReadonlyViolationException,
@@ -1015,8 +1009,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.withdraw(id, lastModified);
     }
 
-    public final String withdraw(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String withdraw(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, NotPublishedException, LockingException,
         AlreadyWithdrawnException, AuthenticationException, AuthorizationException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, ReadonlyViolationException,
@@ -1031,7 +1024,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.withdraw(id, lastModified);
     }
 
-    public final String lock(final String id, final String lastModified, final SecurityContext securityContext)
+    public String lock(final String id, final String lastModified, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, InvalidContentException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, InvalidXmlException, InvalidStatusException {
@@ -1044,8 +1037,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.lock(id, lastModified);
     }
 
-    public final String lock(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String lock(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, InvalidContentException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, InvalidXmlException, InvalidStatusException {
@@ -1059,7 +1051,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.lock(id, lastModified);
     }
 
-    public final String unlock(final String id, final String lastModified, final SecurityContext securityContext)
+    public String unlock(final String id, final String lastModified, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
         InvalidXmlException {
@@ -1072,8 +1064,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.unlock(id, lastModified);
     }
 
-    public final String unlock(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String unlock(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
         InvalidXmlException {
@@ -1087,8 +1078,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.unlock(id, lastModified);
     }
 
-    public final void deleteComponent(
-        final String itemId, final String componentId, final SecurityContext securityContext)
+    public void deleteComponent(final String itemId, final String componentId, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, InvalidStatusException {
         try {
@@ -1100,7 +1090,7 @@ public class ItemHandlerBean implements SessionBean {
         service.deleteComponent(itemId, componentId);
     }
 
-    public final void deleteComponent(
+    public void deleteComponent(
         final String itemId, final String componentId, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, InvalidStatusException {
@@ -1114,7 +1104,7 @@ public class ItemHandlerBean implements SessionBean {
         service.deleteComponent(itemId, componentId);
     }
 
-    public final String moveToContext(final String id, final String taskParam, final SecurityContext securityContext)
+    public String moveToContext(final String id, final String taskParam, final SecurityContext securityContext)
         throws ContextNotFoundException, InvalidContentException, ItemNotFoundException, LockingException,
         InvalidStatusException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
         SystemException {
@@ -1127,7 +1117,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.moveToContext(id, taskParam);
     }
 
-    public final String moveToContext(
+    public String moveToContext(
         final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, InvalidContentException, ItemNotFoundException, LockingException,
         InvalidStatusException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
@@ -1142,7 +1132,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.moveToContext(id, taskParam);
     }
 
-    public final String retrieveItems(final Map filter, final SecurityContext securityContext) throws SystemException {
+    public String retrieveItems(final Map filter, final SecurityContext securityContext) throws SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -1152,7 +1142,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveItems(filter);
     }
 
-    public final String retrieveItems(final Map filter, final String authHandle, final Boolean restAccess)
+    public String retrieveItems(final Map filter, final String authHandle, final Boolean restAccess)
         throws SystemException {
         try {
             UserContext.setUserContext(authHandle);
@@ -1164,7 +1154,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.retrieveItems(filter);
     }
 
-    public final String assignVersionPid(final String id, final String taskParam, final SecurityContext securityContext)
+    public String assignVersionPid(final String id, final String taskParam, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
         InvalidStatusException, XmlCorruptedException, ReadonlyVersionException {
@@ -1177,7 +1167,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.assignVersionPid(id, taskParam);
     }
 
-    public final String assignVersionPid(
+    public String assignVersionPid(
         final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
@@ -1192,7 +1182,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.assignVersionPid(id, taskParam);
     }
 
-    public final String assignObjectPid(final String id, final String taskParam, final SecurityContext securityContext)
+    public String assignObjectPid(final String id, final String taskParam, final SecurityContext securityContext)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
         InvalidStatusException, XmlCorruptedException {
@@ -1205,7 +1195,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.assignObjectPid(id, taskParam);
     }
 
-    public final String assignObjectPid(
+    public String assignObjectPid(
         final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ItemNotFoundException, ComponentNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
@@ -1220,7 +1210,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.assignObjectPid(id, taskParam);
     }
 
-    public final String assignContentPid(
+    public String assignContentPid(
         final String id, final String componentId, final String taskParam, final SecurityContext securityContext)
         throws ItemNotFoundException, LockingException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidStatusException,
@@ -1234,7 +1224,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.assignContentPid(id, componentId, taskParam);
     }
 
-    public final String assignContentPid(
+    public String assignContentPid(
         final String id, final String componentId, final String taskParam, final String authHandle,
         final Boolean restAccess) throws ItemNotFoundException, LockingException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, OptimisticLockingException,
@@ -1249,7 +1239,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.assignContentPid(id, componentId, taskParam);
     }
 
-    public final String addContentRelations(final String id, final String param, final SecurityContext securityContext)
+    public String addContentRelations(final String id, final String param, final SecurityContext securityContext)
         throws SystemException, ItemNotFoundException, ComponentNotFoundException, OptimisticLockingException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AlreadyExistsException,
         InvalidStatusException, InvalidXmlException, MissingElementValueException, LockingException,
@@ -1264,7 +1254,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.addContentRelations(id, param);
     }
 
-    public final String addContentRelations(
+    public String addContentRelations(
         final String id, final String param, final String authHandle, final Boolean restAccess) throws SystemException,
         ItemNotFoundException, ComponentNotFoundException, OptimisticLockingException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AlreadyExistsException,
@@ -1281,12 +1271,11 @@ public class ItemHandlerBean implements SessionBean {
         return service.addContentRelations(id, param);
     }
 
-    public final String removeContentRelations(
-        final String id, final String param, final SecurityContext securityContext) throws SystemException,
-        ItemNotFoundException, ComponentNotFoundException, OptimisticLockingException, InvalidStatusException,
-        MissingElementValueException, InvalidContentException, InvalidXmlException, ContentRelationNotFoundException,
-        AlreadyDeletedException, LockingException, ReadonlyViolationException, AuthenticationException,
-        AuthorizationException, MissingMethodParameterException, ReadonlyVersionException {
+    public String removeContentRelations(final String id, final String param, final SecurityContext securityContext)
+        throws SystemException, ItemNotFoundException, ComponentNotFoundException, OptimisticLockingException,
+        InvalidStatusException, MissingElementValueException, InvalidContentException, InvalidXmlException,
+        ContentRelationNotFoundException, AlreadyDeletedException, LockingException, ReadonlyViolationException,
+        AuthenticationException, AuthorizationException, MissingMethodParameterException, ReadonlyVersionException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -1296,7 +1285,7 @@ public class ItemHandlerBean implements SessionBean {
         return service.removeContentRelations(id, param);
     }
 
-    public final String removeContentRelations(
+    public String removeContentRelations(
         final String id, final String param, final String authHandle, final Boolean restAccess) throws SystemException,
         ItemNotFoundException, ComponentNotFoundException, OptimisticLockingException, InvalidStatusException,
         MissingElementValueException, InvalidContentException, InvalidXmlException, ContentRelationNotFoundException,

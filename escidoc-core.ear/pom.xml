@@ -4,7 +4,7 @@
 
   <parent>
     <artifactId>eSciDocCore</artifactId>
-    <groupId>org.escidoc.core</groupId>
+    <groupId>org.escidoc.core.wildfly</groupId>
     <version>1.3.10-SNAPSHOT</version>
   </parent>
 
@@ -29,66 +29,66 @@
   </profiles>
   <dependencies>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>common</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>cmm</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>aa</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>om</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>oum</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>adm</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>oai</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>sb</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>sm</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>st</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>tme</artifactId>
       <type>ejb</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>common-remote</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>jms-server</artifactId>
       <exclusions>
         <exclusion>
@@ -98,24 +98,24 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>statistic-service-impl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>index-service-impl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>purge-service-impl</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>escidoc-core-war</artifactId>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core</groupId>
+      <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>axis</artifactId>
       <type>war</type>
     </dependency>
@@ -174,26 +174,33 @@
       <artifactId>mptstore-oracle</artifactId>
       <version>0.9.4</version>
     </dependency>
+ 
+  
+      <!-- Added by wildfly migration -->
+    <dependency>
+    	<groupId>org.quartz-scheduler</groupId>
+    	<artifactId>quartz</artifactId>
+    	<version>1.8.6</version>
+	</dependency>
+	
+
+	
+	
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-ear-plugin</artifactId>
-        <version>2.4.2</version>
+        <version>2.10.1</version>
         <configuration>
-          <!-- isolation -->
-          <jboss>
-            <version>4</version>
-            <loader-repository>org.escidoc:loader=escidoc-core.ear</loader-repository>
-            <loader-repository-config>java2ParentDelegation=false</loader-repository-config>
-          </jboss>
+       <applicationName>escidoc-core</applicationName>
           <defaultLibBundleDir>META-INF/lib</defaultLibBundleDir>
           <displayName>eSciDoc-Core</displayName>
           <description>eSciDoc Infrastructure</description>
           <generateApplicationXml>true</generateApplicationXml>
-          <includeLibInApplicationXml>true</includeLibInApplicationXml>
-          <version>5</version>
+          <!-- <includeLibInApplicationXml>true</includeLibInApplicationXml>-->
+          <version>7</version>
           <defaultJavaBundleDir>/</defaultJavaBundleDir>
           <archive>
             <manifest>
@@ -207,87 +214,87 @@
           </archive>
           <modules>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>common</artifactId>
               <bundleFileName>01_common.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>aa</artifactId>
               <bundleFileName>02_aa.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>oai</artifactId>
               <bundleFileName>03_oai.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>adm</artifactId>
               <bundleFileName>04_adm.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>cmm</artifactId>
               <bundleFileName>05_cmm.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>om</artifactId>
               <bundleFileName>06_om.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>oum</artifactId>
               <bundleFileName>07_oum.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>sb</artifactId>
               <bundleFileName>08_sb.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>sm</artifactId>
               <bundleFileName>09_sm.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>st</artifactId>
               <bundleFileName>10_st.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <ejbModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>tme</artifactId>
               <bundleFileName>11_tme.jar</bundleFileName>
               <bundleDir>/</bundleDir>
             </ejbModule>
             <jarModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>common-remote</artifactId>
               <bundleFileName>12_common-remote.jar</bundleFileName>
               <bundleDir>/</bundleDir>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
             <webModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>escidoc-core-war</artifactId>
               <bundleFileName>13_escidoc-core.war</bundleFileName>
               <bundleDir>/</bundleDir>
               <contextRoot>/</contextRoot>
             </webModule>
             <webModule>
-              <groupId>org.escidoc.core</groupId>
+              <groupId>org.escidoc.core.wildfly</groupId>
               <artifactId>axis</artifactId>
               <bundleFileName>14_axis.war</bundleFileName>
               <bundleDir>/</bundleDir>

@@ -21,7 +21,7 @@
       	 <service-endpoint>de.escidoc.core.aa.service.UserAccountHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.aa.ejb.UserAccountHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -44,7 +44,7 @@
       	 <service-endpoint>de.escidoc.core.aa.service.UserGroupHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.aa.ejb.UserGroupHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -67,7 +67,7 @@
       	 <service-endpoint>de.escidoc.core.aa.service.PolicyDecisionPointService</service-endpoint>
          <ejb-class>de.escidoc.core.aa.ejb.PolicyDecisionPointBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -90,7 +90,7 @@
       	 <service-endpoint>de.escidoc.core.aa.service.RoleHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.aa.ejb.RoleHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -113,7 +113,7 @@
       	 <service-endpoint>de.escidoc.core.aa.service.ActionHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.aa.ejb.ActionHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -136,7 +136,7 @@
       	 <service-endpoint>de.escidoc.core.aa.service.UserManagementWrapperService</service-endpoint>
          <ejb-class>de.escidoc.core.aa.ejb.UserManagementWrapperBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

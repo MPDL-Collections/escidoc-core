@@ -20,12 +20,15 @@
 
 package de.escidoc.core.common.util.service;
 
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.string.StringUtility;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.regex.Pattern;
+
+import javax.naming.NamingException;
+
 import org.aopalliance.intercept.MethodInvocation;
 import org.jboss.security.RunAsIdentity;
-import org.jboss.security.SecurityAssociation;
+import org.jboss.security.SecurityContextAssociation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ejb.access.AbstractRemoteSlsbInvokerInterceptor;
@@ -34,10 +37,9 @@ import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.util.MethodInvocationUtils;
 
-import javax.naming.NamingException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.regex.Pattern;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.string.StringUtility;
 
 /**
  * Customized proxy factory Bean for the Remote and Stateless EJB lookup. Provides the current {@link SecurityContext}
@@ -131,7 +133,7 @@ public class RemoteStatelessEjbProxyFactoryBean extends SimpleRemoteStatelessSes
 
                 extendedArgs[argsLength] = securityContext;
                 extendedArgsTypes[argsLength] = SecurityContext.class;
-                SecurityAssociation.pushRunAsIdentity(new RunAsIdentity("Administrator", ""));
+                SecurityContextAssociation.pushRunAsIdentity(new RunAsIdentity("Administrator", ""));
             }
             else {
                 // user currently not authenticated. Just user name and

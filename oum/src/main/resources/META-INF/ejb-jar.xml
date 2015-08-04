@@ -21,7 +21,7 @@
       	 <service-endpoint>de.escidoc.core.oum.service.OrganizationalUnitHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.oum.ejb.OrganizationalUnitHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

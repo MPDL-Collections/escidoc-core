@@ -41,25 +41,25 @@ public class AdminHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String deleteObjects(final String taskParam, final SecurityContext securityContext)
+    public String deleteObjects(final String taskParam, final SecurityContext securityContext)
         throws InvalidXmlException, SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -70,7 +70,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.deleteObjects(taskParam);
     }
 
-    public final String deleteObjects(final String taskParam, final String authHandle, final Boolean restAccess)
+    public String deleteObjects(final String taskParam, final String authHandle, final Boolean restAccess)
         throws InvalidXmlException, SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
@@ -82,7 +82,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.deleteObjects(taskParam);
     }
 
-    public final String getPurgeStatus(final SecurityContext securityContext) throws SystemException,
+    public String getPurgeStatus(final SecurityContext securityContext) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -93,7 +93,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getPurgeStatus();
     }
 
-    public final String getPurgeStatus(final String authHandle, final Boolean restAccess) throws SystemException,
+    public String getPurgeStatus(final String authHandle, final Boolean restAccess) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
@@ -105,7 +105,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getPurgeStatus();
     }
 
-    public final String getReindexStatus(final SecurityContext securityContext) throws SystemException,
+    public String getReindexStatus(final SecurityContext securityContext) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -116,7 +116,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getReindexStatus();
     }
 
-    public final String getReindexStatus(final String authHandle, final Boolean restAccess) throws SystemException,
+    public String getReindexStatus(final String authHandle, final Boolean restAccess) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
@@ -128,7 +128,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getReindexStatus();
     }
 
-    public final void decreaseReindexStatus(final String objectTypeXml, final SecurityContext securityContext)
+    public void decreaseReindexStatus(final String objectTypeXml, final SecurityContext securityContext)
         throws InvalidXmlException, SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -139,9 +139,8 @@ public class AdminHandlerBean implements SessionBean {
         service.decreaseReindexStatus(objectTypeXml);
     }
 
-    public final void decreaseReindexStatus(
-        final String objectTypeXml, final String authHandle, final Boolean restAccess) throws InvalidXmlException,
-        SystemException, AuthenticationException, AuthorizationException {
+    public void decreaseReindexStatus(final String objectTypeXml, final String authHandle, final Boolean restAccess)
+        throws InvalidXmlException, SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
             UserContext.setRestAccess(restAccess);
@@ -152,8 +151,7 @@ public class AdminHandlerBean implements SessionBean {
         service.decreaseReindexStatus(objectTypeXml);
     }
 
-    public final String reindex(
-        final String clearIndex, final String indexNamePrefix, final SecurityContext securityContext)
+    public String reindex(final String clearIndex, final String indexNamePrefix, final SecurityContext securityContext)
         throws SystemException, InvalidSearchQueryException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -164,7 +162,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.reindex(clearIndex, indexNamePrefix);
     }
 
-    public final String reindex(
+    public String reindex(
         final String clearIndex, final String indexNamePrefix, final String authHandle, final Boolean restAccess)
         throws SystemException, InvalidSearchQueryException, AuthenticationException, AuthorizationException {
         try {
@@ -177,7 +175,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.reindex(clearIndex, indexNamePrefix);
     }
 
-    public final String getIndexConfiguration(final SecurityContext securityContext) throws SystemException,
+    public String getIndexConfiguration(final SecurityContext securityContext) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -188,8 +186,8 @@ public class AdminHandlerBean implements SessionBean {
         return service.getIndexConfiguration();
     }
 
-    public final String getIndexConfiguration(final String authHandle, final Boolean restAccess)
-        throws SystemException, AuthenticationException, AuthorizationException {
+    public String getIndexConfiguration(final String authHandle, final Boolean restAccess) throws SystemException,
+        AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
             UserContext.setRestAccess(restAccess);
@@ -200,7 +198,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getIndexConfiguration();
     }
 
-    public final String getRepositoryInfo(final SecurityContext securityContext) throws SystemException,
+    public String getRepositoryInfo(final SecurityContext securityContext) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -211,7 +209,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getRepositoryInfo();
     }
 
-    public final String getRepositoryInfo(final String authHandle, final Boolean restAccess) throws SystemException,
+    public String getRepositoryInfo(final String authHandle, final Boolean restAccess) throws SystemException,
         AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
@@ -223,8 +221,8 @@ public class AdminHandlerBean implements SessionBean {
         return service.getRepositoryInfo();
     }
 
-    public final String getRepositoryInfo(final String key, final SecurityContext securityContext)
-        throws SystemException, AuthenticationException, AuthorizationException {
+    public String getRepositoryInfo(final String key, final SecurityContext securityContext) throws SystemException,
+        AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -234,7 +232,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getRepositoryInfo(key);
     }
 
-    public final String getRepositoryInfo(final String key, final String authHandle, final Boolean restAccess)
+    public String getRepositoryInfo(final String key, final String authHandle, final Boolean restAccess)
         throws SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);
@@ -246,7 +244,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.getRepositoryInfo(key);
     }
 
-    public final String loadExamples(final String type, final SecurityContext securityContext)
+    public String loadExamples(final String type, final SecurityContext securityContext)
         throws InvalidSearchQueryException, SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
@@ -257,7 +255,7 @@ public class AdminHandlerBean implements SessionBean {
         return service.loadExamples(type);
     }
 
-    public final String loadExamples(final String type, final String authHandle, final Boolean restAccess)
+    public String loadExamples(final String type, final String authHandle, final Boolean restAccess)
         throws InvalidSearchQueryException, SystemException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(authHandle);

@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.SoapExceptionGenerationBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>ejb/SoapExceptionGeneration</value>
+            <value>java:global/escidoc-core/01_common/SoapExceptionGeneration!de.escidoc.core.common.ejb.interfaces.SoapExceptionGenerationRemote</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.common.service.interfaces.SoapExceptionGenerationInterface</value>

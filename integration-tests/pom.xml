@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.escidoc.core</groupId>
+	<groupId>org.escidoc.core.wildfly</groupId>
 	<artifactId>integration-tests</artifactId>
 	<packaging>jar</packaging>
 	<name>eSciDoc Core - Integration Tests</name>
@@ -12,7 +12,7 @@
 
 	<parent>
 		<artifactId>eSciDocCore</artifactId>
-		<groupId>org.escidoc.core</groupId>
+		<groupId>org.escidoc.core.wildfly</groupId>
 		<version>1.3.10-SNAPSHOT</version>
 	</parent>
 
@@ -586,7 +586,7 @@
 	     <type>war</type>
 	   </dependency>
 		<dependency>
-			<groupId>org.escidoc.core</groupId>
+			<groupId>org.escidoc.core.wildfly</groupId>
 			<artifactId>common</artifactId>
 			<type>ejb</type>
 		</dependency>

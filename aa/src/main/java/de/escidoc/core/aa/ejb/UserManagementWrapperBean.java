@@ -38,25 +38,25 @@ public class UserManagementWrapperBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final void logout(final SecurityContext securityContext) throws AuthenticationException, SystemException {
+    public void logout(final SecurityContext securityContext) throws AuthenticationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -66,7 +66,7 @@ public class UserManagementWrapperBean implements SessionBean {
         service.logout();
     }
 
-    public final void logout(final String authHandle, final Boolean restAccess) throws AuthenticationException,
+    public void logout(final String authHandle, final Boolean restAccess) throws AuthenticationException,
         SystemException {
         try {
             UserContext.setUserContext(authHandle);
@@ -78,7 +78,7 @@ public class UserManagementWrapperBean implements SessionBean {
         service.logout();
     }
 
-    public final void initHandleExpiryTimestamp(final String handle, final SecurityContext securityContext)
+    public void initHandleExpiryTimestamp(final String handle, final SecurityContext securityContext)
         throws AuthenticationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -89,7 +89,7 @@ public class UserManagementWrapperBean implements SessionBean {
         service.initHandleExpiryTimestamp(handle);
     }
 
-    public final void initHandleExpiryTimestamp(final String handle, final String authHandle, final Boolean restAccess)
+    public void initHandleExpiryTimestamp(final String handle, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, SystemException {
         try {
             UserContext.setUserContext(authHandle);

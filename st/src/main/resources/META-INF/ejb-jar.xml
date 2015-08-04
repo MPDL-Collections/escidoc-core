@@ -21,7 +21,7 @@
       	 <service-endpoint>de.escidoc.core.st.ejb.interfaces.StagingFileHandler</service-endpoint>
          <ejb-class>de.escidoc.core.st.ejb.StagingFileHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

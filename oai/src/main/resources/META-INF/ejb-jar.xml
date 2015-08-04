@@ -21,7 +21,7 @@
       	 <service-endpoint>de.escidoc.core.oai.service.SetDefinitionHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.oai.ejb.SetDefinitionHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

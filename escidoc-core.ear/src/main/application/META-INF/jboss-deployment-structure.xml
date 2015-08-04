@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2" >
+ 
+<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
+
+	 <deployment>
+	     <!-- exclude-subsystem prevents a subsystems deployment unit processors running on a deployment -->
+	     <!-- which gives basically the same effect as removing the subsystem, but it only affects single deployment -->
+ 		<!-- 
+ 		<exclude-subsystems>
+	        <subsystem name="logging" />
+	    </exclude-subsystems>
+	    -->
+	    <dependencies>
+		    <module name="javax.jms.api"/>
+			<module name="javax.management.j2ee.api"/>
+			<module name="javax.wsdl4j.api"/>
+			<module name="org.apache.xalan"/>
+	    </dependencies>
+ 	 </deployment>
+</jboss-deployment-structure>  

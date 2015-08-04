@@ -42,25 +42,25 @@ public class ActionHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String createUnsecuredActions(
+    public String createUnsecuredActions(
         final String contextId, final String actions, final SecurityContext securityContext)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -73,7 +73,7 @@ public class ActionHandlerBean implements SessionBean {
         return service.createUnsecuredActions(contextId, actions);
     }
 
-    public final String createUnsecuredActions(
+    public String createUnsecuredActions(
         final String contextId, final String actions, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -87,7 +87,7 @@ public class ActionHandlerBean implements SessionBean {
         return service.createUnsecuredActions(contextId, actions);
     }
 
-    public final void deleteUnsecuredActions(final String contextId, final SecurityContext securityContext)
+    public void deleteUnsecuredActions(final String contextId, final SecurityContext securityContext)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -98,7 +98,7 @@ public class ActionHandlerBean implements SessionBean {
         service.deleteUnsecuredActions(contextId);
     }
 
-    public final void deleteUnsecuredActions(final String contextId, final String authHandle, final Boolean restAccess)
+    public void deleteUnsecuredActions(final String contextId, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(authHandle);
@@ -110,7 +110,7 @@ public class ActionHandlerBean implements SessionBean {
         service.deleteUnsecuredActions(contextId);
     }
 
-    public final String retrieveUnsecuredActions(final String contextId, final SecurityContext securityContext)
+    public String retrieveUnsecuredActions(final String contextId, final SecurityContext securityContext)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -121,9 +121,8 @@ public class ActionHandlerBean implements SessionBean {
         return service.retrieveUnsecuredActions(contextId);
     }
 
-    public final String retrieveUnsecuredActions(
-        final String contextId, final String authHandle, final Boolean restAccess) throws ContextNotFoundException,
-        AuthenticationException, AuthorizationException, SystemException {
+    public String retrieveUnsecuredActions(final String contextId, final String authHandle, final Boolean restAccess)
+        throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(authHandle);
             UserContext.setRestAccess(restAccess);

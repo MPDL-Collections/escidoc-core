@@ -42,25 +42,25 @@ public class StagingFileHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String create(final EscidocBinaryContent binaryContent, final SecurityContext securityContext)
+    public String create(final EscidocBinaryContent binaryContent, final SecurityContext securityContext)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -71,8 +71,7 @@ public class StagingFileHandlerBean implements SessionBean {
         return service.create(binaryContent);
     }
 
-    public final String create(
-        final EscidocBinaryContent binaryContent, final String authHandle, final Boolean restAccess)
+    public String create(final EscidocBinaryContent binaryContent, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
             UserContext.setUserContext(authHandle);
@@ -84,7 +83,7 @@ public class StagingFileHandlerBean implements SessionBean {
         return service.create(binaryContent);
     }
 
-    public final EscidocBinaryContent retrieve(final String stagingFileId, final SecurityContext securityContext)
+    public EscidocBinaryContent retrieve(final String stagingFileId, final SecurityContext securityContext)
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
         try {
@@ -96,8 +95,7 @@ public class StagingFileHandlerBean implements SessionBean {
         return service.retrieve(stagingFileId);
     }
 
-    public final EscidocBinaryContent retrieve(
-        final String stagingFileId, final String authHandle, final Boolean restAccess)
+    public EscidocBinaryContent retrieve(final String stagingFileId, final String authHandle, final Boolean restAccess)
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
         try {

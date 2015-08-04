@@ -72,30 +72,29 @@ public class ContainerHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String create(final String xmlData, final SecurityContext securityContext)
-        throws ContextNotFoundException, ContentModelNotFoundException, InvalidContentException,
-        MissingMethodParameterException, XmlCorruptedException, MissingAttributeValueException,
-        MissingElementValueException, SystemException, ReferencedResourceNotFoundException,
-        RelationPredicateNotFoundException, AuthenticationException, AuthorizationException, InvalidStatusException,
-        MissingMdRecordException, XmlSchemaValidationException {
+    public String create(final String xmlData, final SecurityContext securityContext) throws ContextNotFoundException,
+        ContentModelNotFoundException, InvalidContentException, MissingMethodParameterException, XmlCorruptedException,
+        MissingAttributeValueException, MissingElementValueException, SystemException,
+        ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AuthenticationException,
+        AuthorizationException, InvalidStatusException, MissingMdRecordException, XmlSchemaValidationException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -105,7 +104,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
-    public final String create(final String xmlData, final String authHandle, final Boolean restAccess)
+    public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, ContentModelNotFoundException, InvalidContentException,
         MissingMethodParameterException, XmlCorruptedException, MissingAttributeValueException,
         MissingElementValueException, SystemException, ReferencedResourceNotFoundException,
@@ -121,7 +120,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
-    public final void delete(final String id, final SecurityContext securityContext) throws ContainerNotFoundException,
+    public void delete(final String id, final SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, InvalidStatusException, SystemException, MissingMethodParameterException,
         AuthenticationException, AuthorizationException {
         try {
@@ -133,7 +132,7 @@ public class ContainerHandlerBean implements SessionBean {
         service.delete(id);
     }
 
-    public final void delete(final String id, final String authHandle, final Boolean restAccess)
+    public void delete(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, InvalidStatusException, SystemException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException {
         try {
@@ -146,7 +145,7 @@ public class ContainerHandlerBean implements SessionBean {
         service.delete(id);
     }
 
-    public final String retrieve(final String id, final SecurityContext securityContext)
+    public String retrieve(final String id, final SecurityContext securityContext)
         throws MissingMethodParameterException, ContainerNotFoundException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -158,7 +157,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
-    public final String retrieve(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, ContainerNotFoundException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -171,7 +170,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
-    public final String update(final String id, final String xmlData, final SecurityContext securityContext)
+    public String update(final String id, final String xmlData, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, InvalidContentException, MissingMethodParameterException,
         InvalidXmlException, OptimisticLockingException, InvalidStatusException, ReadonlyVersionException,
         SystemException, ReferencedResourceNotFoundException, RelationPredicateNotFoundException,
@@ -185,7 +184,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
-    public final String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
+    public String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, InvalidContentException, MissingMethodParameterException,
         InvalidXmlException, OptimisticLockingException, InvalidStatusException, ReadonlyVersionException,
         SystemException, ReferencedResourceNotFoundException, RelationPredicateNotFoundException,
@@ -200,7 +199,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
-    public final String retrieveMembers(final String id, final Map filter, final SecurityContext securityContext)
+    public String retrieveMembers(final String id, final Map filter, final SecurityContext securityContext)
         throws ContainerNotFoundException, InvalidSearchQueryException, MissingMethodParameterException,
         SystemException {
         try {
@@ -212,8 +211,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMembers(id, filter);
     }
 
-    public final String retrieveMembers(
-        final String id, final Map filter, final String authHandle, final Boolean restAccess)
+    public String retrieveMembers(final String id, final Map filter, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, InvalidSearchQueryException, MissingMethodParameterException,
         SystemException {
         try {
@@ -226,7 +224,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMembers(id, filter);
     }
 
-    public final String retrieveTocs(final String id, final Map filter, final SecurityContext securityContext)
+    public String retrieveTocs(final String id, final Map filter, final SecurityContext securityContext)
         throws ContainerNotFoundException, InvalidXmlException, InvalidSearchQueryException,
         MissingMethodParameterException, SystemException {
         try {
@@ -238,8 +236,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveTocs(id, filter);
     }
 
-    public final String retrieveTocs(
-        final String id, final Map filter, final String authHandle, final Boolean restAccess)
+    public String retrieveTocs(final String id, final Map filter, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, InvalidXmlException, InvalidSearchQueryException,
         MissingMethodParameterException, SystemException {
         try {
@@ -252,7 +249,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveTocs(id, filter);
     }
 
-    public final String addMembers(final String id, final String taskParam, final SecurityContext securityContext)
+    public String addMembers(final String id, final String taskParam, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, InvalidContentException, OptimisticLockingException,
         MissingMethodParameterException, SystemException, InvalidContextException, AuthenticationException,
         AuthorizationException, MissingAttributeValueException {
@@ -265,8 +262,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.addMembers(id, taskParam);
     }
 
-    public final String addMembers(
-        final String id, final String taskParam, final String authHandle, final Boolean restAccess)
+    public String addMembers(final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, InvalidContentException, OptimisticLockingException,
         MissingMethodParameterException, SystemException, InvalidContextException, AuthenticationException,
         AuthorizationException, MissingAttributeValueException {
@@ -280,7 +276,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.addMembers(id, taskParam);
     }
 
-    public final String addTocs(final String id, final String taskParam, final SecurityContext securityContext)
+    public String addTocs(final String id, final String taskParam, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, InvalidContentException, OptimisticLockingException,
         MissingMethodParameterException, SystemException, InvalidContextException, AuthenticationException,
         AuthorizationException, MissingAttributeValueException {
@@ -293,8 +289,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.addTocs(id, taskParam);
     }
 
-    public final String addTocs(
-        final String id, final String taskParam, final String authHandle, final Boolean restAccess)
+    public String addTocs(final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, InvalidContentException, OptimisticLockingException,
         MissingMethodParameterException, SystemException, InvalidContextException, AuthenticationException,
         AuthorizationException, MissingAttributeValueException {
@@ -308,7 +303,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.addTocs(id, taskParam);
     }
 
-    public final String removeMembers(final String id, final String taskParam, final SecurityContext securityContext)
+    public String removeMembers(final String id, final String taskParam, final SecurityContext securityContext)
         throws ContextNotFoundException, LockingException, XmlSchemaValidationException, ItemNotFoundException,
         InvalidContextStatusException, InvalidItemStatusException, AuthenticationException, AuthorizationException,
         SystemException, ContainerNotFoundException, InvalidContentException {
@@ -321,7 +316,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.removeMembers(id, taskParam);
     }
 
-    public final String removeMembers(
+    public String removeMembers(
         final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, LockingException, XmlSchemaValidationException, ItemNotFoundException,
         InvalidContextStatusException, InvalidItemStatusException, AuthenticationException, AuthorizationException,
@@ -336,7 +331,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.removeMembers(id, taskParam);
     }
 
-    public final String retrieveMdRecord(final String id, final String mdRecordId, final SecurityContext securityContext)
+    public String retrieveMdRecord(final String id, final String mdRecordId, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, MdRecordNotFoundException,
         AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -348,7 +343,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMdRecord(id, mdRecordId);
     }
 
-    public final String retrieveMdRecord(
+    public String retrieveMdRecord(
         final String id, final String mdRecordId, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, MdRecordNotFoundException,
         AuthenticationException, AuthorizationException, SystemException {
@@ -362,7 +357,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMdRecord(id, mdRecordId);
     }
 
-    public final String retrieveMdRecordContent(
+    public String retrieveMdRecordContent(
         final String id, final String mdRecordId, final SecurityContext securityContext)
         throws ContainerNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -375,7 +370,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMdRecordContent(id, mdRecordId);
     }
 
-    public final String retrieveMdRecordContent(
+    public String retrieveMdRecordContent(
         final String id, final String mdRecordId, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -389,7 +384,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMdRecordContent(id, mdRecordId);
     }
 
-    public final String retrieveDcRecordContent(final String id, final SecurityContext securityContext)
+    public String retrieveDcRecordContent(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -401,7 +396,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveDcRecordContent(id);
     }
 
-    public final String retrieveDcRecordContent(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveDcRecordContent(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -414,7 +409,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveDcRecordContent(id);
     }
 
-    public final String retrieveMdRecords(final String id, final SecurityContext securityContext)
+    public String retrieveMdRecords(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -426,7 +421,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMdRecords(id);
     }
 
-    public final String retrieveMdRecords(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveMdRecords(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -439,7 +434,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveMdRecords(id);
     }
 
-    public final String retrieveProperties(final String id, final SecurityContext securityContext)
+    public String retrieveProperties(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -451,7 +446,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
-    public final String retrieveProperties(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveProperties(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -464,7 +459,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
-    public final String retrieveResources(final String id, final SecurityContext securityContext)
+    public String retrieveResources(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -476,7 +471,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
-    public final String retrieveResources(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveResources(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -489,7 +484,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
-    public final EscidocBinaryContent retrieveResource(
+    public EscidocBinaryContent retrieveResource(
         final String id, final String resourceName, final Map parameters, final SecurityContext securityContext)
         throws SystemException, ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, OperationNotFoundException {
@@ -502,7 +497,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveResource(id, resourceName, parameters);
     }
 
-    public final EscidocBinaryContent retrieveResource(
+    public EscidocBinaryContent retrieveResource(
         final String id, final String resourceName, final Map parameters, final String authHandle,
         final Boolean restAccess) throws SystemException, ContainerNotFoundException, MissingMethodParameterException,
         AuthenticationException, AuthorizationException, OperationNotFoundException {
@@ -516,7 +511,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveResource(id, resourceName, parameters);
     }
 
-    public final String retrieveStructMap(final String id, final SecurityContext securityContext)
+    public String retrieveStructMap(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -528,7 +523,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveStructMap(id);
     }
 
-    public final String retrieveStructMap(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveStructMap(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -541,7 +536,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveStructMap(id);
     }
 
-    public final String retrieveVersionHistory(final String id, final SecurityContext securityContext)
+    public String retrieveVersionHistory(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -553,7 +548,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveVersionHistory(id);
     }
 
-    public final String retrieveVersionHistory(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveVersionHistory(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -566,7 +561,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveVersionHistory(id);
     }
 
-    public final String retrieveParents(final String id, final SecurityContext securityContext)
+    public String retrieveParents(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -578,7 +573,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveParents(id);
     }
 
-    public final String retrieveParents(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveParents(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -591,7 +586,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveParents(id);
     }
 
-    public final String retrieveRelations(final String id, final SecurityContext securityContext)
+    public String retrieveRelations(final String id, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -603,7 +598,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveRelations(id);
     }
 
-    public final String retrieveRelations(final String id, final String authHandle, final Boolean restAccess)
+    public String retrieveRelations(final String id, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -616,7 +611,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveRelations(id);
     }
 
-    public final String release(final String id, final String lastModified, final SecurityContext securityContext)
+    public String release(final String id, final String lastModified, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         ReadonlyVersionException, AuthorizationException, InvalidStatusException, SystemException,
         OptimisticLockingException, InvalidXmlException {
@@ -629,8 +624,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.release(id, lastModified);
     }
 
-    public final String release(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String release(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         ReadonlyVersionException, AuthorizationException, InvalidStatusException, SystemException,
         OptimisticLockingException, InvalidXmlException {
@@ -644,7 +638,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.release(id, lastModified);
     }
 
-    public final String submit(final String id, final String lastModified, final SecurityContext securityContext)
+    public String submit(final String id, final String lastModified, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
         ReadonlyVersionException, InvalidXmlException {
@@ -657,8 +651,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.submit(id, lastModified);
     }
 
-    public final String submit(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String submit(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
         ReadonlyVersionException, InvalidXmlException {
@@ -672,7 +665,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.submit(id, lastModified);
     }
 
-    public final String withdraw(final String id, final String lastModified, final SecurityContext securityContext)
+    public String withdraw(final String id, final String lastModified, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
         AlreadyWithdrawnException, ReadonlyVersionException, InvalidXmlException {
@@ -685,8 +678,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.withdraw(id, lastModified);
     }
 
-    public final String withdraw(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String withdraw(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
         AlreadyWithdrawnException, ReadonlyVersionException, InvalidXmlException {
@@ -700,7 +692,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.withdraw(id, lastModified);
     }
 
-    public final String revise(final String id, final String lastModified, final SecurityContext securityContext)
+    public String revise(final String id, final String lastModified, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, InvalidStatusException,
         SystemException, OptimisticLockingException, ReadonlyVersionException, XmlCorruptedException {
         try {
@@ -712,8 +704,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.revise(id, lastModified);
     }
 
-    public final String revise(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String revise(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, InvalidStatusException,
         SystemException, OptimisticLockingException, ReadonlyVersionException, XmlCorruptedException {
         try {
@@ -726,7 +717,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.revise(id, lastModified);
     }
 
-    public final String lock(final String id, final String lastModified, final SecurityContext securityContext)
+    public String lock(final String id, final String lastModified, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidStatusException,
         InvalidXmlException {
@@ -739,8 +730,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.lock(id, lastModified);
     }
 
-    public final String lock(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String lock(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidStatusException,
         InvalidXmlException {
@@ -754,7 +744,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.lock(id, lastModified);
     }
 
-    public final String unlock(final String id, final String lastModified, final SecurityContext securityContext)
+    public String unlock(final String id, final String lastModified, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidStatusException,
         InvalidXmlException {
@@ -767,8 +757,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.unlock(id, lastModified);
     }
 
-    public final String unlock(
-        final String id, final String lastModified, final String authHandle, final Boolean restAccess)
+    public String unlock(final String id, final String lastModified, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidStatusException,
         InvalidXmlException {
@@ -782,8 +771,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.unlock(id, lastModified);
     }
 
-    public final String moveToContext(
-        final String containerId, final String taskParam, final SecurityContext securityContext)
+    public String moveToContext(final String containerId, final String taskParam, final SecurityContext securityContext)
         throws ContainerNotFoundException, ContextNotFoundException, InvalidContentException, LockingException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -795,7 +783,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.moveToContext(containerId, taskParam);
     }
 
-    public final String moveToContext(
+    public String moveToContext(
         final String containerId, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, ContextNotFoundException, InvalidContentException, LockingException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
@@ -809,7 +797,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.moveToContext(containerId, taskParam);
     }
 
-    public final String createItem(final String containerId, final String xmlData, final SecurityContext securityContext)
+    public String createItem(final String containerId, final String xmlData, final SecurityContext securityContext)
         throws ContainerNotFoundException, MissingContentException, ContextNotFoundException,
         ContentModelNotFoundException, ReadonlyElementViolationException, MissingAttributeValueException,
         MissingElementValueException, ReadonlyAttributeViolationException, MissingMethodParameterException,
@@ -825,7 +813,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.createItem(containerId, xmlData);
     }
 
-    public final String createItem(
+    public String createItem(
         final String containerId, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, MissingContentException, ContextNotFoundException,
         ContentModelNotFoundException, ReadonlyElementViolationException, MissingAttributeValueException,
@@ -843,8 +831,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.createItem(containerId, xmlData);
     }
 
-    public final String createContainer(
-        final String containerId, final String xmlData, final SecurityContext securityContext)
+    public String createContainer(final String containerId, final String xmlData, final SecurityContext securityContext)
         throws MissingMethodParameterException, ContainerNotFoundException, LockingException, ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, InvalidXmlException, MissingAttributeValueException,
         MissingElementValueException, AuthenticationException, AuthorizationException, InvalidContextException,
@@ -859,7 +846,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.createContainer(containerId, xmlData);
     }
 
-    public final String createContainer(
+    public String createContainer(
         final String containerId, final String xmlData, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, ContainerNotFoundException, LockingException, ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, InvalidXmlException, MissingAttributeValueException,
@@ -876,7 +863,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.createContainer(containerId, xmlData);
     }
 
-    public final String retrieveContainers(final Map filter, final SecurityContext securityContext)
+    public String retrieveContainers(final Map filter, final SecurityContext securityContext)
         throws MissingMethodParameterException, InvalidSearchQueryException, InvalidXmlException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -887,7 +874,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveContainers(filter);
     }
 
-    public final String retrieveContainers(final Map filter, final String authHandle, final Boolean restAccess)
+    public String retrieveContainers(final Map filter, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, InvalidSearchQueryException, InvalidXmlException, SystemException {
         try {
             UserContext.setUserContext(authHandle);
@@ -899,7 +886,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.retrieveContainers(filter);
     }
 
-    public final String addContentRelations(final String id, final String param, final SecurityContext securityContext)
+    public String addContentRelations(final String id, final String param, final SecurityContext securityContext)
         throws SystemException, ContainerNotFoundException, OptimisticLockingException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AlreadyExistsException,
         InvalidStatusException, InvalidXmlException, MissingElementValueException, LockingException,
@@ -914,7 +901,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.addContentRelations(id, param);
     }
 
-    public final String addContentRelations(
+    public String addContentRelations(
         final String id, final String param, final String authHandle, final Boolean restAccess) throws SystemException,
         ContainerNotFoundException, OptimisticLockingException, ReferencedResourceNotFoundException,
         RelationPredicateNotFoundException, AlreadyExistsException, InvalidStatusException, InvalidXmlException,
@@ -930,11 +917,10 @@ public class ContainerHandlerBean implements SessionBean {
         return service.addContentRelations(id, param);
     }
 
-    public final String removeContentRelations(
-        final String id, final String param, final SecurityContext securityContext) throws SystemException,
-        ContainerNotFoundException, OptimisticLockingException, InvalidStatusException, MissingElementValueException,
-        InvalidXmlException, ContentRelationNotFoundException, LockingException, ReadonlyVersionException,
-        AuthenticationException, AuthorizationException {
+    public String removeContentRelations(final String id, final String param, final SecurityContext securityContext)
+        throws SystemException, ContainerNotFoundException, OptimisticLockingException, InvalidStatusException,
+        MissingElementValueException, InvalidXmlException, ContentRelationNotFoundException, LockingException,
+        ReadonlyVersionException, AuthenticationException, AuthorizationException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -944,7 +930,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.removeContentRelations(id, param);
     }
 
-    public final String removeContentRelations(
+    public String removeContentRelations(
         final String id, final String param, final String authHandle, final Boolean restAccess) throws SystemException,
         ContainerNotFoundException, OptimisticLockingException, InvalidStatusException, MissingElementValueException,
         InvalidXmlException, ContentRelationNotFoundException, LockingException, ReadonlyVersionException,
@@ -959,7 +945,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.removeContentRelations(id, param);
     }
 
-    public final String assignObjectPid(final String id, final String param, final SecurityContext securityContext)
+    public String assignObjectPid(final String id, final String param, final SecurityContext securityContext)
         throws InvalidStatusException, ContainerNotFoundException, LockingException, MissingMethodParameterException,
         OptimisticLockingException, SystemException, InvalidXmlException {
         try {
@@ -971,8 +957,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.assignObjectPid(id, param);
     }
 
-    public final String assignObjectPid(
-        final String id, final String param, final String authHandle, final Boolean restAccess)
+    public String assignObjectPid(final String id, final String param, final String authHandle, final Boolean restAccess)
         throws InvalidStatusException, ContainerNotFoundException, LockingException, MissingMethodParameterException,
         OptimisticLockingException, SystemException, InvalidXmlException {
         try {
@@ -985,7 +970,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.assignObjectPid(id, param);
     }
 
-    public final String assignVersionPid(final String id, final String param, final SecurityContext securityContext)
+    public String assignVersionPid(final String id, final String param, final SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException {
         try {
@@ -997,7 +982,7 @@ public class ContainerHandlerBean implements SessionBean {
         return service.assignVersionPid(id, param);
     }
 
-    public final String assignVersionPid(
+    public String assignVersionPid(
         final String id, final String param, final String authHandle, final Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException {

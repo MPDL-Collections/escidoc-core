@@ -44,25 +44,25 @@ public class PolicyDecisionPointBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String evaluate(final String requestsXml, final SecurityContext securityContext)
+    public String evaluate(final String requestsXml, final SecurityContext securityContext)
         throws ResourceNotFoundException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -74,7 +74,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluate(requestsXml);
     }
 
-    public final String evaluate(final String requestsXml, final String authHandle, final Boolean restAccess)
+    public String evaluate(final String requestsXml, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -87,7 +87,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluate(requestsXml);
     }
 
-    public final boolean[] evaluateRequestList(final List requests, final SecurityContext securityContext)
+    public boolean[] evaluateRequestList(final List requests, final SecurityContext securityContext)
         throws ResourceNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -99,7 +99,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRequestList(requests);
     }
 
-    public final boolean[] evaluateRequestList(final List requests, final String authHandle, final Boolean restAccess)
+    public boolean[] evaluateRequestList(final List requests, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
         try {
@@ -112,7 +112,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRequestList(requests);
     }
 
-    public final List evaluateRetrieve(final String resourceName, final List ids, final SecurityContext securityContext)
+    public List evaluateRetrieve(final String resourceName, final List ids, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         ResourceNotFoundException, SystemException {
         try {
@@ -124,7 +124,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRetrieve(resourceName, ids);
     }
 
-    public final List evaluateRetrieve(
+    public List evaluateRetrieve(
         final String resourceName, final List ids, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         ResourceNotFoundException, SystemException {
@@ -138,7 +138,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRetrieve(resourceName, ids);
     }
 
-    public final List evaluateMethodForList(
+    public List evaluateMethodForList(
         final String resourceName, final String methodName, final List argumentList,
         final SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
         MissingMethodParameterException, ResourceNotFoundException, SystemException {
@@ -151,7 +151,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateMethodForList(resourceName, methodName, argumentList);
     }
 
-    public final List evaluateMethodForList(
+    public List evaluateMethodForList(
         final String resourceName, final String methodName, final List argumentList, final String authHandle,
         final Boolean restAccess) throws AuthenticationException, AuthorizationException,
         MissingMethodParameterException, ResourceNotFoundException, SystemException {
@@ -165,7 +165,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateMethodForList(resourceName, methodName, argumentList);
     }
 
-    public final void touch(final SecurityContext securityContext) throws SystemException {
+    public void touch(final SecurityContext securityContext) throws SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -175,7 +175,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         service.touch();
     }
 
-    public final void touch(final String authHandle, final Boolean restAccess) throws SystemException {
+    public void touch(final String authHandle, final Boolean restAccess) throws SystemException {
         try {
             UserContext.setUserContext(authHandle);
             UserContext.setRestAccess(restAccess);

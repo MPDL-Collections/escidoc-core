@@ -39,26 +39,26 @@ public class FedoraDescribeDeviationHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String getFedoraDescription(final Map parameters, final SecurityContext securityContext)
-        throws Exception, SystemException {
+    public String getFedoraDescription(final Map parameters, final SecurityContext securityContext) throws Exception,
+        SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -68,7 +68,7 @@ public class FedoraDescribeDeviationHandlerBean implements SessionBean {
         return service.getFedoraDescription(parameters);
     }
 
-    public final String getFedoraDescription(final Map parameters, final String authHandle, final Boolean restAccess)
+    public String getFedoraDescription(final Map parameters, final String authHandle, final Boolean restAccess)
         throws Exception, SystemException {
         try {
             UserContext.setUserContext(authHandle);

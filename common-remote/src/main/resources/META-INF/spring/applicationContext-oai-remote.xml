@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.SetDefinitionHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>ejb/SetDefinitionHandler</value>
+            <value>java:global/escidoc-core/03_oai/SetDefinitionHandler!de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerRemote</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.oai.service.interfaces.SetDefinitionHandlerInterface</value>

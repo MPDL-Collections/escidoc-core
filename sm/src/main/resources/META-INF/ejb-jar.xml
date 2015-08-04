@@ -21,7 +21,7 @@
       	 <service-endpoint>de.escidoc.core.sm.service.ScopeHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.sm.ejb.ScopeHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -44,7 +44,7 @@
       	 <service-endpoint>de.escidoc.core.sm.service.PreprocessingHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.sm.ejb.PreprocessingHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -67,7 +67,7 @@
       	 <service-endpoint>de.escidoc.core.sm.service.ReportDefinitionHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.sm.ejb.ReportDefinitionHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -90,7 +90,7 @@
       	 <service-endpoint>de.escidoc.core.sm.service.AggregationDefinitionHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.sm.ejb.AggregationDefinitionHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -113,7 +113,7 @@
       	 <service-endpoint>de.escidoc.core.sm.service.StatisticDataHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.sm.ejb.StatisticDataHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -136,7 +136,7 @@
       	 <service-endpoint>de.escidoc.core.sm.service.ReportHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.sm.ejb.ReportHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

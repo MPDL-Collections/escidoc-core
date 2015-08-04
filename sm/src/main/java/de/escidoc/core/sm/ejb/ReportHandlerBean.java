@@ -44,27 +44,27 @@ public class ReportHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String retrieve(final String xml, final SecurityContext securityContext)
-        throws AuthenticationException, AuthorizationException, XmlCorruptedException, XmlSchemaValidationException,
-        ReportDefinitionNotFoundException, MissingMethodParameterException, InvalidSqlException, SystemException {
+    public String retrieve(final String xml, final SecurityContext securityContext) throws AuthenticationException,
+        AuthorizationException, XmlCorruptedException, XmlSchemaValidationException, ReportDefinitionNotFoundException,
+        MissingMethodParameterException, InvalidSqlException, SystemException {
         try {
             UserContext.setUserContext(securityContext);
         }
@@ -74,7 +74,7 @@ public class ReportHandlerBean implements SessionBean {
         return service.retrieve(xml);
     }
 
-    public final String retrieve(final String xml, final String authHandle, final Boolean restAccess)
+    public String retrieve(final String xml, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, XmlCorruptedException, XmlSchemaValidationException,
         ReportDefinitionNotFoundException, MissingMethodParameterException, InvalidSqlException, SystemException {
         try {

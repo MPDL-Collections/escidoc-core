@@ -63,8 +63,10 @@ public final class EjbFactoryBeanHelper {
             throw new WebserverSystemException(e);
         }
         final Properties properties = new Properties();
-        properties.setProperty(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
-        properties.setProperty(Context.PROVIDER_URL, providerUrl);
+        //properties.setProperty(Context.URL_PKG_PREFIXES, "org.jboss.naming:org.jnp.interfaces");
+        properties.setProperty(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+
+        //properties.setProperty(Context.PROVIDER_URL, providerUrl);
 
         return properties;
     }

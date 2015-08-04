@@ -21,7 +21,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.ContextHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.ContextHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -44,7 +44,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.ContainerHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.ContainerHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -67,7 +67,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.ItemHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.ItemHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -90,7 +90,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.ContentRelationHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.ContentRelationHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -113,7 +113,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.SemanticStoreHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.SemanticStoreHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -136,7 +136,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.IngestHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.IngestHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -159,7 +159,7 @@
       	 <service-endpoint>de.escidoc.core.om.service.FedoraRestDeviationHandlerService</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.FedoraRestDeviationHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>
@@ -182,7 +182,7 @@
       	 <service-endpoint>de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandler</service-endpoint>
          <ejb-class>de.escidoc.core.om.ejb.FedoraDescribeDeviationHandlerBean</ejb-class>
          <session-type>Stateless</session-type>
-         <transaction-type>Container</transaction-type>
+         <transaction-type>Bean</transaction-type>
 
          <security-identity>
             <run-as>

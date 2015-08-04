@@ -5,11 +5,11 @@
 	<description>Staging Service package of eSciDoc Core</description>
 	<parent>
 		<artifactId>eSciDocCore</artifactId>
-		<groupId>org.escidoc.core</groupId>
+		<groupId>org.escidoc.core.wildfly</groupId>
 		<version>1.3.10-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.escidoc.core</groupId>
+	<groupId>org.escidoc.core.wildfly</groupId>
 	<artifactId>st</artifactId>
 	<packaging>ejb</packaging>
 	
@@ -121,11 +121,11 @@
                     </aspectLibraries>
                     <aspectLibraries>
                         <aspectLibrary>
-                            <groupId>org.escidoc.core</groupId>
+                            <groupId>org.escidoc.core.wildfly</groupId>
                             <artifactId>common</artifactId>
                         </aspectLibrary>
                         <aspectLibrary>
-                            <groupId>org.escidoc.core</groupId>
+                            <groupId>org.escidoc.core.wildfly</groupId>
                             <artifactId>aa</artifactId>
                         </aspectLibrary>
                     </aspectLibraries>
@@ -163,12 +163,12 @@
 
 	<dependencies>
         <dependency>
-            <groupId>org.escidoc.core</groupId>
+            <groupId>org.escidoc.core.wildfly</groupId>
             <artifactId>common</artifactId>
             <type>ejb</type>
         </dependency>
         <dependency>
-            <groupId>org.escidoc.core</groupId>
+            <groupId>org.escidoc.core.wildfly</groupId>
             <artifactId>aa</artifactId>
             <type>ejb</type>
         </dependency>

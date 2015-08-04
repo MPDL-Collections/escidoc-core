@@ -46,25 +46,25 @@ public class SetDefinitionHandlerBean implements SessionBean {
     }
 
     @Override
-    public final void setSessionContext(final SessionContext arg0) throws RemoteException {
+    public void setSessionContext(final SessionContext arg0) throws RemoteException {
         this.sessionCtx = arg0;
     }
 
     @Override
-    public final void ejbRemove() throws RemoteException {
+    public void ejbRemove() throws RemoteException {
     }
 
     @Override
-    public final void ejbActivate() throws RemoteException {
+    public void ejbActivate() throws RemoteException {
 
     }
 
     @Override
-    public final void ejbPassivate() throws RemoteException {
+    public void ejbPassivate() throws RemoteException {
 
     }
 
-    public final String create(final String setDefinition, final SecurityContext securityContext)
+    public String create(final String setDefinition, final SecurityContext securityContext)
         throws UniqueConstraintViolationException, InvalidXmlException, MissingMethodParameterException,
         SystemException, AuthenticationException, AuthorizationException {
         try {
@@ -76,7 +76,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.create(setDefinition);
     }
 
-    public final String create(final String setDefinition, final String authHandle, final Boolean restAccess)
+    public String create(final String setDefinition, final String authHandle, final Boolean restAccess)
         throws UniqueConstraintViolationException, InvalidXmlException, MissingMethodParameterException,
         SystemException, AuthenticationException, AuthorizationException {
         try {
@@ -89,7 +89,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.create(setDefinition);
     }
 
-    public final String retrieve(final String setDefinitionId, final SecurityContext securityContext)
+    public String retrieve(final String setDefinitionId, final SecurityContext securityContext)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
         try {
@@ -101,7 +101,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.retrieve(setDefinitionId);
     }
 
-    public final String retrieve(final String setDefinitionId, final String authHandle, final Boolean restAccess)
+    public String retrieve(final String setDefinitionId, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
         try {
@@ -114,7 +114,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.retrieve(setDefinitionId);
     }
 
-    public final String update(final String setDefinitionId, final String xmlData, final SecurityContext securityContext)
+    public String update(final String setDefinitionId, final String xmlData, final SecurityContext securityContext)
         throws ResourceNotFoundException, OptimisticLockingException, MissingMethodParameterException, SystemException,
         AuthenticationException, AuthorizationException {
         try {
@@ -126,7 +126,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.update(setDefinitionId, xmlData);
     }
 
-    public final String update(
+    public String update(
         final String setDefinitionId, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, OptimisticLockingException, MissingMethodParameterException, SystemException,
         AuthenticationException, AuthorizationException {
@@ -140,7 +140,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.update(setDefinitionId, xmlData);
     }
 
-    public final void delete(final String setDefinitionId, final SecurityContext securityContext)
+    public void delete(final String setDefinitionId, final SecurityContext securityContext)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
         try {
@@ -152,7 +152,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         service.delete(setDefinitionId);
     }
 
-    public final void delete(final String setDefinitionId, final String authHandle, final Boolean restAccess)
+    public void delete(final String setDefinitionId, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
         try {
@@ -165,7 +165,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         service.delete(setDefinitionId);
     }
 
-    public final String retrieveSetDefinitions(final Map filter, final SecurityContext securityContext)
+    public String retrieveSetDefinitions(final Map filter, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         InvalidSearchQueryException, SystemException {
         try {
@@ -177,7 +177,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.retrieveSetDefinitions(filter);
     }
 
-    public final String retrieveSetDefinitions(final Map filter, final String authHandle, final Boolean restAccess)
+    public String retrieveSetDefinitions(final Map filter, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         InvalidSearchQueryException, SystemException {
         try {
