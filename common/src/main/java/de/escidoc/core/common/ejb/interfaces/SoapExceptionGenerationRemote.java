@@ -19,6 +19,12 @@
  */
 package de.escidoc.core.common.ejb.interfaces;
 
+import java.rmi.RemoteException;
+
+import javax.ejb.EJBObject;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.application.ApplicationException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidAggregationTypeException;
@@ -116,10 +122,6 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.EJBObject;
-import java.rmi.RemoteException;
 
 /**
  * Remote interface for SoapExceptionGeneration.

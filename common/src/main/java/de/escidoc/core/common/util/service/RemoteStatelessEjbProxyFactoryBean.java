@@ -33,8 +33,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ejb.access.AbstractRemoteSlsbInvokerInterceptor;
 import org.springframework.ejb.access.SimpleRemoteStatelessSessionProxyFactoryBean;
-import org.springframework.security.Authentication;
-import org.springframework.security.context.SecurityContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.util.MethodInvocationUtils;
 
 import de.escidoc.core.common.exceptions.system.SystemException;

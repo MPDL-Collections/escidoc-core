@@ -28,21 +28,6 @@
  */
 package de.escidoc.core.aa.business.cache;
 
-import com.sun.xacml.cond.EvaluationResult;
-import de.escidoc.core.aa.business.persistence.EscidocRole;
-import de.escidoc.core.aa.business.xacml.XacmlPolicySet;
-import de.escidoc.core.aa.business.xacml.function.XacmlFunctionRoleIsGranted;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
-import net.sf.ehcache.config.CacheConfiguration;
-import org.apache.commons.collections.map.LRUMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.userdetails.UserDetails;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -51,6 +36,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+import net.sf.ehcache.config.CacheConfiguration;
+
+import org.apache.commons.collections.map.LRUMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.sun.xacml.cond.EvaluationResult;
+
+import de.escidoc.core.aa.business.persistence.EscidocRole;
+import de.escidoc.core.aa.business.xacml.XacmlPolicySet;
+import de.escidoc.core.aa.business.xacml.function.XacmlFunctionRoleIsGranted;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
 
 /**
  * Class to cache policies retrieved from the database for the XACML engine.<br> This class caches different policy

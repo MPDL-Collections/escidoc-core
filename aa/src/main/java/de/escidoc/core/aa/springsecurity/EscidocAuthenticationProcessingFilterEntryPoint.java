@@ -28,23 +28,23 @@
  */
 package de.escidoc.core.aa.springsecurity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.AuthenticationException;
-import org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint;
-import org.springframework.security.util.RedirectUrlBuilder;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.RedirectUrlBuilder;
 
 /**
  * Overwrites AuthenticationProcessingFilterEntryPoint to enable to use absolute urls for the login-form.
  *
  * @author Michael Hoppe
  */
-public class EscidocAuthenticationProcessingFilterEntryPoint extends AuthenticationProcessingFilterEntryPoint {
+public class EscidocAuthenticationProcessingFilterEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationProcessingFilterEntryPoint.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginUrlAuthenticationEntryPoint.class);
 
     /**
      * Get url to login-page from configuration.

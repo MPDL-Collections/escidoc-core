@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.aa.convert;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 import com.sun.xacml.attr.AttributeDesignator;
 import com.sun.xacml.attr.StringAttribute;
 import com.sun.xacml.cond.Apply;
-import de.escidoc.core.common.business.fedora.resources.Values;
 
-import java.util.List;
-import java.util.regex.Pattern;
+import de.escidoc.core.common.business.fedora.resources.Values;
 
 /**
  * This is a helper class to convert a XACML condition into an SQL fragment.

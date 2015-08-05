@@ -1,10 +1,11 @@
 package de.escidoc.core.om.ejb.interfaces;
 
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.EJBObject;
 import java.rmi.RemoteException;
 import java.util.Map;
+
+import javax.ejb.EJBObject;
+
+import org.springframework.security.core.context.SecurityContext;
 
 /**
  * Remote interface for FedoraDescribeDeviationHandler.

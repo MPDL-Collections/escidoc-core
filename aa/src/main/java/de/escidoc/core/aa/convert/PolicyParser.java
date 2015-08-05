@@ -28,6 +28,15 @@
  */
 package de.escidoc.core.aa.convert;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
+
 import com.sun.xacml.AbstractPolicy;
 import com.sun.xacml.Policy;
 import com.sun.xacml.Rule;
@@ -42,18 +51,10 @@ import com.sun.xacml.cond.Apply;
 import com.sun.xacml.cond.EqualFunction;
 import com.sun.xacml.cond.Evaluatable;
 import com.sun.xacml.ctx.Result;
+
 import de.escidoc.core.aa.business.xacml.function.XacmlFunctionContains;
 import de.escidoc.core.common.business.fedora.resources.ResourceType;
 import de.escidoc.core.common.business.fedora.resources.Values;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 /**
  * This is a helper class to convert an XACML policy into an SQL / Lucene fragment.

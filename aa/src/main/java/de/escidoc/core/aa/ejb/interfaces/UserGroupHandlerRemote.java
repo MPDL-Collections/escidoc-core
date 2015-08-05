@@ -1,5 +1,12 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
+import java.rmi.RemoteException;
+import java.util.Map;
+
+import javax.ejb.EJBObject;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidScopeException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
@@ -22,11 +29,6 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.application.violated.UserGroupHierarchyViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.EJBObject;
-import java.rmi.RemoteException;
-import java.util.Map;
 
 /**
  * Remote interface for UserGroupHandler.

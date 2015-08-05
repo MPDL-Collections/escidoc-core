@@ -1,5 +1,11 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
+import java.util.Map;
+
+import javax.ejb.EJBLocalObject;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -12,10 +18,6 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.RoleInUseViolationException;
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
-import java.util.Map;
 
 /**
  * Local interface for RoleHandler.

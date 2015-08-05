@@ -1,5 +1,12 @@
 package de.escidoc.core.om.ejb.interfaces;
 
+import java.rmi.RemoteException;
+import java.util.Map;
+
+import javax.ejb.EJBObject;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.invalid.ContextNotEmptyException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
@@ -24,11 +31,6 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeViolationException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.EJBObject;
-import java.rmi.RemoteException;
-import java.util.Map;
 
 /**
  * Remote interface for ContextHandler.

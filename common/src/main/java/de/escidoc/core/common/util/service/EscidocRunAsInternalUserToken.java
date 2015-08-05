@@ -20,9 +20,11 @@
 
 package de.escidoc.core.common.util.service;
 
-import org.springframework.security.Authentication;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.providers.AbstractAuthenticationToken;
+import java.util.Collection;
+
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * {@link Authentication} implementation for indicating the access of the user identified by a wrapped {@link
@@ -100,10 +102,11 @@ public class EscidocRunAsInternalUserToken extends AbstractAuthenticationToken {
      *
      * @see AbstractAuthenticationToken #getAuthorities()
      */
-    @Override
-    public GrantedAuthority[] getAuthorities() {
 
-        return orginalAuthentication.getAuthorities();
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+
+        return (Collection<GrantedAuthority>) orginalAuthentication.getAuthorities();
     }
 
     /**

@@ -20,15 +20,19 @@
 
 package de.escidoc.core.common.util.security;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import de.escidoc.core.aa.service.interfaces.EscidocUserDetailsServiceInterface;
-import org.springframework.security.Authentication;
-import org.springframework.security.AuthenticationException;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.providers.AuthenticationProvider;
-import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
-import org.springframework.security.providers.anonymous.AnonymousAuthenticationToken;
-import org.springframework.security.userdetails.UserDetails;
 
 /**
  * @author Torsten Tetteroo
@@ -47,7 +51,9 @@ public class EscidocAuthenticationProvider implements AuthenticationProvider {
         final String credentials = (String) authentication.getCredentials();
         if (credentials == null || "".equals(credentials)) {
             final GrantedAuthority grantedAuthority = new GrantedAuthorityImpl("");
-            final GrantedAuthority[] grantedAuthorities = { grantedAuthority };
+
+            final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+            grantedAuthorities.add(grantedAuthority);
             return new AnonymousAuthenticationToken("key", "Anonymous", grantedAuthorities);
         }
         final UserDetails userDetails = escidocUserDetailsService.loadUserByUsername(credentials);

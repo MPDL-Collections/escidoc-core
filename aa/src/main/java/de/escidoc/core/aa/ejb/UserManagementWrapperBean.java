@@ -1,20 +1,22 @@
 package de.escidoc.core.aa.ejb;
 
-import de.escidoc.core.aa.service.interfaces.UserManagementWrapperInterface;
-import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.util.service.UserContext;
+import java.rmi.RemoteException;
+
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.security.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
+import de.escidoc.core.aa.service.interfaces.UserManagementWrapperInterface;
+import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.UserContext;
 
 public class UserManagementWrapperBean implements SessionBean {
 

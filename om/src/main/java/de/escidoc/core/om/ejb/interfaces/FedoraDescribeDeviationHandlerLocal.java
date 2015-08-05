@@ -1,9 +1,10 @@
 package de.escidoc.core.om.ejb.interfaces;
 
-import org.springframework.security.context.SecurityContext;
+import java.util.Map;
 
 import javax.ejb.EJBLocalObject;
-import java.util.Map;
+
+import org.springframework.security.core.context.SecurityContext;
 
 /**
  * Local interface for FedoraDescribeDeviationHandler.

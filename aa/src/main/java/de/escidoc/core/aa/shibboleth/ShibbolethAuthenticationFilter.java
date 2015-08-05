@@ -28,29 +28,32 @@
  */
 package de.escidoc.core.aa.shibboleth;
 
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.ui.SpringSecurityFilter;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 
-public class ShibbolethAuthenticationFilter extends SpringSecurityFilter {
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.GenericFilterBean;
+
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+
+public class ShibbolethAuthenticationFilter extends GenericFilterBean {
 
     /**
      * See Interface for functional description.
      */
     @Override
-    protected void doFilterHttp(
-        final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain)
+    public void doFilter(final ServletRequest requ, final ServletResponse response, final FilterChain filterChain)
         throws IOException, ServletException {
 
+        HttpServletRequest request = (HttpServletRequest) requ;
         final String shibSessionId = request.getHeader(ShibbolethDetails.SHIB_SESSION_ID);
         if (shibSessionId != null && shibSessionId.length() != 0) {
             final ShibbolethDetails details =
@@ -114,17 +117,6 @@ public class ShibbolethAuthenticationFilter extends SpringSecurityFilter {
         }
 
         filterChain.doFilter(request, response);
-    }
-
-    /**
-     * See Interface for functional description.
-     *
-     * @see SpringSecurityFilter#getOrder()
-     */
-    @Override
-    public int getOrder() {
-
-        return 0;
     }
 
 }

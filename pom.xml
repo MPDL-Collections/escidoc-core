@@ -508,6 +508,17 @@
 							</exclusion>
 						</exclusions>
 					</dependency>
+					<dependency>
+						<groupId>org.springframework.security</groupId>
+						<artifactId>spring-security-config</artifactId>
+						<version>3.2.8.RELEASE</version>
+						<exclusions>
+							<exclusion>
+								<groupId>commons-logging</groupId>
+								<artifactId>commons-logging</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
 					<!-- dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-openid</artifactId> 
 						<version>2.0.5.RELEASE</version> </dependency -->
 					<dependency>
@@ -532,6 +543,7 @@
 							</exclusion>
 						</exclusions>
 					</dependency>
+					<!-- 
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-context</artifactId>
@@ -543,6 +555,7 @@
 							</exclusion>
 						</exclusions>
 					</dependency>
+					-->
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-aop</artifactId>
@@ -612,6 +625,17 @@
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-webmvc</artifactId>
+						<version>${spring.version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>commons-logging</groupId>
+								<artifactId>commons-logging</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context-support</artifactId>
 						<version>${spring.version}</version>
 						<exclusions>
 							<exclusion>
@@ -1361,6 +1385,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<!-- 
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
@@ -1372,6 +1397,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			-->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
@@ -1441,6 +1467,17 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
 				<version>${spring.version}</version>
 				<exclusions>
 					<exclusion>
@@ -1602,9 +1639,20 @@
 				</exclusions>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.ldap</groupId>
-				<artifactId>spring-ldap-core</artifactId>
-				<version>1.3.0.RELEASE</version>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>3.2.8.RELEASE</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-ldap</artifactId>
+				<version>3.2.8.RELEASE</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>

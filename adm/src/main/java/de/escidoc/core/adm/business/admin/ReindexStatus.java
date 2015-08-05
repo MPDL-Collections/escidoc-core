@@ -28,8 +28,6 @@
  */
 package de.escidoc.core.adm.business.admin;
 
-import java.util.Date;
-
 import de.escidoc.core.common.business.fedora.resources.ResourceType;
 
 /**

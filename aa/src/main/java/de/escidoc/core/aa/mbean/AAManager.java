@@ -28,14 +28,15 @@
  */
 package de.escidoc.core.aa.mbean;
 
-import de.escidoc.core.aa.business.UserHandleCleaner;
-import de.escidoc.core.aa.business.cache.PoliciesCache;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import java.io.IOException;
+
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
-import java.io.IOException;
+import de.escidoc.core.aa.business.UserHandleCleaner;
+import de.escidoc.core.aa.business.cache.PoliciesCache;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
 
 /**
  * Managed bean to access values and operations of the authentication and authorization component.

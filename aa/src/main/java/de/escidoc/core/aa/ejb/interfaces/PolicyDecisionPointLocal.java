@@ -1,5 +1,11 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
+import java.util.List;
+
+import javax.ejb.EJBLocalObject;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
 import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
@@ -7,10 +13,6 @@ import de.escidoc.core.common.exceptions.application.notfound.ResourceNotFoundEx
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
-import java.util.List;
 
 /**
  * Local interface for PolicyDecisionPoint.

@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.aa.business;
 
+import java.io.ByteArrayInputStream;
+
 import de.escidoc.core.aa.business.persistence.ActionDaoInterface;
 import de.escidoc.core.aa.business.persistence.UnsecuredActionList;
 import de.escidoc.core.aa.business.renderer.interfaces.ActionRendererInterface;
@@ -45,8 +47,6 @@ import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.common.util.xml.stax.StaxParser;
-
-import java.io.ByteArrayInputStream;
 
 /**
  * Business layer implementation of a handler that manages eSciDoc actions.

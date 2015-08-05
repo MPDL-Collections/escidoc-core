@@ -1,10 +1,12 @@
 package de.escidoc.core.om.ejb.interfaces;
 
-import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
-import org.springframework.security.context.SecurityContext;
+import java.util.Map;
 
 import javax.ejb.EJBLocalObject;
-import java.util.Map;
+
+import org.springframework.security.core.context.SecurityContext;
+
+import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 
 /**
  * Local interface for FedoraRestDeviationHandler.
