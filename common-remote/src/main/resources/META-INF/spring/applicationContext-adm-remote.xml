@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.AdminHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/04_adm/AdminHandler!de.escidoc.core.adm.ejb.interfaces.AdminHandlerRemote</value>
+            <value>java:global/escidoc-core/04_adm/AdminHandler!de.escidoc.core.adm.ejb.interfaces.AdminHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.adm.service.interfaces.AdminHandlerInterface</value>

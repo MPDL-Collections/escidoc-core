@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.StatisticDataHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/09_sm/StatisticDataHandler!de.escidoc.core.sm.ejb.interfaces.StatisticDataHandlerRemote</value>
+            <value>java:global/escidoc-core/09_sm/StatisticDataHandler!de.escidoc.core.sm.ejb.interfaces.StatisticDataHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.sm.service.interfaces.StatisticDataHandlerInterface</value>
@@ -32,7 +32,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ScopeHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/09_sm/ScopeHandler!de.escidoc.core.sm.ejb.interfaces.ScopeHandlerRemote</value>
+            <value>java:global/escidoc-core/09_sm/ScopeHandler!de.escidoc.core.sm.ejb.interfaces.ScopeHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.sm.service.interfaces.ScopeHandlerInterface</value>
@@ -44,7 +44,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ReportDefinitionHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/09_sm/ReportDefinitionHandler!de.escidoc.core.sm.ejb.interfaces.ReportDefinitionHandlerRemote</value>
+            <value>java:global/escidoc-core/09_sm/ReportDefinitionHandler!de.escidoc.core.sm.ejb.interfaces.ReportDefinitionHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.sm.service.interfaces.ReportDefinitionHandlerInterface</value>
@@ -56,7 +56,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.PreprocessingHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/09_sm/PreprocessingHandler!de.escidoc.core.sm.ejb.interfaces.PreprocessingHandlerRemote</value>
+            <value>java:global/escidoc-core/09_sm/PreprocessingHandler!de.escidoc.core.sm.ejb.interfaces.PreprocessingHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.sm.service.interfaces.PreprocessingHandlerInterface</value>
@@ -68,7 +68,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ReportHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/09_sm/ReportHandler!de.escidoc.core.sm.ejb.interfaces.ReportHandlerRemote</value>
+            <value>java:global/escidoc-core/09_sm/ReportHandler!de.escidoc.core.sm.ejb.interfaces.ReportHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.sm.service.interfaces.ReportHandlerInterface</value>
@@ -80,7 +80,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.AggregationDefinitionHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/09_sm/AggregationDefinitionHandler!de.escidoc.core.sm.ejb.interfaces.AggregationDefinitionHandlerRemote</value>
+            <value>java:global/escidoc-core/09_sm/AggregationDefinitionHandler!de.escidoc.core.sm.ejb.interfaces.AggregationDefinitionHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.sm.service.interfaces.AggregationDefinitionHandlerInterface</value>

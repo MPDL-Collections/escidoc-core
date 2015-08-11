@@ -272,12 +272,13 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                     org.hibernate.cache.HashtableCacheProvider
                 </prop>
                 <prop key="hibernate.show_sql">false</prop>
-                <!-- 
+                 
                 <prop key="jta.UserTransaction">
                     ${escidoc-core.jta.UserTransaction}
                 </prop>
-                -->
+                
                 <prop key="hibernate.connection.release_mode">auto</prop>
+                <prop key="hibernate.current_session_context_class">jta</prop>
             </props>
         </property>
         <property name="mappingResources">

@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.SemanticStoreHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/SemanticStoreHandler!de.escidoc.core.om.ejb.interfaces.SemanticStoreHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/SemanticStoreHandler!de.escidoc.core.om.ejb.interfaces.SemanticStoreHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.SemanticStoreHandlerInterface</value>
@@ -32,7 +32,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.FedoraDescribeDeviationHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/FedoraDescribeDeviationHandler!de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/FedoraDescribeDeviationHandler!de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.FedoraDescribeDeviationHandlerInterface</value>
@@ -44,7 +44,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ItemHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/ItemHandler!de.escidoc.core.om.ejb.interfaces.ItemHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/ItemHandler!de.escidoc.core.om.ejb.interfaces.ItemHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.ItemHandlerInterface</value>
@@ -56,7 +56,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.IngestHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/IngestHandler!de.escidoc.core.om.ejb.interfaces.IngestHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/IngestHandler!de.escidoc.core.om.ejb.interfaces.IngestHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.IngestHandlerInterface</value>
@@ -68,7 +68,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ContainerHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/ContainerHandler!de.escidoc.core.om.ejb.interfaces.ContainerHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/ContainerHandler!de.escidoc.core.om.ejb.interfaces.ContainerHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.ContainerHandlerInterface</value>
@@ -80,7 +80,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ContextHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/ContextHandler!de.escidoc.core.om.ejb.interfaces.ContextHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/ContextHandler!de.escidoc.core.om.ejb.interfaces.ContextHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.ContextHandlerInterface</value>
@@ -92,7 +92,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ContentRelationHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/ContentRelationHandler!de.escidoc.core.om.ejb.interfaces.ContentRelationHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/ContentRelationHandler!de.escidoc.core.om.ejb.interfaces.ContentRelationHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface</value>
@@ -104,7 +104,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.FedoraRestDeviationHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/06_om/FedoraRestDeviationHandler!de.escidoc.core.om.ejb.interfaces.FedoraRestDeviationHandlerRemote</value>
+            <value>java:global/escidoc-core/06_om/FedoraRestDeviationHandler!de.escidoc.core.om.ejb.interfaces.FedoraRestDeviationHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.om.service.interfaces.FedoraRestDeviationHandlerInterface</value>

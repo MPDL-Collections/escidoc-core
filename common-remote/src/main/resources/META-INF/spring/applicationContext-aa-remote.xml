@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ActionHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/02_aa/ActionHandler!de.escidoc.core.aa.ejb.interfaces.ActionHandlerRemote</value>
+            <value>java:global/escidoc-core/02_aa/ActionHandler!de.escidoc.core.aa.ejb.interfaces.ActionHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.aa.service.interfaces.ActionHandlerInterface</value>
@@ -32,7 +32,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.UserManagementWrapperBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/02_aa/UserManagementWrapper!de.escidoc.core.aa.ejb.interfaces.UserManagementWrapperRemote</value>
+            <value>java:global/escidoc-core/02_aa/UserManagementWrapper!de.escidoc.core.aa.ejb.interfaces.UserManagementWrapperLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.aa.service.interfaces.UserManagementWrapperInterface</value>
@@ -44,7 +44,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.PolicyDecisionPointBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/02_aa/PolicyDecisionPoint!de.escidoc.core.aa.ejb.interfaces.PolicyDecisionPointRemote</value>
+            <value>java:global/escidoc-core/02_aa/PolicyDecisionPoint!de.escidoc.core.aa.ejb.interfaces.PolicyDecisionPointLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.aa.service.interfaces.PolicyDecisionPointInterface</value>
@@ -56,7 +56,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.UserGroupHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/02_aa/UserGroupHandler!de.escidoc.core.aa.ejb.interfaces.UserGroupHandlerRemote</value>
+            <value>java:global/escidoc-core/02_aa/UserGroupHandler!de.escidoc.core.aa.ejb.interfaces.UserGroupHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.aa.service.interfaces.UserGroupHandlerInterface</value>
@@ -68,7 +68,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.RoleHandlerBean" class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean"
           lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/02_aa/RoleHandler!de.escidoc.core.aa.ejb.interfaces.RoleHandlerRemote</value>
+            <value>java:global/escidoc-core/02_aa/RoleHandler!de.escidoc.core.aa.ejb.interfaces.RoleHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.aa.service.interfaces.RoleHandlerInterface</value>
@@ -80,7 +80,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.UserAccountHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/02_aa/UserAccountHandler!de.escidoc.core.aa.ejb.interfaces.UserAccountHandlerRemote</value>
+            <value>java:global/escidoc-core/02_aa/UserAccountHandler!de.escidoc.core.aa.ejb.interfaces.UserAccountHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.aa.service.interfaces.UserAccountHandlerInterface</value>

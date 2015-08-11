@@ -29,8 +29,10 @@
 package de.escidoc.core.st.business.persistence.hibernate;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
+import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
 import de.escidoc.core.st.business.StagingFile;
 import de.escidoc.core.st.business.persistence.StagingFileDao;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -48,7 +50,7 @@ import java.util.List;
  *
  * @author Torsten Tetteroo
  */
-public class HibernateStagingFileDao extends HibernateDaoSupport implements StagingFileDao {
+public class HibernateStagingFileDao extends AbstractHibernateDao implements StagingFileDao {
 
     /**
      * Wrapper of setSessionFactory to enable bean stuff generation for this bean.
@@ -67,10 +69,18 @@ public class HibernateStagingFileDao extends HibernateDaoSupport implements Stag
     public StagingFile findStagingFile(final String token) throws SqlDatabaseSystemException {
 
         try {
+            List result =
+                getHibernateTemplate().findByCriteria(
+                    DetachedCriteria.forClass(StagingFile.class).add(Restrictions.eq("token", token)));
+
+            return (StagingFile) getUniqueResult(result);
+
+            /*
             final Session session = getSession(false);
             final Criteria criteria = session.createCriteria(StagingFile.class);
             criteria.add(Restrictions.eq("token", token));
             return (StagingFile) criteria.uniqueResult();
+             */
         }
         catch (final DataAccessResourceFailureException e) {
             throw new SqlDatabaseSystemException(e);

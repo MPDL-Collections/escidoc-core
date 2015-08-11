@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.ContentModelHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/05_cmm/ContentModelHandler!de.escidoc.core.cmm.ejb.interfaces.ContentModelHandlerRemote</value>
+            <value>java:global/escidoc-core/05_cmm/ContentModelHandler!de.escidoc.core.cmm.ejb.interfaces.ContentModelHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.cmm.service.interfaces.ContentModelHandlerInterface</value>

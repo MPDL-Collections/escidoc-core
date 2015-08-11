@@ -46,7 +46,7 @@ public final class StagingUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StagingUtil.class);
 
-    private static final String STAGING_AREA_BASE_PATH = "catalina.home";
+    private static final String STAGING_AREA_BASE_PATH = "jboss.home.dir";
 
     private static final String STAGING_AREA = "staging";
 

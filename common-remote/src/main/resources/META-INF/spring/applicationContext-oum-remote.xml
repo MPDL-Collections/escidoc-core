@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.OrganizationalUnitHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/07_oum/OrganizationalUnitHandler!de.escidoc.core.oum.ejb.interfaces.OrganizationalUnitHandlerRemote</value>
+            <value>java:global/escidoc-core/07_oum/OrganizationalUnitHandler!de.escidoc.core.oum.ejb.interfaces.OrganizationalUnitHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.oum.service.interfaces.OrganizationalUnitHandlerInterface</value>

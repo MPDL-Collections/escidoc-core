@@ -19,9 +19,11 @@
             <module name="org.apache.xalan"/>
         </exclusions>
 	    <dependencies>
+	    	<module name="escidoc" export="true"/>
 		    <module name="javax.jms.api"/>
 			<module name="javax.management.j2ee.api"/>
 			<module name="javax.wsdl4j.api"/>
 	    </dependencies>
  	 </deployment>
+ 	
 </jboss-deployment-structure>  

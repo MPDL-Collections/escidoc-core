@@ -215,8 +215,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>file:${jboss.home.dir}/modules/pubman/main/escidoc-core.properties</value>
-                <value>file:${jboss.home.dir}/modules/pubman/main/escidoc-core.custom.properties</value>
+                <value>file:${jboss.home.dir}/modules/escidoc/main/escidoc-core.properties</value>
+                <value>file:${jboss.home.dir}/modules/escidoc/main/escidoc-core.custom.properties</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>
@@ -318,12 +318,13 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                     org.hibernate.cache.HashtableCacheProvider
                 </prop>
                 <prop key="hibernate.show_sql">false</prop>
-                <!-- 
+               
                 <prop key="jta.UserTransaction">
                     ${escidoc-core.jta.UserTransaction}
                 </prop>
-                -->
+               
                 <prop key="hibernate.connection.release_mode">auto</prop>
+                <prop key="hibernate.current_session_context_class">jta</prop>
             </props>
         </property>
         <property name="mappingResources">

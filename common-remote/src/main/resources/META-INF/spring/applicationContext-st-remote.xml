@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.StagingFileHandlerBean"
           class="de.escidoc.core.common.util.service.RemoteStatelessEjbProxyFactoryBean" lazy-init="true">
         <property name="jndiName">
-            <value>java:global/escidoc-core/10_st/StagingFileHandler!de.escidoc.core.st.ejb.interfaces.StagingFileHandlerRemote</value>
+            <value>java:global/escidoc-core/10_st/StagingFileHandler!de.escidoc.core.st.ejb.interfaces.StagingFileHandlerLocal</value>
         </property>
         <property name="businessInterface">
             <value>de.escidoc.core.st.service.interfaces.StagingFileHandlerInterface</value>
