@@ -150,7 +150,7 @@
 
     <set
         name="escidocRolesByModifiedById"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -160,7 +160,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -183,7 +183,7 @@
 
     <set
         name="escidocRolesByCreatorId"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -193,7 +193,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -216,7 +216,7 @@
 
     <set
         name="roleGrantsByUserId"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -226,7 +226,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -249,7 +249,7 @@
 
     <set
         name="roleGrantsByCreatorId"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -259,7 +259,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -282,7 +282,7 @@
 
     <set
         name="roleGrantsByRevokerId"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -292,7 +292,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -315,7 +315,7 @@
 
     <set
         name="userAccountsByCreatorId"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -325,7 +325,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -348,7 +348,7 @@
 
     <set
         name="userGroupsByCreatorId"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -358,7 +358,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -381,7 +381,7 @@
 
     <set
         name="userGroupsByModifiedById"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -391,7 +391,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -414,7 +414,7 @@
 
     <set
         name="userPreferencesByUserId"
-        lazy="true"
+        lazy="false"
         inverse="true"
         cascade="all,delete-orphan"
 
@@ -424,7 +424,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -448,7 +448,7 @@
 
     <set
         name="userAttributesByUserId"
-        lazy="true"
+        lazy="false"
         inverse="true"
         cascade="all,delete-orphan"
 
@@ -458,7 +458,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -482,7 +482,7 @@
 
     <set
         name="userAccountsByModifiedById"
-        lazy="true"
+        lazy="false"
         inverse="false"
         cascade="all,delete-orphan"
 
@@ -492,7 +492,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 
@@ -545,7 +545,7 @@
 
     <set
         name="userLoginDatas"
-        lazy="true"
+        lazy="false"
         inverse="true"
         cascade="all,delete-orphan"
 
@@ -555,7 +555,7 @@
                 <meta attribute
             ="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 

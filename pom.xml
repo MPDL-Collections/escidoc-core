@@ -500,7 +500,7 @@
 					<dependency>
 						<groupId>org.springframework.security</groupId>
 						<artifactId>spring-security-web</artifactId>
-						<version>3.2.8.RELEASE</version>
+						<version>3.0.8.RELEASE</version>
 						<exclusions>
 							<exclusion>
 								<groupId>commons-logging</groupId>
@@ -511,7 +511,7 @@
 					<dependency>
 						<groupId>org.springframework.security</groupId>
 						<artifactId>spring-security-config</artifactId>
-						<version>3.2.8.RELEASE</version>
+						<version>3.0.8.RELEASE</version>
 						<exclusions>
 							<exclusion>
 								<groupId>commons-logging</groupId>
@@ -622,6 +622,7 @@
 							</exclusion>
 						</exclusions>
 					</dependency>
+					<!-- 
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-webmvc</artifactId>
@@ -633,6 +634,7 @@
 							</exclusion>
 						</exclusions>
 					</dependency>
+					-->
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-context-support</artifactId>
@@ -966,7 +968,7 @@
 		<log4j.version>1.2.16</log4j.version>
 		<aspectj.version>1.6.10</aspectj.version>
 		<spring.version>3.2.14.RELEASE</spring.version>
-		<camel.version>2.4.0</camel.version>
+		<camel.version>2.14.3</camel.version>
 		<activemq.version>5.3.2</activemq.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<junit.version>4.8.2</junit.version>
@@ -1630,7 +1632,7 @@
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-web</artifactId>
-				<version>3.2.8.RELEASE</version>
+				<version>3.0.8.RELEASE</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>
@@ -1641,7 +1643,7 @@
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-config</artifactId>
-				<version>3.2.8.RELEASE</version>
+				<version>3.0.8.RELEASE</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>
@@ -1652,7 +1654,7 @@
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-ldap</artifactId>
-				<version>3.2.8.RELEASE</version>
+				<version>3.0.8.RELEASE</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>

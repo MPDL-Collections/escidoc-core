@@ -22,6 +22,7 @@ package de.escidoc.core.common.util.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -52,7 +53,7 @@ public class EscidocAuthenticationProvider implements AuthenticationProvider {
         if (credentials == null || "".equals(credentials)) {
             final GrantedAuthority grantedAuthority = new GrantedAuthorityImpl("");
 
-            final Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+            final List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
             grantedAuthorities.add(grantedAuthority);
             return new AnonymousAuthenticationToken("key", "Anonymous", grantedAuthorities);
         }

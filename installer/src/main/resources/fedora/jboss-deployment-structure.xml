@@ -8,6 +8,7 @@
 	    </exclude-subsystems>
 	    <dependencies>
 	    	<module name="org.apache.openjpa"/>
+	    	<module name="javax.jms.api"/>
 	    </dependencies>
  	 </deployment>
 </jboss-deployment-structure>  

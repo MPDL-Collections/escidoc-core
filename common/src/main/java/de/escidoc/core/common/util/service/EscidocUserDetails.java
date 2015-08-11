@@ -102,7 +102,7 @@ public class EscidocUserDetails implements UserDetails {
      * @see org.springframework.security.userdetails.UserDetails#getAuthorities()
      */
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         // TODO Auto-generated method stub
         return null;
     }

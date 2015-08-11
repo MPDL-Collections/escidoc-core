@@ -174,7 +174,7 @@
 
     <set
         name="invocationMappings"
-        lazy="true"
+        lazy="false"
         inverse="false"
 		cascade="all,delete-orphan"
 
@@ -184,7 +184,7 @@
 				<meta attribute
 			="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all,delete-orphan"
 

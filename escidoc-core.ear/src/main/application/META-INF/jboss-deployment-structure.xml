@@ -11,11 +11,17 @@
 	        <subsystem name="logging" />
 	    </exclude-subsystems>
 	    -->
+	    <exclude-subsystems>
+            <subsystem name="jpa"/>
+        </exclude-subsystems>
+         <exclusions>
+            <module name="org.hibernate" />
+            <module name="org.apache.xalan"/>
+        </exclusions>
 	    <dependencies>
 		    <module name="javax.jms.api"/>
 			<module name="javax.management.j2ee.api"/>
 			<module name="javax.wsdl4j.api"/>
-			<module name="org.apache.xalan"/>
 	    </dependencies>
  	 </deployment>
 </jboss-deployment-structure>  

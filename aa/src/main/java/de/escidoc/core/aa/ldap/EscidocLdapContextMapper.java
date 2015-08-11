@@ -74,7 +74,7 @@ public class EscidocLdapContextMapper implements UserDetailsContextMapper {
      */
     @Override
     public UserDetails mapUserFromContext(
-        final DirContextOperations ctx, final String username, final Collection<? extends GrantedAuthority> authority) {
+        final DirContextOperations ctx, final String username, final Collection<GrantedAuthority> authority) {
         final EscidocLdapUserDetails user = new EscidocLdapUserDetails();
 
         final String dn = ctx.getNameInNamespace();

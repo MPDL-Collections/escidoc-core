@@ -187,8 +187,8 @@ public class ConnectionUtility {
      */
     public HttpResponse getRequestURL(final URL url) throws WebserverSystemException {
 
-        final String username;
-        final String password;
+        String username = null;
+        String password = null;
 
         final String userinfo = url.getUserInfo();
         if (userinfo != null) {
@@ -196,10 +196,14 @@ public class ConnectionUtility {
             username = loginValues[0];
             password = loginValues[1];
         }
+
+        /*
         else {
             username = EscidocConfiguration.FEDORA_USER;
-            password = EscidocConfiguration.FEDORA_PASSWORD;
+           password = EscidocConfiguration.FEDORA_PASSWORD;
+        	
         }
+         */
 
         return getRequestURL(url, username, password);
     }
@@ -217,8 +221,9 @@ public class ConnectionUtility {
      */
     public HttpResponse getRequestURL(final URL url, final String username, final String password)
         throws WebserverSystemException {
-
-        setAuthentication(url, username, password);
+        if (username != null) {
+            setAuthentication(url, username, password);
+        }
         return get(url.toString());
     }
 

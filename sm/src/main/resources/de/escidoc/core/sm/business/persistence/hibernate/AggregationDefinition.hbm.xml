@@ -86,14 +86,14 @@
 <!-- 
     <set
         name="preprocessingLogs"
-        lazy="true"
+        lazy="false"
         inverse="false"
 		cascade="all"
 
     >
         <meta attribute="field-description">
            @hibernate.set
-            lazy="true"
+            lazy="false"
             inverse="false"
             cascade="all"
 
