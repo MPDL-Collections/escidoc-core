@@ -29,6 +29,7 @@ import javax.naming.NamingException;
 import org.aopalliance.intercept.MethodInvocation;
 import org.jboss.security.RunAsIdentity;
 import org.jboss.security.SecurityContextAssociation;
+import org.jboss.security.plugins.JBossSecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ejb.access.AbstractRemoteSlsbInvokerInterceptor;
@@ -133,6 +134,10 @@ public class RemoteStatelessEjbProxyFactoryBean extends SimpleRemoteStatelessSes
 
                 extendedArgs[argsLength] = securityContext;
                 extendedArgsTypes[argsLength] = SecurityContext.class;
+                JBossSecurityContext jBossSecurityContext = new JBossSecurityContext("other");
+                SecurityContextAssociation.setSecurityContext(jBossSecurityContext);
+                jBossSecurityContext.setIncomingRunAs(new RunAsIdentity("Administrator", ""));
+                jBossSecurityContext.setOutgoingRunAs(new RunAsIdentity("Administrator", ""));
                 SecurityContextAssociation.pushRunAsIdentity(new RunAsIdentity("Administrator", ""));
             }
             else {
