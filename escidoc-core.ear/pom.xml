@@ -200,6 +200,7 @@
           <description>eSciDoc Infrastructure</description>
           <generateApplicationXml>true</generateApplicationXml>
           <!-- <includeLibInApplicationXml>true</includeLibInApplicationXml>-->
+          <initializeInOrder>true</initializeInOrder>
           <version>7</version>
           <defaultJavaBundleDir>/</defaultJavaBundleDir>
           <archive>

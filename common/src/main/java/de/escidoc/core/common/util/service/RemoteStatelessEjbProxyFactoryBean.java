@@ -136,7 +136,7 @@ public class RemoteStatelessEjbProxyFactoryBean extends SimpleRemoteStatelessSes
                 extendedArgsTypes[argsLength] = SecurityContext.class;
                 JBossSecurityContext jBossSecurityContext = new JBossSecurityContext("other");
                 SecurityContextAssociation.setSecurityContext(jBossSecurityContext);
-               // jBossSecurityContext.setIncomingRunAs(new RunAsIdentity("Administrator", ""));
+                // jBossSecurityContext.setIncomingRunAs(new RunAsIdentity("Administrator", ""));
                 jBossSecurityContext.setOutgoingRunAs(new RunAsIdentity("Administrator", ""));
                 //SecurityContextAssociation.pushRunAsIdentity(new RunAsIdentity("Administrator", ""));
             }

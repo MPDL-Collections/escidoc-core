@@ -1202,6 +1202,7 @@
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>1.6.2</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<!-- Specs -->
@@ -1628,6 +1629,11 @@
 						<artifactId>commons-logging</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>wsdl4j</groupId>
+				<artifactId>wsdl4j</artifactId>
+				<version>1.6.3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
