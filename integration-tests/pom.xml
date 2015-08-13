@@ -631,14 +631,26 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.axis</groupId>
-			<artifactId>axis</artifactId>
-			<scope>test</scope>
+			<artifactId>axis-rt-core</artifactId>
+			<scope>test</scope>		
 		</dependency>
+	    <dependency>
+	      <groupId>org.apache.axis</groupId>
+	      <artifactId>axis-rt-jws</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.apache.axis</groupId>
+	      <artifactId>axis-rt-soapmonitor</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+		
 		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis-jaxrpc-noqname</artifactId>
 			<scope>test</scope>
 		</dependency>
+	
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>

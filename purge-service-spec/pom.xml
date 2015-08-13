@@ -13,51 +13,50 @@
 
     <build>
         <plugins>
+        
+        
+        <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<configuration>
+				<skip>true</skip>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
-                <groupId>com.sun.tools.jxc.maven2</groupId>
-                <artifactId>maven-jaxb-schemagen-plugin</artifactId>
-                <version>1.2</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
+                    <id>schemagen</id>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>schemagen</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <destdir>${project.build.outputDirectory}/xsd</destdir>
-                    <srcdir>${project.build.sourceDirectory}/de/escidoc/core/purge/internal</srcdir>
-                    <schemas>
-                        <schema>
-                            <namespace>http://www.escidoc.de/schemas/purge-service/1.0/</namespace>
-                            <file>purge-service-1.0.xsd</file>
-                        </schema>
-                    </schemas>
-                    <excludes>
-                        <exclude>*Builder*</exclude>
-                        <exclude>*Service*</exclude>
-                    </excludes>
+                    <transformSchemas>
+                        <transformSchema>
+                            <uri>http://www.escidoc.de/schemas/purge-service/1.0/</uri>
+                            <toFile>purge-service-1.0.xsd</toFile>
+                     </transformSchema>
+                    </transformSchemas>
+					<outputDirectory>${project.build.outputDirectory}/xsd</outputDirectory>
+                    <!-- <destdir>${project.build.outputDirectory}/xsd</destdir>-->
+                   
+                    <includes>
+                    	<include>de/escidoc/core/purge/internal/PurgeRequestImpl.java</include>
+                    </includes>
+
                     <verbose>true</verbose>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>javax.xml.bind</groupId>
-                        <artifactId>jaxb-api</artifactId>
-                        <version>2.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.sun.xml.bind</groupId>
-			            <artifactId>jaxb-impl</artifactId>
-                        <version>2.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.sun.xml.bind</groupId>
-                        <artifactId>jaxb-xjc</artifactId>
-                        <version>2.2</version>
-                    </dependency>
-                </dependencies>
             </plugin>
+
             <plugin>
                 <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
                 <artifactId>maven-java-formatter-plugin</artifactId>

@@ -305,7 +305,7 @@ public class FileProvider implements WSDDEngineConfiguration {
                         LOGGER.debug("Error on creating input stream.", e);
                     }
                     if (this.searchClasspath) {
-                        setInputStream(ClassUtils.getResourceAsStream(engine.getClass(), configFile.getName(), true));
+                        setInputStream(ClassUtils.getResourceAsStream(engine.getClass(), configFile.getName()));
                     }
                 }
             }

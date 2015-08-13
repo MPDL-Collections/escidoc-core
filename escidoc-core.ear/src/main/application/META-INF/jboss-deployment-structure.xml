@@ -23,14 +23,12 @@
 		    <module name="javax.jms.api"/>
 			<module name="javax.management.j2ee.api"/>
 			<module name="org.joda.time" export="true"/>
-			<!-- Import axis and other configuration files which are locates in escidoc-core.war/META-INF/services -->
-			<module name="deployment.escidoc-core-1.3.10-SNAPSHOT.ear.13_escidoc-core.war" services="import" />
-
+			<module name="deployment.escidoc-core-1.3.10-SNAPSHOT.ear.13_escidoc-core.war" services="import"  />
 	    </dependencies>
 	    
 	    
  	 </deployment>
-
-
+ 	 
+	
  	
 </jboss-deployment-structure>  

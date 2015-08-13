@@ -266,14 +266,29 @@
       <groupId>sun-xacml</groupId>
       <artifactId>sun-xacml</artifactId>
     </dependency>
+    
+	<dependency>
+		<groupId>org.apache.axis</groupId>
+		<artifactId>axis-rt-core</artifactId>
+	
+	</dependency>
     <dependency>
       <groupId>org.apache.axis</groupId>
-      <artifactId>axis</artifactId>
+      <artifactId>axis-rt-jws</artifactId>
+	
     </dependency>
+    <dependency>
+      <groupId>org.apache.axis</groupId>
+      <artifactId>axis-rt-soapmonitor</artifactId>
+    
+    </dependency>
+     
     <dependency>
       <groupId>org.apache.axis</groupId>
       <artifactId>axis-jaxrpc-noqname</artifactId>
+	
     </dependency>
+   
     <dependency>
       <groupId>org.apache.ws.security</groupId>
       <artifactId>wss4j</artifactId>
