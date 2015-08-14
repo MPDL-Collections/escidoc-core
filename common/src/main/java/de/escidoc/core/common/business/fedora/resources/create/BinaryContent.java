@@ -20,14 +20,14 @@
 
 package de.escidoc.core.common.business.fedora.resources.create;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import de.escidoc.core.common.business.fedora.Constants;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * BinaryContent of Component, Content Stream.

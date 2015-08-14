@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.om.service;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.business.filter.LuceneRequestParameters;
 import de.escidoc.core.common.business.interfaces.ResourceHandlerInterface;
@@ -55,8 +57,6 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeV
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.om.service.interfaces.ContextHandlerInterface;
-
-import java.util.Map;
 
 /**
  * A context resource handler.

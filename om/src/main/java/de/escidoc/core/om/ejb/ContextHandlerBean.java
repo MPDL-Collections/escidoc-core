@@ -1,5 +1,27 @@
 package de.escidoc.core.om.ejb;
 
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.access.BeanFactoryLocator;
+import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.invalid.ContextNotEmptyException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
@@ -25,29 +47,25 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeV
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.ejb.interfaces.ContextHandlerLocal;
+import de.escidoc.core.om.ejb.interfaces.ContextHandlerRemote;
 import de.escidoc.core.om.service.interfaces.ContextHandlerInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
-import java.util.Map;
-
-public class ContextHandlerBean implements SessionBean {
+@Stateless(name = "ContextHandler")
+@Remote(ContextHandlerRemote.class)
+@Local(ContextHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class ContextHandlerBean implements ContextHandlerRemote, ContextHandlerLocal {
 
     private ContextHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ContextHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -60,25 +78,7 @@ public class ContextHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String create(final String xmlData, final SecurityContext securityContext)
         throws MissingMethodParameterException, ContextNameNotUniqueException, AuthenticationException,
         AuthorizationException, SystemException, ContentModelNotFoundException, ReadonlyElementViolationException,
@@ -94,6 +94,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @PermitAll
     public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, ContextNameNotUniqueException, AuthenticationException,
         AuthorizationException, SystemException, ContentModelNotFoundException, ReadonlyElementViolationException,
@@ -110,6 +111,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public void delete(final String id, final SecurityContext securityContext) throws ContextNotFoundException,
         ContextNotEmptyException, MissingMethodParameterException, InvalidStatusException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -122,6 +124,7 @@ public class ContextHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @PermitAll
     public void delete(final String id, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, ContextNotEmptyException, MissingMethodParameterException,
         InvalidStatusException, AuthenticationException, AuthorizationException, SystemException {
@@ -135,6 +138,7 @@ public class ContextHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieve(final String id, final SecurityContext securityContext) throws ContextNotFoundException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -146,6 +150,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @PermitAll
     public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -159,6 +164,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveProperties(final String id, final SecurityContext securityContext)
         throws ContextNotFoundException, SystemException {
         try {
@@ -170,6 +176,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
+    @PermitAll
     public String retrieveProperties(final String id, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, SystemException {
         try {
@@ -182,6 +189,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
+    @RolesAllowed("Administrator")
     public String update(final String id, final String xmlData, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, InvalidContentException,
         InvalidStatusException, AuthenticationException, AuthorizationException, ReadonlyElementViolationException,
@@ -196,6 +204,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
+    @PermitAll
     public String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, InvalidContentException,
         InvalidStatusException, AuthenticationException, AuthorizationException, ReadonlyElementViolationException,
@@ -211,6 +220,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public EscidocBinaryContent retrieveResource(
         final String id, final String resourceName, final Map parameters, final SecurityContext securityContext)
         throws OperationNotFoundException, ContextNotFoundException, MissingMethodParameterException,
@@ -224,6 +234,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveResource(id, resourceName, parameters);
     }
 
+    @PermitAll
     public EscidocBinaryContent retrieveResource(
         final String id, final String resourceName, final Map parameters, final String authHandle,
         final Boolean restAccess) throws OperationNotFoundException, ContextNotFoundException,
@@ -238,6 +249,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveResource(id, resourceName, parameters);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveResources(final String id, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -250,6 +262,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
+    @PermitAll
     public String retrieveResources(final String id, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -263,6 +276,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
+    @RolesAllowed("Administrator")
     public String open(final String id, final String taskParam, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, InvalidStatusException,
         AuthenticationException, AuthorizationException, OptimisticLockingException, InvalidXmlException,
@@ -276,6 +290,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.open(id, taskParam);
     }
 
+    @PermitAll
     public String open(final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, InvalidStatusException,
         AuthenticationException, AuthorizationException, OptimisticLockingException, InvalidXmlException,
@@ -290,6 +305,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.open(id, taskParam);
     }
 
+    @RolesAllowed("Administrator")
     public String close(final String id, final String taskParam, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidXmlException,
@@ -303,6 +319,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.close(id, taskParam);
     }
 
+    @PermitAll
     public String close(final String id, final String taskParam, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidXmlException,
@@ -317,6 +334,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.close(id, taskParam);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveContexts(final Map filter, final SecurityContext securityContext)
         throws MissingMethodParameterException, SystemException {
         try {
@@ -328,6 +346,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveContexts(filter);
     }
 
+    @PermitAll
     public String retrieveContexts(final Map filter, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, SystemException {
         try {
@@ -340,6 +359,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveContexts(filter);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveMembers(final String id, final Map filter, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, SystemException {
         try {
@@ -351,6 +371,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveMembers(id, filter);
     }
 
+    @PermitAll
     public String retrieveMembers(final String id, final Map filter, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, SystemException {
         try {
@@ -363,6 +384,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveMembers(id, filter);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveAdminDescriptor(final String id, final String name, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, AdminDescriptorNotFoundException {
@@ -375,6 +397,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveAdminDescriptor(id, name);
     }
 
+    @PermitAll
     public String retrieveAdminDescriptor(
         final String id, final String name, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
@@ -389,6 +412,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveAdminDescriptor(id, name);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveAdminDescriptors(final String id, final SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -401,6 +425,7 @@ public class ContextHandlerBean implements SessionBean {
         return service.retrieveAdminDescriptors(id);
     }
 
+    @PermitAll
     public String retrieveAdminDescriptors(final String id, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {

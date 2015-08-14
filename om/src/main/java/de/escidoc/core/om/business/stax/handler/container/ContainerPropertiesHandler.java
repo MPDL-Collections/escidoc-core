@@ -28,6 +28,16 @@
  */
 package de.escidoc.core.om.business.stax.handler.container;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.naming.directory.NoSuchAttributeException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.business.fedora.Utility;
@@ -45,14 +55,6 @@ import de.escidoc.core.common.util.xml.Elements;
 import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.naming.directory.NoSuchAttributeException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The PropertiesHandler. Verifies the elements <code>context</code> and <code>content-model</code> of a properties

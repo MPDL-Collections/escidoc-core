@@ -20,6 +20,8 @@
 
 package de.escidoc.core.cmm.service.interfaces;
 
+import java.util.Map;
+
 import de.escidoc.core.common.annotation.Validate;
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.business.interfaces.IngestableResource;
@@ -41,8 +43,6 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionException;
 import de.escidoc.core.common.exceptions.application.violated.ResourceInUseException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-
-import java.util.Map;
 
 /**
  * Interface of a business layer content type handler.

@@ -28,9 +28,11 @@
  */
 package de.escidoc.core.test.oum.organizationalunit;
 
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.OrganizationalUnitNotFoundException;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.Vector;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -38,10 +40,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.Vector;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.notfound.OrganizationalUnitNotFoundException;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 @RunWith(value = Parameterized.class)
 public class RetrievePathListTest extends OrganizationalUnitTestBase {

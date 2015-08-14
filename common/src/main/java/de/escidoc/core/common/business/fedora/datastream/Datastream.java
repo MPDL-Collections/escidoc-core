@@ -23,6 +23,23 @@
  */
 package de.escidoc.core.common.business.fedora.datastream;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.fcrepo.server.types.gen.DatastreamControlGroup;
+import org.fcrepo.server.types.gen.MIMETypedStream;
+import org.joda.time.ReadableDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
+
 import de.escidoc.core.common.business.fedora.Constants;
 import de.escidoc.core.common.business.fedora.FedoraUtility;
 import de.escidoc.core.common.business.fedora.Utility;
@@ -34,20 +51,6 @@ import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.configuration.EscidocConfiguration;
 import de.escidoc.core.common.util.string.StringUtility;
 import de.escidoc.core.common.util.xml.XmlUtility;
-import org.fcrepo.server.types.gen.DatastreamControlGroup;
-import org.fcrepo.server.types.gen.MIMETypedStream;
-import org.joda.time.ReadableDateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Representation of a datastream managed in Fedora Digital Repository System.

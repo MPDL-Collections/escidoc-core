@@ -20,11 +20,12 @@
 
 package de.escidoc.core.common.servlet.invocation;
 
-import de.escidoc.core.common.exceptions.system.EncodingSystemException;
-import de.escidoc.core.common.servlet.invocation.exceptions.MethodNotFoundException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+
+import de.escidoc.core.common.exceptions.system.EncodingSystemException;
+import de.escidoc.core.common.servlet.invocation.exceptions.MethodNotFoundException;
 
 /**
  * Interface for mapping a http request to a resource method.

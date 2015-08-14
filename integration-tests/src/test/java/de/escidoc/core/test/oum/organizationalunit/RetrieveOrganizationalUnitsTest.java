@@ -28,20 +28,21 @@
  */
 package de.escidoc.core.test.oum.organizationalunit;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 @RunWith(value = Parameterized.class)
 public class RetrieveOrganizationalUnitsTest extends OrganizationalUnitTestBase {

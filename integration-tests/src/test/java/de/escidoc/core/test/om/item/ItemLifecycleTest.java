@@ -28,16 +28,12 @@
  */
 package de.escidoc.core.test.om.item;
 
-import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidStatusException;
-import de.escidoc.core.common.exceptions.remote.application.invalid.XmlCorruptedException;
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.ItemNotFoundException;
-import de.escidoc.core.common.exceptions.remote.application.security.AuthorizationException;
-import de.escidoc.core.common.exceptions.remote.application.violated.AlreadyWithdrawnException;
-import de.escidoc.core.common.exceptions.remote.application.violated.NotPublishedException;
-import de.escidoc.core.common.exceptions.remote.application.violated.OptimisticLockingException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.security.client.PWCallback;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.xpath.XPathAPI;
 import org.junit.After;
 import org.junit.Before;
@@ -46,11 +42,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidStatusException;
+import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.notfound.ItemNotFoundException;
+import de.escidoc.core.common.exceptions.application.violated.AlreadyWithdrawnException;
+import de.escidoc.core.common.exceptions.application.violated.NotPublishedException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Test the mock implementation of the item resource.

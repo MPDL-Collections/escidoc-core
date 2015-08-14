@@ -28,12 +28,10 @@
  */
 package de.escidoc.core.test.common.client.servlet.aa;
 
-import de.escidoc.core.aa.PolicyDecisionPoint;
-import de.escidoc.core.aa.PolicyDecisionPointServiceLocator;
+import javax.xml.rpc.ServiceException;
+
 import de.escidoc.core.test.common.client.servlet.ClientBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
-
-import javax.xml.rpc.ServiceException;
 
 /**
  * Offers access methods to the escidoc REST and soap interface of the policy decision point.

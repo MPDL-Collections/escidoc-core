@@ -20,11 +20,11 @@
 
 package de.escidoc.core.common.util.stax.handler;
 
-import de.escidoc.core.common.util.stax.StaxParser;
-import de.escidoc.core.common.util.xml.stax.events.EndElement;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import de.escidoc.core.common.util.stax.StaxParser;
+import de.escidoc.core.common.util.xml.stax.events.EndElement;
 
 public class RelsExtContentRelationsReadHandlerForUpdate extends RelsExtContentRelationsReadHandler {
 

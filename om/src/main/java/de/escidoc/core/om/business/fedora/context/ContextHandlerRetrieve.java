@@ -28,12 +28,12 @@
  */
 package de.escidoc.core.om.business.fedora.context;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.escidoc.core.common.exceptions.application.notfound.ContextNotFoundException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Context Retrieve Handler.

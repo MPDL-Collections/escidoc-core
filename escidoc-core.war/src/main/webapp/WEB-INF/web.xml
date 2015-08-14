@@ -48,6 +48,19 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 	<!--
 		############################ # Filter ############################
 	-->
+	
+	<!-- 
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>de.escidoc.core.common.persistence.hibernate.CustomHibernateSessionFilter</filter-class>
+	</filter>
+		
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	-->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>

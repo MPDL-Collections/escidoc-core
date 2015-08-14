@@ -28,9 +28,12 @@
  */
 package de.escidoc.core.test.common.fedora;
 
-import de.escidoc.core.common.exceptions.remote.system.FedoraSystemException;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
-import de.escidoc.core.test.common.resources.PropertiesProvider;
+import java.io.UnsupportedEncodingException;
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
 import org.apache.axis.types.NonNegativeInteger;
 import org.fcrepo.client.FedoraClient;
 import org.fcrepo.server.access.FedoraAPIA;
@@ -41,11 +44,9 @@ import org.fcrepo.server.types.gen.ObjectProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.UnsupportedEncodingException;
-import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
+import de.escidoc.core.common.exceptions.system.FedoraSystemException;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import de.escidoc.core.test.common.resources.PropertiesProvider;
 
 /**
  * An utility class for Fedora requests.

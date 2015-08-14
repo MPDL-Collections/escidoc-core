@@ -28,19 +28,20 @@
  */
 package de.escidoc.core.test.oum.organizationalunit;
 
-import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidStatusException;
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.OrganizationalUnitNotFoundException;
-import de.escidoc.core.common.exceptions.remote.application.violated.OrganizationalUnitHasChildrenException;
+import static org.junit.Assert.assertFalse;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertFalse;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidStatusException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.notfound.OrganizationalUnitNotFoundException;
+import de.escidoc.core.common.exceptions.application.violated.OrganizationalUnitHasChildrenException;
 
 /**
  * Test delete method of OrganizationalUnitHandler.

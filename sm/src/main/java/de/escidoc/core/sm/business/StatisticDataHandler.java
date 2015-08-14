@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.sm.business;
 
+import org.apache.camel.ProducerTemplate;
+
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
 import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
@@ -39,7 +41,6 @@ import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.sm.business.interfaces.StatisticDataHandlerInterface;
 import de.escidoc.core.sm.business.persistence.SmStatisticDataDaoInterface;
-import org.apache.camel.ProducerTemplate;
 
 /**
  * An statistic data resource handler.

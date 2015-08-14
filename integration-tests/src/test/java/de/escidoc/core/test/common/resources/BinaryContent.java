@@ -28,9 +28,9 @@
  */
 package de.escidoc.core.test.common.resources;
 
-import org.apache.http.HttpMessage;
-
 import java.io.InputStream;
+
+import org.apache.http.HttpMessage;
 
 /**
  * Class encapsulating binary content.

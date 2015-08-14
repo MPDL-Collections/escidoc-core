@@ -20,7 +20,13 @@
 
 package de.escidoc.core.common.business.filter;
 
-import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
@@ -35,12 +41,7 @@ import org.z3950.zing.cql.CQLTermNode;
 import org.z3950.zing.cql.Modifier;
 import org.z3950.zing.cql.ModifierSet;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 
 /**
  * This class parses a CQL filter and translates it into a Hibernate query.

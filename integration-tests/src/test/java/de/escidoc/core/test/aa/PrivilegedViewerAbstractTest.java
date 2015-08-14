@@ -28,14 +28,15 @@
  */
 package de.escidoc.core.test.aa;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.security.client.PWCallback;
+import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.Before;
 import org.w3c.dom.Document;
 
-import java.util.HashMap;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Test suite for the role PrivilegedViewer.

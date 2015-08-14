@@ -28,14 +28,14 @@
  */
 package de.escidoc.core.test.om.context;
 
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingElementValueException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.ContextNotFoundException;
-import de.escidoc.core.common.exceptions.remote.application.violated.ContextNameNotUniqueException;
-import de.escidoc.core.common.exceptions.remote.application.violated.OptimisticLockingException;
-import de.escidoc.core.common.exceptions.remote.application.violated.ReadonlyAttributeViolationException;
-import de.escidoc.core.common.exceptions.remote.application.violated.ReadonlyElementViolationException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import java.util.HashMap;
+import java.util.Vector;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -46,13 +46,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.HashMap;
-import java.util.Vector;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.missing.MissingElementValueException;
+import de.escidoc.core.common.exceptions.application.notfound.ContextNotFoundException;
+import de.escidoc.core.common.exceptions.application.violated.ContextNameNotUniqueException;
+import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeViolationException;
+import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Test the mock implementation of the item resource.

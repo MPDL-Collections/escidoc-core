@@ -28,12 +28,12 @@
  */
 package de.escidoc.core.st.business.persistence.hibernate;
 
+import java.io.Serializable;
+
 import org.apache.axis.components.uuid.UUIDGen;
 import org.apache.axis.components.uuid.UUIDGenFactory;
 import org.hibernate.engine.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
-
-import java.io.Serializable;
 
 /**
  * Generator for unique tokens.<br> This is an implementation of a hibernate id generator.

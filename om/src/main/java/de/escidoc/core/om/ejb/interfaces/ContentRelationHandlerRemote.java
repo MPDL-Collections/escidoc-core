@@ -1,9 +1,8 @@
 package de.escidoc.core.om.ejb.interfaces;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -28,140 +27,136 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for ContentRelationHandler.
  */
-public interface ContentRelationHandlerRemote extends EJBObject {
+public interface ContentRelationHandlerRemote {
 
     String create(String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingAttributeValueException, MissingMethodParameterException, InvalidXmlException,
         InvalidContentException, ReferencedResourceNotFoundException, RelationPredicateNotFoundException,
-        SystemException, RemoteException;
+        SystemException;
 
     String create(String xmlData, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, MissingAttributeValueException, MissingMethodParameterException, InvalidXmlException,
         InvalidContentException, ReferencedResourceNotFoundException, RelationPredicateNotFoundException,
-        SystemException, RemoteException;
+        SystemException;
 
     void delete(String id, SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
-        ContentRelationNotFoundException, SystemException, LockingException, RemoteException;
+        ContentRelationNotFoundException, SystemException, LockingException;
 
     void delete(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, SystemException, LockingException, RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, SystemException, LockingException;
 
     String lock(String id, String param, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidContentException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidXmlException,
-        InvalidStatusException, RemoteException;
+        InvalidStatusException;
 
     String lock(String id, String param, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidContentException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidXmlException,
-        InvalidStatusException, RemoteException;
+        InvalidStatusException;
 
     String unlock(String id, String param, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, MissingMethodParameterException,
         SystemException, OptimisticLockingException, InvalidXmlException, InvalidContentException,
-        InvalidStatusException, RemoteException;
+        InvalidStatusException;
 
     String unlock(String id, String param, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, MissingMethodParameterException,
         SystemException, OptimisticLockingException, InvalidXmlException, InvalidContentException,
-        InvalidStatusException, RemoteException;
+        InvalidStatusException;
 
     String submit(String id, String param, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidXmlException,
-        InvalidContentException, RemoteException;
+        InvalidContentException;
 
     String submit(String id, String param, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidXmlException,
-        InvalidContentException, RemoteException;
+        InvalidContentException;
 
     String release(String id, String param, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidXmlException,
-        InvalidContentException, RemoteException;
+        InvalidContentException;
 
     String release(String id, String param, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, InvalidXmlException,
-        InvalidContentException, RemoteException;
+        InvalidContentException;
 
     String revise(String id, String param, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, XmlCorruptedException,
-        InvalidContentException, RemoteException;
+        InvalidContentException;
 
     String revise(String id, String param, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, LockingException, InvalidStatusException,
         MissingMethodParameterException, SystemException, OptimisticLockingException, XmlCorruptedException,
-        InvalidContentException, RemoteException;
+        InvalidContentException;
 
     String retrieve(String id, SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
-        ContentRelationNotFoundException, SystemException, RemoteException;
+        ContentRelationNotFoundException, SystemException;
 
     String retrieve(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, SystemException, RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, SystemException;
 
     String retrieveContentRelations(Map parameterMap, SecurityContext securityContext)
-        throws InvalidSearchQueryException, SystemException, RemoteException;
+        throws InvalidSearchQueryException, SystemException;
 
     String retrieveContentRelations(Map parameterMap, String authHandle, Boolean restAccess)
-        throws InvalidSearchQueryException, SystemException, RemoteException;
+        throws InvalidSearchQueryException, SystemException;
 
     String retrieveProperties(String id, SecurityContext securityContext) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, SystemException, RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, SystemException;
 
     String retrieveProperties(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, SystemException, RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, SystemException;
 
     String update(String id, String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, OptimisticLockingException, InvalidContentException,
         InvalidStatusException, LockingException, MissingAttributeValueException, SystemException, InvalidXmlException,
-        ReferencedResourceNotFoundException, RelationPredicateNotFoundException, MissingMethodParameterException,
-        RemoteException;
+        ReferencedResourceNotFoundException, RelationPredicateNotFoundException, MissingMethodParameterException;
 
     String update(String id, String xmlData, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ContentRelationNotFoundException, OptimisticLockingException, InvalidContentException,
         InvalidStatusException, LockingException, MissingAttributeValueException, SystemException, InvalidXmlException,
-        ReferencedResourceNotFoundException, RelationPredicateNotFoundException, MissingMethodParameterException,
-        RemoteException;
+        ReferencedResourceNotFoundException, RelationPredicateNotFoundException, MissingMethodParameterException;
 
     String assignObjectPid(String id, String taskParam, SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, ContentRelationNotFoundException, LockingException,
         MissingMethodParameterException, OptimisticLockingException, InvalidXmlException, SystemException,
-        PidAlreadyAssignedException, RemoteException;
+        PidAlreadyAssignedException;
 
     String assignObjectPid(String id, String taskParam, String authHandle, Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ContentRelationNotFoundException, LockingException,
         MissingMethodParameterException, OptimisticLockingException, InvalidXmlException, SystemException,
-        PidAlreadyAssignedException, RemoteException;
+        PidAlreadyAssignedException;
 
     String retrieveMdRecords(String id, SecurityContext securityContext) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, SystemException, RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, SystemException;
 
     String retrieveMdRecords(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, SystemException, RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, SystemException;
 
     String retrieveRegisteredPredicates(SecurityContext securityContext) throws InvalidContentException,
-        InvalidXmlException, SystemException, RemoteException;
+        InvalidXmlException, SystemException;
 
     String retrieveRegisteredPredicates(String authHandle, Boolean restAccess) throws InvalidContentException,
-        InvalidXmlException, SystemException, RemoteException;
+        InvalidXmlException, SystemException;
 
     String retrieveMdRecord(String id, String name, SecurityContext securityContext) throws AuthenticationException,
-        AuthorizationException, ContentRelationNotFoundException, MdRecordNotFoundException, SystemException,
-        RemoteException;
+        AuthorizationException, ContentRelationNotFoundException, MdRecordNotFoundException, SystemException;
 
     String retrieveMdRecord(String id, String name, String authHandle, Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ContentRelationNotFoundException,
-        MdRecordNotFoundException, SystemException, RemoteException;
+        MdRecordNotFoundException, SystemException;
 
     String retrieveResources(String id, SecurityContext securityContext) throws ContentRelationNotFoundException,
-        AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
-        RemoteException;
+        AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException;
 
     String retrieveResources(String id, String authHandle, Boolean restAccess) throws ContentRelationNotFoundException,
-        AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
-        RemoteException;
+        AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException;
 
+    void create() throws CreateException;
 }

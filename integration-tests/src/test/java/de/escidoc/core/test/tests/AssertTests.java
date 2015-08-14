@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.test.tests;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.om.OmTestBase;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static org.junit.Assert.fail;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.om.OmTestBase;
 
 /**
  * This tests test test methods. OK, it's clear that tests can't fully check systems, but it seems reasonable to check

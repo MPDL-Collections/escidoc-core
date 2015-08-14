@@ -20,6 +20,12 @@
 
 package de.escidoc.core.common.util.xml.factory;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.joda.time.DateTimeZone;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.business.fedora.resources.create.ContentRelationCreate;
@@ -31,11 +37,6 @@ import de.escidoc.core.common.exceptions.system.IntegritySystemException;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.xml.XmlUtility;
-import org.joda.time.DateTimeZone;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * XML Provider of ContentRelation.

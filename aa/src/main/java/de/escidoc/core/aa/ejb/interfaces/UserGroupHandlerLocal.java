@@ -2,7 +2,7 @@ package de.escidoc.core.aa.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -32,7 +32,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for UserGroupHandler.
  */
-public interface UserGroupHandlerLocal extends EJBLocalObject {
+public interface UserGroupHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
@@ -165,4 +165,5 @@ public interface UserGroupHandlerLocal extends EJBLocalObject {
         SystemException, UserGroupNotFoundException, OptimisticLockingException, MissingMethodParameterException,
         UserAccountNotFoundException, OrganizationalUnitNotFoundException;
 
+    void create() throws CreateException;
 }

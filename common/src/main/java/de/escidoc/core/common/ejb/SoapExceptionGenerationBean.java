@@ -19,11 +19,18 @@
  */
 package de.escidoc.core.common.ejb;
 
-import java.rmi.RemoteException;
-
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +39,8 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
+import de.escidoc.core.common.ejb.interfaces.SoapExceptionGenerationLocal;
+import de.escidoc.core.common.ejb.interfaces.SoapExceptionGenerationRemote;
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.application.ApplicationException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidAggregationTypeException;
@@ -132,14 +141,20 @@ import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 import de.escidoc.core.common.service.interfaces.SoapExceptionGenerationInterface;
 import de.escidoc.core.common.util.service.UserContext;
 
-public class SoapExceptionGenerationBean implements SessionBean {
+@Stateless(name = "SoapExceptionGeneration")
+@Remote(SoapExceptionGenerationRemote.class)
+@Local(SoapExceptionGenerationLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class SoapExceptionGenerationBean implements SoapExceptionGenerationRemote, SoapExceptionGenerationLocal {
 
     private SoapExceptionGenerationInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SoapExceptionGenerationBean.class);
 
+    @PostConstruct
+    @PermitAll
     public void ejbCreate() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
@@ -153,25 +168,7 @@ public class SoapExceptionGenerationBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public void generateExceptions(final SecurityContext securityContext) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,
         MissingAttributeValueException, MissingElementValueException, MissingParameterException,
@@ -210,6 +207,7 @@ public class SoapExceptionGenerationBean implements SessionBean {
         service.generateExceptions();
     }
 
+    @PermitAll
     public void generateExceptions(final String authHandle, final Boolean restAccess) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,
         MissingAttributeValueException, MissingElementValueException, MissingParameterException,

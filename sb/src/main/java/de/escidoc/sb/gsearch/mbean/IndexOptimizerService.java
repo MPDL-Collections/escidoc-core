@@ -28,16 +28,17 @@
  */
 package de.escidoc.sb.gsearch.mbean;
 
-import de.escidoc.core.common.business.Constants;
-import de.escidoc.core.common.business.indexing.GsearchHandler;
-import de.escidoc.core.common.business.queue.errorprocessing.ErrorMessageHandler;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
-import java.util.HashMap;
-import java.util.Map;
+import de.escidoc.core.common.business.Constants;
+import de.escidoc.core.common.business.indexing.GsearchHandler;
+import de.escidoc.core.common.business.queue.errorprocessing.ErrorMessageHandler;
 
 /**
  * IndexOptimizerService. sends index.optimize-message to gsearch. gsearch then optimizes all lucene-indexes

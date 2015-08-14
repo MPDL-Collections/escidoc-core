@@ -28,13 +28,15 @@
  */
 package de.escidoc.core.test.aa;
 
-import de.escidoc.core.common.exceptions.remote.application.notfound.ResourceNotFoundException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.UserAccountNotFoundException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.UserGroupNotFoundException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.client.servlet.aa.GrantClient;
-import de.escidoc.core.test.security.client.PWCallback;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.http.HttpMessage;
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
@@ -43,14 +45,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import de.escidoc.core.common.exceptions.application.notfound.UserAccountNotFoundException;
+import de.escidoc.core.common.exceptions.application.notfound.UserGroupNotFoundException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.client.servlet.aa.GrantClient;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Base Class for GrantTests (userGrants and groupGrants).

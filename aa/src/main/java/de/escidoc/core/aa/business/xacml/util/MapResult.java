@@ -29,9 +29,10 @@
 
 package de.escidoc.core.aa.business.xacml.util;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Class encapsulating the mapping from aa attribute id to the identified used in the triple store.

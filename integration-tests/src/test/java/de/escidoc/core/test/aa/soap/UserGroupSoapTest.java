@@ -28,10 +28,11 @@
  */
 package de.escidoc.core.test.aa.soap;
 
-import de.escidoc.core.test.aa.UserGroupTest;
-import de.escidoc.core.test.common.client.servlet.Constants;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import de.escidoc.core.test.aa.UserGroupTest;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Testsuite for the UserGroup's Grants with SOAP transport.

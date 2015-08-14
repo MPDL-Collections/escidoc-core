@@ -20,21 +20,22 @@
 
 package de.escidoc.core.common.business.fedora;
 
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.persistence.EscidocIdProvider;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-import de.escidoc.core.common.util.xml.XmlUtility;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.persistence.EscidocIdProvider;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
  * Abstract base class for handlers.

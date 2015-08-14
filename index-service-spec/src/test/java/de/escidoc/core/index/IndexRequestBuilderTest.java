@@ -1,8 +1,8 @@
 package de.escidoc.core.index;
 
-import org.junit.Test;
-
 import static junit.framework.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * Unit test for {@link IndexRequestBuilder} and its implementations.

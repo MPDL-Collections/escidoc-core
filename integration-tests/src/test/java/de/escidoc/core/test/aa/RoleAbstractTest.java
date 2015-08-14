@@ -28,31 +28,30 @@
  */
 package de.escidoc.core.test.aa;
 
-import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidSearchQueryException;
-import de.escidoc.core.common.exceptions.remote.application.invalid.XmlCorruptedException;
-import de.escidoc.core.common.exceptions.remote.application.invalid.XmlSchemaValidationException;
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingAttributeValueException;
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.RoleNotFoundException;
-import de.escidoc.core.common.exceptions.remote.application.violated.OptimisticLockingException;
-import de.escidoc.core.common.exceptions.remote.application.violated.RoleInUseViolationException;
-import de.escidoc.core.common.exceptions.remote.application.violated.UniqueConstraintViolationException;
-import de.escidoc.core.common.exceptions.remote.system.WebserverSystemException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.EscidocTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.client.servlet.aa.RoleClient;
-import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
+import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
+import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
+import de.escidoc.core.common.exceptions.application.missing.MissingAttributeValueException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.violated.RoleInUseViolationException;
+import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.EscidocTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.client.servlet.aa.RoleClient;
+import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
 
 /**
  * Test suite for the resource role.

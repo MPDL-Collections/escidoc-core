@@ -20,13 +20,13 @@
 
 package de.escidoc.core.common.util.security.client;
 
+import java.util.Iterator;
+
 import org.apache.axis.AxisFault;
 import org.apache.axis.MessageContext;
 import org.apache.axis.handlers.BasicHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Iterator;
 
 /**
  * An default handler for the Axis framework.

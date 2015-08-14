@@ -1,5 +1,11 @@
 package de.escidoc.core.oum.ejb.interfaces;
 
+import java.util.Map;
+
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
@@ -20,15 +26,11 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.OrganizationalUnitHasChildrenException;
 import de.escidoc.core.common.exceptions.application.violated.OrganizationalUnitHierarchyViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
-import java.util.Map;
 
 /**
  * Local interface for OrganizationalUnitHandler.
  */
-public interface OrganizationalUnitHandlerLocal extends EJBLocalObject {
+public interface OrganizationalUnitHandlerLocal {
 
     String ingest(String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, MissingAttributeValueException,
@@ -179,4 +181,5 @@ public interface OrganizationalUnitHandlerLocal extends EJBLocalObject {
         AuthorizationException, MissingMethodParameterException, OrganizationalUnitNotFoundException,
         InvalidStatusException, SystemException, OptimisticLockingException, InvalidXmlException;
 
+    void create() throws CreateException;
 }

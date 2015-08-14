@@ -20,18 +20,6 @@
 
 package de.escidoc.core.common.util.stax.handler;
 
-import de.escidoc.core.common.business.Constants;
-import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.stax.StaxParser;
-import de.escidoc.core.common.util.xml.XmlUtility;
-import de.escidoc.core.common.util.xml.stax.events.Attribute;
-import de.escidoc.core.common.util.xml.stax.events.EndElement;
-import de.escidoc.core.common.util.xml.stax.events.StartElement;
-import de.escidoc.core.common.util.xml.stax.events.StartElementWithChildElements;
-
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.stream.XMLStreamException;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +29,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.stream.XMLStreamException;
+
+import de.escidoc.core.common.business.Constants;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.stax.StaxParser;
+import de.escidoc.core.common.util.xml.XmlUtility;
+import de.escidoc.core.common.util.xml.stax.events.Attribute;
+import de.escidoc.core.common.util.xml.stax.events.EndElement;
+import de.escidoc.core.common.util.xml.stax.events.StartElement;
+import de.escidoc.core.common.util.xml.stax.events.StartElementWithChildElements;
 
 /**
  * Extracts the subtrees according to the provided pathes from the parsed ByteArrayInputStream containing a xml

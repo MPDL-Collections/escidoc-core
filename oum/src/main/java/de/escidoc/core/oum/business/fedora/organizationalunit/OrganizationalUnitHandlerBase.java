@@ -28,12 +28,19 @@
  */
 package de.escidoc.core.oum.business.fedora.organizationalunit;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
+
+import javax.xml.stream.XMLStreamException;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.HandlerBase;
 import de.escidoc.core.common.business.fedora.Utility;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidStatusException;
-import de.escidoc.core.common.exceptions.application.invalid.InvalidXmlException;
 import de.escidoc.core.common.exceptions.application.invalid.TmeException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.missing.MissingAttributeValueException;
@@ -67,13 +74,6 @@ import de.escidoc.core.oum.business.renderer.VelocityXmlOrganizationalUnitFoXmlR
 import de.escidoc.core.oum.business.renderer.VelocityXmlOrganizationalUnitRenderer;
 import de.escidoc.core.oum.business.renderer.interfaces.OrganizationalUnitFoXmlRendererInterface;
 import de.escidoc.core.oum.business.renderer.interfaces.OrganizationalUnitRendererInterface;
-
-import javax.xml.stream.XMLStreamException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
 /**
  * This class contains common methods for all handler classes of an organizational unit.

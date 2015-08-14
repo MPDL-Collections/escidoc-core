@@ -2,7 +2,7 @@ package de.escidoc.core.om.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -45,7 +45,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for ContainerHandler.
  */
-public interface ContainerHandlerLocal extends EJBLocalObject {
+public interface ContainerHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, MissingMethodParameterException, XmlCorruptedException,
@@ -341,4 +341,5 @@ public interface ContainerHandlerLocal extends EJBLocalObject {
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException;
 
+    void create() throws CreateException;
 }

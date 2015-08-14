@@ -20,14 +20,15 @@
 
 package de.escidoc.core.common.persistence;
 
-import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.system.PidSystemException;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.system.PidSystemException;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
 
 /**
  * Factory for PID Generator and Management Systems.

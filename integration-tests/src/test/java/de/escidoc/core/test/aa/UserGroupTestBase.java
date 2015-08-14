@@ -28,22 +28,23 @@
  */
 package de.escidoc.core.test.aa;
 
-import de.escidoc.core.common.exceptions.remote.application.violated.AlreadyActiveException;
-import de.escidoc.core.common.exceptions.remote.application.violated.AlreadyDeactiveException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
-import de.escidoc.core.test.security.client.PWCallback;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import de.escidoc.core.common.exceptions.application.violated.AlreadyActiveException;
+import de.escidoc.core.common.exceptions.application.violated.AlreadyDeactiveException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Base class for testing the AA.UserGroup component.

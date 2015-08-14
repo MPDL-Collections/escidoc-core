@@ -28,6 +28,9 @@
  */
 package de.escidoc.core.om.business.security;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.business.fedora.resources.Container;
@@ -37,9 +40,6 @@ import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 import de.escidoc.core.common.util.stax.StaxParser;
 import de.escidoc.core.common.util.stax.handler.RelsExtRefListExtractor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Helper class to filter elements out where the user permissions are restricted.

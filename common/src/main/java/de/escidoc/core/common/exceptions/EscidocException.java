@@ -20,9 +20,9 @@
 
 package de.escidoc.core.common.exceptions;
 
-import de.escidoc.core.common.util.xml.XmlEscaper;
-
 import javax.servlet.http.HttpServletResponse;
+
+import de.escidoc.core.common.util.xml.XmlEscaper;
 
 /**
  * EscidocExeption contains a HttpStatusCode and a HttpStatusMessage which should be used in the REST interface.

@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.om.service;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.business.filter.LuceneRequestParameters;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
@@ -72,8 +74,6 @@ import de.escidoc.core.common.exceptions.system.PidSystemException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.om.service.interfaces.EscidocServiceRedirectInterface;
 import de.escidoc.core.om.service.interfaces.ItemHandlerInterface;
-
-import java.util.Map;
 
 /**
  * An item resource handler.

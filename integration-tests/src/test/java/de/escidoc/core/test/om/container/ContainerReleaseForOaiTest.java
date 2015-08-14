@@ -28,17 +28,14 @@
  */
 package de.escidoc.core.test.om.container;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
 import org.apache.http.HttpResponse;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.net.URL;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 /**
  * Test the mock implementation of the Container resource.

@@ -28,6 +28,16 @@
  */
 package de.escidoc.core.om.business.stax.handler.item;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import javax.naming.directory.NoSuchAttributeException;
+import javax.xml.stream.XMLStreamException;
+
+import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.Utility;
 import de.escidoc.core.common.business.fedora.resources.create.ContentRelationCreate;
@@ -42,15 +52,6 @@ import de.escidoc.core.common.util.xml.stax.events.Attribute;
 import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.naming.directory.NoSuchAttributeException;
-import javax.xml.stream.XMLStreamException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.joda.time.DateTime;
 
 /**
  * Handle ContentRelation XML to obtain all required values (Properties, Metadata, .. ).

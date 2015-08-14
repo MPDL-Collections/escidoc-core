@@ -1,16 +1,17 @@
 package de.escidoc.core.statistic.internal;
 
-import de.escidoc.core.statistic.LinkRequired;
-import de.escidoc.core.statistic.Parameter;
-import de.escidoc.core.statistic.StatisticRecord;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.List;
+
+import de.escidoc.core.statistic.LinkRequired;
+import de.escidoc.core.statistic.Parameter;
+import de.escidoc.core.statistic.StatisticRecord;
 
 /**
  * Default implementation of {@link StatisticRecord}.

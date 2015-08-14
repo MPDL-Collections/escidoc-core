@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMdRecordException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMdRecordException;
 
 /**
  * @author Marko Voß

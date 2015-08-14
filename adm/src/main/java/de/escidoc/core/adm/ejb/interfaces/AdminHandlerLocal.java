@@ -1,7 +1,5 @@
 package de.escidoc.core.adm.ejb.interfaces;
 
-import javax.ejb.EJBLocalObject;
-
 import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
@@ -13,7 +11,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for AdminHandler.
  */
-public interface AdminHandlerLocal extends EJBLocalObject {
+public interface AdminHandlerLocal {
 
     String deleteObjects(String taskParam, SecurityContext securityContext) throws InvalidXmlException,
         SystemException, AuthenticationException, AuthorizationException;

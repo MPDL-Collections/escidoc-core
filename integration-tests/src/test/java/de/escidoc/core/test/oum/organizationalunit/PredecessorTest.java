@@ -28,9 +28,8 @@
  */
 package de.escidoc.core.test.oum.organizationalunit;
 
-import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidStatusException;
-import de.escidoc.core.test.EscidocXmlElements;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import static org.junit.Assert.fail;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +37,9 @@ import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidStatusException;
+import de.escidoc.core.test.EscidocXmlElements;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Testing predecessor/successor relation of OU.

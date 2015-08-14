@@ -20,18 +20,19 @@
 
 package de.escidoc.core.common.persistence.hibernate;
 
-import de.escidoc.core.common.exceptions.system.FedoraSystemException;
-import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
-import de.escidoc.core.common.util.string.StringUtility;
+import java.sql.BatchUpdateException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
+
 import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import java.sql.BatchUpdateException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Set;
+import de.escidoc.core.common.exceptions.system.FedoraSystemException;
+import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
+import de.escidoc.core.common.util.string.StringUtility;
 
 /**
  * Abstract (base) class for data access objects using hibernate.

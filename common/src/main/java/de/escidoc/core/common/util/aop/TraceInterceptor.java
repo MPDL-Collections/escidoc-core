@@ -20,6 +20,8 @@
 
 package de.escidoc.core.common.util.aop;
 
+import java.io.StringWriter;
+
 import org.aspectj.lang.JoinPoint.StaticPart;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -27,8 +29,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.StringWriter;
 
 @Aspect
 public class TraceInterceptor {

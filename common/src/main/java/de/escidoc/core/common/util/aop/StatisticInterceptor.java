@@ -20,6 +20,16 @@
 
 package de.escidoc.core.common.util.aop;
 
+import java.util.regex.Pattern;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.system.SystemException;
@@ -29,15 +39,6 @@ import de.escidoc.core.common.util.string.StringUtility;
 import de.escidoc.core.statistic.StatisticRecord;
 import de.escidoc.core.statistic.StatisticRecordBuilder;
 import de.escidoc.core.statistic.StatisticService;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.Ordered;
-
-import java.util.regex.Pattern;
 
 /**
  * Interceptor used to create statistic data for the eSciDoc base services.

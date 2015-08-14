@@ -1,5 +1,27 @@
 package de.escidoc.core.sm.ejb;
 
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.access.BeanFactoryLocator;
+import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSqlException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
@@ -12,29 +34,25 @@ import de.escidoc.core.common.exceptions.application.security.AuthorizationExcep
 import de.escidoc.core.common.exceptions.application.violated.ScopeContextViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.sm.ejb.interfaces.ReportDefinitionHandlerLocal;
+import de.escidoc.core.sm.ejb.interfaces.ReportDefinitionHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.ReportDefinitionHandlerInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
-import java.util.Map;
-
-public class ReportDefinitionHandlerBean implements SessionBean {
+@Stateless(name = "ReportDefinitionHandler")
+@Remote(ReportDefinitionHandlerRemote.class)
+@Local(ReportDefinitionHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class ReportDefinitionHandlerBean implements ReportDefinitionHandlerRemote, ReportDefinitionHandlerLocal {
 
     private ReportDefinitionHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ReportDefinitionHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -47,25 +65,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String create(final String xmlData, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, InvalidSqlException,
         MissingMethodParameterException, ScopeNotFoundException, ScopeContextViolationException, SystemException {
@@ -78,6 +78,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @PermitAll
     public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, XmlSchemaValidationException, XmlCorruptedException,
         InvalidSqlException, MissingMethodParameterException, ScopeNotFoundException, ScopeContextViolationException,
@@ -92,6 +93,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public void delete(final String id, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ReportDefinitionNotFoundException, MissingMethodParameterException, SystemException {
         try {
@@ -103,6 +105,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @PermitAll
     public void delete(final String id, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ReportDefinitionNotFoundException,
         MissingMethodParameterException, SystemException {
@@ -116,6 +119,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieve(final String id, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ReportDefinitionNotFoundException, MissingMethodParameterException, SystemException {
         try {
@@ -127,6 +131,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @PermitAll
     public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ReportDefinitionNotFoundException,
         MissingMethodParameterException, SystemException {
@@ -140,6 +145,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveReportDefinitions(final Map filter, final SecurityContext securityContext)
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -152,6 +158,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.retrieveReportDefinitions(filter);
     }
 
+    @PermitAll
     public String retrieveReportDefinitions(final Map filter, final String authHandle, final Boolean restAccess)
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -165,6 +172,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.retrieveReportDefinitions(filter);
     }
 
+    @RolesAllowed("Administrator")
     public String update(final String id, final String xmlData, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, ReportDefinitionNotFoundException,
         MissingMethodParameterException, ScopeNotFoundException, InvalidSqlException, ScopeContextViolationException,
@@ -178,6 +186,7 @@ public class ReportDefinitionHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
+    @PermitAll
     public String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ReportDefinitionNotFoundException,
         MissingMethodParameterException, ScopeNotFoundException, InvalidSqlException, ScopeContextViolationException,

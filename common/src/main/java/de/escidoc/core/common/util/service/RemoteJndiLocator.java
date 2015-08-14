@@ -20,14 +20,16 @@
 
 package de.escidoc.core.common.util.service;
 
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-import org.springframework.jndi.JndiObjectFactoryBean;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
-import java.io.IOException;
-import java.util.Properties;
+
+import org.springframework.jndi.JndiObjectFactoryBean;
+
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
 
 /**
  * Customized Proxy factory Bean for the Remote and Stateless EJB lookup. Provides the jndiUser and jndiPassword to the

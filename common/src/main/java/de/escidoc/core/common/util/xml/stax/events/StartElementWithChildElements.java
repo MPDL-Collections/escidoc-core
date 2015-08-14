@@ -20,9 +20,10 @@
 
 package de.escidoc.core.common.util.xml.stax.events;
 
-import javax.xml.namespace.NamespaceContext;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.namespace.NamespaceContext;
 
 /**
  * StartElementWithChildElements.

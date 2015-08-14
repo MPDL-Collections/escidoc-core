@@ -20,6 +20,8 @@
 
 package de.escidoc.core.om.service.interfaces;
 
+import java.util.Map;
+
 import de.escidoc.core.common.annotation.Validate;
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.invalid.ContextNotEmptyException;
@@ -45,8 +47,6 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeViolationException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-
-import java.util.Map;
 
 /**
  * Interface of a Context handler.

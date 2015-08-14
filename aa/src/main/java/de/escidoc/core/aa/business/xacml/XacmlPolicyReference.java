@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.aa.business.xacml;
 
+import java.io.ByteArrayOutputStream;
+import java.net.URI;
+
 import com.sun.xacml.Indenter;
 import com.sun.xacml.PolicyReference;
 import com.sun.xacml.finder.PolicyFinder;
-import de.escidoc.core.common.util.IOUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.net.URI;
+import de.escidoc.core.common.util.IOUtils;
 
 /**
  * Class holding the data of a policy reference.

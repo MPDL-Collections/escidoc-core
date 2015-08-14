@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.aa.business.stax.handler;
 
+import java.util.Date;
+
 import de.escidoc.core.aa.business.UserAccountHandler;
 import de.escidoc.core.aa.business.persistence.RoleGrant;
 import de.escidoc.core.aa.business.persistence.UserAccount;
@@ -36,8 +38,6 @@ import de.escidoc.core.common.exceptions.application.violated.AlreadyRevokedExce
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
-
-import java.util.Date;
 
 /**
  * Stax handler implementation that handles the revocation of a grant. It revokes the grant and extracts the revocation

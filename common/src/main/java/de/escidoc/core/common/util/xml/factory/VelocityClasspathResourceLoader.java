@@ -20,13 +20,13 @@
 
 package de.escidoc.core.common.util.xml.factory;
 
+import java.io.InputStream;
+
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.runtime.resource.loader.ResourceLoader;
-
-import java.io.InputStream;
 
 /**
  * ResourceLoader implementation that wraps a <code>ClasspathResourceLoader</code> and changes the resource string by

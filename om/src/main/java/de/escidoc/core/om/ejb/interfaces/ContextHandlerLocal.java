@@ -2,7 +2,7 @@ package de.escidoc.core.om.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -34,7 +34,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for ContextHandler.
  */
-public interface ContextHandlerLocal extends EJBLocalObject {
+public interface ContextHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws MissingMethodParameterException,
         ContextNameNotUniqueException, AuthenticationException, AuthorizationException, SystemException,
@@ -142,4 +142,5 @@ public interface ContextHandlerLocal extends EJBLocalObject {
     String retrieveAdminDescriptors(String id, String authHandle, Boolean restAccess) throws ContextNotFoundException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
+    void create() throws CreateException;
 }

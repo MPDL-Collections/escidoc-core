@@ -2,6 +2,8 @@ package de.escidoc.core.purge.internal;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import de.escidoc.core.purge.PurgeRequest;
+
 /**
  * This class contains factory methods for each Java content interface and Java element interface generated in the
  * de.escidoc.core.purge.internal package. <p>An ObjectFactory allows you to programatically construct new instances of

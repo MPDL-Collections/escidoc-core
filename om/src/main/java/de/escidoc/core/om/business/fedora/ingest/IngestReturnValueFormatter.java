@@ -1,9 +1,9 @@
 package de.escidoc.core.om.business.fedora.ingest;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.om.business.interfaces.ValueFormatter;
-
-import java.util.Map;
 
 /**
  * Provide a formatter for the return value of the ingest.

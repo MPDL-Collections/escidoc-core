@@ -29,14 +29,14 @@
 
 package de.escidoc.core.om.business.fedora.ingest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidResourceException;
 import de.escidoc.core.om.business.interfaces.IngestFacade;
 import de.escidoc.core.om.business.interfaces.ValueFormatter;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Thin facade on top of the FedoraIngestHandler. This class separates the Handler from the individual classes used for

@@ -20,9 +20,9 @@
 
 package de.escidoc.core.common.servlet.invocation.exceptions;
 
-import de.escidoc.core.common.exceptions.EscidocException;
-
 import javax.servlet.http.HttpServletResponse;
+
+import de.escidoc.core.common.exceptions.EscidocException;
 
 /**
  * The MethodNotFoundException is used to indicate that no matching method could be found to a REST call.

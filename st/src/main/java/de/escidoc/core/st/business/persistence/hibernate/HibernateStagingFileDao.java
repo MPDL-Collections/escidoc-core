@@ -28,22 +28,19 @@
  */
 package de.escidoc.core.st.business.persistence.hibernate;
 
-import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
-import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
-import de.escidoc.core.st.business.StagingFile;
-import de.escidoc.core.st.business.persistence.StagingFileDao;
+import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import java.util.List;
+import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
+import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
+import de.escidoc.core.st.business.StagingFile;
+import de.escidoc.core.st.business.persistence.StagingFileDao;
 
 /**
  * Implementation of a staging file data access object (DAO).

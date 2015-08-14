@@ -1,10 +1,11 @@
 package de.escidoc.core.om.service;
 
-import de.escidoc.core.common.exceptions.EscidocException;
-import org.springframework.security.core.context.SecurityContext;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+
+import org.springframework.security.core.context.SecurityContext;
+
+import de.escidoc.core.common.exceptions.EscidocException;
 
 /**
  * Service endpoint interface for IngestHandler.

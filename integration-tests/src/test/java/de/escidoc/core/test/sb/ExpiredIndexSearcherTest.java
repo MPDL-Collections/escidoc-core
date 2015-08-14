@@ -28,17 +28,18 @@
  */
 package de.escidoc.core.test.sb;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.HashMap;
-
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
 
 /**
  * Test if IndexSearcher gets reloaded when an object is added or deleted in the index.

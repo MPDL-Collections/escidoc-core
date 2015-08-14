@@ -28,16 +28,8 @@
  */
 package de.escidoc.core.test.cmm.contentmodel;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.cmm.CmmTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
-import de.escidoc.core.test.om.OmTestBase;
-import org.apache.http.HttpResponse;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,8 +37,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.apache.http.HttpResponse;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.cmm.CmmTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import de.escidoc.core.test.om.OmTestBase;
 
 /**
  * Test the implementation of the Content Model.

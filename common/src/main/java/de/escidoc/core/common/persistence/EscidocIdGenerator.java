@@ -20,14 +20,15 @@
 
 package de.escidoc.core.common.persistence;
 
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.service.BeanLocator;
+import java.io.Serializable;
+
 import org.hibernate.HibernateException;
 import org.hibernate.engine.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-import java.io.Serializable;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 
 /**
  * Implementation of a hibernate id generator.<br> This implementation fetches the ids from the {@link

@@ -20,6 +20,8 @@
 
 package de.escidoc.core.common.util.xml.stax.handler;
 
+import java.lang.reflect.Constructor;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.system.SystemException;
@@ -29,8 +31,6 @@ import de.escidoc.core.common.util.string.StringUtility;
 import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
-
-import java.lang.reflect.Constructor;
 
 /**
  * Stax handler that manages a link element that refers to another eSciDoc resource object.<br> In case of a REST

@@ -28,12 +28,13 @@
  */
 package de.escidoc.core.test.oum.organizationalunit.rest;
 
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.OrganizationalUnitNotFoundException;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.oum.organizationalunit.OrganizationalUnitTestBase;
 import org.junit.Test;
 import org.w3c.dom.Document;
+
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.notfound.OrganizationalUnitNotFoundException;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.oum.organizationalunit.OrganizationalUnitTestBase;
 
 /**
  * Test retrieve of Organizational Unit via REST.

@@ -1,7 +1,8 @@
 package de.escidoc.core.statistic;
 
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * Represents a parameter in a {@link StatisticRecord}.

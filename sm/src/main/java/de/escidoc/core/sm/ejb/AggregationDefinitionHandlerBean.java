@@ -1,5 +1,27 @@
 package de.escidoc.core.sm.ejb;
 
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.access.BeanFactoryLocator;
+import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -10,29 +32,26 @@ import de.escidoc.core.common.exceptions.application.security.AuthenticationExce
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.sm.ejb.interfaces.AggregationDefinitionHandlerLocal;
+import de.escidoc.core.sm.ejb.interfaces.AggregationDefinitionHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.AggregationDefinitionHandlerInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
-import java.util.Map;
-
-public class AggregationDefinitionHandlerBean implements SessionBean {
+@Stateless(name = "AggregationDefinitionHandler")
+@Remote(AggregationDefinitionHandlerRemote.class)
+@Local(AggregationDefinitionHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class AggregationDefinitionHandlerBean
+    implements AggregationDefinitionHandlerRemote, AggregationDefinitionHandlerLocal {
 
     private AggregationDefinitionHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(AggregationDefinitionHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -46,25 +65,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String create(final String xmlData, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, MissingMethodParameterException,
         ScopeNotFoundException, SystemException {
@@ -77,6 +78,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @PermitAll
     public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, XmlSchemaValidationException, XmlCorruptedException,
         MissingMethodParameterException, ScopeNotFoundException, SystemException {
@@ -90,6 +92,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public void delete(final String id, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, AggregationDefinitionNotFoundException, MissingMethodParameterException,
         SystemException {
@@ -102,6 +105,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @PermitAll
     public void delete(final String id, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, AggregationDefinitionNotFoundException,
         MissingMethodParameterException, SystemException {
@@ -115,6 +119,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieve(final String id, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, AggregationDefinitionNotFoundException, MissingMethodParameterException,
         SystemException {
@@ -127,6 +132,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @PermitAll
     public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, AggregationDefinitionNotFoundException,
         MissingMethodParameterException, SystemException {
@@ -140,6 +146,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveAggregationDefinitions(final Map parameters, final SecurityContext securityContext)
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -152,6 +159,7 @@ public class AggregationDefinitionHandlerBean implements SessionBean {
         return service.retrieveAggregationDefinitions(parameters);
     }
 
+    @PermitAll
     public String retrieveAggregationDefinitions(final Map parameters, final String authHandle, final Boolean restAccess)
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {

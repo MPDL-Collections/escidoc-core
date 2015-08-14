@@ -20,6 +20,8 @@
 
 package de.escidoc.core.common.util.security;
 
+import java.io.IOException;
+
 import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
@@ -32,8 +34,6 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
-
-import java.io.IOException;
 
 public class PreemptiveAuthInterceptor implements HttpRequestInterceptor {
 

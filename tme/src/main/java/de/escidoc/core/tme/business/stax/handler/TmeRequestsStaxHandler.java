@@ -28,20 +28,21 @@
  */
 package de.escidoc.core.tme.business.stax.handler;
 
-import de.escidoc.core.common.business.Constants;
-import de.escidoc.core.common.exceptions.EscidocException;
-import de.escidoc.core.common.exceptions.application.invalid.TmeException;
-import de.escidoc.core.common.util.xml.stax.events.StartElement;
-import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.naming.directory.NoSuchAttributeException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
+import javax.naming.directory.NoSuchAttributeException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.escidoc.core.common.business.Constants;
+import de.escidoc.core.common.exceptions.application.invalid.TmeException;
+import de.escidoc.core.common.util.xml.stax.events.StartElement;
+import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
 
 /**
  * Stax handler that handles the last modification attribute and checks the optimistic locking criteria.

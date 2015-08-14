@@ -28,15 +28,16 @@
  */
 package de.escidoc.core.test.aa.soap;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.aa.UserAccountTest;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.w3c.dom.Document;
 
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.aa.UserAccountTest;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Testsuite for the UserAccount with SOAP transport.

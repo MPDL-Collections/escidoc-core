@@ -28,9 +28,9 @@
  */
 package de.escidoc.core.test.common;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.fedora.Client;
-import de.escidoc.core.test.common.fedora.TripleStoreTestBase;
+import java.util.Iterator;
+import java.util.Vector;
+
 import org.apache.xpath.XPathAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,8 +38,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.Iterator;
-import java.util.Vector;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.fedora.Client;
+import de.escidoc.core.test.common.fedora.TripleStoreTestBase;
 
 /**
  * Tool to purge all escidoc resources from Fedora Repository. Precondition is a running TripleStore where Fedora has

@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.test.om.contentRelation;
 
-import de.escidoc.core.common.exceptions.remote.application.notfound.ContentRelationNotFoundException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.notfound.ContentRelationNotFoundException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 /**
  * Test content relation delete implementation.

@@ -2,7 +2,7 @@ package de.escidoc.core.om.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -11,7 +11,7 @@ import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 /**
  * Local interface for FedoraRestDeviationHandler.
  */
-public interface FedoraRestDeviationHandlerLocal extends EJBLocalObject {
+public interface FedoraRestDeviationHandlerLocal {
 
     EscidocBinaryContent getDatastreamDissemination(
         String pid, String dsID, Map parameters, SecurityContext securityContext) throws Exception;
@@ -35,4 +35,5 @@ public interface FedoraRestDeviationHandlerLocal extends EJBLocalObject {
 
     void replaceInCache(String pid, String xml, String authHandle, Boolean restAccess) throws Exception;
 
+    void create() throws CreateException;
 }

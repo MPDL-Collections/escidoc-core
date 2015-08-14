@@ -1,14 +1,15 @@
 package de.escidoc.core.test.oai.setdefinition;
 
-import de.escidoc.core.common.exceptions.remote.application.violated.UniqueConstraintViolationException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 @RunWith(value = Parameterized.class)
 public class SetDefinitionCreateTest extends SetDefinitionTestBase {

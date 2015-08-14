@@ -2,7 +2,7 @@ package de.escidoc.core.aa.ejb.interfaces;
 
 import java.util.List;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -17,7 +17,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for PolicyDecisionPoint.
  */
-public interface PolicyDecisionPointLocal extends EJBLocalObject {
+public interface PolicyDecisionPointLocal {
 
     String evaluate(String requestsXml, SecurityContext securityContext) throws ResourceNotFoundException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
@@ -56,4 +56,5 @@ public interface PolicyDecisionPointLocal extends EJBLocalObject {
 
     void touch(String authHandle, Boolean restAccess) throws SystemException;
 
+    void create() throws CreateException;
 }

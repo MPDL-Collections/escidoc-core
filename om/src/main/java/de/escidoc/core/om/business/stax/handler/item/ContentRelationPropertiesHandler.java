@@ -28,6 +28,9 @@
  */
 package de.escidoc.core.om.business.stax.handler.item;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.escidoc.core.common.business.fedora.resources.StatusType;
 import de.escidoc.core.common.business.fedora.resources.create.ContentRelationProperties;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidStatusException;
@@ -37,8 +40,6 @@ import de.escidoc.core.common.util.xml.Elements;
 import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Handle and obtain values from Content Relation Properties section.

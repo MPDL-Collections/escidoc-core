@@ -23,14 +23,14 @@
  */
 package de.escidoc.core.common.business.fedora.resources.interfaces;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.fedora.datastream.Datastream;
 import de.escidoc.core.common.exceptions.application.notfound.StreamNotFoundException;
 import de.escidoc.core.common.exceptions.application.violated.LockingException;
 import de.escidoc.core.common.exceptions.system.FedoraSystemException;
 import de.escidoc.core.common.exceptions.system.IntegritySystemException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-
-import java.util.Map;
 
 /**
  * @author Frank Schwichtenberg

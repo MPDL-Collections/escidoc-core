@@ -1,9 +1,8 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -33,141 +32,138 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for UserGroupHandler.
  */
-public interface UserGroupHandlerRemote extends EJBObject {
+public interface UserGroupHandlerRemote {
 
     String create(String xmlData, SecurityContext securityContext) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String create(String xmlData, String authHandle, Boolean restAccess) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     void delete(String groupId, SecurityContext securityContext) throws UserGroupNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     void delete(String groupId, String authHandle, Boolean restAccess) throws UserGroupNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieve(String groupId, SecurityContext securityContext) throws UserGroupNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieve(String groupId, String authHandle, Boolean restAccess) throws UserGroupNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String update(String groupId, String xmlData, SecurityContext securityContext) throws UserGroupNotFoundException,
         UniqueConstraintViolationException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String update(String groupId, String xmlData, String authHandle, Boolean restAccess)
         throws UserGroupNotFoundException, UniqueConstraintViolationException, XmlCorruptedException,
         XmlSchemaValidationException, MissingMethodParameterException, MissingAttributeValueException,
-        OptimisticLockingException, AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        OptimisticLockingException, AuthenticationException, AuthorizationException, SystemException;
 
     void activate(String groupId, String taskParam, SecurityContext securityContext) throws AlreadyActiveException,
         UserGroupNotFoundException, XmlCorruptedException, MissingMethodParameterException,
         MissingAttributeValueException, OptimisticLockingException, AuthenticationException, AuthorizationException,
-        SystemException, RemoteException;
+        SystemException;
 
     void activate(String groupId, String taskParam, String authHandle, Boolean restAccess)
         throws AlreadyActiveException, UserGroupNotFoundException, XmlCorruptedException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     void deactivate(String groupId, String taskParam, SecurityContext securityContext) throws AlreadyDeactiveException,
         UserGroupNotFoundException, XmlCorruptedException, MissingMethodParameterException,
         MissingAttributeValueException, OptimisticLockingException, AuthenticationException, AuthorizationException,
-        SystemException, RemoteException;
+        SystemException;
 
     void deactivate(String groupId, String taskParam, String authHandle, Boolean restAccess)
         throws AlreadyDeactiveException, UserGroupNotFoundException, XmlCorruptedException,
         MissingMethodParameterException, MissingAttributeValueException, OptimisticLockingException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveCurrentGrants(String userGroupId, SecurityContext securityContext)
         throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String retrieveCurrentGrants(String userGroupId, String authHandle, Boolean restAccess)
         throws UserGroupNotFoundException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String createGrant(String groupId, String grantXML, SecurityContext securityContext) throws AlreadyExistsException,
         UserGroupNotFoundException, InvalidScopeException, RoleNotFoundException, XmlCorruptedException,
         XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        SystemException, RemoteException;
+        SystemException;
 
     String createGrant(String groupId, String grantXML, String authHandle, Boolean restAccess)
         throws AlreadyExistsException, UserGroupNotFoundException, InvalidScopeException, RoleNotFoundException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     void revokeGrant(String groupId, String grantId, String taskParam, SecurityContext securityContext)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     void revokeGrant(String groupId, String grantId, String taskParam, String authHandle, Boolean restAccess)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String retrieveGrant(String groupId, String grantId, SecurityContext securityContext)
         throws UserGroupNotFoundException, GrantNotFoundException, MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveGrant(String groupId, String grantId, String authHandle, Boolean restAccess)
         throws UserGroupNotFoundException, GrantNotFoundException, MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     void revokeGrants(String groupId, String taskParam, SecurityContext securityContext)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     void revokeGrants(String groupId, String taskParam, String authHandle, Boolean restAccess)
         throws UserGroupNotFoundException, GrantNotFoundException, AlreadyRevokedException, XmlCorruptedException,
         MissingAttributeValueException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String retrieveResources(String groupId, SecurityContext securityContext) throws UserGroupNotFoundException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieveResources(String groupId, String authHandle, Boolean restAccess) throws UserGroupNotFoundException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieveUserGroups(Map filter, SecurityContext securityContext) throws MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, InvalidSearchQueryException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, InvalidSearchQueryException, SystemException;
 
     String retrieveUserGroups(Map filter, String authHandle, Boolean restAccess)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        InvalidSearchQueryException, SystemException, RemoteException;
+        InvalidSearchQueryException, SystemException;
 
     String addSelectors(String groupId, String taskParam, SecurityContext securityContext)
         throws OrganizationalUnitNotFoundException, UserAccountNotFoundException, UserGroupNotFoundException,
         InvalidContentException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException, OptimisticLockingException, XmlCorruptedException, XmlSchemaValidationException,
-        UserGroupHierarchyViolationException, RemoteException;
+        UserGroupHierarchyViolationException;
 
     String addSelectors(String groupId, String taskParam, String authHandle, Boolean restAccess)
         throws OrganizationalUnitNotFoundException, UserAccountNotFoundException, UserGroupNotFoundException,
         InvalidContentException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException, OptimisticLockingException, XmlCorruptedException, XmlSchemaValidationException,
-        UserGroupHierarchyViolationException, RemoteException;
+        UserGroupHierarchyViolationException;
 
     String removeSelectors(String groupId, String taskParam, SecurityContext securityContext)
         throws XmlCorruptedException, XmlSchemaValidationException, AuthenticationException, AuthorizationException,
         SystemException, UserGroupNotFoundException, OptimisticLockingException, MissingMethodParameterException,
-        UserAccountNotFoundException, OrganizationalUnitNotFoundException, RemoteException;
+        UserAccountNotFoundException, OrganizationalUnitNotFoundException;
 
     String removeSelectors(String groupId, String taskParam, String authHandle, Boolean restAccess)
         throws XmlCorruptedException, XmlSchemaValidationException, AuthenticationException, AuthorizationException,
         SystemException, UserGroupNotFoundException, OptimisticLockingException, MissingMethodParameterException,
-        UserAccountNotFoundException, OrganizationalUnitNotFoundException, RemoteException;
+        UserAccountNotFoundException, OrganizationalUnitNotFoundException;
 
+    void create() throws CreateException;
 }

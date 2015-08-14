@@ -1,13 +1,13 @@
 package de.escidoc.core.statistic;
 
-import org.joda.time.DateTime;
-import org.junit.Test;
+import static junit.framework.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.Assert.assertEquals;
+import org.joda.time.DateTime;
+import org.junit.Test;
 
 /**
  * Unit test for {@link StatisticRecordBuilder} and its implementations.

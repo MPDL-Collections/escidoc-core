@@ -28,10 +28,9 @@
  */
 package de.escidoc.core.test.om.item;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.compare.TripleStoreValue;
-import de.escidoc.core.test.common.fedora.Client;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.apache.xpath.XPathAPI;
 import org.fcrepo.server.types.gen.Datastream;
 import org.junit.Test;
@@ -39,8 +38,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.compare.TripleStoreValue;
+import de.escidoc.core.test.common.fedora.Client;
 
 /**
  * Test creating the example Item objects.

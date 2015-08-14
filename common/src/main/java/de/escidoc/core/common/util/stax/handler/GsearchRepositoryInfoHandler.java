@@ -20,11 +20,11 @@
 
 package de.escidoc.core.common.util.stax.handler;
 
-import de.escidoc.core.common.util.xml.stax.events.StartElement;
-import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import de.escidoc.core.common.util.xml.stax.events.StartElement;
+import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
 
 /**
  * Parses the GsearchRepositoryInfo-XML into a Hash-Structure.

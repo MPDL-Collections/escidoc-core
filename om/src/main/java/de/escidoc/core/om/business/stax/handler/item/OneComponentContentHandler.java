@@ -28,6 +28,9 @@
  */
 package de.escidoc.core.om.business.stax.handler.item;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.exceptions.application.missing.MissingContentException;
 import de.escidoc.core.common.util.stax.StaxParser;
@@ -36,9 +39,6 @@ import de.escidoc.core.common.util.xml.stax.events.Attribute;
 import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Handler for content of one Component.

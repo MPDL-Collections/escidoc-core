@@ -28,8 +28,6 @@
  */
 package de.escidoc.core.st.business;
 
-import de.escidoc.core.common.util.IOUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -37,6 +35,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import de.escidoc.core.common.util.IOUtils;
 
 /**
  * This class represents a file in the staging area.

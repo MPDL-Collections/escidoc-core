@@ -28,13 +28,12 @@
  */
 package de.escidoc.core.test.common.client.servlet.sm;
 
-import de.escidoc.core.sm.ScopeHandler;
-import de.escidoc.core.sm.ScopeHandlerServiceLocator;
-import de.escidoc.core.test.common.client.servlet.ClientBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import java.util.Map;
 
 import javax.xml.rpc.ServiceException;
-import java.util.Map;
+
+import de.escidoc.core.test.common.client.servlet.ClientBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Offers access methods to the escidoc REST and SOAP interface of the Statistic Scope resource.

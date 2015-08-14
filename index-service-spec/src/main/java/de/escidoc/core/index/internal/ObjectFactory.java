@@ -2,6 +2,8 @@ package de.escidoc.core.index.internal;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import de.escidoc.core.index.IndexRequest;
+
 /**
  * This class contains factory methods for each Java content interface and Java element interface generated in the
  * de.escidoc.core.index.internal package. <p>An ObjectFactory allows you to programatically construct new instances of

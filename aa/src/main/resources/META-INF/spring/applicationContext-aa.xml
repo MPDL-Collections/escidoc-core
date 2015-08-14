@@ -17,7 +17,8 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
        default-autowire="no" default-lazy-init="true">
-       <tx:annotation-driven />
+      
+      
        
     <bean id="eSciDoc.core.aa.ObjectTypeAttributeFinderModule"
           class="de.escidoc.core.aa.business.xacml.finder.ObjectTypeAttributeFinderModule">
@@ -519,7 +520,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                 </prop>
                
                 <prop key="hibernate.connection.release_mode">auto</prop>
-                <prop key="hibernate.current_session_context_class">jta</prop>
+                
             </props>
         </property>
         <property name="mappingResources">

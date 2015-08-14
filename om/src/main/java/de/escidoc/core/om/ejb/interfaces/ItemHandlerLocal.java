@@ -1,5 +1,11 @@
 package de.escidoc.core.om.ejb.interfaces;
 
+import java.util.Map;
+
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContextException;
@@ -41,15 +47,11 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionExc
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.om.service.interfaces.EscidocServiceRedirectInterface;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
-import java.util.Map;
 
 /**
  * Local interface for ItemHandler.
  */
-public interface ItemHandlerLocal extends EJBLocalObject {
+public interface ItemHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws MissingContentException,
         ContextNotFoundException, ContentModelNotFoundException, ReadonlyElementViolationException,
@@ -453,4 +455,5 @@ public interface ItemHandlerLocal extends EJBLocalObject {
         ContentRelationNotFoundException, AlreadyDeletedException, LockingException, ReadonlyViolationException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, ReadonlyVersionException;
 
+    void create() throws CreateException;
 }

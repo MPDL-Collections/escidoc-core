@@ -1,9 +1,8 @@
 package de.escidoc.core.om.ejb.interfaces;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -35,120 +34,113 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for ContextHandler.
  */
-public interface ContextHandlerRemote extends EJBObject {
+public interface ContextHandlerRemote {
 
     String create(String xmlData, SecurityContext securityContext) throws MissingMethodParameterException,
         ContextNameNotUniqueException, AuthenticationException, AuthorizationException, SystemException,
         ContentModelNotFoundException, ReadonlyElementViolationException, MissingAttributeValueException,
         MissingElementValueException, ReadonlyAttributeViolationException, InvalidContentException,
         OrganizationalUnitNotFoundException, InvalidStatusException, XmlCorruptedException,
-        XmlSchemaValidationException, RemoteException;
+        XmlSchemaValidationException;
 
     String create(String xmlData, String authHandle, Boolean restAccess) throws MissingMethodParameterException,
         ContextNameNotUniqueException, AuthenticationException, AuthorizationException, SystemException,
         ContentModelNotFoundException, ReadonlyElementViolationException, MissingAttributeValueException,
         MissingElementValueException, ReadonlyAttributeViolationException, InvalidContentException,
         OrganizationalUnitNotFoundException, InvalidStatusException, XmlCorruptedException,
-        XmlSchemaValidationException, RemoteException;
+        XmlSchemaValidationException;
 
     void delete(String id, SecurityContext securityContext) throws ContextNotFoundException, ContextNotEmptyException,
         MissingMethodParameterException, InvalidStatusException, AuthenticationException, AuthorizationException,
-        SystemException, RemoteException;
+        SystemException;
 
     void delete(String id, String authHandle, Boolean restAccess) throws ContextNotFoundException,
         ContextNotEmptyException, MissingMethodParameterException, InvalidStatusException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String retrieve(String id, SecurityContext securityContext) throws ContextNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieve(String id, String authHandle, Boolean restAccess) throws ContextNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveProperties(String id, SecurityContext securityContext) throws ContextNotFoundException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieveProperties(String id, String authHandle, Boolean restAccess) throws ContextNotFoundException,
-        SystemException, RemoteException;
+        SystemException;
 
     String update(String id, String xmlData, SecurityContext securityContext) throws ContextNotFoundException,
         MissingMethodParameterException, InvalidContentException, InvalidStatusException, AuthenticationException,
         AuthorizationException, ReadonlyElementViolationException, ReadonlyAttributeViolationException,
         OptimisticLockingException, ContextNameNotUniqueException, InvalidXmlException, MissingElementValueException,
-        SystemException, RemoteException;
+        SystemException;
 
     String update(String id, String xmlData, String authHandle, Boolean restAccess) throws ContextNotFoundException,
         MissingMethodParameterException, InvalidContentException, InvalidStatusException, AuthenticationException,
         AuthorizationException, ReadonlyElementViolationException, ReadonlyAttributeViolationException,
         OptimisticLockingException, ContextNameNotUniqueException, InvalidXmlException, MissingElementValueException,
-        SystemException, RemoteException;
+        SystemException;
 
     EscidocBinaryContent retrieveResource(
         String id, String resourceName, Map parameters, SecurityContext securityContext)
         throws OperationNotFoundException, ContextNotFoundException, MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     EscidocBinaryContent retrieveResource(
         String id, String resourceName, Map parameters, String authHandle, Boolean restAccess)
         throws OperationNotFoundException, ContextNotFoundException, MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveResources(String id, SecurityContext securityContext) throws ContextNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveResources(String id, String authHandle, Boolean restAccess) throws ContextNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String open(String id, String taskParam, SecurityContext securityContext) throws ContextNotFoundException,
         MissingMethodParameterException, InvalidStatusException, AuthenticationException, AuthorizationException,
-        OptimisticLockingException, InvalidXmlException, SystemException, LockingException, StreamNotFoundException,
-        RemoteException;
+        OptimisticLockingException, InvalidXmlException, SystemException, LockingException, StreamNotFoundException;
 
     String open(String id, String taskParam, String authHandle, Boolean restAccess) throws ContextNotFoundException,
         MissingMethodParameterException, InvalidStatusException, AuthenticationException, AuthorizationException,
-        OptimisticLockingException, InvalidXmlException, SystemException, LockingException, StreamNotFoundException,
-        RemoteException;
+        OptimisticLockingException, InvalidXmlException, SystemException, LockingException, StreamNotFoundException;
 
     String close(String id, String taskParam, SecurityContext securityContext) throws ContextNotFoundException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
         OptimisticLockingException, InvalidXmlException, InvalidStatusException, LockingException,
-        StreamNotFoundException, RemoteException;
+        StreamNotFoundException;
 
     String close(String id, String taskParam, String authHandle, Boolean restAccess) throws ContextNotFoundException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
         OptimisticLockingException, InvalidXmlException, InvalidStatusException, LockingException,
-        StreamNotFoundException, RemoteException;
+        StreamNotFoundException;
 
     String retrieveContexts(Map filter, SecurityContext securityContext) throws MissingMethodParameterException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieveContexts(Map filter, String authHandle, Boolean restAccess) throws MissingMethodParameterException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieveMembers(String id, Map filter, SecurityContext securityContext) throws ContextNotFoundException,
-        MissingMethodParameterException, SystemException, RemoteException;
+        MissingMethodParameterException, SystemException;
 
     String retrieveMembers(String id, Map filter, String authHandle, Boolean restAccess)
-        throws ContextNotFoundException, MissingMethodParameterException, SystemException, RemoteException;
+        throws ContextNotFoundException, MissingMethodParameterException, SystemException;
 
     String retrieveAdminDescriptor(String id, String name, SecurityContext securityContext)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, AdminDescriptorNotFoundException, RemoteException;
+        AuthorizationException, SystemException, AdminDescriptorNotFoundException;
 
     String retrieveAdminDescriptor(String id, String name, String authHandle, Boolean restAccess)
         throws ContextNotFoundException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, AdminDescriptorNotFoundException, RemoteException;
+        AuthorizationException, SystemException, AdminDescriptorNotFoundException;
 
     String retrieveAdminDescriptors(String id, SecurityContext securityContext) throws ContextNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveAdminDescriptors(String id, String authHandle, Boolean restAccess) throws ContextNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
+    void create() throws CreateException;
 }

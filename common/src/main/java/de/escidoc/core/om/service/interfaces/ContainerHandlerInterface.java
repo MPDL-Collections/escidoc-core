@@ -20,6 +20,8 @@
 
 package de.escidoc.core.om.service.interfaces;
 
+import java.util.Map;
+
 import de.escidoc.core.common.annotation.Validate;
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
@@ -57,8 +59,6 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeV
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-
-import java.util.Map;
 
 /**
  * Interface of a container handler.

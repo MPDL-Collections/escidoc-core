@@ -18,10 +18,11 @@
  * terms.
  */
 
-import de.escidoc.core.common.business.fedora.Constants;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.common.business.fedora.Constants;
 
 /**
  * Dump test.

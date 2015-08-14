@@ -1,6 +1,7 @@
 package de.escidoc.core.statistic.internal;
 
 import de.escidoc.core.sm.business.interfaces.StatisticDataHandlerInterface;
+import de.escidoc.core.statistic.StatisticService;
 import de.escidoc.core.statistic.StatisticServiceException;
 
 /**

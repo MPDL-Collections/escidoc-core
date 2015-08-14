@@ -1,7 +1,7 @@
 package de.escidoc.core.statistic.internal;
 
-import de.escidoc.core.statistic.Parameter;
-import org.joda.time.ReadableInstant;
+import java.math.BigDecimal;
+import java.util.GregorianCalendar;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,8 +11,10 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.math.BigDecimal;
-import java.util.GregorianCalendar;
+
+import org.joda.time.ReadableInstant;
+
+import de.escidoc.core.statistic.Parameter;
 
 /**
  * Default implementation of {@link Parameter}.

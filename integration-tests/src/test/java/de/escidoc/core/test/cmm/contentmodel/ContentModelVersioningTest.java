@@ -28,7 +28,8 @@
  */
 package de.escidoc.core.test.cmm.contentmodel;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
+import static org.junit.Assert.assertEquals;
+
 import org.apache.xpath.XPathAPI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +37,7 @@ import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 /**
  * Test Content Model versioning behavior.

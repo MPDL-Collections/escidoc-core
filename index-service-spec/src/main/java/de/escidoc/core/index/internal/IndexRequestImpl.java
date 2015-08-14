@@ -1,11 +1,12 @@
 package de.escidoc.core.index.internal;
 
-import de.escidoc.core.index.IndexRequest;
+import java.util.Date;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Date;
-import java.util.UUID;
+
+import de.escidoc.core.index.IndexRequest;
 
 /**
  * Default implementation of {@link IndexRequest}.

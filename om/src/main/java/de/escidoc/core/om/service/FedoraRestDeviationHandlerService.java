@@ -1,11 +1,12 @@
 package de.escidoc.core.om.service;
 
-import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
-import org.springframework.security.core.context.SecurityContext;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
+
+import org.springframework.security.core.context.SecurityContext;
+
+import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 
 /**
  * Service endpoint interface for FedoraRestDeviationHandler.

@@ -20,15 +20,16 @@
 
 package de.escidoc.core.common.util.xml;
 
-import de.escidoc.core.common.business.Constants;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.xerces.dom.DOMInputImpl;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.escidoc.core.common.business.Constants;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
 
 /**
  * Helper class to change the base-url of imported schemas.

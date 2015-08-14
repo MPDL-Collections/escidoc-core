@@ -28,8 +28,10 @@
  */
 package de.escidoc.core.test.sb;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -40,9 +42,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
-import java.util.HashMap;
-
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
 
 /**
  * Test the implementation of the search resource.

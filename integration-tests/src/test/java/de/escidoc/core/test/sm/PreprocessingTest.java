@@ -28,14 +28,15 @@
  */
 package de.escidoc.core.test.sm;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
+import static org.junit.Assert.fail;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static org.junit.Assert.fail;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 /**
  * Test the implementation of the Preprocessing resource.

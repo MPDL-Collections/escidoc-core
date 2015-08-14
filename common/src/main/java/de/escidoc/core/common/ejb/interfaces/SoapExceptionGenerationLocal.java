@@ -19,8 +19,6 @@
  */
 package de.escidoc.core.common.ejb.interfaces;
 
-import javax.ejb.EJBLocalObject;
-
 import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.exceptions.EscidocException;
@@ -124,7 +122,7 @@ import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 /**
  * Local interface for SoapExceptionGeneration.
  */
-public interface SoapExceptionGenerationLocal extends EJBLocalObject {
+public interface SoapExceptionGenerationLocal {
 
     void generateExceptions(SecurityContext securityContext) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,

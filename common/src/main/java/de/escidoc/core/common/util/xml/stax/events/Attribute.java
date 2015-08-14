@@ -20,9 +20,9 @@
 
 package de.escidoc.core.common.util.xml.stax.events;
 
-import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
-
 import javax.xml.stream.XMLStreamReader;
+
+import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 
 /**
  * Attribute.

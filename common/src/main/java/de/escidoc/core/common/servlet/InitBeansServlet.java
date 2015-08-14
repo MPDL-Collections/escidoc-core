@@ -20,12 +20,14 @@
 
 package de.escidoc.core.common.servlet;
 
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.service.BeanLocator;
+import java.util.regex.Pattern;
 
+import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import java.util.regex.Pattern;
+
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 
 /**
  * Servlet that initializes the AA beans during startup.

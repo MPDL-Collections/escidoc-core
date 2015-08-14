@@ -28,10 +28,13 @@
  */
 package de.escidoc.core.aa.business.stax.handler;
 
+import java.util.Collection;
+
 import com.sun.xacml.EvaluationCtx;
 import com.sun.xacml.attr.BagAttribute;
 import com.sun.xacml.attr.StringAttribute;
 import com.sun.xacml.cond.EvaluationResult;
+
 import de.escidoc.core.aa.business.authorisation.Constants;
 import de.escidoc.core.aa.business.authorisation.CustomEvaluationResultBuilder;
 import de.escidoc.core.aa.business.cache.RequestAttributesCache;
@@ -41,8 +44,6 @@ import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
-import java.util.Collection;
 
 /**
  * Abstract stax handler that handles the attributes that have to be fetched from a resource Xml representation.<br>

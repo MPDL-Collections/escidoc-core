@@ -20,9 +20,10 @@
 
 package de.escidoc.core.common.util.xml.factory;
 
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.xml.XmlEscaper;
-import de.escidoc.core.common.util.xml.XmlUtility;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Map;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -31,9 +32,9 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Map;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.xml.XmlEscaper;
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
  * XmlTemplateProvider implementation using the velocity template engine.<br> This implementation uses the velocity

@@ -1,13 +1,17 @@
 package de.escidoc.core.st.ejb;
 
-import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
-import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.application.notfound.StagingFileNotFoundException;
-import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
-import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.util.service.UserContext;
-import de.escidoc.core.st.service.interfaces.StagingFileHandlerInterface;
+import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -15,20 +19,32 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
+import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.notfound.StagingFileNotFoundException;
+import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
+import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.st.ejb.interfaces.StagingFileHandlerLocal;
+import de.escidoc.core.st.ejb.interfaces.StagingFileHandlerRemote;
+import de.escidoc.core.st.service.interfaces.StagingFileHandlerInterface;
 
-public class StagingFileHandlerBean implements SessionBean {
+@Stateless(name = "StagingFileHandler")
+@Remote(StagingFileHandlerRemote.class)
+@Local(StagingFileHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+@RolesAllowed("Administrator")
+public class StagingFileHandlerBean implements StagingFileHandlerRemote, StagingFileHandlerLocal {
 
     private StagingFileHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(StagingFileHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -39,25 +55,6 @@ public class StagingFileHandlerBean implements SessionBean {
             LOGGER.error("ejbCreate(): Exception StagingFileHandlerComponent: " + e);
             throw new CreateException(e.getMessage()); // Ignore FindBugs
         }
-    }
-
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
     }
 
     public String create(final EscidocBinaryContent binaryContent, final SecurityContext securityContext)

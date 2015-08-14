@@ -28,12 +28,10 @@
  */
 package de.escidoc.core.test.om.semanticstore.spo;
 
-import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidTripleStoreOutputFormatException;
-import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidTripleStoreQueryException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.om.OmTestBase;
-import de.escidoc.core.test.security.client.PWCallback;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,9 +41,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidTripleStoreOutputFormatException;
+import de.escidoc.core.common.exceptions.application.invalid.InvalidTripleStoreQueryException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.om.OmTestBase;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Tests the Semantic Store.<br> The tests are executed by the depositor.

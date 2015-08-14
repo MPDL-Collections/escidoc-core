@@ -1,9 +1,8 @@
 package de.escidoc.core.om.ejb.interfaces;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -46,248 +45,227 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for ContainerHandler.
  */
-public interface ContainerHandlerRemote extends EJBObject {
+public interface ContainerHandlerRemote {
 
     String create(String xmlData, SecurityContext securityContext) throws ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, MissingMethodParameterException, XmlCorruptedException,
         MissingAttributeValueException, MissingElementValueException, SystemException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AuthenticationException,
-        AuthorizationException, InvalidStatusException, MissingMdRecordException, XmlSchemaValidationException,
-        RemoteException;
+        AuthorizationException, InvalidStatusException, MissingMdRecordException, XmlSchemaValidationException;
 
     String create(String xmlData, String authHandle, Boolean restAccess) throws ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, MissingMethodParameterException, XmlCorruptedException,
         MissingAttributeValueException, MissingElementValueException, SystemException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AuthenticationException,
-        AuthorizationException, InvalidStatusException, MissingMdRecordException, XmlSchemaValidationException,
-        RemoteException;
+        AuthorizationException, InvalidStatusException, MissingMdRecordException, XmlSchemaValidationException;
 
     void delete(String id, SecurityContext securityContext) throws ContainerNotFoundException, LockingException,
         InvalidStatusException, SystemException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, RemoteException;
+        AuthorizationException;
 
     void delete(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException, LockingException,
         InvalidStatusException, SystemException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, RemoteException;
+        AuthorizationException;
 
     String retrieve(String id, SecurityContext securityContext) throws MissingMethodParameterException,
-        ContainerNotFoundException, AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        ContainerNotFoundException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieve(String id, String authHandle, Boolean restAccess) throws MissingMethodParameterException,
-        ContainerNotFoundException, AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        ContainerNotFoundException, AuthenticationException, AuthorizationException, SystemException;
 
     String update(String id, String xmlData, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, InvalidContentException, MissingMethodParameterException, InvalidXmlException,
         OptimisticLockingException, InvalidStatusException, ReadonlyVersionException, SystemException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AuthenticationException,
-        AuthorizationException, MissingAttributeValueException, MissingMdRecordException, RemoteException;
+        AuthorizationException, MissingAttributeValueException, MissingMdRecordException;
 
     String update(String id, String xmlData, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
         LockingException, InvalidContentException, MissingMethodParameterException, InvalidXmlException,
         OptimisticLockingException, InvalidStatusException, ReadonlyVersionException, SystemException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AuthenticationException,
-        AuthorizationException, MissingAttributeValueException, MissingMdRecordException, RemoteException;
+        AuthorizationException, MissingAttributeValueException, MissingMdRecordException;
 
     String retrieveMembers(String id, Map filter, SecurityContext securityContext) throws ContainerNotFoundException,
-        InvalidSearchQueryException, MissingMethodParameterException, SystemException, RemoteException;
+        InvalidSearchQueryException, MissingMethodParameterException, SystemException;
 
     String retrieveMembers(String id, Map filter, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, InvalidSearchQueryException, MissingMethodParameterException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieveTocs(String id, Map filter, SecurityContext securityContext) throws ContainerNotFoundException,
-        InvalidXmlException, InvalidSearchQueryException, MissingMethodParameterException, SystemException,
-        RemoteException;
+        InvalidXmlException, InvalidSearchQueryException, MissingMethodParameterException, SystemException;
 
     String retrieveTocs(String id, Map filter, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, InvalidXmlException, InvalidSearchQueryException,
-        MissingMethodParameterException, SystemException, RemoteException;
+        MissingMethodParameterException, SystemException;
 
     String addMembers(String id, String taskParam, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, InvalidContentException, OptimisticLockingException, MissingMethodParameterException,
         SystemException, InvalidContextException, AuthenticationException, AuthorizationException,
-        MissingAttributeValueException, RemoteException;
+        MissingAttributeValueException;
 
     String addMembers(String id, String taskParam, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, InvalidContentException, OptimisticLockingException,
         MissingMethodParameterException, SystemException, InvalidContextException, AuthenticationException,
-        AuthorizationException, MissingAttributeValueException, RemoteException;
+        AuthorizationException, MissingAttributeValueException;
 
     String addTocs(String id, String taskParam, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, InvalidContentException, OptimisticLockingException, MissingMethodParameterException,
         SystemException, InvalidContextException, AuthenticationException, AuthorizationException,
-        MissingAttributeValueException, RemoteException;
+        MissingAttributeValueException;
 
     String addTocs(String id, String taskParam, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, InvalidContentException, OptimisticLockingException,
         MissingMethodParameterException, SystemException, InvalidContextException, AuthenticationException,
-        AuthorizationException, MissingAttributeValueException, RemoteException;
+        AuthorizationException, MissingAttributeValueException;
 
     String removeMembers(String id, String taskParam, SecurityContext securityContext) throws ContextNotFoundException,
         LockingException, XmlSchemaValidationException, ItemNotFoundException, InvalidContextStatusException,
         InvalidItemStatusException, AuthenticationException, AuthorizationException, SystemException,
-        ContainerNotFoundException, InvalidContentException, RemoteException;
+        ContainerNotFoundException, InvalidContentException;
 
     String removeMembers(String id, String taskParam, String authHandle, Boolean restAccess)
         throws ContextNotFoundException, LockingException, XmlSchemaValidationException, ItemNotFoundException,
         InvalidContextStatusException, InvalidItemStatusException, AuthenticationException, AuthorizationException,
-        SystemException, ContainerNotFoundException, InvalidContentException, RemoteException;
+        SystemException, ContainerNotFoundException, InvalidContentException;
 
     String retrieveMdRecord(String id, String mdRecordId, SecurityContext securityContext)
         throws ContainerNotFoundException, MissingMethodParameterException, MdRecordNotFoundException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveMdRecord(String id, String mdRecordId, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, MissingMethodParameterException, MdRecordNotFoundException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveMdRecordContent(String id, String mdRecordId, SecurityContext securityContext)
         throws ContainerNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
-        MissingMethodParameterException, SystemException, RemoteException;
+        MissingMethodParameterException, SystemException;
 
     String retrieveMdRecordContent(String id, String mdRecordId, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, MdRecordNotFoundException, AuthenticationException, AuthorizationException,
-        MissingMethodParameterException, SystemException, RemoteException;
+        MissingMethodParameterException, SystemException;
 
     String retrieveDcRecordContent(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveDcRecordContent(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveMdRecords(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveMdRecords(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveProperties(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveProperties(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveResources(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveResources(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     EscidocBinaryContent retrieveResource(
         String id, String resourceName, Map parameters, SecurityContext securityContext) throws SystemException,
         ContainerNotFoundException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        OperationNotFoundException, RemoteException;
+        OperationNotFoundException;
 
     EscidocBinaryContent retrieveResource(
         String id, String resourceName, Map parameters, String authHandle, Boolean restAccess) throws SystemException,
         ContainerNotFoundException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        OperationNotFoundException, RemoteException;
+        OperationNotFoundException;
 
     String retrieveStructMap(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveStructMap(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveVersionHistory(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveVersionHistory(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveParents(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveParents(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveRelations(String id, SecurityContext securityContext) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveRelations(String id, String authHandle, Boolean restAccess) throws ContainerNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String release(String id, String lastModified, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, MissingMethodParameterException, AuthenticationException, ReadonlyVersionException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
-        InvalidXmlException, RemoteException;
+        InvalidXmlException;
 
     String release(String id, String lastModified, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         ReadonlyVersionException, AuthorizationException, InvalidStatusException, SystemException,
-        OptimisticLockingException, InvalidXmlException, RemoteException;
+        OptimisticLockingException, InvalidXmlException;
 
     String submit(String id, String lastModified, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
         InvalidStatusException, SystemException, OptimisticLockingException, ReadonlyVersionException,
-        InvalidXmlException, RemoteException;
+        InvalidXmlException;
 
     String submit(String id, String lastModified, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
-        ReadonlyVersionException, InvalidXmlException, RemoteException;
+        ReadonlyVersionException, InvalidXmlException;
 
     String withdraw(String id, String lastModified, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
         InvalidStatusException, SystemException, OptimisticLockingException, AlreadyWithdrawnException,
-        ReadonlyVersionException, InvalidXmlException, RemoteException;
+        ReadonlyVersionException, InvalidXmlException;
 
     String withdraw(String id, String lastModified, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, InvalidStatusException, SystemException, OptimisticLockingException,
-        AlreadyWithdrawnException, ReadonlyVersionException, InvalidXmlException, RemoteException;
+        AlreadyWithdrawnException, ReadonlyVersionException, InvalidXmlException;
 
     String revise(String id, String lastModified, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, MissingMethodParameterException, InvalidStatusException, SystemException,
-        OptimisticLockingException, ReadonlyVersionException, XmlCorruptedException, RemoteException;
+        OptimisticLockingException, ReadonlyVersionException, XmlCorruptedException;
 
     String revise(String id, String lastModified, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, InvalidStatusException,
-        SystemException, OptimisticLockingException, ReadonlyVersionException, XmlCorruptedException, RemoteException;
+        SystemException, OptimisticLockingException, ReadonlyVersionException, XmlCorruptedException;
 
     String lock(String id, String lastModified, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        SystemException, OptimisticLockingException, InvalidStatusException, InvalidXmlException, RemoteException;
+        SystemException, OptimisticLockingException, InvalidStatusException, InvalidXmlException;
 
     String lock(String id, String lastModified, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidStatusException,
-        InvalidXmlException, RemoteException;
+        InvalidXmlException;
 
     String unlock(String id, String lastModified, SecurityContext securityContext) throws ContainerNotFoundException,
         LockingException, MissingMethodParameterException, AuthenticationException, AuthorizationException,
-        SystemException, OptimisticLockingException, InvalidStatusException, InvalidXmlException, RemoteException;
+        SystemException, OptimisticLockingException, InvalidStatusException, InvalidXmlException;
 
     String unlock(String id, String lastModified, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException, OptimisticLockingException, InvalidStatusException,
-        InvalidXmlException, RemoteException;
+        InvalidXmlException;
 
     String moveToContext(String containerId, String taskParam, SecurityContext securityContext)
         throws ContainerNotFoundException, ContextNotFoundException, InvalidContentException, LockingException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String moveToContext(String containerId, String taskParam, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, ContextNotFoundException, InvalidContentException, LockingException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String createItem(String containerId, String xmlData, SecurityContext securityContext)
         throws ContainerNotFoundException, MissingContentException, ContextNotFoundException,
@@ -295,8 +273,7 @@ public interface ContainerHandlerRemote extends EJBObject {
         MissingElementValueException, ReadonlyAttributeViolationException, MissingMethodParameterException,
         InvalidXmlException, FileNotFoundException, LockingException, InvalidContentException, InvalidContextException,
         RelationPredicateNotFoundException, ReferencedResourceNotFoundException, SystemException,
-        AuthenticationException, AuthorizationException, MissingMdRecordException, InvalidStatusException,
-        RemoteException;
+        AuthenticationException, AuthorizationException, MissingMdRecordException, InvalidStatusException;
 
     String createItem(String containerId, String xmlData, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, MissingContentException, ContextNotFoundException,
@@ -304,68 +281,65 @@ public interface ContainerHandlerRemote extends EJBObject {
         MissingElementValueException, ReadonlyAttributeViolationException, MissingMethodParameterException,
         InvalidXmlException, FileNotFoundException, LockingException, InvalidContentException, InvalidContextException,
         RelationPredicateNotFoundException, ReferencedResourceNotFoundException, SystemException,
-        AuthenticationException, AuthorizationException, MissingMdRecordException, InvalidStatusException,
-        RemoteException;
+        AuthenticationException, AuthorizationException, MissingMdRecordException, InvalidStatusException;
 
     String createContainer(String containerId, String xmlData, SecurityContext securityContext)
         throws MissingMethodParameterException, ContainerNotFoundException, LockingException, ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, InvalidXmlException, MissingAttributeValueException,
         MissingElementValueException, AuthenticationException, AuthorizationException, InvalidContextException,
         RelationPredicateNotFoundException, InvalidStatusException, ReferencedResourceNotFoundException,
-        SystemException, MissingMdRecordException, RemoteException;
+        SystemException, MissingMdRecordException;
 
     String createContainer(String containerId, String xmlData, String authHandle, Boolean restAccess)
         throws MissingMethodParameterException, ContainerNotFoundException, LockingException, ContextNotFoundException,
         ContentModelNotFoundException, InvalidContentException, InvalidXmlException, MissingAttributeValueException,
         MissingElementValueException, AuthenticationException, AuthorizationException, InvalidContextException,
         RelationPredicateNotFoundException, InvalidStatusException, ReferencedResourceNotFoundException,
-        SystemException, MissingMdRecordException, RemoteException;
+        SystemException, MissingMdRecordException;
 
     String retrieveContainers(Map filter, SecurityContext securityContext) throws MissingMethodParameterException,
-        InvalidSearchQueryException, InvalidXmlException, SystemException, RemoteException;
+        InvalidSearchQueryException, InvalidXmlException, SystemException;
 
     String retrieveContainers(Map filter, String authHandle, Boolean restAccess)
-        throws MissingMethodParameterException, InvalidSearchQueryException, InvalidXmlException, SystemException,
-        RemoteException;
+        throws MissingMethodParameterException, InvalidSearchQueryException, InvalidXmlException, SystemException;
 
     String addContentRelations(String id, String param, SecurityContext securityContext) throws SystemException,
         ContainerNotFoundException, OptimisticLockingException, ReferencedResourceNotFoundException,
         RelationPredicateNotFoundException, AlreadyExistsException, InvalidStatusException, InvalidXmlException,
         MissingElementValueException, LockingException, ReadonlyVersionException, InvalidContentException,
-        AuthenticationException, AuthorizationException, MissingMethodParameterException, RemoteException;
+        AuthenticationException, AuthorizationException, MissingMethodParameterException;
 
     String addContentRelations(String id, String param, String authHandle, Boolean restAccess) throws SystemException,
         ContainerNotFoundException, OptimisticLockingException, ReferencedResourceNotFoundException,
         RelationPredicateNotFoundException, AlreadyExistsException, InvalidStatusException, InvalidXmlException,
         MissingElementValueException, LockingException, ReadonlyVersionException, InvalidContentException,
-        AuthenticationException, AuthorizationException, MissingMethodParameterException, RemoteException;
+        AuthenticationException, AuthorizationException, MissingMethodParameterException;
 
     String removeContentRelations(String id, String param, SecurityContext securityContext) throws SystemException,
         ContainerNotFoundException, OptimisticLockingException, InvalidStatusException, MissingElementValueException,
         InvalidXmlException, ContentRelationNotFoundException, LockingException, ReadonlyVersionException,
-        AuthenticationException, AuthorizationException, RemoteException;
+        AuthenticationException, AuthorizationException;
 
     String removeContentRelations(String id, String param, String authHandle, Boolean restAccess)
         throws SystemException, ContainerNotFoundException, OptimisticLockingException, InvalidStatusException,
         MissingElementValueException, InvalidXmlException, ContentRelationNotFoundException, LockingException,
-        ReadonlyVersionException, AuthenticationException, AuthorizationException, RemoteException;
+        ReadonlyVersionException, AuthenticationException, AuthorizationException;
 
     String assignObjectPid(String id, String param, SecurityContext securityContext) throws InvalidStatusException,
         ContainerNotFoundException, LockingException, MissingMethodParameterException, OptimisticLockingException,
-        SystemException, InvalidXmlException, RemoteException;
+        SystemException, InvalidXmlException;
 
     String assignObjectPid(String id, String param, String authHandle, Boolean restAccess)
         throws InvalidStatusException, ContainerNotFoundException, LockingException, MissingMethodParameterException,
-        OptimisticLockingException, SystemException, InvalidXmlException, RemoteException;
+        OptimisticLockingException, SystemException, InvalidXmlException;
 
     String assignVersionPid(String id, String param, SecurityContext securityContext)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, SystemException,
-        OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException,
-        RemoteException;
+        OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException;
 
     String assignVersionPid(String id, String param, String authHandle, Boolean restAccess)
         throws ContainerNotFoundException, LockingException, MissingMethodParameterException, SystemException,
-        OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException,
-        RemoteException;
+        OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException;
 
+    void create() throws CreateException;
 }

@@ -1,5 +1,11 @@
 package de.escidoc.core.sm.ejb.interfaces;
 
+import java.util.Map;
+
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -8,53 +14,45 @@ import de.escidoc.core.common.exceptions.application.notfound.ScopeNotFoundExcep
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBObject;
-import java.rmi.RemoteException;
-import java.util.Map;
 
 /**
  * Remote interface for ScopeHandler.
  */
-public interface ScopeHandlerRemote extends EJBObject {
+public interface ScopeHandlerRemote {
 
     String create(String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, MissingMethodParameterException,
-        SystemException, RemoteException;
+        SystemException;
 
     String create(String xmlData, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, MissingMethodParameterException,
-        SystemException, RemoteException;
+        SystemException;
 
     void delete(String id, SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
-        ScopeNotFoundException, MissingMethodParameterException, SystemException, RemoteException;
+        ScopeNotFoundException, MissingMethodParameterException, SystemException;
 
     void delete(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, SystemException,
-        RemoteException;
+        AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, SystemException;
 
     String retrieve(String id, SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
-        ScopeNotFoundException, MissingMethodParameterException, SystemException, RemoteException;
+        ScopeNotFoundException, MissingMethodParameterException, SystemException;
 
     String retrieve(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, SystemException,
-        RemoteException;
+        AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, SystemException;
 
     String retrieveScopes(Map parameters, SecurityContext securityContext) throws InvalidSearchQueryException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveScopes(Map parameters, String authHandle, Boolean restAccess) throws InvalidSearchQueryException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String update(String id, String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, XmlSchemaValidationException,
-        XmlCorruptedException, SystemException, RemoteException;
+        XmlCorruptedException, SystemException;
 
     String update(String id, String xmlData, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, XmlSchemaValidationException,
-        XmlCorruptedException, SystemException, RemoteException;
+        XmlCorruptedException, SystemException;
 
+    void create() throws CreateException;
 }

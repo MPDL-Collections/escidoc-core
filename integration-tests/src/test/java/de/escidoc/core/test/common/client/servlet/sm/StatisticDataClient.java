@@ -28,13 +28,12 @@
  */
 package de.escidoc.core.test.common.client.servlet.sm;
 
-import de.escidoc.core.sm.StatisticDataHandler;
-import de.escidoc.core.sm.StatisticDataHandlerServiceLocator;
-import de.escidoc.core.test.common.client.servlet.ClientBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import java.rmi.Remote;
 
 import javax.xml.rpc.ServiceException;
-import java.rmi.Remote;
+
+import de.escidoc.core.test.common.client.servlet.ClientBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Offers access methods to the escidoc REST and SOAP interface of the Statistic Data resource.

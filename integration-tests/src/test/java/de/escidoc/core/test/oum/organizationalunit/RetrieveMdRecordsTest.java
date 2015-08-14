@@ -28,12 +28,13 @@
  */
 package de.escidoc.core.test.oum.organizationalunit;
 
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.OrganizationalUnitNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
+
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.notfound.OrganizationalUnitNotFoundException;
 
 @RunWith(value = Parameterized.class)
 public class RetrieveMdRecordsTest extends OrganizationalUnitTestBase {

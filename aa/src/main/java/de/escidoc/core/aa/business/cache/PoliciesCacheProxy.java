@@ -28,15 +28,16 @@
  */
 package de.escidoc.core.aa.business.cache;
 
-import de.escidoc.core.aa.business.interfaces.UserAccountHandlerInterface;
-import de.escidoc.core.aa.business.interfaces.UserGroupHandlerInterface;
-import de.escidoc.core.aa.business.persistence.RoleGrant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.escidoc.core.aa.business.interfaces.UserAccountHandlerInterface;
+import de.escidoc.core.aa.business.interfaces.UserGroupHandlerInterface;
+import de.escidoc.core.aa.business.persistence.RoleGrant;
 
 /**
  * This class encapsulates access to the policies cache and ensures that the cache is filled when reading from it.

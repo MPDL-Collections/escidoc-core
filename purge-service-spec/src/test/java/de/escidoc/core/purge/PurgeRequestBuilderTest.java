@@ -1,8 +1,8 @@
 package de.escidoc.core.purge;
 
-import org.junit.Test;
-
 import static junit.framework.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * Test for {@link PurgeRequestBuilder}.

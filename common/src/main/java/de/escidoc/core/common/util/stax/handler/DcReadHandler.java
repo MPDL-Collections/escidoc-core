@@ -23,15 +23,15 @@
  */
 package de.escidoc.core.common.util.stax.handler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.exceptions.system.IntegritySystemException;
 import de.escidoc.core.common.util.stax.StaxParser;
 import de.escidoc.core.common.util.xml.Elements;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Frank Schwichtenberg

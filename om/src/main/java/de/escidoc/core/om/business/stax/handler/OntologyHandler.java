@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.om.business.stax.handler;
 
+import java.util.regex.Pattern;
+
+import javax.xml.XMLConstants;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.util.stax.StaxParser;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
-import javax.xml.XMLConstants;
-import java.util.regex.Pattern;
 
 public class OntologyHandler extends DefaultHandler {
 

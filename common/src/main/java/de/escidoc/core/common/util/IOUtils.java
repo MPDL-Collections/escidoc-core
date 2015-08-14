@@ -20,10 +20,6 @@
 
 package de.escidoc.core.common.util;
 
-import de.escidoc.core.common.util.xml.XmlUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
@@ -35,6 +31,11 @@ import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 public final class IOUtils {
 

@@ -29,10 +29,10 @@
 
 package de.escidoc.core.sm.business.util.comparator;
 
-import de.escidoc.core.sm.business.persistence.hibernate.ReportDefinitionRole;
-
 import java.io.Serializable;
 import java.util.Comparator;
+
+import de.escidoc.core.sm.business.persistence.hibernate.ReportDefinitionRole;
 
 /**
  * Sorts ReportDefinitionRole-Objects according to their listIndex.

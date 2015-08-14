@@ -1,11 +1,18 @@
 package de.escidoc.core.sm.ejb;
 
-import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
-import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.util.service.UserContext;
-import de.escidoc.core.sm.service.interfaces.StatisticDataHandlerInterface;
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -13,20 +20,30 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
+import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.sm.ejb.interfaces.StatisticDataHandlerLocal;
+import de.escidoc.core.sm.ejb.interfaces.StatisticDataHandlerRemote;
+import de.escidoc.core.sm.service.interfaces.StatisticDataHandlerInterface;
 
-public class StatisticDataHandlerBean implements SessionBean {
+@Stateless(name = "StatisticDataHandler")
+@Remote(StatisticDataHandlerRemote.class)
+@Local(StatisticDataHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class StatisticDataHandlerBean implements StatisticDataHandlerRemote, StatisticDataHandlerLocal {
 
     private StatisticDataHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(StatisticDataHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -39,25 +56,7 @@ public class StatisticDataHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public void create(final String xmlData, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException {
         try {
@@ -69,6 +68,7 @@ public class StatisticDataHandlerBean implements SessionBean {
         service.create(xmlData);
     }
 
+    @PermitAll
     public void create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException {
         try {

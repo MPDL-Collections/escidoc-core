@@ -1,19 +1,20 @@
 package de.escidoc.core.st.ejb.interfaces;
 
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
 import de.escidoc.core.common.exceptions.application.notfound.StagingFileNotFoundException;
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
 
 /**
  * Local interface for StagingFileHandler.
  */
-public interface StagingFileHandlerLocal extends EJBLocalObject {
+public interface StagingFileHandlerLocal {
 
     String create(EscidocBinaryContent binaryContent, SecurityContext securityContext)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
@@ -29,4 +30,5 @@ public interface StagingFileHandlerLocal extends EJBLocalObject {
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException;
 
+    void create() throws CreateException;
 }

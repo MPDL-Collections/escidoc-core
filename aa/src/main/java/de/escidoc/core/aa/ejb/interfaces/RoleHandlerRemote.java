@@ -1,9 +1,8 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -23,54 +22,50 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for RoleHandler.
  */
-public interface RoleHandlerRemote extends EJBObject {
+public interface RoleHandlerRemote {
 
     String create(String xmlData, SecurityContext securityContext) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String create(String xmlData, String authHandle, Boolean restAccess) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     void delete(String id, SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
-        MissingMethodParameterException, RoleNotFoundException, RoleInUseViolationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, RoleNotFoundException, RoleInUseViolationException, SystemException;
 
     void delete(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, RoleNotFoundException, RoleInUseViolationException,
-        SystemException, RemoteException;
+        SystemException;
 
     String retrieve(String id, SecurityContext securityContext) throws RoleNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieve(String id, String authHandle, Boolean restAccess) throws RoleNotFoundException,
-        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveResources(String id, SecurityContext securityContext) throws AuthenticationException,
-        AuthorizationException, MissingMethodParameterException, RoleNotFoundException, SystemException,
-        RemoteException;
+        AuthorizationException, MissingMethodParameterException, RoleNotFoundException, SystemException;
 
     String retrieveResources(String id, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, MissingMethodParameterException, RoleNotFoundException, SystemException,
-        RemoteException;
+        AuthorizationException, MissingMethodParameterException, RoleNotFoundException, SystemException;
 
     String update(String id, String xmlData, SecurityContext securityContext) throws RoleNotFoundException,
         XmlCorruptedException, XmlSchemaValidationException, MissingAttributeValueException,
         UniqueConstraintViolationException, OptimisticLockingException, MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String update(String id, String xmlData, String authHandle, Boolean restAccess) throws RoleNotFoundException,
         XmlCorruptedException, XmlSchemaValidationException, MissingAttributeValueException,
         UniqueConstraintViolationException, OptimisticLockingException, MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveRoles(Map filter, SecurityContext securityContext) throws MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, InvalidSearchQueryException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException, InvalidSearchQueryException;
 
     String retrieveRoles(Map filter, String authHandle, Boolean restAccess) throws MissingMethodParameterException,
-        AuthenticationException, AuthorizationException, SystemException, InvalidSearchQueryException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException, InvalidSearchQueryException;
 
+    void create() throws CreateException;
 }

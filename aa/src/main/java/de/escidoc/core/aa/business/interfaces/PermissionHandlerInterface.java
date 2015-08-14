@@ -28,6 +28,9 @@
  */
 package de.escidoc.core.aa.business.interfaces;
 
+import java.util.List;
+import java.util.Map;
+
 import de.escidoc.core.aa.business.persistence.RoleGrant;
 import de.escidoc.core.common.business.interfaces.ResourceHandlerInterface;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidScopeException;
@@ -44,9 +47,6 @@ import de.escidoc.core.common.exceptions.application.violated.AlreadyRevokedExce
 import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.xml.XmlUtility;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Common interface for all handlers dealing with permissions.

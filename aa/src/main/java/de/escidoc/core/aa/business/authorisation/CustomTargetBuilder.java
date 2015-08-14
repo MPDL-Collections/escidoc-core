@@ -28,6 +28,9 @@
  */
 package de.escidoc.core.aa.business.authorisation;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import com.sun.xacml.TargetMatch;
 import com.sun.xacml.UnknownIdentifierException;
 import com.sun.xacml.attr.AttributeDesignator;
@@ -36,9 +39,6 @@ import com.sun.xacml.attr.StringAttribute;
 import com.sun.xacml.cond.Function;
 import com.sun.xacml.cond.FunctionFactory;
 import com.sun.xacml.cond.FunctionTypeException;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * Helper class to support target creation.

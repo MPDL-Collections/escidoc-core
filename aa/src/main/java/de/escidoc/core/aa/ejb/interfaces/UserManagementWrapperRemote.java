@@ -1,8 +1,6 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
-import java.rmi.RemoteException;
-
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -12,16 +10,17 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for UserManagementWrapper.
  */
-public interface UserManagementWrapperRemote extends EJBObject {
+public interface UserManagementWrapperRemote {
 
-    void logout(SecurityContext securityContext) throws AuthenticationException, SystemException, RemoteException;
+    void logout(SecurityContext securityContext) throws AuthenticationException, SystemException;
 
-    void logout(String authHandle, Boolean restAccess) throws AuthenticationException, SystemException, RemoteException;
+    void logout(String authHandle, Boolean restAccess) throws AuthenticationException, SystemException;
 
     void initHandleExpiryTimestamp(String handle, SecurityContext securityContext) throws AuthenticationException,
-        SystemException, RemoteException;
+        SystemException;
 
     void initHandleExpiryTimestamp(String handle, String authHandle, Boolean restAccess)
-        throws AuthenticationException, SystemException, RemoteException;
+        throws AuthenticationException, SystemException;
 
+    void create() throws CreateException;
 }

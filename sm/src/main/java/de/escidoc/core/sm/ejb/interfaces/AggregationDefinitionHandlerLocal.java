@@ -1,5 +1,11 @@
 package de.escidoc.core.sm.ejb.interfaces;
 
+import java.util.Map;
+
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -9,15 +15,11 @@ import de.escidoc.core.common.exceptions.application.notfound.ScopeNotFoundExcep
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
-import java.util.Map;
 
 /**
  * Local interface for AggregationDefinitionHandler.
  */
-public interface AggregationDefinitionHandlerLocal extends EJBLocalObject {
+public interface AggregationDefinitionHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, MissingMethodParameterException,
@@ -49,4 +51,5 @@ public interface AggregationDefinitionHandlerLocal extends EJBLocalObject {
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException;
 
+    void create() throws CreateException;
 }

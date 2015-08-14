@@ -2,7 +2,7 @@ package de.escidoc.core.aa.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +34,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for UserAccountHandler.
  */
-public interface UserAccountHandlerLocal extends EJBLocalObject {
+public interface UserAccountHandlerLocal {
 
     String create(String user, SecurityContext securityContext) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, OrganizationalUnitNotFoundException,
@@ -289,4 +289,5 @@ public interface UserAccountHandlerLocal extends EJBLocalObject {
     String retrievePermissionFilterQuery(Map parameters, String authHandle, Boolean restAccess) throws SystemException,
         InvalidSearchQueryException, AuthenticationException, AuthorizationException;
 
+    void create() throws CreateException;
 }

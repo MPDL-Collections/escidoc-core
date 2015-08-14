@@ -20,6 +20,15 @@
 
 package de.escidoc.core.common.business.fedora.resources.create;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.joda.time.DateTime;
+import org.joda.time.ReadableInstant;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.FedoraUtility;
 import de.escidoc.core.common.business.fedora.datastream.Datastream;
@@ -34,14 +43,6 @@ import de.escidoc.core.common.util.xml.factory.CommonFoXmlProvider;
 import de.escidoc.core.common.util.xml.factory.ContentModelFoXmlProvider;
 import de.escidoc.core.common.util.xml.factory.FoXmlProvider;
 import de.escidoc.core.common.util.xml.factory.XmlTemplateProvider;
-import org.joda.time.DateTime;
-import org.joda.time.ReadableInstant;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Content Model for create method.

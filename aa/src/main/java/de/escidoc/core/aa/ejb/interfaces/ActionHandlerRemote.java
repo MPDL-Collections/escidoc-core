@@ -1,8 +1,6 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
-import java.rmi.RemoteException;
-
-import javax.ejb.EJBObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -16,28 +14,27 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for ActionHandler.
  */
-public interface ActionHandlerRemote extends EJBObject {
+public interface ActionHandlerRemote {
 
     String createUnsecuredActions(String contextId, String actions, SecurityContext securityContext)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     String createUnsecuredActions(String contextId, String actions, String authHandle, Boolean restAccess)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
-        AuthorizationException, SystemException, RemoteException;
+        AuthorizationException, SystemException;
 
     void deleteUnsecuredActions(String contextId, SecurityContext securityContext) throws ContextNotFoundException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     void deleteUnsecuredActions(String contextId, String authHandle, Boolean restAccess)
-        throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveUnsecuredActions(String contextId, SecurityContext securityContext) throws ContextNotFoundException,
-        AuthenticationException, AuthorizationException, SystemException, RemoteException;
+        AuthenticationException, AuthorizationException, SystemException;
 
     String retrieveUnsecuredActions(String contextId, String authHandle, Boolean restAccess)
-        throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException;
 
+    void create() throws CreateException;
 }

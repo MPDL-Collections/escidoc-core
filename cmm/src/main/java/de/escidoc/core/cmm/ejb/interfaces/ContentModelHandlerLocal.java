@@ -2,8 +2,6 @@ package de.escidoc.core.cmm.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
-
 import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
@@ -31,7 +29,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for ContentModelHandler.
  */
-public interface ContentModelHandlerLocal extends EJBLocalObject {
+public interface ContentModelHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws InvalidContentException,
         MissingAttributeValueException, SystemException, AuthenticationException, AuthorizationException,

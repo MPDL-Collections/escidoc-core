@@ -1,35 +1,34 @@
 package de.escidoc.core.st.ejb.interfaces;
 
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
 import de.escidoc.core.common.exceptions.application.notfound.StagingFileNotFoundException;
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBObject;
-import java.rmi.RemoteException;
 
 /**
  * Remote interface for StagingFileHandler.
  */
-public interface StagingFileHandlerRemote extends EJBObject {
+public interface StagingFileHandlerRemote {
 
     String create(EscidocBinaryContent binaryContent, SecurityContext securityContext)
-        throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     String create(EscidocBinaryContent binaryContent, String authHandle, Boolean restAccess)
-        throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException,
-        RemoteException;
+        throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException;
 
     EscidocBinaryContent retrieve(String stagingFileId, SecurityContext securityContext)
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
-        MissingMethodParameterException, SystemException, RemoteException;
+        MissingMethodParameterException, SystemException;
 
     EscidocBinaryContent retrieve(String stagingFileId, String authHandle, Boolean restAccess)
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
-        MissingMethodParameterException, SystemException, RemoteException;
+        MissingMethodParameterException, SystemException;
 
+    void create() throws CreateException;
 }

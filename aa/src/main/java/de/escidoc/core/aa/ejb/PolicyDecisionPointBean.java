@@ -1,11 +1,19 @@
 package de.escidoc.core.aa.ejb;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +22,8 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
+import de.escidoc.core.aa.ejb.interfaces.PolicyDecisionPointLocal;
+import de.escidoc.core.aa.ejb.interfaces.PolicyDecisionPointRemote;
 import de.escidoc.core.aa.service.interfaces.PolicyDecisionPointInterface;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -24,15 +34,21 @@ import de.escidoc.core.common.exceptions.application.security.AuthorizationExcep
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
 
-public class PolicyDecisionPointBean implements SessionBean {
+@Stateless(name = "PolicyDecisionPoint")
+@Remote(PolicyDecisionPointRemote.class)
+@Local(PolicyDecisionPointLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class PolicyDecisionPointBean implements PolicyDecisionPointRemote, PolicyDecisionPointLocal {
 
     private PolicyDecisionPointInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(PolicyDecisionPointBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -45,25 +61,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String evaluate(final String requestsXml, final SecurityContext securityContext)
         throws ResourceNotFoundException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
@@ -76,6 +74,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluate(requestsXml);
     }
 
+    @PermitAll
     public String evaluate(final String requestsXml, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, XmlCorruptedException, XmlSchemaValidationException,
         MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
@@ -89,6 +88,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluate(requestsXml);
     }
 
+    @RolesAllowed("Administrator")
     public boolean[] evaluateRequestList(final List requests, final SecurityContext securityContext)
         throws ResourceNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -101,6 +101,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRequestList(requests);
     }
 
+    @PermitAll
     public boolean[] evaluateRequestList(final List requests, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -114,6 +115,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRequestList(requests);
     }
 
+    @RolesAllowed("Administrator")
     public List evaluateRetrieve(final String resourceName, final List ids, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         ResourceNotFoundException, SystemException {
@@ -126,6 +128,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRetrieve(resourceName, ids);
     }
 
+    @PermitAll
     public List evaluateRetrieve(
         final String resourceName, final List ids, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
@@ -140,6 +143,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateRetrieve(resourceName, ids);
     }
 
+    @RolesAllowed("Administrator")
     public List evaluateMethodForList(
         final String resourceName, final String methodName, final List argumentList,
         final SecurityContext securityContext) throws AuthenticationException, AuthorizationException,
@@ -153,6 +157,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateMethodForList(resourceName, methodName, argumentList);
     }
 
+    @PermitAll
     public List evaluateMethodForList(
         final String resourceName, final String methodName, final List argumentList, final String authHandle,
         final Boolean restAccess) throws AuthenticationException, AuthorizationException,
@@ -167,6 +172,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         return service.evaluateMethodForList(resourceName, methodName, argumentList);
     }
 
+    @RolesAllowed("Administrator")
     public void touch(final SecurityContext securityContext) throws SystemException {
         try {
             UserContext.setUserContext(securityContext);
@@ -177,6 +183,7 @@ public class PolicyDecisionPointBean implements SessionBean {
         service.touch();
     }
 
+    @PermitAll
     public void touch(final String authHandle, final Boolean restAccess) throws SystemException {
         try {
             UserContext.setUserContext(authHandle);

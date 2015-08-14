@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.st.mbean;
 
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-import de.escidoc.core.st.business.StagingCleaner;
+import java.io.IOException;
+
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
-import java.io.IOException;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import de.escidoc.core.st.business.StagingCleaner;
 
 /**
  * Managed bean for the staging file area. This should be exposed (as a mbean) to a JMX server.

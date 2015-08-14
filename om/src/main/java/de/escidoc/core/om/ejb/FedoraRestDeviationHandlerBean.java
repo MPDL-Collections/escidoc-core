@@ -1,9 +1,20 @@
 package de.escidoc.core.om.ejb;
 
-import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.util.service.UserContext;
-import de.escidoc.core.om.service.interfaces.FedoraRestDeviationHandlerInterface;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -11,21 +22,29 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
-import java.util.Map;
+import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.ejb.interfaces.FedoraRestDeviationHandlerLocal;
+import de.escidoc.core.om.ejb.interfaces.FedoraRestDeviationHandlerRemote;
+import de.escidoc.core.om.service.interfaces.FedoraRestDeviationHandlerInterface;
 
-public class FedoraRestDeviationHandlerBean implements SessionBean {
+@Stateless(name = "FedoraRestDeviationHandler")
+@Remote(FedoraRestDeviationHandlerRemote.class)
+@Local(FedoraRestDeviationHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class FedoraRestDeviationHandlerBean
+    implements FedoraRestDeviationHandlerRemote, FedoraRestDeviationHandlerLocal {
 
     private FedoraRestDeviationHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(FedoraRestDeviationHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -38,25 +57,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public EscidocBinaryContent getDatastreamDissemination(
         final String pid, final String dsID, final Map parameters, final SecurityContext securityContext)
         throws Exception, SystemException {
@@ -69,6 +70,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         return service.getDatastreamDissemination(pid, dsID, parameters);
     }
 
+    @PermitAll
     public EscidocBinaryContent getDatastreamDissemination(
         final String pid, final String dsID, final Map parameters, final String authHandle, final Boolean restAccess)
         throws Exception, SystemException {
@@ -82,6 +84,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         return service.getDatastreamDissemination(pid, dsID, parameters);
     }
 
+    @RolesAllowed("Administrator")
     public String export(final String pid, final Map parameters, final SecurityContext securityContext)
         throws Exception, SystemException {
         try {
@@ -93,6 +96,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         return service.export(pid, parameters);
     }
 
+    @PermitAll
     public String export(final String pid, final Map parameters, final String authHandle, final Boolean restAccess)
         throws Exception, SystemException {
         try {
@@ -105,6 +109,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         return service.export(pid, parameters);
     }
 
+    @RolesAllowed("Administrator")
     public void cache(final String pid, final String xml, final SecurityContext securityContext) throws Exception,
         SystemException {
         try {
@@ -116,6 +121,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         service.cache(pid, xml);
     }
 
+    @PermitAll
     public void cache(final String pid, final String xml, final String authHandle, final Boolean restAccess)
         throws Exception, SystemException {
         try {
@@ -128,6 +134,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         service.cache(pid, xml);
     }
 
+    @RolesAllowed("Administrator")
     public void removeFromCache(final String pid, final SecurityContext securityContext) throws Exception,
         SystemException {
         try {
@@ -139,6 +146,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         service.removeFromCache(pid);
     }
 
+    @PermitAll
     public void removeFromCache(final String pid, final String authHandle, final Boolean restAccess) throws Exception,
         SystemException {
         try {
@@ -151,6 +159,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         service.removeFromCache(pid);
     }
 
+    @RolesAllowed("Administrator")
     public void replaceInCache(final String pid, final String xml, final SecurityContext securityContext)
         throws Exception, SystemException {
         try {
@@ -162,6 +171,7 @@ public class FedoraRestDeviationHandlerBean implements SessionBean {
         service.replaceInCache(pid, xml);
     }
 
+    @PermitAll
     public void replaceInCache(final String pid, final String xml, final String authHandle, final Boolean restAccess)
         throws Exception, SystemException {
         try {

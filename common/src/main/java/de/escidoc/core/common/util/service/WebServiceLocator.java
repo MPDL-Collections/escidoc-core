@@ -20,6 +20,13 @@
 
 package de.escidoc.core.common.util.service;
 
+import java.rmi.Remote;
+import java.util.List;
+
+import javax.xml.namespace.QName;
+import javax.xml.rpc.ServiceException;
+import javax.xml.rpc.Stub;
+
 import org.apache.axis.ConfigurationException;
 import org.apache.axis.EngineConfiguration;
 import org.apache.axis.client.Call;
@@ -30,12 +37,6 @@ import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.xml.namespace.QName;
-import javax.xml.rpc.ServiceException;
-import javax.xml.rpc.Stub;
-import java.rmi.Remote;
-import java.util.List;
 
 /**
  * WebServiceLocator.java is used to connect to WebSevices using service-endpoint classes.

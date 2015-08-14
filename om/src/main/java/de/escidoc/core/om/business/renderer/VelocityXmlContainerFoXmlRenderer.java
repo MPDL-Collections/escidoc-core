@@ -1,5 +1,11 @@
 package de.escidoc.core.om.business.renderer;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.Utility;
 import de.escidoc.core.common.business.fedora.resources.StatusType;
@@ -9,11 +15,6 @@ import de.escidoc.core.common.util.xml.factory.ContainerFoXmlProvider;
 import de.escidoc.core.common.util.xml.factory.XmlTemplateProvider;
 import de.escidoc.core.common.util.xml.renderer.VelocityXmlCommonFoXmlRenderer;
 import de.escidoc.core.om.business.renderer.interfaces.ContainerFoXmlRendererInterface;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Render Container FoXMl.

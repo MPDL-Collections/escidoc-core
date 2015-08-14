@@ -28,14 +28,14 @@
  */
 package de.escidoc.core.test.aa;
 
-import de.escidoc.core.common.exceptions.remote.application.security.AuthorizationException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.common.client.servlet.aa.GrantClient;
 import de.escidoc.core.test.security.client.PWCallback;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Test suite for the role escidoc:role-context-administrator. Context-Administrator may -create contexts -retrieve,

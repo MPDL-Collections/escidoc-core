@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.om.business.fedora.container;
 
+import java.io.UnsupportedEncodingException;
+
 import de.escidoc.core.common.business.fedora.datastream.Datastream;
 import de.escidoc.core.common.business.fedora.resources.Container;
 import de.escidoc.core.common.exceptions.application.notfound.MdRecordNotFoundException;
@@ -38,8 +40,6 @@ import de.escidoc.core.common.exceptions.system.IntegritySystemException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.xml.XmlUtility;
-
-import java.io.UnsupportedEncodingException;
 
 /**
  * The class contains methods, which invoke the rendering methods for container its subresources and lists and methods

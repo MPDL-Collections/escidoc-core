@@ -1,10 +1,11 @@
 package de.escidoc.core.statistic.internal;
 
-import de.escidoc.core.statistic.StatisticRecord;
-import de.escidoc.core.statistic.StatisticRecordBuilder;
+import java.math.BigDecimal;
+
 import org.joda.time.DateTime;
 
-import java.math.BigDecimal;
+import de.escidoc.core.statistic.StatisticRecord;
+import de.escidoc.core.statistic.StatisticRecordBuilder;
 
 /**
  * Default implementation of {@link StatisticRecordBuilder}.

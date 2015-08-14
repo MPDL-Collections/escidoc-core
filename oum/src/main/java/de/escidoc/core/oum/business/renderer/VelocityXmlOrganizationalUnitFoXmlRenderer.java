@@ -28,13 +28,13 @@
  */
 package de.escidoc.core.oum.business.renderer;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.xml.factory.OrganizationalUnitFoXmlProvider;
 import de.escidoc.core.common.util.xml.factory.XmlTemplateProvider;
 import de.escidoc.core.oum.business.renderer.interfaces.OrganizationalUnitFoXmlRendererInterface;
-
-import java.util.Map;
 
 /**
  * Organizational unit foxml renderer implementation using the velocity template engine.

@@ -26,13 +26,12 @@
  * Gesellschaft zur Foerderung der Wissenschaft e.V.
  * All rights reserved.  Use is subject to license terms.
  */
-import com.izforge.izpack.installer.AutomatedInstallData;
-import com.izforge.izpack.installer.DataValidator.Status;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import com.izforge.izpack.installer.AutomatedInstallData;
 
 /**
  * Check if a HTTP URL is reachable and return an error if it does.

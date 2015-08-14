@@ -28,14 +28,14 @@
  */
 package de.escidoc.core.aa.business.stax.handler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.escidoc.core.common.exceptions.application.missing.MissingAttributeValueException;
 import de.escidoc.core.common.util.stax.StaxParser;
 import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Stax handler implementation that extracts ouIds out of a ouList.

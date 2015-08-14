@@ -20,15 +20,16 @@
 
 package de.escidoc.core.common.util.stax.handler;
 
-import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
-import de.escidoc.core.common.util.xml.stax.events.StartElement;
-import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
-
-import javax.naming.directory.NoSuchAttributeException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.naming.directory.NoSuchAttributeException;
+
+import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
+import de.escidoc.core.common.util.xml.stax.events.StartElement;
+import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
 
 public class RelsExtRefListExtractor extends DefaultHandler {
 

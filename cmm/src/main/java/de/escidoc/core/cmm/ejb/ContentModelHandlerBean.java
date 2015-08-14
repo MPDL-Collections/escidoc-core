@@ -1,11 +1,21 @@
 package de.escidoc.core.cmm.ejb;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
+import javax.ejb.Local;
+import javax.ejb.LocalHome;
+import javax.ejb.Remote;
+import javax.ejb.RemoteHome;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +24,10 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
+import de.escidoc.core.cmm.ejb.interfaces.ContentModelHandlerLocal;
+import de.escidoc.core.cmm.ejb.interfaces.ContentModelHandlerLocalHome;
+import de.escidoc.core.cmm.ejb.interfaces.ContentModelHandlerRemote;
+import de.escidoc.core.cmm.ejb.interfaces.ContentModelHandlerRemoteHome;
 import de.escidoc.core.cmm.service.interfaces.ContentModelHandlerInterface;
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.EscidocException;
@@ -38,14 +52,22 @@ import de.escidoc.core.common.exceptions.application.violated.ResourceInUseExcep
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
 
-public class ContentModelHandlerBean implements SessionBean {
+@Stateless(name = "ContentModelHandler")
+@RemoteHome(ContentModelHandlerRemoteHome.class)
+@LocalHome(ContentModelHandlerLocalHome.class)
+@Remote(ContentModelHandlerRemote.class)
+@Local(ContentModelHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class ContentModelHandlerBean implements ContentModelHandlerRemote, ContentModelHandlerLocal {
 
     private ContentModelHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ContentModelHandlerBean.class);
 
+    @PostConstruct
+    @PermitAll
     public void ejbCreate() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
@@ -59,25 +81,7 @@ public class ContentModelHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String ingest(final String xmlData, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, SystemException, MissingAttributeValueException,
         MissingElementValueException, ContentModelNotFoundException, InvalidXmlException, XmlCorruptedException,
@@ -91,6 +95,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.ingest(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public String ingest(final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException,
         MissingAttributeValueException, MissingElementValueException, ContentModelNotFoundException,
@@ -105,6 +110,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.ingest(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public String create(final String xmlData, final SecurityContext securityContext) throws InvalidContentException,
         MissingAttributeValueException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, XmlCorruptedException, XmlSchemaValidationException {
@@ -117,6 +123,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @PermitAll
     public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws InvalidContentException, MissingAttributeValueException, SystemException, AuthenticationException,
         AuthorizationException, MissingMethodParameterException, XmlCorruptedException, XmlSchemaValidationException {
@@ -130,6 +137,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public void delete(final String id, final SecurityContext securityContext) throws SystemException,
         ContentModelNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, LockingException, InvalidStatusException, ResourceInUseException {
@@ -143,6 +151,7 @@ public class ContentModelHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @PermitAll
     public void delete(final String id, final String authHandle, final Boolean restAccess) throws SystemException,
         ContentModelNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, LockingException, InvalidStatusException, ResourceInUseException {
@@ -156,6 +165,7 @@ public class ContentModelHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieve(final String id, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, MissingMethodParameterException,
         AuthenticationException, AuthorizationException {
@@ -168,6 +178,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @PermitAll
     public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, MissingMethodParameterException,
         AuthenticationException, AuthorizationException {
@@ -181,6 +192,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveProperties(final String id, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -193,6 +205,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
+    @PermitAll
     public String retrieveProperties(final String id, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -206,6 +219,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveProperties(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveContentStreams(final String id, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -218,6 +232,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentStreams(id);
     }
 
+    @PermitAll
     public String retrieveContentStreams(final String id, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -231,6 +246,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentStreams(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveContentStream(final String id, final String name, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -243,6 +259,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentStream(id, name);
     }
 
+    @PermitAll
     public String retrieveContentStream(
         final String id, final String name, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
@@ -257,6 +274,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentStream(id, name);
     }
 
+    @RolesAllowed("Administrator")
     public EscidocBinaryContent retrieveContentStreamContent(
         final String id, final String name, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
@@ -270,6 +288,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentStreamContent(id, name);
     }
 
+    @PermitAll
     public EscidocBinaryContent retrieveContentStreamContent(
         final String id, final String name, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
@@ -284,6 +303,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentStreamContent(id, name);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveResources(final String id, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -296,6 +316,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
+    @PermitAll
     public String retrieveResources(final String id, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -309,6 +330,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveResources(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveVersionHistory(final String id, final SecurityContext securityContext)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -321,6 +343,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveVersionHistory(id);
     }
 
+    @PermitAll
     public String retrieveVersionHistory(final String id, final String authHandle, final Boolean restAccess)
         throws ContentModelNotFoundException, SystemException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException {
@@ -334,6 +357,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveVersionHistory(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveContentModels(final Map parameterMap, final SecurityContext securityContext)
         throws InvalidSearchQueryException, SystemException {
         try {
@@ -345,6 +369,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentModels(parameterMap);
     }
 
+    @PermitAll
     public String retrieveContentModels(final Map parameterMap, final String authHandle, final Boolean restAccess)
         throws InvalidSearchQueryException, SystemException {
         try {
@@ -357,6 +382,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveContentModels(parameterMap);
     }
 
+    @RolesAllowed("Administrator")
     public String update(final String id, final String xmlData, final SecurityContext securityContext)
         throws InvalidXmlException, ContentModelNotFoundException, OptimisticLockingException, SystemException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, ReadonlyVersionException,
@@ -370,6 +396,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
+    @PermitAll
     public String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws InvalidXmlException, ContentModelNotFoundException, OptimisticLockingException, SystemException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, ReadonlyVersionException,
@@ -384,6 +411,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public EscidocBinaryContent retrieveMdRecordDefinitionSchemaContent(
         final String id, final String name, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, ContentModelNotFoundException, SystemException {
@@ -396,6 +424,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveMdRecordDefinitionSchemaContent(id, name);
     }
 
+    @PermitAll
     public EscidocBinaryContent retrieveMdRecordDefinitionSchemaContent(
         final String id, final String name, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
@@ -410,6 +439,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveMdRecordDefinitionSchemaContent(id, name);
     }
 
+    @RolesAllowed("Administrator")
     public EscidocBinaryContent retrieveResourceDefinitionXsltContent(
         final String id, final String name, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingMethodParameterException, ContentModelNotFoundException,
@@ -423,6 +453,7 @@ public class ContentModelHandlerBean implements SessionBean {
         return service.retrieveResourceDefinitionXsltContent(id, name);
     }
 
+    @PermitAll
     public EscidocBinaryContent retrieveResourceDefinitionXsltContent(
         final String id, final String name, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,

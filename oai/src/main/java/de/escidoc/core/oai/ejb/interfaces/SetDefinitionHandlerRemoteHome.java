@@ -1,8 +1,9 @@
 package de.escidoc.core.oai.ejb.interfaces;
 
+import java.rmi.RemoteException;
+
 import javax.ejb.CreateException;
 import javax.ejb.EJBHome;
-import java.rmi.RemoteException;
 
 /**
  * Home interface for SetDefinitionHandler.

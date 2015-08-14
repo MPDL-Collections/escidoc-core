@@ -20,15 +20,19 @@
 
 package de.escidoc.core.common.business.fedora;
 
-import de.escidoc.core.common.business.Constants;
-import de.escidoc.core.common.exceptions.system.FedoraSystemException;
-import de.escidoc.core.common.exceptions.system.FileSystemException;
-import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.configuration.EscidocConfiguration;
-import de.escidoc.core.common.util.security.PreemptiveAuthInterceptor;
-import de.escidoc.core.common.util.service.BeanLocator;
-import de.escidoc.core.common.util.xml.XmlUtility;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.rpc.ServiceException;
+
 import org.apache.axis.types.NonNegativeInteger;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.PoolUtils;
@@ -77,17 +81,15 @@ import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.rpc.ServiceException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.escidoc.core.common.business.Constants;
+import de.escidoc.core.common.exceptions.system.FedoraSystemException;
+import de.escidoc.core.common.exceptions.system.FileSystemException;
+import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import de.escidoc.core.common.util.security.PreemptiveAuthInterceptor;
+import de.escidoc.core.common.util.service.BeanLocator;
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
  * An utility class for Fedora requests.<br />

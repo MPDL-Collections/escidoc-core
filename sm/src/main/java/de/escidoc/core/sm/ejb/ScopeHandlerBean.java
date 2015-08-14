@@ -1,5 +1,27 @@
 package de.escidoc.core.sm.ejb;
 
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.access.BeanFactoryLocator;
+import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -9,29 +31,25 @@ import de.escidoc.core.common.exceptions.application.security.AuthenticationExce
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.sm.ejb.interfaces.ScopeHandlerLocal;
+import de.escidoc.core.sm.ejb.interfaces.ScopeHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.ScopeHandlerInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.access.BeanFactoryLocator;
-import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
-import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
-import java.util.Map;
-
-public class ScopeHandlerBean implements SessionBean {
+@Stateless(name = "ScopeHandler")
+@Remote(ScopeHandlerRemote.class)
+@Local(ScopeHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class ScopeHandlerBean implements ScopeHandlerRemote, ScopeHandlerLocal {
 
     private ScopeHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ScopeHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -44,25 +62,7 @@ public class ScopeHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String create(final String xmlData, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, MissingMethodParameterException,
         SystemException {
@@ -75,6 +75,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @PermitAll
     public String create(final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, XmlSchemaValidationException, XmlCorruptedException,
         MissingMethodParameterException, SystemException {
@@ -88,6 +89,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.create(xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public void delete(final String id, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, SystemException {
         try {
@@ -99,6 +101,7 @@ public class ScopeHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @PermitAll
     public void delete(final String id, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ScopeNotFoundException,
         MissingMethodParameterException, SystemException {
@@ -112,6 +115,7 @@ public class ScopeHandlerBean implements SessionBean {
         service.delete(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieve(final String id, final SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, ScopeNotFoundException, MissingMethodParameterException, SystemException {
         try {
@@ -123,6 +127,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @PermitAll
     public String retrieve(final String id, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ScopeNotFoundException,
         MissingMethodParameterException, SystemException {
@@ -136,6 +141,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.retrieve(id);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveScopes(final Map parameters, final SecurityContext securityContext)
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -148,6 +154,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.retrieveScopes(parameters);
     }
 
+    @PermitAll
     public String retrieveScopes(final Map parameters, final String authHandle, final Boolean restAccess)
         throws InvalidSearchQueryException, MissingMethodParameterException, AuthenticationException,
         AuthorizationException, SystemException {
@@ -161,6 +168,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.retrieveScopes(parameters);
     }
 
+    @RolesAllowed("Administrator")
     public String update(final String id, final String xmlData, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, ScopeNotFoundException,
         MissingMethodParameterException, XmlSchemaValidationException, XmlCorruptedException, SystemException {
@@ -173,6 +181,7 @@ public class ScopeHandlerBean implements SessionBean {
         return service.update(id, xmlData);
     }
 
+    @PermitAll
     public String update(final String id, final String xmlData, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, ScopeNotFoundException,
         MissingMethodParameterException, XmlSchemaValidationException, XmlCorruptedException, SystemException {

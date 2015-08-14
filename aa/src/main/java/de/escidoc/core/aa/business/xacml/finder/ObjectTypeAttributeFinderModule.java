@@ -28,8 +28,12 @@
  */
 package de.escidoc.core.aa.business.xacml.finder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sun.xacml.EvaluationCtx;
 import com.sun.xacml.cond.EvaluationResult;
+
 import de.escidoc.core.aa.business.ObjectAttributeResolver;
 import de.escidoc.core.aa.business.authorisation.CustomEvaluationResultBuilder;
 import de.escidoc.core.aa.business.authorisation.FinderModuleHelper;
@@ -46,8 +50,6 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.string.StringUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Attribute finder module implementation that resolves the object type of the resource addressed by the

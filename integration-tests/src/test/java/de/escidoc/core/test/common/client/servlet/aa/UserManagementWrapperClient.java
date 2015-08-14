@@ -28,13 +28,12 @@
  */
 package de.escidoc.core.test.common.client.servlet.aa;
 
-import de.escidoc.core.aa.UserManagementWrapper;
-import de.escidoc.core.aa.UserManagementWrapperServiceLocator;
-import de.escidoc.core.test.common.client.servlet.ClientBase;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import javax.xml.rpc.ServiceException;
+
 import org.apache.http.HttpResponse;
 
-import javax.xml.rpc.ServiceException;
+import de.escidoc.core.test.common.client.servlet.ClientBase;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
 
 /**
  * Offers access methods to the escidoc REST and soap interface of the user management wrapper.

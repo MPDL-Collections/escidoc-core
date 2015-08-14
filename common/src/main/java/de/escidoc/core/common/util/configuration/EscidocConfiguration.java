@@ -20,20 +20,21 @@
 
 package de.escidoc.core.common.util.configuration;
 
-import de.escidoc.core.common.exceptions.EscidocException;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternResolver;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
+
+import de.escidoc.core.common.exceptions.EscidocException;
+import de.escidoc.core.common.exceptions.system.SystemException;
 
 /**
  * Handles properties.

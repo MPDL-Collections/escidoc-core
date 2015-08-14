@@ -28,9 +28,10 @@
  */
 package de.escidoc.core.test.adm.rest;
 
+import org.junit.Test;
+
 import de.escidoc.core.test.adm.AdminToolTestBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
-import org.junit.Test;
 
 /**
  * Test for the Admin tool with REST transport.

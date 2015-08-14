@@ -28,10 +28,11 @@
  */
 package de.escidoc.core.test.aa;
 
-import de.escidoc.core.test.common.client.servlet.aa.UserAccountClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import de.escidoc.core.test.common.client.servlet.aa.UserAccountClient;
 
 /**
  * Base Class for GrantTests (userGrants and groupGrants).

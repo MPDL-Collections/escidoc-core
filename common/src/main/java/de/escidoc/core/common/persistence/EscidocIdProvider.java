@@ -20,13 +20,14 @@
 
 package de.escidoc.core.common.persistence;
 
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.persistence.interfaces.ResourceIdentifierDao;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import de.escidoc.core.common.business.fedora.FedoraResourceIdentifierDao;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.persistence.interfaces.ResourceIdentifierDao;
 
 /**
  * Provider for new eSciDoc object ids.<br> This class prefetches a number of ids and provides ids on request. If no id

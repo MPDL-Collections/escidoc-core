@@ -1,8 +1,20 @@
 package de.escidoc.core.om.ejb;
 
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.util.service.UserContext;
-import de.escidoc.core.om.service.interfaces.FedoraDescribeDeviationHandlerInterface;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
+import javax.ejb.CreateException;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -10,21 +22,28 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
-import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
-import java.rmi.RemoteException;
-import java.util.Map;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandlerLocal;
+import de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandlerRemote;
+import de.escidoc.core.om.service.interfaces.FedoraDescribeDeviationHandlerInterface;
 
-public class FedoraDescribeDeviationHandlerBean implements SessionBean {
+@Stateless(name = "FedoraDescribeDeviationHandler")
+@Remote(FedoraDescribeDeviationHandlerRemote.class)
+@Local(FedoraDescribeDeviationHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class FedoraDescribeDeviationHandlerBean
+    implements FedoraDescribeDeviationHandlerRemote, FedoraDescribeDeviationHandlerLocal {
 
     private FedoraDescribeDeviationHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(FedoraDescribeDeviationHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -38,25 +57,7 @@ public class FedoraDescribeDeviationHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String getFedoraDescription(final Map parameters, final SecurityContext securityContext) throws Exception,
         SystemException {
         try {
@@ -68,6 +69,7 @@ public class FedoraDescribeDeviationHandlerBean implements SessionBean {
         return service.getFedoraDescription(parameters);
     }
 
+    @PermitAll
     public String getFedoraDescription(final Map parameters, final String authHandle, final Boolean restAccess)
         throws Exception, SystemException {
         try {

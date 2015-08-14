@@ -20,9 +20,9 @@
 
 package de.escidoc.core.om.service.interfaces;
 
-import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
-
 import java.util.Map;
+
+import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 
 /**
  * Interface of an fedora deviation handler via rest.

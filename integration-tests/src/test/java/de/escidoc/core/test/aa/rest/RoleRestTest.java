@@ -28,13 +28,9 @@
  */
 package de.escidoc.core.test.aa.rest;
 
-import de.escidoc.core.common.exceptions.remote.application.invalid.XmlSchemaValidationException;
-import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.remote.application.notfound.RoleNotFoundException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.EscidocTestBase;
-import de.escidoc.core.test.aa.RoleAbstractTest;
-import de.escidoc.core.test.common.client.servlet.Constants;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -42,8 +38,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
+import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.EscidocTestBase;
+import de.escidoc.core.test.aa.RoleAbstractTest;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Test suite for the resource role using the REST interface.

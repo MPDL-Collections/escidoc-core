@@ -1,10 +1,17 @@
 package de.escidoc.core.aa.ejb;
 
-import java.rmi.RemoteException;
-
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +20,8 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
+import de.escidoc.core.aa.ejb.interfaces.ActionHandlerLocal;
+import de.escidoc.core.aa.ejb.interfaces.ActionHandlerRemote;
 import de.escidoc.core.aa.service.interfaces.ActionHandlerInterface;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -22,15 +31,21 @@ import de.escidoc.core.common.exceptions.application.security.AuthorizationExcep
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
 
-public class ActionHandlerBean implements SessionBean {
+@Stateless(name = "ActionHandler")
+@Remote(ActionHandlerRemote.class)
+@Local(ActionHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class ActionHandlerBean implements ActionHandlerRemote, ActionHandlerLocal {
 
     private ActionHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ActionHandlerBean.class);
 
-    public void ejbCreate() throws CreateException {
+    @PermitAll
+    @PostConstruct
+    public void create() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
             final BeanFactory factory =
@@ -43,25 +58,7 @@ public class ActionHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String createUnsecuredActions(
         final String contextId, final String actions, final SecurityContext securityContext)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
@@ -75,6 +72,7 @@ public class ActionHandlerBean implements SessionBean {
         return service.createUnsecuredActions(contextId, actions);
     }
 
+    @PermitAll
     public String createUnsecuredActions(
         final String contextId, final String actions, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
@@ -89,6 +87,7 @@ public class ActionHandlerBean implements SessionBean {
         return service.createUnsecuredActions(contextId, actions);
     }
 
+    @RolesAllowed("Administrator")
     public void deleteUnsecuredActions(final String contextId, final SecurityContext securityContext)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -100,6 +99,7 @@ public class ActionHandlerBean implements SessionBean {
         service.deleteUnsecuredActions(contextId);
     }
 
+    @PermitAll
     public void deleteUnsecuredActions(final String contextId, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -112,6 +112,7 @@ public class ActionHandlerBean implements SessionBean {
         service.deleteUnsecuredActions(contextId);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveUnsecuredActions(final String contextId, final SecurityContext securityContext)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -123,6 +124,7 @@ public class ActionHandlerBean implements SessionBean {
         return service.retrieveUnsecuredActions(contextId);
     }
 
+    @PermitAll
     public String retrieveUnsecuredActions(final String contextId, final String authHandle, final Boolean restAccess)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException {
         try {

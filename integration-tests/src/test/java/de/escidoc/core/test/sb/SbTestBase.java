@@ -28,11 +28,8 @@
  */
 package de.escidoc.core.test.sb;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.ClientBase;
-import de.escidoc.core.test.common.client.servlet.oum.OrganizationalUnitClient;
-import de.escidoc.core.test.common.client.servlet.sb.SearchClient;
-import de.escidoc.core.test.security.client.PWCallback;
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
@@ -40,7 +37,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
-import static org.junit.Assert.assertNotNull;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.ClientBase;
+import de.escidoc.core.test.common.client.servlet.oum.OrganizationalUnitClient;
+import de.escidoc.core.test.common.client.servlet.sb.SearchClient;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Base class for tests of the mock implementation of the SB resources.

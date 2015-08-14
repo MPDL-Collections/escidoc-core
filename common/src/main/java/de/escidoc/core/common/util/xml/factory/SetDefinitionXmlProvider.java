@@ -20,9 +20,9 @@
 
 package de.escidoc.core.common.util.xml.factory;
 
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-
 import java.util.Map;
+
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 
 /**
  * XmlTemplateProvider implementation using the Velocity template engine.<br/> This implementation uses the velocity

@@ -1,10 +1,10 @@
 package de.escidoc.core.statistic.internal;
 
+import javax.xml.bind.annotation.XmlRegistry;
+
 import de.escidoc.core.statistic.LinkRequired;
 import de.escidoc.core.statistic.Parameter;
 import de.escidoc.core.statistic.StatisticRecord;
-
-import javax.xml.bind.annotation.XmlRegistry;
 
 /**
  * This class contains factory methods for each Java content interface and Java element interface generated in the

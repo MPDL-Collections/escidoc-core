@@ -28,14 +28,6 @@
  */
 package de.escidoc.core.oum.business.fedora.organizationalunit;
 
-import de.escidoc.core.common.business.fedora.Utility;
-import de.escidoc.core.common.exceptions.system.EncodingSystemException;
-import de.escidoc.core.common.exceptions.system.SystemException;
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.xml.Elements;
-import de.escidoc.core.common.util.xml.XmlUtility;
-import de.escidoc.core.common.util.xml.factory.XmlTemplateProvider;
-
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -44,6 +36,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import de.escidoc.core.common.business.fedora.Utility;
+import de.escidoc.core.common.exceptions.system.EncodingSystemException;
+import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.xml.Elements;
+import de.escidoc.core.common.util.xml.XmlUtility;
+import de.escidoc.core.common.util.xml.factory.XmlTemplateProvider;
 
 /**
  * The methods of the class deals with datastreams for fedora objects, which will represent the

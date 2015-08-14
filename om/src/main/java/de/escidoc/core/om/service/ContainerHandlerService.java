@@ -1,5 +1,11 @@
 package de.escidoc.core.om.service;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.Map;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContextException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContextStatusException;
@@ -33,11 +39,6 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeV
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.util.Map;
 
 /**
  * Service endpoint interface for ContainerHandler.

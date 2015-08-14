@@ -28,13 +28,14 @@
  */
 package de.escidoc.core.test.security.client;
 
-import org.apache.http.HttpMessage;
-import org.apache.ws.security.WSPasswordCallback;
+import java.io.IOException;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import java.io.IOException;
+
+import org.apache.http.HttpMessage;
+import org.apache.ws.security.WSPasswordCallback;
 
 /**
  * PWCallback for the Client.<p/>

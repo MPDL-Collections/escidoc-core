@@ -20,13 +20,14 @@
 
 package de.escidoc.core.common.util.xml.stax.events;
 
-import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.directory.NoSuchAttributeException;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.stream.XMLStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+
+import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 
 public class StartElement extends AbstractElement {
 

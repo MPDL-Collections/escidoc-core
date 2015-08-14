@@ -28,6 +28,9 @@
  */
 package de.escidoc.core.om.business.stax.handler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.business.fedora.Utility;
@@ -45,9 +48,6 @@ import de.escidoc.core.common.util.xml.stax.events.EndElement;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
 import de.escidoc.core.common.util.xml.stax.handler.DefaultHandler;
 import de.escidoc.core.om.business.fedora.ContentRelationsUtility;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Rozita Friedman

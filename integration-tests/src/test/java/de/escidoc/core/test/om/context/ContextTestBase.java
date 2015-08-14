@@ -28,17 +28,18 @@
  */
 package de.escidoc.core.test.om.context;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
-import de.escidoc.core.test.om.OmTestBase;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Map;
+
 import org.apache.http.HttpResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
+import de.escidoc.core.test.om.OmTestBase;
 
 /**
  * Test the mock implementation of the context resource.

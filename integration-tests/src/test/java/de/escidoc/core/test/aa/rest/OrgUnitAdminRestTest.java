@@ -28,15 +28,16 @@
  */
 package de.escidoc.core.test.aa.rest;
 
-import de.escidoc.core.test.aa.OrgUnitAdminAbstractTest;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.security.client.PWCallback;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import java.util.Arrays;
-import java.util.Collection;
+import de.escidoc.core.test.aa.OrgUnitAdminAbstractTest;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Test suite for the role ou-administrator using the REST interface.

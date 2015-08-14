@@ -324,7 +324,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                 </prop>
                
                 <prop key="hibernate.connection.release_mode">auto</prop>
-                <prop key="hibernate.current_session_context_class">jta</prop>
+                
             </props>
         </property>
         <property name="mappingResources">

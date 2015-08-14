@@ -20,19 +20,21 @@
 
 package de.escidoc.core.common.documentation;
 
-import de.escidoc.core.common.servlet.invocation.XMLBase;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.TransformerException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.List;
+import de.escidoc.core.common.servlet.invocation.XMLBase;
 
 /**
  * Create documentation for a bundle of resources.

@@ -28,6 +28,11 @@
  */
 package de.escidoc.core.oum.business.handler;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.directory.NoSuchAttributeException;
+
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.Utility;
 import de.escidoc.core.common.business.fedora.resources.Predecessor;
@@ -36,17 +41,12 @@ import de.escidoc.core.common.exceptions.application.invalid.InvalidContentExcep
 import de.escidoc.core.common.exceptions.application.missing.MissingAttributeValueException;
 import de.escidoc.core.common.exceptions.application.notfound.OrganizationalUnitNotFoundException;
 import de.escidoc.core.common.exceptions.system.IntegritySystemException;
-import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.stax.StaxParser;
 import de.escidoc.core.common.util.xml.Elements;
 import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.common.util.xml.stax.events.StartElement;
-
-import javax.naming.directory.NoSuchAttributeException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * StAX handler for predecessor relation of Organizational Unit.

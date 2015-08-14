@@ -19,10 +19,6 @@
  */
 package de.escidoc.core.common.ejb.interfaces;
 
-import java.rmi.RemoteException;
-
-import javax.ejb.EJBObject;
-
 import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.exceptions.EscidocException;
@@ -126,7 +122,7 @@ import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 /**
  * Remote interface for SoapExceptionGeneration.
  */
-public interface SoapExceptionGenerationRemote extends EJBObject {
+public interface SoapExceptionGenerationRemote {
 
     void generateExceptions(SecurityContext securityContext) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,
@@ -156,7 +152,7 @@ public interface SoapExceptionGenerationRemote extends EJBObject {
         InvalidTripleStoreOutputFormatException, SystemException, ApplicationServerSystemException,
         FedoraSystemException, FileSystemException, IntegritySystemException, SqlDatabaseSystemException,
         TripleStoreSystemException, WebserverSystemException, XmlParserSystemException, TmeException,
-        UserGroupHierarchyViolationException, ResourceInUseException, RemoteException;
+        UserGroupHierarchyViolationException, ResourceInUseException;
 
     void generateExceptions(String authHandle, Boolean restAccess) throws EscidocException,
         AggregationDefinitionNotFoundException, ApplicationException, ValidationException, ResourceNotFoundException,
@@ -186,6 +182,6 @@ public interface SoapExceptionGenerationRemote extends EJBObject {
         InvalidTripleStoreOutputFormatException, SystemException, ApplicationServerSystemException,
         FedoraSystemException, FileSystemException, IntegritySystemException, SqlDatabaseSystemException,
         TripleStoreSystemException, WebserverSystemException, XmlParserSystemException, TmeException,
-        UserGroupHierarchyViolationException, ResourceInUseException, RemoteException;
+        UserGroupHierarchyViolationException, ResourceInUseException;
 
 }

@@ -1,5 +1,11 @@
 package de.escidoc.core.sm.ejb.interfaces;
 
+import java.util.Map;
+
+import javax.ejb.CreateException;
+
+import org.springframework.security.core.context.SecurityContext;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSqlException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
@@ -11,15 +17,11 @@ import de.escidoc.core.common.exceptions.application.security.AuthenticationExce
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.application.violated.ScopeContextViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
-import org.springframework.security.core.context.SecurityContext;
-
-import javax.ejb.EJBLocalObject;
-import java.util.Map;
 
 /**
  * Local interface for ReportDefinitionHandler.
  */
-public interface ReportDefinitionHandlerLocal extends EJBLocalObject {
+public interface ReportDefinitionHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, XmlSchemaValidationException, XmlCorruptedException, InvalidSqlException,
@@ -58,4 +60,5 @@ public interface ReportDefinitionHandlerLocal extends EJBLocalObject {
         ScopeNotFoundException, InvalidSqlException, ScopeContextViolationException, XmlSchemaValidationException,
         XmlCorruptedException, SystemException;
 
+    void create() throws CreateException;
 }

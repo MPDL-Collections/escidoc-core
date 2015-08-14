@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.sm.service;
 
+import java.util.Map;
+
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
 import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
@@ -37,8 +39,6 @@ import de.escidoc.core.common.exceptions.application.security.AuthenticationExce
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.sm.service.interfaces.ScopeHandlerInterface;
-
-import java.util.Map;
 
 /**
  * An statistic Scope resource handler.

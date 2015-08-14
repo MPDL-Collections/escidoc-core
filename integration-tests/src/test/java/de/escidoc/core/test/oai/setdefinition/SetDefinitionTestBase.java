@@ -28,14 +28,15 @@
  */
 package de.escidoc.core.test.oai.setdefinition;
 
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
-import de.escidoc.core.test.oai.OaiTestBase;
+import java.util.Map;
+
 import org.apache.http.HttpResponse;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import java.util.Map;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
+import de.escidoc.core.test.oai.OaiTestBase;
 
 /**
  * Base class for tests of the mock implementation of the OM resources.

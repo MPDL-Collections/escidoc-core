@@ -20,15 +20,16 @@
 
 package de.escidoc.core.common.util.aop;
 
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.util.service.UserContext;
-import de.escidoc.core.common.util.xml.XmlUtility;
+import java.util.regex.Pattern;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.Ordered;
 
-import java.util.regex.Pattern;
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
  * Interceptor to insert the xml header and an optional (in case access via REST) a style sheet definition into an XML

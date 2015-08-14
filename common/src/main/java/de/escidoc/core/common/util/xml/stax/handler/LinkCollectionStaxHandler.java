@@ -20,11 +20,11 @@
 
 package de.escidoc.core.common.util.xml.stax.handler;
 
-import de.escidoc.core.common.exceptions.EscidocException;
-import de.escidoc.core.common.util.xml.stax.events.EndElement;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import de.escidoc.core.common.exceptions.EscidocException;
+import de.escidoc.core.common.util.xml.stax.events.EndElement;
 
 /**
  * Stax handler implementation that handles a "collection" of link elements, e.g. organizational units of an user

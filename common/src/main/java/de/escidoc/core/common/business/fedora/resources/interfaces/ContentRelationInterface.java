@@ -20,6 +20,8 @@
 
 package de.escidoc.core.common.business.fedora.resources.interfaces;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.fedora.datastream.Datastream;
 import de.escidoc.core.common.exceptions.application.notfound.MdRecordNotFoundException;
 import de.escidoc.core.common.exceptions.application.notfound.StreamNotFoundException;
@@ -29,8 +31,6 @@ import de.escidoc.core.common.exceptions.system.IntegritySystemException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-
-import java.util.Map;
 
 /**
  * Interface for Fedora Content Relation Object which consist of datastreams managed in Fedora Digital Repository

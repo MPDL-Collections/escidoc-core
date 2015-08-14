@@ -20,17 +20,18 @@
 
 package de.escidoc.core.common.binding.jaxb;
 
-import de.escidoc.core.common.binding.BindingHandlerInterface;
-import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
-import de.escidoc.core.common.util.xml.XmlUtility;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+import de.escidoc.core.common.binding.BindingHandlerInterface;
+import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
  * @author Michael Hoppe

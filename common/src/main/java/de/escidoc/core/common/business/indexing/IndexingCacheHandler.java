@@ -20,10 +20,10 @@
 
 package de.escidoc.core.common.business.indexing;
 
+import java.util.HashMap;
+
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.om.service.interfaces.FedoraRestDeviationHandlerInterface;
-
-import java.util.HashMap;
 
 /**
  * Handler for handling cache for indexing.

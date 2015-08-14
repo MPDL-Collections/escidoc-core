@@ -28,9 +28,14 @@
  */
 package de.escidoc.core.test.common.fedora;
 
-import de.escidoc.core.common.util.security.PreemptiveAuthInterceptor;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.resources.PropertiesProvider;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
@@ -46,12 +51,9 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletResponse;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.escidoc.core.common.util.security.PreemptiveAuthInterceptor;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.resources.PropertiesProvider;
 
 /**
  * @author Steffen Wagner

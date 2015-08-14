@@ -1,13 +1,14 @@
 package de.escidoc.core.test.common.util.xml;
 
-import de.escidoc.core.test.common.client.servlet.Constants;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.xpath.XPathAPI;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import de.escidoc.core.test.common.client.servlet.Constants;
 
 /**
  * Collection of methods to select values from eSciDoc XML resources.

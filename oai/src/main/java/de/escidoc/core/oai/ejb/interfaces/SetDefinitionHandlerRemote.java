@@ -1,9 +1,6 @@
 package de.escidoc.core.oai.ejb.interfaces;
 
-import java.rmi.RemoteException;
 import java.util.Map;
-
-import javax.ejb.EJBObject;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -20,46 +17,40 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Remote interface for SetDefinitionHandler.
  */
-public interface SetDefinitionHandlerRemote extends EJBObject {
+public interface SetDefinitionHandlerRemote {
 
     String create(String setDefinition, SecurityContext securityContext) throws UniqueConstraintViolationException,
         InvalidXmlException, MissingMethodParameterException, SystemException, AuthenticationException,
-        AuthorizationException, RemoteException;
+        AuthorizationException;
 
     String create(String setDefinition, String authHandle, Boolean restAccess)
         throws UniqueConstraintViolationException, InvalidXmlException, MissingMethodParameterException,
-        SystemException, AuthenticationException, AuthorizationException, RemoteException;
+        SystemException, AuthenticationException, AuthorizationException;
 
     String retrieve(String setDefinitionId, SecurityContext securityContext) throws ResourceNotFoundException,
-        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException,
-        RemoteException;
+        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException;
 
     String retrieve(String setDefinitionId, String authHandle, Boolean restAccess) throws ResourceNotFoundException,
-        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException,
-        RemoteException;
+        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException;
 
     String update(String setDefinitionId, String xmlData, SecurityContext securityContext)
         throws ResourceNotFoundException, OptimisticLockingException, MissingMethodParameterException, SystemException,
-        AuthenticationException, AuthorizationException, RemoteException;
+        AuthenticationException, AuthorizationException;
 
     String update(String setDefinitionId, String xmlData, String authHandle, Boolean restAccess)
         throws ResourceNotFoundException, OptimisticLockingException, MissingMethodParameterException, SystemException,
-        AuthenticationException, AuthorizationException, RemoteException;
+        AuthenticationException, AuthorizationException;
 
     void delete(String setDefinitionId, SecurityContext securityContext) throws ResourceNotFoundException,
-        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException,
-        RemoteException;
+        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException;
 
     void delete(String setDefinitionId, String authHandle, Boolean restAccess) throws ResourceNotFoundException,
-        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException,
-        RemoteException;
+        MissingMethodParameterException, SystemException, AuthenticationException, AuthorizationException;
 
     String retrieveSetDefinitions(Map filter, SecurityContext securityContext) throws AuthenticationException,
-        AuthorizationException, MissingMethodParameterException, InvalidSearchQueryException, SystemException,
-        RemoteException;
+        AuthorizationException, MissingMethodParameterException, InvalidSearchQueryException, SystemException;
 
     String retrieveSetDefinitions(Map filter, String authHandle, Boolean restAccess) throws AuthenticationException,
-        AuthorizationException, MissingMethodParameterException, InvalidSearchQueryException, SystemException,
-        RemoteException;
+        AuthorizationException, MissingMethodParameterException, InvalidSearchQueryException, SystemException;
 
 }

@@ -1,11 +1,21 @@
 package de.escidoc.core.oai.ejb;
 
-import java.rmi.RemoteException;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.ejb.CreateException;
-import javax.ejb.SessionBean;
-import javax.ejb.SessionContext;
+import javax.ejb.Local;
+import javax.ejb.LocalHome;
+import javax.ejb.Remote;
+import javax.ejb.RemoteHome;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,16 +34,28 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerLocal;
+import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerLocalHome;
+import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerRemote;
+import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerRemoteHome;
 import de.escidoc.core.oai.service.interfaces.SetDefinitionHandlerInterface;
 
-public class SetDefinitionHandlerBean implements SessionBean {
+@Stateless(name = "SetDefinitionHandler")
+@RemoteHome(SetDefinitionHandlerRemoteHome.class)
+@LocalHome(SetDefinitionHandlerLocalHome.class)
+@Remote(SetDefinitionHandlerRemote.class)
+@Local(SetDefinitionHandlerLocal.class)
+@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@RunAs("Administrator")
+public class SetDefinitionHandlerBean implements SetDefinitionHandlerRemote, SetDefinitionHandlerLocal {
 
     private SetDefinitionHandlerInterface service;
 
-    private SessionContext sessionCtx;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SetDefinitionHandlerBean.class);
 
+    @PostConstruct
+    @PermitAll
     public void ejbCreate() throws CreateException {
         try {
             final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
@@ -47,25 +69,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         }
     }
 
-    @Override
-    public void setSessionContext(final SessionContext arg0) throws RemoteException {
-        this.sessionCtx = arg0;
-    }
-
-    @Override
-    public void ejbRemove() throws RemoteException {
-    }
-
-    @Override
-    public void ejbActivate() throws RemoteException {
-
-    }
-
-    @Override
-    public void ejbPassivate() throws RemoteException {
-
-    }
-
+    @RolesAllowed("Administrator")
     public String create(final String setDefinition, final SecurityContext securityContext)
         throws UniqueConstraintViolationException, InvalidXmlException, MissingMethodParameterException,
         SystemException, AuthenticationException, AuthorizationException {
@@ -78,6 +82,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.create(setDefinition);
     }
 
+    @PermitAll
     public String create(final String setDefinition, final String authHandle, final Boolean restAccess)
         throws UniqueConstraintViolationException, InvalidXmlException, MissingMethodParameterException,
         SystemException, AuthenticationException, AuthorizationException {
@@ -91,6 +96,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.create(setDefinition);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieve(final String setDefinitionId, final SecurityContext securityContext)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
@@ -103,6 +109,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.retrieve(setDefinitionId);
     }
 
+    @PermitAll
     public String retrieve(final String setDefinitionId, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
@@ -116,6 +123,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.retrieve(setDefinitionId);
     }
 
+    @RolesAllowed("Administrator")
     public String update(final String setDefinitionId, final String xmlData, final SecurityContext securityContext)
         throws ResourceNotFoundException, OptimisticLockingException, MissingMethodParameterException, SystemException,
         AuthenticationException, AuthorizationException {
@@ -128,6 +136,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.update(setDefinitionId, xmlData);
     }
 
+    @PermitAll
     public String update(
         final String setDefinitionId, final String xmlData, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, OptimisticLockingException, MissingMethodParameterException, SystemException,
@@ -142,6 +151,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.update(setDefinitionId, xmlData);
     }
 
+    @RolesAllowed("Administrator")
     public void delete(final String setDefinitionId, final SecurityContext securityContext)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
@@ -154,6 +164,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         service.delete(setDefinitionId);
     }
 
+    @PermitAll
     public void delete(final String setDefinitionId, final String authHandle, final Boolean restAccess)
         throws ResourceNotFoundException, MissingMethodParameterException, SystemException, AuthenticationException,
         AuthorizationException {
@@ -167,6 +178,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         service.delete(setDefinitionId);
     }
 
+    @RolesAllowed("Administrator")
     public String retrieveSetDefinitions(final Map filter, final SecurityContext securityContext)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         InvalidSearchQueryException, SystemException {
@@ -179,6 +191,7 @@ public class SetDefinitionHandlerBean implements SessionBean {
         return service.retrieveSetDefinitions(filter);
     }
 
+    @PermitAll
     public String retrieveSetDefinitions(final Map filter, final String authHandle, final Boolean restAccess)
         throws AuthenticationException, AuthorizationException, MissingMethodParameterException,
         InvalidSearchQueryException, SystemException {

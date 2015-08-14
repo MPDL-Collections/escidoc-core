@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.om.business.interfaces;
 
+import java.util.Map;
+
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.business.filter.SRURequestParameters;
 import de.escidoc.core.common.business.interfaces.IngestableResource;
@@ -71,8 +73,6 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyViolationE
 import de.escidoc.core.common.exceptions.system.PidSystemException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.om.service.interfaces.EscidocServiceRedirectInterface;
-
-import java.util.Map;
 
 /**
  * Interface of an item handler of the business layer.

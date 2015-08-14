@@ -1,6 +1,6 @@
 package de.escidoc.core.aa.ejb.interfaces;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -14,7 +14,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for ActionHandler.
  */
-public interface ActionHandlerLocal extends EJBLocalObject {
+public interface ActionHandlerLocal {
 
     String createUnsecuredActions(String contextId, String actions, SecurityContext securityContext)
         throws ContextNotFoundException, XmlCorruptedException, XmlSchemaValidationException, AuthenticationException,
@@ -36,4 +36,5 @@ public interface ActionHandlerLocal extends EJBLocalObject {
     String retrieveUnsecuredActions(String contextId, String authHandle, Boolean restAccess)
         throws ContextNotFoundException, AuthenticationException, AuthorizationException, SystemException;
 
+    void create() throws CreateException;
 }

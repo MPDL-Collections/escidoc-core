@@ -20,19 +20,6 @@
 
 package de.escidoc.core.common.util.service;
 
-import de.escidoc.core.common.exceptions.system.WebserverSystemException;
-import de.escidoc.core.common.servlet.EscidocServlet;
-import de.escidoc.core.common.servlet.UserHandleCookieUtil;
-import de.escidoc.core.common.util.IOUtils;
-import de.escidoc.core.common.util.xml.XmlUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,6 +32,21 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.servlet.EscidocServlet;
+import de.escidoc.core.common.servlet.UserHandleCookieUtil;
+import de.escidoc.core.common.util.IOUtils;
+import de.escidoc.core.common.util.xml.XmlUtility;
 
 /*
  * Created on 05.10.2006

@@ -7,3 +7,5 @@ target/
 attachments/
 activemq-data/
 /bin
+*.iml
+.idea

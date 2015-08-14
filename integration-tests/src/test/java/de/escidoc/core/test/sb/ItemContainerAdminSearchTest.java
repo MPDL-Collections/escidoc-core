@@ -28,12 +28,15 @@
  */
 package de.escidoc.core.test.sb;
 
-import de.escidoc.core.common.util.stax.StaxParser;
-import de.escidoc.core.common.util.xml.XmlUtility;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
-import de.escidoc.core.test.sb.stax.handler.AllStaxHandler;
-import de.escidoc.core.test.security.client.PWCallback;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.After;
@@ -47,14 +50,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import de.escidoc.core.common.util.stax.StaxParser;
+import de.escidoc.core.common.util.xml.XmlUtility;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import de.escidoc.core.test.sb.stax.handler.AllStaxHandler;
+import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Test the implementation of the admin search for items and containers.

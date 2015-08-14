@@ -20,6 +20,9 @@
 
 package de.escidoc.core.http;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -36,9 +39,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class HttpClientBuilderImpl extends HttpClientBuilder {
 

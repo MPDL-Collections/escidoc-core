@@ -2,7 +2,7 @@ package de.escidoc.core.om.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -27,7 +27,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for ContentRelationHandler.
  */
-public interface ContentRelationHandlerLocal extends EJBLocalObject {
+public interface ContentRelationHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws AuthenticationException,
         AuthorizationException, MissingAttributeValueException, MissingMethodParameterException, InvalidXmlException,
@@ -158,4 +158,5 @@ public interface ContentRelationHandlerLocal extends EJBLocalObject {
     String retrieveResources(String id, String authHandle, Boolean restAccess) throws ContentRelationNotFoundException,
         AuthenticationException, AuthorizationException, MissingMethodParameterException, SystemException;
 
+    void create() throws CreateException;
 }

@@ -28,14 +28,13 @@
  */
 package de.escidoc.core.test.common.client.servlet.oai;
 
-import de.escidoc.core.oai.SetDefinitionHandler;
-import de.escidoc.core.oai.SetDefinitionHandlerServiceLocator;
+import java.util.Map;
+
+import javax.xml.rpc.ServiceException;
+
 import de.escidoc.core.test.common.client.servlet.ClientBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.common.client.servlet.interfaces.ResourceHandlerClientInterface;
-
-import javax.xml.rpc.ServiceException;
-import java.util.Map;
 
 /**
  * Offers access methods to the escidoc REST interface of the setDefintion resource.

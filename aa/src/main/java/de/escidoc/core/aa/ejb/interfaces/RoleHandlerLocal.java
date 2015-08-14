@@ -2,7 +2,7 @@ package de.escidoc.core.aa.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
+import javax.ejb.CreateException;
 
 import org.springframework.security.core.context.SecurityContext;
 
@@ -22,7 +22,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for RoleHandler.
  */
-public interface RoleHandlerLocal extends EJBLocalObject {
+public interface RoleHandlerLocal {
 
     String create(String xmlData, SecurityContext securityContext) throws UniqueConstraintViolationException,
         XmlCorruptedException, XmlSchemaValidationException, MissingMethodParameterException, AuthenticationException,
@@ -67,4 +67,5 @@ public interface RoleHandlerLocal extends EJBLocalObject {
     String retrieveRoles(Map filter, String authHandle, Boolean restAccess) throws MissingMethodParameterException,
         AuthenticationException, AuthorizationException, SystemException, InvalidSearchQueryException;
 
+    void create() throws CreateException;
 }

@@ -2,8 +2,6 @@ package de.escidoc.core.oai.ejb.interfaces;
 
 import java.util.Map;
 
-import javax.ejb.EJBLocalObject;
-
 import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
@@ -19,7 +17,7 @@ import de.escidoc.core.common.exceptions.system.SystemException;
 /**
  * Local interface for SetDefinitionHandler.
  */
-public interface SetDefinitionHandlerLocal extends EJBLocalObject {
+public interface SetDefinitionHandlerLocal {
 
     String create(String setDefinition, SecurityContext securityContext) throws UniqueConstraintViolationException,
         InvalidXmlException, MissingMethodParameterException, SystemException, AuthenticationException,
