@@ -1,6 +1,7 @@
 package de.escidoc.core.st.ejb;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
 import javax.ejb.CreateException;
@@ -36,7 +37,6 @@ import de.escidoc.core.st.service.interfaces.StagingFileHandlerInterface;
 @TransactionManagement(TransactionManagementType.BEAN)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @RunAs("Administrator")
-@RolesAllowed("Administrator")
 public class StagingFileHandlerBean implements StagingFileHandlerRemote, StagingFileHandlerLocal {
 
     private StagingFileHandlerInterface service;
@@ -57,6 +57,7 @@ public class StagingFileHandlerBean implements StagingFileHandlerRemote, Staging
         }
     }
 
+    @PermitAll
     public String create(final EscidocBinaryContent binaryContent, final SecurityContext securityContext)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -68,6 +69,7 @@ public class StagingFileHandlerBean implements StagingFileHandlerRemote, Staging
         return service.create(binaryContent);
     }
 
+    @PermitAll
     public String create(final EscidocBinaryContent binaryContent, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -80,6 +82,7 @@ public class StagingFileHandlerBean implements StagingFileHandlerRemote, Staging
         return service.create(binaryContent);
     }
 
+    @PermitAll
     public EscidocBinaryContent retrieve(final String stagingFileId, final SecurityContext securityContext)
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
@@ -92,6 +95,7 @@ public class StagingFileHandlerBean implements StagingFileHandlerRemote, Staging
         return service.retrieve(stagingFileId);
     }
 
+    @PermitAll
     public EscidocBinaryContent retrieve(final String stagingFileId, final String authHandle, final Boolean restAccess)
         throws StagingFileNotFoundException, AuthenticationException, AuthorizationException,
         MissingMethodParameterException, SystemException {
