@@ -1061,14 +1061,12 @@
 		<!-- Sonar -->
 	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-	    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
-	    <sonar.language>java</sonar.language>
-	    
-	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 	
 		<jacoco.version>0.7.1.201405082137</jacoco.version>
+		<!--  
 	    <jacoco.outputDir>${project.build.directory}/jacoco</jacoco.outputDir>
+	    -->
+	    <jacoco.outputDir>../target/jacoco/jacoco</jacoco.outputDir>
 	    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
 	    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
 	    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
