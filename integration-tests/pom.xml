@@ -535,11 +535,12 @@
 					<!-- failsafe plugin runs per default only intergration tests (*IT.java). 
 						So make sure our (old) tests are included too. -->
 					<includes>
-					<!--  
+					  
 						<include>**/*Test.java</include>
 						<include>target/generated-sources/</include>
-						-->
+						<!--
 						<include>**/CreateTest.java</include>
+						-->
 					</includes>
 					<excludes>
 						<exclude>**/*TestBase*</exclude>
