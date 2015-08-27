@@ -834,6 +834,17 @@
 							<append>true</append>
 						</configuration>
 					</execution>
+					
+					<execution>
+		                <id>jacoco-site</id>
+		                <phase>verify</phase>
+		                <goals>
+		                  <goal>report</goal>
+		                </goals>
+		                <configuration>
+		                	<dataFile>${sonar.jacoco.itReportPath}</dataFile>
+		                </configuration>
+		              </execution>
 				</executions>
 			</plugin>
 
