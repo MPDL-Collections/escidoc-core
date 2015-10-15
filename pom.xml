@@ -897,7 +897,7 @@
 		<repository>
 	        <id>ecs-marep</id>
 	        <name>ecs-marep-releases</name>
-	        <url>http://dev.fiz-karlsruhe.de/artifactory/ext-release-local</url>
+	        <url>https://dev.fiz-karlsruhe.de/artifactory/anonymous-repo</url>
     	</repository>
 		<repository>
 			<id>Jboss</id>
