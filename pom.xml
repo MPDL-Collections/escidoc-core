@@ -957,17 +957,12 @@
 			<id>central-mirror</id>
 			<url>http://rd.mpdl.mpg.de/nexus/content/repositories/central-mirror/</url>
 		</pluginRepository>
-		<!-- 
+		 
 		<pluginRepository>
-			<id>org.escidoc.core</id>
-			<url>https://www.escidoc.org/artifactory/anonymous-repo</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>ecs-marep</id>
+	        <name>ecs-marep-releases</name>
+	        <url>https://dev.fiz-karlsruhe.de/artifactory/anonymous-repo</url>
 		</pluginRepository>
-		 -->
-		
-		
 		
 	</pluginRepositories>
 
