@@ -864,7 +864,7 @@
 		</repository>
 		<repository>
 			<id>org.escidoc.core</id>
-			<url>https://d ev.fiz-karlsruhe.de/artifactory/anonymous-repo</url>
+			<url>https://dev.fiz-karlsruhe.de/artifactory/anonymous-repo</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
