@@ -9,3 +9,4 @@ activemq-data/
 /bin
 *.iml
 .idea
+*~

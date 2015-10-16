@@ -19,7 +19,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.escidoc</groupId>
+      <groupId>org.escidoc.wildfly</groupId>
       <artifactId>srw</artifactId>
       <classifier>sources</classifier>
       <type>zip</type>
@@ -32,7 +32,7 @@
       <version>${escidoc.saxon.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.escidoc</groupId>
+      <groupId>org.escidoc.wildfly</groupId>
       <artifactId>fedoragsearch</artifactId>
       <type>zip</type>
       <classifier>sources</classifier>
@@ -69,7 +69,7 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>org.escidoc</groupId>
+                  <groupId>org.escidoc.wildfly</groupId>
                   <artifactId>fedoragsearch</artifactId>
                   <type>war</type>
                   <version>${escidoc.fedoragsearch.version}</version>
@@ -78,7 +78,7 @@
                 </artifactItem>
 
                 <artifactItem>
-                  <groupId>org.escidoc</groupId>
+                  <groupId>org.escidoc.wildfly</groupId>
                   <artifactId>srw</artifactId>
                   <type>war</type>
                   <version>${escidoc.srw.version}</version>
