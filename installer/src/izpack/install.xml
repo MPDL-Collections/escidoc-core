@@ -44,7 +44,7 @@
             <author name="eSciDoc Dev Team" email="infrastructure-users@escidoc.org"/>
         </authors>
         <url>http://www.escidoc.org/</url>
-        <javaversion>1.6</javaversion>
+        <javaversion>1.8</javaversion>
         <summarylogfilepath>${INSTALL_PATH}${FILE_SEPARATOR}install.log${FILE_SEPARATOR}install.log</summarylogfilepath>
         <uninstaller name="uninstall-escidoc.jar" />
     </info>
@@ -96,6 +96,11 @@
     </resources>
 
     <variables>
+    <!-- TODO del -->
+     <variable name="JBossPassword" value="admin" />
+      <variable name="JBossUsername" value="admin" />
+     
+    
       <!-- Short Installer uses form-based authentication as default -->
       <variable name="ShortInstaller" value="true" />
 
@@ -116,14 +121,17 @@
       <!-- make sure to add the appropriate separator as prefix (usually a dot) if needed, e.g. a ".build345" -->
 
       <!-- JDK checks -->
-      <variable name="JDKPathPanel.minVersion" value="1.6.0" />
-      <variable name="JDKPathPanel.maxVersion" value="1.6.99" />
+      <variable name="JDKPathPanel.minVersion" value="1.8.0" />
+      <variable name="JDKPathPanel.maxVersion" value="1.8.99" />
       <variable name="JDKPathPanel.skipIfValid" value="yes" />
 
       <!-- database connection -->
       <!-- Postgres -->
       <variable name="jdbc.driver.postgres" value="lib/postgresql-${jdbc.postgresql.version}.jar" />
       <variable name="DatabaseAdminUsernamePostgres" value="postgres" />
+      
+     
+      
       <variable name="DatabaseDriverClassPostgres" value="org.postgresql.Driver" />
       <variable name="DatabasePortPostgres" value="5432" />
       <variable name="SqlScriptDelimiterPostgres" value=";" />
@@ -155,8 +163,8 @@
       <variable name="RootDatabaseNameOracle" value="oraesci01" />
       <variable name="DatabaseMaxStatementsOracle" value="0" />
       <variable name="DatabaseMaxStatementsPerConnectionOracle" value="0" />
-
-      <variable name="DatabaseAdminPassword" value="" />
+	 <!-- TODO del -->
+      <variable name="DatabaseAdminPassword" value="postgres" />
       <variable name="DatabaseUsername" value="escidoc" />
       <variable name="DatabasePassword" value="escidoc" />
       <variable name="DatabaseDefaultTablespace" value="escidoc" />
@@ -169,7 +177,10 @@
       <!-- Fedora admin user -->
       <variable name="FedoraUsername" value="fedoraAdmin" />
       <variable name="FedoraPassword" value="fedoraAdmin" />
-      <variable name="FedoraAdminMailAddress" value="" />
+      
+      <!-- TODO del -->
+      <variable name="FedoraAdminMailAddress" value="a@b.de" />
+      
       <variable name="FedoraDefaultTablespace" value="fedora" />
       <variable name="FedoraTempTablespace" value="TEMP" />
       <!-- triplestore database user -->
@@ -181,14 +192,20 @@
       <variable name="sid-prefix" value="escidoc" />
       <!-- Infrastructure administrator user -->
       <variable name="AdminUsername" value="sysadmin" />
-      <variable name="AdminPassword" value="" />
+      
+      <!-- TODO del -->
+      <variable name="AdminPassword" value="sysadmin" />
       <!-- variable name="AdminEmail" value="" / -->
       <!-- Infrastructure inspector user -->
       <variable name="InspectorUsername" value="inspector" />
-      <variable name="InspectorPassword" value="" />
+      
+      <!-- TODO del -->
+      <variable name="InspectorPassword" value="inspector" />
       <!-- Infrastructure depositor user -->
       <variable name="DepositorUsername" value="depositor" />
-      <variable name="DepositorPassword" value="" />
+      
+      <!-- TODO del -->
+      <variable name="DepositorPassword" value="depositor" />
       <!-- Creator Id used in migration SQL scripts -->
       <variable name="CreatorUserid" value="escidoc:exuser1" />
     </variables>
@@ -415,12 +432,14 @@
             <parsable targetfile="$INSTALL_PATH/install.tmp/escidoc-core.custom.properties" />
         </pack>
         
-        <pack name="JBoss Application Server" parent="eSciDoc" required="yes">
-            <description>JBoss Application Server ${jboss.version}</description>
-            <file src="packages/jboss/jboss-${jboss.version}.zip" targetdir="$INSTALL_PATH/install.tmp" />
-            <file src="../../../assembly/target/escidoc-core-${project.version}-jboss-patch.zip" targetdir="$INSTALL_PATH/install.tmp" />
+        <pack name="WildFly Application Server" parent="eSciDoc" required="yes">
+            <description>WildFly Application Server ${wildfly.version}</description>
+            <file src="packages/wildfly/wildfly-${wildfly.version}.zip" targetdir="$INSTALL_PATH/install.tmp" />
+            <file src="config/wildfly" targetdir="$INSTALL_PATH/install.tmp/wildfly_config" />
             <file src="${jdbc.driver.postgres}" targetdir="$INSTALL_PATH/install.tmp" condition="installEscidoc+databaseIsPostgres" />
-            <!--file src="${jdbc.driver.mysql}" targetdir="$INSTALL_PATH/install.tmp" /-->
+            <!-- 
+            <file src="../../../assembly/target/escidoc-core-${project.version}-jboss-patch.zip" targetdir="$INSTALL_PATH/install.tmp" />
+            
             <file src="config/jboss/run.conf" targetdir="$INSTALL_PATH/install.tmp" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/run.conf" />
             <file src="config/jboss/run.bat" targetdir="$INSTALL_PATH/install.tmp" />
@@ -429,31 +448,50 @@
             <parsable targetfile="$INSTALL_PATH/install.tmp/shutdown.bat" />
             <file src="config/jboss/shutdown.sh" targetdir="$INSTALL_PATH/install.tmp" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/shutdown.sh" />
+            -->
             <!-- copy security settings -->
+            <!-- 
             <fileset dir="config/jboss/security/" targetdir="$INSTALL_PATH/install.tmp/jboss-security/">
               <include name="**/*.xml"/>
               <include name="**/*.properties"/>
             </fileset>
+            -->
         </pack>
         
         <pack name="Fedora Repository" parent="eSciDoc" required="yes">
             <description>Fedora Commons ${fcrepo.version}</description>
             <file src="../fedora-fedora.zip" targetdir="$INSTALL_PATH/install.tmp" />
             <file src="../fedora/install/fedora.war" targetdir="$INSTALL_PATH/install.tmp" />
-            <file src="lib/${OracleDDLGenerator}" targetdir="$INSTALL_PATH/install.tmp/WEB-INF/lib" />
+            <file src="lib/${OracleDDLGenerator}" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
             <!-- Configuration files -->
             <!--file src="fedora/mpt-mysql.jar" targetdir="$INSTALL_PATH/fedora/WEB-INF/lib" / -->
-            <file src="../web.xml" targetdir="$INSTALL_PATH/install.tmp/WEB-INF" />
+            <!-- <file src="../web.xml" targetdir="$INSTALL_PATH/install.tmp/WEB-INF" />-->
             <!-- file src="fedora/RISearchServlet.class" targetdir="$INSTALL_PATH/fedora/WEB-INF/classes/fedora/server/access" / -->
-            <parsable targetfile="$INSTALL_PATH/install.tmp/WEB-INF/web.xml" />
-            <file src="../fedora-users.xml" targetdir="$INSTALL_PATH/install.tmp" />
-            <parsable targetfile="$INSTALL_PATH/install.tmp/fedora-users.xml" />
-            <file src="../fedora.fcfg" targetdir="$INSTALL_PATH/install.tmp" />
-            <parsable targetfile="$INSTALL_PATH/install.tmp/fedora.fcfg" />
-            <file src="../staging/fedora/jboss-web.xml" targetdir="$INSTALL_PATH/install.tmp/WEB-INF" />
-            <parsable targetfile="$INSTALL_PATH/install.tmp/WEB-INF/jboss-web.xml" />
-            <file src="config/fedora/log4j.properties" targetdir="$INSTALL_PATH/install.tmp" />
-            <file src="config/fedora/deny-everything-if-not-administrator.xml" targetdir="$INSTALL_PATH/install.tmp" />
+            
+            <!-- Take web.xml, fedora-users.xml and fedora.fcfg file from target path, where it was modified by pom.xml -->
+            <file src="../web.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/web.xml" />
+            
+            <file src="../fedora-users.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/fedora-users.xml" />
+            
+            <file src="../fedora.fcfg" targetdir="$INSTALL_PATH/install.tmp/fedora_config" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/fedora.fcfg" />
+            
+            <file src="config/fedora/jboss-deployment-structure.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/jboss-deployment-structure.xml" />
+            
+            <file src="config/fedora/log4j.properties" targetdir="$INSTALL_PATH/install.tmp/fedora_config" />
+            <file src="config/fedora/deny-everything-if-not-administrator.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
+            
+             <file src="config/fedora/env-server.sh" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
+             <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/env-server.sh" />
+             
+             <file src="config/fedora/env-server.bat" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
+             <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/env-server.bat" />
+             
+             <!-- Tomcat for running Fedora tools -->
+             <file src="packages/tomcat/apache-tomcat-8.0.28.zip" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
         </pack>
         
         <pack name="eSciDoc Infrastructure" parent="eSciDoc" required="yes">
@@ -505,7 +543,9 @@
         
         <pack name="SRW" parent="Additional Services and Tools" required="yes">
             <description/>
+            <!-- 
             <file src="../staging/srw/jboss-web.xml" targetdir="$INSTALL_PATH/install.tmp/srw/WEB-INF" />
+            -->
             <file src="packages/srw/srw-${escidoc.srw.version}.war" targetdir="$INSTALL_PATH/services" />
         </pack>
         

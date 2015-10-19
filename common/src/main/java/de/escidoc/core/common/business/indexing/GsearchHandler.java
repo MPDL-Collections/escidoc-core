@@ -132,9 +132,11 @@ public class GsearchHandler {
                 responses.append(response).append("\n");
             }
             catch (final IOException e) {
+                LOGGER.error("Error while request indexing", e);
                 exceptions.append(e.getMessage()).append("\n");
             }
             catch (final WebserverSystemException e) {
+                LOGGER.error("Error while request indexing", e);
                 exceptions.append(e.getMessage()).append("\n");
             }
         }

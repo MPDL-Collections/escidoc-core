@@ -1850,13 +1850,13 @@
 				<classifier>mptstore</classifier>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc</groupId>
+				<groupId>org.escidoc.wildfly</groupId>
 				<artifactId>fedoragsearch</artifactId>
 				<type>war</type>
 				<version>${escidoc.fedoragsearch.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.escidoc</groupId>
+				<groupId>org.escidoc.wildfly</groupId>
 				<artifactId>srw</artifactId>
 				<type>war</type>
 				<version>${escidoc.srw.version}</version>

@@ -22,12 +22,18 @@
     <ant-launcher.version>1.8.2</ant-launcher.version>
     <ant-contrib.version>1.0b3</ant-contrib.version>
     <ant-xmltask.version>1.14</ant-xmltask.version>
-    <jboss.version>4.2.3.GA</jboss.version>
+    <wildfly.version>8.2.1.Final</wildfly.version>
     <mptstore.version>0.9.4</mptstore.version>
     <admin-tool.version>1.1.1</admin-tool.version>
   </properties>
 
   <dependencies>
+   <dependency>
+      <groupId>org.fcrepo</groupId>
+      <artifactId>fcrepo-server</artifactId>
+      <version>${fcrepo.version}</version>
+      <type>jar</type>
+    </dependency>
     <dependency>
       <groupId>org.escidoc</groupId>
       <artifactId>fcrepo-installer</artifactId>
@@ -71,25 +77,25 @@
       <version>${ant-contrib.version}</version>
     </dependency>
     <dependency>
-      <groupId>de.escidoc.admintool</groupId>
+      <groupId>de.escidoc.admintool.wildfly</groupId>
       <artifactId>AdminTool</artifactId>
       <version>${admin-tool.version}</version>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc.core.wildfly</groupId>
+      <groupId>org.escidoc.core</groupId>
       <artifactId>migration-tool</artifactId>
       <version>${migration-tool.version}</version>
       <type>zip</type>
     </dependency>
     <!-- install fedoragsearch, srw & saxon WARs separately -->
     <dependency>
-      <groupId>org.escidoc</groupId>
+      <groupId>org.escidoc.wildfly</groupId>
       <artifactId>fedoragsearch</artifactId>
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc</groupId>
+      <groupId>org.escidoc.wildfly</groupId>
       <artifactId>srw</artifactId>
       <type>war</type>
     </dependency>
@@ -205,16 +211,7 @@
                 </artifactItem>
 
                 <artifactItem>
-                  <groupId>org.jboss</groupId>
-                  <artifactId>jboss</artifactId>
-                  <type>zip</type>
-                  <version>${jboss.version}</version>
-                  <overWrite>false</overWrite>
-                  <outputDirectory>${staging.dir}/packages/jboss</outputDirectory>
-                </artifactItem>
-
-                <artifactItem>
-                  <groupId>de.escidoc.admintool</groupId>
+                  <groupId>de.escidoc.admintool.wildfly</groupId>
                   <artifactId>AdminTool</artifactId>
                   <type>war</type>
                   <version>${admin-tool.version}</version>
@@ -232,7 +229,7 @@
                 </artifactItem>
 
                 <artifactItem>
-                  <groupId>org.escidoc.core.wildfly</groupId>
+                  <groupId>org.escidoc.core</groupId>
                   <artifactId>migration-tool</artifactId>
                   <type>zip</type>
                   <version>${migration-tool.version}</version>
@@ -241,7 +238,7 @@
                 </artifactItem>
                 
                 <artifactItem>
-                  <groupId>org.escidoc</groupId>
+                  <groupId>org.escidoc.wildfly</groupId>
                   <artifactId>fedoragsearch</artifactId>
                   <type>war</type>
                   <version>${escidoc.fedoragsearch.version}</version>
@@ -251,7 +248,7 @@
                 </artifactItem>
                 
                 <artifactItem>
-                  <groupId>org.escidoc</groupId>
+                  <groupId>org.escidoc.wildfly</groupId>
                   <artifactId>srw</artifactId>
                   <type>war</type>
                   <version>${escidoc.srw.version}</version>
@@ -268,12 +265,64 @@
                   <overWrite>false</overWrite>
                   <outputDirectory>${staging.dir}/packages/saxon</outputDirectory>
                 </artifactItem>
+                
+                <!-- Required for fedora as wildfly module -->
+                <artifactItem>
+                  	<groupId>org.apache.openjpa</groupId>
+					<artifactId>openjpa</artifactId>
+					<version>2.3.0</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${staging.dir}/config/wildfly/modules/system/layers/base/org/apache/openjpa/main</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  	<groupId>net.sourceforge.serp</groupId>
+                  	<artifactId>serp</artifactId>
+                  	<version>1.14.1</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/wildfly/modules/system/layers/base/org/apache/openjpa/main</outputDirectory>
+                </artifactItem>
+                
+                
               </artifactItems>
               <!-- other configurations here -->
             </configuration>
           </execution>
         </executions>
       </plugin>
+      
+      <plugin>
+		    <groupId>com.googlecode.maven-download-plugin</groupId>
+		    <artifactId>download-maven-plugin</artifactId>
+		    <version>1.2.1</version>
+		    <executions>
+		        <execution>
+		            <id>download-wildfly</id>
+		            <phase>prepare-package</phase>
+		            <goals>
+		                <goal>wget</goal>
+		            </goals>
+		            <configuration>
+		                <url>http://download.jboss.org/wildfly/${wildfly.version}/wildfly-${wildfly.version}.zip</url>
+		                <unpack>false</unpack>
+		                <outputDirectory>${staging.dir}/packages/wildfly</outputDirectory>
+		            </configuration>
+		        </execution>
+		        <execution>
+		            <id>download-tomcat-for-fedora-rebuild-tools</id>
+		            <phase>prepare-package</phase>
+		            <goals>
+		                <goal>wget</goal>
+		            </goals>
+		            <configuration>
+		                <url>http://mirror.dkd.de/apache/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.zip</url>
+		                <unpack>false</unpack>
+		                <outputDirectory>${staging.dir}/packages/tomcat</outputDirectory>
+		            </configuration>
+		        </execution>
+		    </executions>
+		</plugin>
 
       <!-- Used to configure IzPack installer -->
       <plugin>
@@ -362,7 +411,7 @@
                   <arguments>
                     <argument>-jar</argument>
                     <argument>${settings.localRepository}/org/escidoc/fcrepo-installer/${fcrepo.version}.oracle/fcrepo-installer-${fcrepo.version}.oracle.jar</argument>
-                    <argument>src/main/resources/fedora/install.properties</argument>
+                    <argument>src/main/resources/config/fedora/install.properties</argument>
                   </arguments>
                   <outputFile>${project.build.directory}/fcrepo-install-error.log</outputFile>
                 </configuration>
@@ -436,11 +485,20 @@
                     </xmltask>
 
                     <!-- web.xml -->
+                    
                     <xmltask source="${project.build.directory}/fedora/install/fedorawar/WEB-INF/web.xml" dest="${project.build.directory}/web.xml"
                       failWithoutMatch="true">
                       <replace path="//*[local-name()='param-name' and text()='fedora.home']/following-sibling::*[1]/text()"
                         withText="${INSTALL_PATH}${FILE_SEPARATOR}fedora" />
+                       
+                       <!-- Remove login-config and security role for WildFly/Undertow compatibility issues --> 
+                       <remove path="//*[local-name()='login-config']" />
+                       <remove path="//*[local-name()='security-role']" />
+                       
+                       <!-- Remove LogSetupContextListener in order to let wildfly log --> 
+                        <remove path="//*[local-name()='listener' and ./*[local-name()='listener-class' and text()='org.fcrepo.server.utilities.LogSetupContextListener']]" />
                     </xmltask>
+                    
                   </tasks>
                 </configuration>
               </execution>
