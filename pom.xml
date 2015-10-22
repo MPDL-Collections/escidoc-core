@@ -1128,6 +1128,7 @@
 		</dependency>
 		
 		<!-- Just for overwriting entry in widlfy-ee--> 
+		<!-- 
 		 <dependency>
             <groupId>sun.jdk</groupId>
             <artifactId>jconsole</artifactId>
@@ -1135,7 +1136,7 @@
             <scope>system</scope>
             <systemPath>C:\Program Files\Java\jdk1.8.0_60\lib\jconsole.jar</systemPath>
         </dependency>
-
+ 		-->
 		<dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
