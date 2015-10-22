@@ -37,6 +37,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.fcrepo.server.types.gen.ArrayOfString;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -969,13 +970,13 @@ public class FedoraContentRelationHandler extends HandlerBase implements Content
                 mdRecord.setChecksum(datastreamInfo.getChecksum());
                 // TODO checksum enabled missing
                 mdRecord.setMimeType(datastreamInfo.getMIMEType());
-                mdRecord.setControlGroup(datastreamInfo.getControlGroup().getValue());
+                mdRecord.setControlGroup(datastreamInfo.getControlGroup().value());
                 mdRecord.setDatastreamLocation(datastreamInfo.getLocation());
                 mdRecord.getRepositoryIndicator().setResourceIsNew(false);
 
                 // alternate ids
-                mdRecord.setType(datastreamInfo.getAltIDs()[1]);
-                mdRecord.setSchema(datastreamInfo.getAltIDs()[2]);
+                mdRecord.setType(datastreamInfo.getAltIDs().getItem().get(1));
+                mdRecord.setSchema(datastreamInfo.getAltIDs().getItem().get(2));
             }
         }
     }
@@ -987,13 +988,16 @@ public class FedoraContentRelationHandler extends HandlerBase implements Content
      * @param value The value which is to check.
      * @return the int value of the position in the array and -1 if the values is not in the array
      */
-    private static int contains(final String[] array, final String value) {
+    private static int contains(final ArrayOfString array, final String value) {
 
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(value)) {
-                return i;
+        if (array != null && array.getItem() != null) {
+            for (int i = 0; i < array.getItem().size(); i++) {
+                if (array.getItem().get(i).equals(value)) {
+                    return i;
+                }
             }
         }
+
         return -1;
     }
 

@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.fcrepo.server.types.gen.ArrayOfString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -326,9 +327,10 @@ public class Context extends GenericResource implements ContextInterface {
         final Collection<String> names = new ArrayList<String>();
 
         for (final org.fcrepo.server.types.gen.Datastream datastream : datastreams) {
-            final String[] altIDs = datastream.getAltIDs();
-            if (altIDs.length > 0
-                && altIDs[0].equals(de.escidoc.core.common.business.fedora.Constants.ADMIN_DESCRIPTOR_ALT_ID)) {
+            final ArrayOfString altIDs = datastream.getAltIDs();
+            if (altIDs.getItem().size() > 0
+                && altIDs.getItem().get(0).equals(
+                    de.escidoc.core.common.business.fedora.Constants.ADMIN_DESCRIPTOR_ALT_ID)) {
                 names.add(datastream.getID());
             }
         }

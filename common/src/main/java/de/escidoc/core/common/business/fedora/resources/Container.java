@@ -254,7 +254,7 @@ public class Container extends GenericVersionableResourcePid implements Containe
 
         final Collection<String> names = new ArrayList<String>();
         for (final org.fcrepo.server.types.gen.Datastream datastream : datastreams) {
-            final List<String> altIDs = Arrays.asList(datastream.getAltIDs());
+            final List<String> altIDs = datastream.getAltIDs().getItem();
             if (altIDs != null && altIDs.contains(Datastream.METADATA_ALTERNATE_ID)) {
                 names.add(datastream.getID());
             }

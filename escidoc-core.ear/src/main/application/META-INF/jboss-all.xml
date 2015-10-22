@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Due to problems with Apache CXF (part of fedora) and wildfly, see https://developer.jboss.org/thread/235656 -->
+<jboss xmlns="urn:jboss:1.0">
+    <weld xmlns="urn:jboss:weld:1.0" require-bean-descriptor="true"/>
+    
+</jboss>
+

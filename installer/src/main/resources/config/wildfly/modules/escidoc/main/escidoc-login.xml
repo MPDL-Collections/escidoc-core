@@ -57,7 +57,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
          UserAccount resource -->
 
     <security:http auto-config="false" access-denied-page="/aa/login/login-repeated.html"
-        path-type="regex" entry-point-ref="authenticationProcessingFilterEntryPoint">
+        path-type="regex" entry-point-ref="authenticationProcessingFilterEntryPoint" disable-url-rewriting="true">
         <security:intercept-url pattern="/aa/login[^/].*$" access="IS_AUTHENTICATED_FULLY"/>
         <security:intercept-url pattern="/.*" filters="none" />
         <security:x509 subject-principal-regex="CN=(.*?)," user-service-ref="jdbcUserService"/>

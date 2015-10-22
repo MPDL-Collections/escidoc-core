@@ -26,7 +26,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,9 +69,10 @@ import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.fcrepo.client.FedoraClient;
-import org.fcrepo.client.HttpInputStream;
+import org.fcrepo.common.http.HttpInputStream;
 import org.fcrepo.server.access.FedoraAPIA;
 import org.fcrepo.server.management.FedoraAPIM;
+import org.fcrepo.server.types.gen.ArrayOfString;
 import org.fcrepo.server.types.gen.Datastream;
 import org.fcrepo.server.types.gen.MIMETypedStream;
 import org.fcrepo.server.types.gen.ObjectProfile;
@@ -280,7 +283,7 @@ public class FedoraUtility implements InitializingBean {
         try {
             return apim.export(pid, FOXML_FORMAT, "public");
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException("APIM export failure: " + e.getMessage(), e);
         }
         finally {
@@ -304,9 +307,9 @@ public class FedoraUtility implements InitializingBean {
 
         final FedoraAPIM apim = borrowApim();
         try {
-            pids = apim.getNextPID(number, this.identifierPrefix);
+            pids = apim.getNextPID(number, this.identifierPrefix).toArray(new String[0]);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException("Unable to get Obids from Fedora: " + e.getMessage(), e);
         }
         finally {
@@ -336,7 +339,7 @@ public class FedoraUtility implements InitializingBean {
         try {
             timestamp = apim.setDatastreamState(pid, dsName, dsState, "ds state is changed.");
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException("APIM setDatastreamState failure: " + e.getMessage(), e);
         }
         finally {
@@ -366,7 +369,7 @@ public class FedoraUtility implements InitializingBean {
         try {
             return apia.getDatastreamDissemination(pid, dataStreamId, timestamp);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             // Workaround
             LOGGER.warn("APIA getDatastreamWithMimeType(..) " + e);
             invalidateApiaObject(apia);
@@ -375,7 +378,7 @@ public class FedoraUtility implements InitializingBean {
             try {
                 return apia.getDatastreamDissemination(pid, dataStreamId, timestamp);
             }
-            catch (final RemoteException e1) {
+            catch (final Exception e1) {
                 final String message =
                     "Error on retrieve datastream (pid='" + pid + "', dataStreamId='" + dataStreamId + "', timestamp='"
                         + timestamp + "') ";
@@ -419,7 +422,7 @@ public class FedoraUtility implements InitializingBean {
         final FedoraAPIM apim = borrowApim();
         try {
             timestamp =
-                apim.modifyDatastreamByValue(pid, datastreamName, new String[0], datastreamLabel,
+                apim.modifyDatastreamByValue(pid, datastreamName, new ArrayOfString(), datastreamLabel,
                     de.escidoc.core.common.business.fedora.datastream.Datastream.MIME_TYPE_TEXT_XML, null, datastream,
                     null, null, null, true);
         }
@@ -485,8 +488,10 @@ public class FedoraUtility implements InitializingBean {
         }
         final FedoraAPIM apim = borrowApim();
         try {
+            ArrayOfString aos = new ArrayOfString();
+            aos.getItem().addAll(Arrays.asList(altIDs));
             timestamp =
-                apim.modifyDatastreamByReference(pid, datastreamName, altIDs, datastreamLabel, mimeType, null, url,
+                apim.modifyDatastreamByReference(pid, datastreamName, aos, datastreamLabel, mimeType, null, url,
                     checksumType, null, "Modified by reference.", true);
         }
         catch (final Exception e) {
@@ -533,9 +538,11 @@ public class FedoraUtility implements InitializingBean {
         String timestamp = null;
         final FedoraAPIM apim = borrowApim();
         try {
+            ArrayOfString aos = new ArrayOfString();
+            aos.getItem().addAll(Arrays.asList(alternateIDs));
             timestamp =
-                apim.modifyDatastreamByValue(pid, datastreamName, alternateIDs, datastreamLabel, mimeType, null,
-                    datastream, null, null, null, true);
+                apim.modifyDatastreamByValue(pid, datastreamName, aos, datastreamLabel, mimeType, null, datastream,
+                    null, null, null, true);
         }
         catch (final Exception e) {
             throw new FedoraSystemException("Failed to modify Fedora datastream.", e);
@@ -627,8 +634,8 @@ public class FedoraUtility implements InitializingBean {
         final Datastream[] ds = getDatastreamsInformation(pid);
 
         for (final Datastream d : ds) {
-            final String[] altIDs = d.getAltIDs();
-            if (altIDs.length > 0 && altIDs[0].equals(altId)) {
+            final ArrayOfString altIDs = d.getAltIDs();
+            if (altIDs.getItem().size() > 0 && altIDs.getItem().get(0).equals(altId)) {
                 names.add(d.getID());
             }
         }
@@ -714,7 +721,7 @@ public class FedoraUtility implements InitializingBean {
      */
     public Datastream[] getDatastreamsInformation(final String pid, final String timestamp)
         throws FedoraSystemException {
-        Datastream[] datastreams = null;
+        List<Datastream> datastreams = null;
         FedoraAPIM apim = borrowApim();
         try {
             // work around to prevent null returns
@@ -726,7 +733,7 @@ public class FedoraUtility implements InitializingBean {
                 datastreams = apim.getDatastreams(pid, timestamp, null);
             }
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             if (LOGGER.isWarnEnabled()) {
                 LOGGER.warn("Error on APIM getDatastreams(..)");
             }
@@ -739,7 +746,7 @@ public class FedoraUtility implements InitializingBean {
             try {
                 datastreams = apim.getDatastreams(pid, timestamp, null);
             }
-            catch (final RemoteException e1) {
+            catch (final Exception e1) {
                 final String message =
                     "Error on retrieve datastream (pid='" + pid + "', timestamp='" + timestamp + "') ";
                 LOGGER.warn(message);
@@ -752,7 +759,7 @@ public class FedoraUtility implements InitializingBean {
         finally {
             returnApim(apim);
         }
-        return datastreams;
+        return (datastreams == null) ? null : datastreams.toArray(new Datastream[datastreams.size()]);
     }
 
     /**
@@ -816,18 +823,18 @@ public class FedoraUtility implements InitializingBean {
      *             Thrown if Fedora request failed.
      */
     public Datastream[] getDatastreamHistory(final String pid, final String dsID) throws FedoraSystemException {
-        Datastream[] datastreams = null;
+        List<Datastream> datastreams = null;
         final FedoraAPIM apim = borrowApim();
         try {
             datastreams = apim.getDatastreamHistory(pid, dsID);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException(e.toString(), e);
         }
         finally {
             returnApim(apim);
         }
-        return datastreams;
+        return (datastreams == null) ? null : datastreams.toArray(new Datastream[datastreams.size()]);
     }
 
     public String addDatastream(
@@ -1007,7 +1014,9 @@ public class FedoraUtility implements InitializingBean {
 
         final FedoraAPIM apim = borrowApim();
         try {
-            return apim.addDatastream(pid, dsID, altIDs, dsLabel, versionable, mimeType, formatURI, dsLocation,
+            ArrayOfString aos = new ArrayOfString();
+            aos.getItem().addAll(Arrays.asList(altIDs));
+            return apim.addDatastream(pid, dsID, aos, dsLabel, versionable, mimeType, formatURI, dsLocation,
                 controlGroup, dsState, null, null, logMessage);
         }
         catch (final Exception e) {
@@ -1040,7 +1049,7 @@ public class FedoraUtility implements InitializingBean {
         try {
             timestamp = apim.modifyObject(pid, null, null, null, "touched");
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException(e.toString(), e);
         }
         finally {
@@ -1072,7 +1081,7 @@ public class FedoraUtility implements InitializingBean {
         try {
             apim.purgeObject(pid, msg, false);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException("While deleting: ", e);
         }
         finally {
@@ -1183,7 +1192,7 @@ public class FedoraUtility implements InitializingBean {
         try {
             op = apia.getObjectProfile(pid, null);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             // Workaround
             invalidateApiaObject(apia);
             apia = borrowApia();
@@ -1191,7 +1200,7 @@ public class FedoraUtility implements InitializingBean {
             try {
                 op = apia.getObjectProfile(pid, null);
             }
-            catch (final RemoteException e1) {
+            catch (final Exception e1) {
                 final String message = "Error on retrieve object profile (pid='" + pid + "') ";
                 LOGGER.warn(message);
                 if (LOGGER.isDebugEnabled()) {

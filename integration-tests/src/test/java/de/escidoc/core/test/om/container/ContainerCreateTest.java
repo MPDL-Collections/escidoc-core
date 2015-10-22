@@ -28,8 +28,9 @@
  */
 package de.escidoc.core.test.om.container;
 
-import static org.junit.Assert.assertTrue;
-
+import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidXmlException;
+import de.escidoc.core.common.exceptions.remote.application.invalid.XmlSchemaValidationException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -37,9 +38,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 
-import de.escidoc.core.common.exceptions.application.invalid.InvalidXmlException;
-import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test the mock implementation of the item resource.

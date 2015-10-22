@@ -28,12 +28,11 @@
  */
 package de.escidoc.core.test.om.item;
 
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
-
-import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 /**
  * Test the mock implementation of the item resource.

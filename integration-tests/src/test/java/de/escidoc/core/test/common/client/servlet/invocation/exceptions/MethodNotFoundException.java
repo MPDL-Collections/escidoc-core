@@ -28,9 +28,9 @@
  */
 package de.escidoc.core.test.common.client.servlet.invocation.exceptions;
 
-import javax.servlet.http.HttpServletResponse;
+import de.escidoc.core.common.exceptions.remote.EscidocException;
 
-import de.escidoc.core.common.exceptions.EscidocException;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Reimplementation of the MethodNotFoundException thrown by eSciDoc. <br> Reimplemented for the eSciDocTestProject.<br>

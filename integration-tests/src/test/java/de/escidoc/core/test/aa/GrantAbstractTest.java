@@ -28,13 +28,19 @@
  */
 package de.escidoc.core.test.aa;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import java.util.HashMap;
-import java.util.Map;
-
+import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidScopeException;
+import de.escidoc.core.common.exceptions.remote.application.invalid.InvalidXmlException;
+import de.escidoc.core.common.exceptions.remote.application.invalid.XmlCorruptedException;
+import de.escidoc.core.common.exceptions.remote.application.invalid.XmlSchemaValidationException;
+import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
+import de.escidoc.core.common.exceptions.remote.application.notfound.GrantNotFoundException;
+import de.escidoc.core.common.exceptions.remote.application.notfound.RoleNotFoundException;
+import de.escidoc.core.common.exceptions.remote.application.violated.AlreadyExistsException;
+import de.escidoc.core.common.exceptions.remote.application.violated.AlreadyRevokedException;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.EscidocTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.security.client.PWCallback;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,17 +48,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.escidoc.core.common.exceptions.application.invalid.InvalidScopeException;
-import de.escidoc.core.common.exceptions.application.invalid.InvalidXmlException;
-import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
-import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
-import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
-import de.escidoc.core.common.exceptions.application.notfound.GrantNotFoundException;
-import de.escidoc.core.common.exceptions.application.violated.AlreadyRevokedException;
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.EscidocTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.security.client.PWCallback;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Test suite for the Grants of an UserAccount or UserGroup.

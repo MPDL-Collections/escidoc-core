@@ -28,11 +28,6 @@
  */
 package de.escidoc.core.test.sm;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.w3c.dom.Document;
-
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.common.client.servlet.sm.AggregationDefinitionClient;
@@ -41,6 +36,10 @@ import de.escidoc.core.test.common.client.servlet.sm.ReportClient;
 import de.escidoc.core.test.common.client.servlet.sm.ReportDefinitionClient;
 import de.escidoc.core.test.common.client.servlet.sm.ScopeClient;
 import de.escidoc.core.test.common.client.servlet.sm.StatisticDataClient;
+import org.w3c.dom.Document;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Base class for tests of the mock implementation of the SB resources.

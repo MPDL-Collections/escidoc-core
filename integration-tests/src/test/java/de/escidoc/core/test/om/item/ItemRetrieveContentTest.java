@@ -30,6 +30,27 @@ package de.escidoc.core.test.om.item;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.EscidocTestBase;
+import de.escidoc.core.test.common.client.servlet.Constants;
+import de.escidoc.core.test.common.resources.BinaryContent;
+import de.escidoc.core.test.common.resources.PropertiesProvider;
+import de.escidoc.core.test.om.item.contentTools.ContentTestBase;
+import de.escidoc.core.test.om.item.contentTools.ImageProperties;
+import de.escidoc.core.test.security.client.PWCallback;
+import org.apache.http.HttpResponse;
+import org.apache.http.Header;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,28 +61,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
-
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.Constants;
-import de.escidoc.core.test.common.resources.BinaryContent;
-import de.escidoc.core.test.common.resources.PropertiesProvider;
-import de.escidoc.core.test.om.item.contentTools.ContentTestBase;
-import de.escidoc.core.test.om.item.contentTools.ImageProperties;
-import de.escidoc.core.test.security.client.PWCallback;
 
 /**
  * Test the retrieve of binary content. These class tests especially the transformation of images with digilib.

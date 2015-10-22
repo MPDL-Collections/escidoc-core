@@ -28,25 +28,28 @@
  */
 package de.escidoc.core.test.common.fedora;
 
-import java.io.UnsupportedEncodingException;
-import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
+import de.escidoc.core.common.exceptions.remote.system.FedoraSystemException;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import de.escidoc.core.test.common.resources.PropertiesProvider;
 
 import org.apache.axis.types.NonNegativeInteger;
 import org.fcrepo.client.FedoraClient;
 import org.fcrepo.server.access.FedoraAPIA;
 import org.fcrepo.server.management.FedoraAPIM;
+import org.fcrepo.server.types.gen.ArrayOfString;
 import org.fcrepo.server.types.gen.Datastream;
 import org.fcrepo.server.types.gen.MIMETypedStream;
 import org.fcrepo.server.types.gen.ObjectProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.escidoc.core.common.exceptions.system.FedoraSystemException;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
-import de.escidoc.core.test.common.resources.PropertiesProvider;
+import java.io.UnsupportedEncodingException;
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * An utility class for Fedora requests.
@@ -168,7 +171,7 @@ public class Client {
         try {
             datastream = apia.getDatastreamDissemination(pid, dataStreamId, null);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
 
             throw new FedoraSystemException();
         }
@@ -191,7 +194,7 @@ public class Client {
             datastream.put("mimeType", stream.getMIMEType());
 
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
 
             throw new FedoraSystemException();
         }
@@ -212,7 +215,7 @@ public class Client {
         final String pid, final String datastreamName, final String datastreamLabel, final byte[] datastream)
         throws FedoraSystemException {
         try {
-            apim.modifyDatastreamByValue(pid, datastreamName, new String[0], datastreamLabel, "text/xml", null,
+            apim.modifyDatastreamByValue(pid, datastreamName, new ArrayOfString(), datastreamLabel, "text/xml", null,
                 datastream, "A", null, "eSciDoc test environment", true);
         }
         catch (final Exception e) {
@@ -236,7 +239,7 @@ public class Client {
         final String pid, final String datastreamName, final String datastreamLabel, final String mimeType,
         final byte[] datastream) throws FedoraSystemException {
         try {
-            apim.modifyDatastreamByValue(pid, datastreamName, new String[0], datastreamLabel, mimeType, null,
+            apim.modifyDatastreamByValue(pid, datastreamName, new ArrayOfString(), datastreamLabel, mimeType, null,
                 datastream, "A", null, "eSciDoc test environment", true);
         }
         catch (final Exception e) {
@@ -260,8 +263,8 @@ public class Client {
         final String pid, final String datastreamName, final String datastreamLabel, final String mimeType,
         final String url) throws FedoraSystemException {
         try {
-            apim.modifyDatastreamByReference(pid, datastreamName, new String[0], datastreamLabel, mimeType, null, url,
-                "A", null, "eSciDoc test environment", true);
+            apim.modifyDatastreamByReference(pid, datastreamName, new ArrayOfString(), datastreamLabel, mimeType, null,
+                url, "A", null, "eSciDoc test environment", true);
         }
         catch (final Exception e) {
 
@@ -284,8 +287,10 @@ public class Client {
         final String pid, final String datastreamName, final String datastreamLabel, final String[] alternateIDs,
         final byte[] datastream) throws FedoraSystemException {
         try {
-            apim.modifyDatastreamByValue(pid, datastreamName, alternateIDs, datastreamLabel, "text/xml", null,
-                datastream, "A", null, "eSciDoc test environment", true);
+            ArrayOfString aos = new ArrayOfString();
+            aos.getItem().addAll(Arrays.asList(alternateIDs));
+            apim.modifyDatastreamByValue(pid, datastreamName, aos, datastreamLabel, "text/xml", null, datastream, "A",
+                null, "eSciDoc test environment", true);
         }
         catch (final Exception e) {
 
@@ -302,7 +307,8 @@ public class Client {
      */
     public Datastream[] getDatastreams(final String pid) throws FedoraSystemException {
         try {
-            return apim.getDatastreams(pid, null, "A");
+            List<Datastream> datastreams = apim.getDatastreams(pid, null, "A");
+            return (datastreams == null) ? null : datastreams.toArray(new Datastream[datastreams.size()]);
         }
         catch (final Exception e) {
 
@@ -392,7 +398,7 @@ public class Client {
         catch (final UnsupportedEncodingException e) {
             LOGGER.error("", e);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             LOGGER.error("", e);
         }
         return contentString;
@@ -412,7 +418,7 @@ public class Client {
             // convert to String
 
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             // TODO Auto-generated catch block
             LOGGER.error("", e);
         }
@@ -437,7 +443,7 @@ public class Client {
     }
 
     public String[] getNextPid(final int pidNumber) throws FedoraSystemException {
-        String[] pids = null;
+        List<String> pids = null;
         NonNegativeInteger number = new NonNegativeInteger(String.valueOf(pidNumber));
         try {
             pids = apim.getNextPID(number, "escidoc");
@@ -445,7 +451,7 @@ public class Client {
         catch (final Exception e) {
             throw new FedoraSystemException();
         }
-        return pids;
+        return (pids == null) ? null : pids.toArray(new String[pids.size()]);
     }
 
     /**
@@ -475,7 +481,7 @@ public class Client {
      * @throws FedoraSystemException Thrown if access to Fedora failed.
      */
     public Datastream[] getDatastreamsInformation(final String pid) throws FedoraSystemException {
-        Datastream[] datastreamInfos = null;
+        List<Datastream> datastreamInfos = null;
         try {
             datastreamInfos = apim.getDatastreams(pid, null, "A");
         }
@@ -483,7 +489,7 @@ public class Client {
 
             throw new FedoraSystemException();
         }
-        return datastreamInfos;
+        return (datastreamInfos == null) ? null : datastreamInfos.toArray(new Datastream[datastreamInfos.size()]);
     }
 
     /**
@@ -587,9 +593,11 @@ public class Client {
 
         String datastreamID = null;
         try {
+            ArrayOfString aos = new ArrayOfString();
+            aos.getItem().addAll(Arrays.asList(altIDs));
             datastreamID =
-                apim.addDatastream(pid, dsID, altIDs, dsLabel, versionable, MIMEType, formatURI, dsLocation,
-                    controlGroup, dsState, checksumType, checksum, logMessage);
+                apim.addDatastream(pid, dsID, aos, dsLabel, versionable, MIMEType, formatURI, dsLocation, controlGroup,
+                    dsState, checksumType, checksum, logMessage);
         }
         catch (final Exception e) {
 
@@ -609,7 +617,7 @@ public class Client {
         try {
             apim.modifyObject(pid, null, null, null, "touched");
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
 
             throw new FedoraSystemException();
         }
@@ -626,7 +634,7 @@ public class Client {
         try {
             apim.purgeObject(objid, msg, false);
         }
-        catch (final RemoteException e) {
+        catch (final Exception e) {
             throw new FedoraSystemException();
         }
     }

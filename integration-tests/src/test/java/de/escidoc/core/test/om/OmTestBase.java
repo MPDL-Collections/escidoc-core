@@ -34,12 +34,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.xml.transform.TransformerException;
-
-import org.apache.xpath.XPathAPI;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.common.client.servlet.adm.AdminClient;
@@ -50,6 +44,12 @@ import de.escidoc.core.test.common.client.servlet.om.DeviationClient;
 import de.escidoc.core.test.common.client.servlet.om.IngestClient;
 import de.escidoc.core.test.common.client.servlet.om.ItemClient;
 import de.escidoc.core.test.sb.SearchTestBase;
+
+import org.apache.xpath.XPathAPI;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
+import javax.xml.transform.TransformerException;
 
 /**
  * Base class for tests of the mock implementation of the OM resources.

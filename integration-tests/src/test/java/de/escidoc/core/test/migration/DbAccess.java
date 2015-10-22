@@ -1,5 +1,9 @@
 package de.escidoc.core.test.migration;
 
+import de.escidoc.core.test.common.resources.ResourceProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -10,11 +14,6 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.Vector;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import de.escidoc.core.test.common.resources.ResourceProvider;
 
 public class DbAccess {
 

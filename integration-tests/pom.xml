@@ -28,10 +28,9 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.5</version>
 				<executions>
 					<execution>
-						<phase>generate-sources</phase>
+						<phase>generate-test-sources</phase>
 						<goals>
 							<goal>add-test-source</goal>
 						</goals>
@@ -94,29 +93,35 @@
 						</configuration>
 					</execution>
 				</executions>
+
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.1.0</version>
+				<version>1.4.16</version>
         <configuration>
           <wait>${cargo.wait}</wait>
           <container>
-            <containerId>jboss42x</containerId>
-            <home>${project.build.directory}/escidoc/jboss</home>
+            <containerId>wildfly8x</containerId>
+            <home>${project.build.directory}/escidoc/wildfly</home>
             <timeout>600000</timeout>
+            <systemProperties>
+            	<fedora.home>${project.build.directory}${file.separator}escidoc${file.separator}fedora</fedora.home>
+            
+            </systemProperties>
           </container>
           <configuration>
-            <type>standalone</type>
-            <properties>
-              <cargo.hostname>localhost</cargo.hostname>
-              <cargo.protocol>http</cargo.protocol>
-
-              <cargo.servlet.port>8080</cargo.servlet.port>
-              <cargo.rmi.port>1099</cargo.rmi.port>
-              <cargo.logging>medium</cargo.logging>
-              <cargo.jvmargs>-Xmx1024m -Xms312m -XX:MaxPermSize=320m ${cargo.jvmdebug} ${cargo.ucldebug}</cargo.jvmargs>
-            </properties>
+	            <type>standalone</type>
+	            <properties>
+	              <cargo.hostname>localhost</cargo.hostname>
+	              <cargo.protocol>http</cargo.protocol>
+	
+	              <cargo.servlet.port>8080</cargo.servlet.port>
+	              <cargo.rmi.port>1099</cargo.rmi.port>
+	              <cargo.logging>medium</cargo.logging>
+	              <cargo.jvmargs>-Xmx1024m -Xms312m -XX:MaxPermSize=320m ${cargo.jvmdebug} ${cargo.ucldebug}</cargo.jvmargs>
+	            </properties>
+            </configuration>
             <deployables>
               <deployable>
                 <groupId>org.escidoc</groupId>
@@ -127,15 +132,23 @@
                 </properties>
               </deployable>
               <deployable>
-                <groupId>org.escidoc</groupId>
+                <groupId>org.escidoc.wildfly</groupId>
                 <artifactId>oaiprovider</artifactId>
                 <type>war</type>
                 <properties>
                   <context>escidoc-oaiprovider</context>
                 </properties>
+                <pingURL>http://localhost:8080/axis</pingURL>
+                <pingTimeout>600000</pingTimeout>
               </deployable>
+              <!-- 
+              <deployable>
+              	<location>${project.build.directory}/escidoc/wildfly/standalone/deployments/escidoc-core.ear</location>
+              	<pingURL>http://localhost:8080/axis</pingURL>
+              </deployable>
+              -->
             </deployables>
-          </configuration>
+          
         </configuration>
 				<executions>
 					<execution>
@@ -580,7 +593,7 @@
 		<type>war</type>
 	   </dependency>
 	   <dependency>
-	     <groupId>org.escidoc</groupId>
+	     <groupId>org.escidoc.wildfly</groupId>
 	     <artifactId>oaiprovider</artifactId>
 	     <version>${escidoc.oaiprovider.version}</version>
 	     <type>war</type>
@@ -857,11 +870,11 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<outputDirectory>${project.build.directory}/escidoc/jboss
+									<outputDirectory>${project.build.directory}/escidoc/wildfly
 									</outputDirectory>
 									<resources>
 										<resource>
-											<directory>src/test/resources/configuration/jboss/postgres
+											<directory>src/test/resources/configuration/wildfly/postgres
 											</directory>
 											<filtering>true</filtering>
 										</resource>
@@ -1100,11 +1113,11 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<outputDirectory>${project.build.directory}/escidoc/jboss
+									<outputDirectory>${project.build.directory}/escidoc/wildfly
 									</outputDirectory>
 									<resources>
 										<resource>
-											<directory>src/test/resources/configuration/jboss/oracle
+											<directory>src/test/resources/configuration/wildfly/oracle
 											</directory>
 											<filtering>true</filtering>
 										</resource>
@@ -1435,7 +1448,7 @@
 										<argument>-Xmx96m</argument>
 
 										<argument>-classpath</argument>
-										<argument>${project.build.directory}${file.separator}escidoc${file.separator}fedora${file.separator}client${file.separator}bin${path.separator}${project.build.directory}${file.separator}escidoc${file.separator}fedora${file.separator}client${file.separator}fcrepo-client-admin-${fcrepo.version}.jar
+										<argument>${project.build.directory}${file.separator}escidoc${file.separator}fedora${file.separator}client${file.separator}bin${path.separator}${project.build.directory}${file.separator}escidoc${file.separator}fedora${file.separator}client${file.separator}/*
 										</argument>
 										<argument>-Djava.endorsed.dirs=${project.build.directory}${file.separator}escidoc${file.separator}fedora${file.separator}client${file.separator}lib
 										</argument>

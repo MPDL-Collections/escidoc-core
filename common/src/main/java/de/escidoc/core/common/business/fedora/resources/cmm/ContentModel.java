@@ -231,11 +231,11 @@ public class ContentModel extends GenericVersionableResourcePid implements Versi
         super.initDatastreams(datastreamInfos);
 
         for (final org.fcrepo.server.types.gen.Datastream datastreamInfo : datastreamInfos) {
-            final List<String> altIDs = Arrays.asList(datastreamInfo.getAltIDs());
+            final List<String> altIDs = datastreamInfo.getAltIDs().getItem();
             final String name = datastreamInfo.getID();
             final String label = datastreamInfo.getLabel();
             final DatastreamControlGroup controlGroup = datastreamInfo.getControlGroup();
-            final String controlGroupValue = controlGroup.getValue();
+            final String controlGroupValue = controlGroup.value();
             final String mimeType = datastreamInfo.getMIMEType();
             final String location = datastreamInfo.getLocation();
 

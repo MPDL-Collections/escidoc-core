@@ -28,11 +28,10 @@
  */
 package de.escidoc.core.test.sb;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.oum.organizationalunit.OrganizationalUnitTestBase;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 /**
  * Call the OrganizationalUnit-Service.

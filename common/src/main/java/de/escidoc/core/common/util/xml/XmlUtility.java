@@ -68,6 +68,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import com.ctc.wstx.exc.WstxParsingException;
+import com.ctc.wstx.stax.WstxOutputFactory;
 
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
@@ -2430,7 +2431,9 @@ public final class XmlUtility {
      */
     private static XMLOutputFactory getInitilizedXmlOutputFactory(final boolean repairing) {
 
-        final XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
+        //final XMLOutputFactory xmlof = XMLOutputFactory.newFactory("com.ctc.wstx.stax.WstxOutputFactory", null);
+        final XMLOutputFactory xmlof = new WstxOutputFactory();
+
         xmlof.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, repairing);
         if (repairing) {
             xmlof.setProperty(XMLOutputFactory2.P_AUTOMATIC_NS_PREFIX, "ext");
