@@ -28,13 +28,17 @@
  */
 package de.escidoc.core.test.sb;
 
-import java.net.URL;
-
+import gov.loc.www.zing.srw.ExplainRequestType;
+import gov.loc.www.zing.srw.service.ExplainPort;
+import gov.loc.www.zing.srw.service.SRWPort;
+import gov.loc.www.zing.srw.service.SRWSampleServiceLocator;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.URL;
 
 /**
  * @author Rozita Friedman

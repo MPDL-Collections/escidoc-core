@@ -28,11 +28,10 @@
  */
 package de.escidoc.core.test.aa.soap;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-
 import de.escidoc.core.test.aa.UserAttributeAbstractTest;
 import de.escidoc.core.test.common.client.servlet.Constants;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 /**
  * Testsuite for the UserAccount's Attributes with SOAP transport.

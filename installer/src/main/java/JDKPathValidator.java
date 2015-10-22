@@ -65,7 +65,7 @@ public class JDKPathValidator extends AbstractValidator {
                     isJavaHome);
             }
 
-            if (!(versionNumbers[0].equals("1") && versionNumbers[1].equals("6"))) {
+            if (!(versionNumbers[0].equals("1") && versionNumbers[1].equals("7"))) {
                 return buildMessage("Invalid JDK version.", null, isJavaHome);
             }
         }
@@ -105,7 +105,7 @@ public class JDKPathValidator extends AbstractValidator {
     private void buildWarningMessage(final String message) {
         clearWarningMessage();
         warningMessage.append(message);
-        warningMessage.append("\n\nPlease ensure to change your JAVA_HOME setting to a JDK of version 1.6.x.");
+        warningMessage.append("\n\nPlease ensure to change your JAVA_HOME setting to a JDK of version 1.8.x.");
     }
 
     private void buildWarningMessage(final String message, final File file) {
@@ -114,6 +114,6 @@ public class JDKPathValidator extends AbstractValidator {
         warningMessage.append("\n(");
         warningMessage.append(file.getAbsolutePath());
         warningMessage.append(")");
-        warningMessage.append("\n\nPlease ensure to change your JAVA_HOME setting to a JDK of version 1.6.x.");
+        warningMessage.append("\n\nPlease ensure to change your JAVA_HOME setting to a JDK of version 1.8.x.");
     }
 }

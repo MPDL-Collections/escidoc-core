@@ -6,6 +6,23 @@
 	     
 	     <exclude-subsystems>
 	        <subsystem name="resteasy" />
+	        <subsystem name="webservices" />
 	    </exclude-subsystems>
+	     <exclusions>
+          	<module name="javaee.api" />  
+        </exclusions>
+         
+         <dependencies>
+         <!-- see https://developer.jboss.org/message/637818#637818 -->
+			<!-- 
+			<module name="javaee.api" >  
+            <imports>  
+                <exclude-set>  
+                    <path name="org/apache/xml/security"/>  
+                </exclude-set>  
+            </imports>  
+        	</module>
+        	  -->
+	    </dependencies>
  	 </deployment>
 </jboss-deployment-structure>  

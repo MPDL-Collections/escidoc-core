@@ -132,10 +132,10 @@ public class Component extends GenericResourcePid implements ComponentInterface 
 
         for (final org.fcrepo.server.types.gen.Datastream datastreamInfo : datastreamInfos) {
 
-            final List<String> altIDs = Arrays.asList(datastreamInfo.getAltIDs());
+            final List<String> altIDs = datastreamInfo.getAltIDs().getItem();
             final String name = datastreamInfo.getID();
             final String label = datastreamInfo.getLabel();
-            final String controlGroupValue = datastreamInfo.getControlGroup().getValue();
+            final String controlGroupValue = datastreamInfo.getControlGroup().value();
             final String mimeType = datastreamInfo.getMIMEType();
             final String location = datastreamInfo.getLocation();
 

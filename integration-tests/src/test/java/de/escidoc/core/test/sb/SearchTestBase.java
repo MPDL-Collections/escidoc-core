@@ -28,7 +28,26 @@
  */
 package de.escidoc.core.test.sb;
 
-import static org.junit.Assert.assertEquals;
+import de.escidoc.core.test.EscidocRestSoapTestBase;
+import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import gov.loc.www.zing.cql.xcql.SearchClauseType;
+import gov.loc.www.zing.srw.DiagnosticsType;
+import gov.loc.www.zing.srw.EchoedScanRequestType;
+import gov.loc.www.zing.srw.EchoedSearchRetrieveRequestType;
+import gov.loc.www.zing.srw.ExplainResponseType;
+import gov.loc.www.zing.srw.RecordType;
+import gov.loc.www.zing.srw.RecordsType;
+import gov.loc.www.zing.srw.ScanResponseType;
+import gov.loc.www.zing.srw.SearchRetrieveResponseType;
+import gov.loc.www.zing.srw.TermType;
+import gov.loc.www.zing.srw.TermsType;
+import gov.loc.www.zing.srw.diagnostic.DiagnosticType;
+import org.apache.http.HttpResponse;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
@@ -37,15 +56,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import de.escidoc.core.test.EscidocRestSoapTestBase;
-import de.escidoc.core.test.common.client.servlet.HttpHelper;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Base class for search tests.

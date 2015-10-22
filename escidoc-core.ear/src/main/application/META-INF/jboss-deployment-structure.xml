@@ -2,19 +2,27 @@
 <jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2" >
  
 <ear-subdeployments-isolated>false</ear-subdeployments-isolated>
-
+	
+	<module name="deployment.myservices" >
+	
+ 	 	<resources>
+ 	 		<resource-root path=".">
+ 	 			<filter>
+ 	 				<include path="services/**"/>
+ 	 			</filter>
+ 	 		
+ 	 		</resource-root>
+ 	 	</resources>
+ 	 </module>
+	
 	 <deployment>
-	     <!-- exclude-subsystem prevents a subsystems deployment unit processors running on a deployment -->
-	     <!-- which gives basically the same effect as removing the subsystem, but it only affects single deployment -->
- 		<!-- 
- 		<exclude-subsystems>
-	        <subsystem name="logging" />
-	    </exclude-subsystems>
-	    -->
+		
 	    <exclude-subsystems>
             <subsystem name="jpa"/>
+            <subsystem name="webservices" />
         </exclude-subsystems>
          <exclusions>
+          	<module name="javaee.api" />  
             <module name="org.hibernate" />
             <module name="org.apache.xalan" />
         </exclusions>
@@ -23,6 +31,17 @@
 		    <module name="javax.jms.api"/>
 			<module name="javax.management.j2ee.api"/>
 			<module name="org.joda.time" export="true"/>
+			<module name="org.codehaus.woodstox" services="import" export="true"/>
+			<!-- see https://developer.jboss.org/message/637818#637818 -->
+			<module name="javaee.api" >  
+            <imports>  
+                <exclude-set>  
+                    <path name="org/apache/xml/security"/>  
+                </exclude-set>  
+            </imports>  
+        </module>  
+			
+			<module name="deployment.myservices" services="import" export="true"/>
 			
 			<!-- 
 			<module name="deployment.escidoc-core-1.3.10-SNAPSHOT.ear.13_escidoc-core.war" services="import"  />
@@ -30,8 +49,11 @@
 	    </dependencies>
 	    
 	    
+	    
+	    
  	 </deployment>
  	 
+
 	
  	
 </jboss-deployment-structure>  

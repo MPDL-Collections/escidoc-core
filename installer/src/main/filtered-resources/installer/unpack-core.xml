@@ -93,6 +93,14 @@
   	<delete dir="${install.dir}/install.tmp/wildfly_config" />
   	
     <chmod dir="${install.dir}/wildfly/bin" perm="ugo+rx" includes="*.sh" />
+  	
+  	<move file="${install.dir}/wildfly/standalone/configuration/standalone.xml" tofile="${install.dir}/wildfly/standalone/configuration/standalone.xml.bak" failonerror="true"/>
+  	
+  	<!-- Set spec-descriptor-property-replacement to true. This is important for web.xml of fedora.war which contains placeholders for fedora.home -->
+  	<xmltask source="${install.dir}/wildfly/standalone/configuration/standalone.xml.bak" dest="${install.dir}/wildfly/standalone/configuration/standalone.xml"
+  	                      failWithoutMatch="true">	                      
+  		<replace path="//*[local-name()='spec-descriptor-property-replacement']/text()" withText="true" />                 
+  	</xmltask>
   </target>
 
 	<!--
@@ -178,13 +186,54 @@
     </antcall>
     <move file="${install.dir}/fedora-${timestamp}/data/objects" tofile="${install.dir}/fedora/data/objects" failonerror="false" />
     <move file="${install.dir}/fedora-${timestamp}/data/datastreams" tofile="${install.dir}/fedora/data/datastreams" failonerror="false" />
+  	
+  	<!--
+  	<move file="${install.dir}/install.tmp/fedora.war" tofile="${install.dir}/install.tmp/fedora.bak.war" failonerror="true"/>
+  	<delete file="${install.dir}/install.tmp/fedora.war" failonerror="true"/>
+  	<jar destfile="${install.dir}/install.tmp/fedora.war">
+  		<zipfileset src="${install.dir}/install.tmp/fedora.bak.war" excludes="WEB-INF/lib/xercesImpl-2.9.1.jar,
+  																				WEB-INF/lib/xml-apis-1.3.04.jar,
+  																				WEB-INF/lib/jersey-core-1.0.3.1.jar,
+  																				WEB-INF/lib/jersey-bundle-1.0.3.1.jar,
+																	  			WEB-INF/lib/jersey-multipart-1.0.3.1.jar,
+																	  			WEB-INF/lib/jackson-core-asl-1.5.2.jar,
+																	  			WEB-INF/lib/jackson-mapper-asl-1.5.2.jar,
+  																				WEB-INF/web.xml"/>
+  		
+  		<fileset  dir="${install.dir}/install.tmp/fedora_config/" includes="WEB-INF/web.xml,WEB-INF/jboss-deployment-structure.xml,WEB-INF/lib/**"/>
+
+  	</jar>
+  	-->
+  		
     <!-- patch fedora.war by replacing web.xml with customized version -->
+    
     <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/web.xml" />
+  	<!-- patch fedora.war by adding a jboss-deployment-structure.xml -->
+  	  
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/jboss-deployment-structure.xml" />
+  	
+  
     <!-- patch fedora.war by adding the database driver -->
-    <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/${DatabaseDriverFile}" />
+    <!--
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/${DatabaseDriverFile}" />
     <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/${OracleDDLGenerator}" />
-    <!-- patch fedora.war by adding a jboss-deployment-structure.xml -->
-    <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/jboss-deployment-structure.xml" />
+    -->
+    
+  	<!-- patch fedora.war by adding jaxp-jar -->
+  	<!--
+  		<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/jaxp-ri-1.4.5.jar" />
+  	
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/jersey-core-1.19.jar" />
+	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/jersey-bundle-1.19.jar" />
+	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/jersey-multipart-1.19.jar" />
+	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/jackson-core-asl-1.9.2.jar" />
+	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/lib/jackson-mapper-asl-1.9.2.jar" />
+  	<jar destfile="${install.dir}/install.tmp/fedora.war"  excludesfile="WEB-INF/lib/jersey-core-1.0.3.1.jar" update="yes"/>
+  	<jar destfile="${install.dir}/install.tmp/fedora.war" excludesfile="WEB-INF/lib/jersey-bundle-1.0.3.1.jar" update="yes"/>
+  	<jar destfile="${install.dir}/install.tmp/fedora.war" excludesfile="WEB-INF/lib/jersey-multipart-1.0.3.1.jar" update="yes"/>
+  	<jar destfile="${install.dir}/install.tmp/fedora.war" excludesfile="WEB-INF/lib/jackson-core-asl-1.5.2.jar" update="yes"/>
+  	<jar destfile="${install.dir}/install.tmp/fedora.war" excludesfile="WEB-INF/lib/jackson-mapper-asl-1.5.2.jar" update="yes"/>
+  		-->
     <!-- deploy fedora.war in JBoss -->
     <antcall target="move-file-with-save">
       <param name="source" value="${install.dir}/install.tmp/fedora.war" />

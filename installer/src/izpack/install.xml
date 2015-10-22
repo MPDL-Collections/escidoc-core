@@ -481,6 +481,18 @@
             <file src="config/fedora/jboss-deployment-structure.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/jboss-deployment-structure.xml" />
             
+            <!-- 
+            <file src="config/fedora/jaxp-ri-1.4.5.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            -->
+            <file src="config/fedora/xercesImpl-2.11.0.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/xml-apis-1.4.01.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/jersey-core-1.19.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/jersey-core-1.19.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/jersey-bundle-1.19.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/jersey-multipart-1.19.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/jackson-core-asl-1.9.2.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            <file src="config/fedora/jackson-mapper-asl-1.9.2.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+            
             <file src="config/fedora/log4j.properties" targetdir="$INSTALL_PATH/install.tmp/fedora_config" />
             <file src="config/fedora/deny-everything-if-not-administrator.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
             
@@ -621,6 +633,7 @@
     <jar src="lib/ant-launcher-${ant-launcher.version}.jar" stage="install" />
     <jar src="lib/ant-contrib-${ant-contrib.version}.jar" stage="install" />
     <jar src="lib/xmltask-${ant-xmltask.version}.jar" stage="install" />
+    <jar src="lib/xalan-2.7.0.jar" stage="install" />
     <jar src="lib/postgresql-${jdbc.postgresql.version}.jar" stage="install" />
     <jar src="escidoc-validators.jar" stage="install" />
 

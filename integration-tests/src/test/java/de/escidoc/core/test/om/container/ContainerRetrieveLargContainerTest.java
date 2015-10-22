@@ -28,6 +28,7 @@
  */
 package de.escidoc.core.test.om.container;
 
+import de.escidoc.core.test.EscidocRestSoapTestBase;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -36,8 +37,6 @@ import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-
-import de.escidoc.core.test.EscidocRestSoapTestBase;
 
 /**
  * Test stability by increasing the number of versions of the Container resource.

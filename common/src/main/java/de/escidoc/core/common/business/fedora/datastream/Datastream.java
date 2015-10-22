@@ -33,6 +33,7 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.fcrepo.server.types.gen.ArrayOfString;
 import org.fcrepo.server.types.gen.DatastreamControlGroup;
 import org.fcrepo.server.types.gen.MIMETypedStream;
 import org.joda.time.ReadableDateTime;
@@ -326,9 +327,9 @@ public class Datastream {
 
         this.label = fedoraDatastream.getLabel();
         final DatastreamControlGroup controlGroup = fedoraDatastream.getControlGroup();
-        this.controlGroupValue = controlGroup.getValue();
-        final String[] altIDs = fedoraDatastream.getAltIDs();
-        this.alternateIDs.addAll(Arrays.asList(altIDs));
+        this.controlGroupValue = controlGroup.value();
+        final ArrayOfString altIDs = fedoraDatastream.getAltIDs();
+        this.alternateIDs.addAll(altIDs.getItem());
 
         this.mimeType = fedoraDatastream.getMIMEType();
 

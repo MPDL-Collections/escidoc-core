@@ -513,10 +513,12 @@
       <groupId>xerces</groupId>
       <artifactId>xercesImpl</artifactId>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>woodstox</groupId>
       <artifactId>wstx-asl</artifactId>
     </dependency>
+    -->
     <dependency>
       <groupId>org.escidoc.core.wildfly</groupId>
       <artifactId>http-client</artifactId>

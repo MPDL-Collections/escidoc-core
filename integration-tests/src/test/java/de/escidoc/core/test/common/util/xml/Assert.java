@@ -1,9 +1,9 @@
 package de.escidoc.core.test.common.util.xml;
 
-import static junit.framework.Assert.assertNotNull;
-
 import org.apache.xpath.XPathAPI;
 import org.w3c.dom.Node;
+
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Assert eSciDoc XML representation.

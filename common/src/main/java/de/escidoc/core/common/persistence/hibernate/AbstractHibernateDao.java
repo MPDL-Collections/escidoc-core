@@ -27,6 +27,8 @@ import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -44,6 +46,8 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport {
     protected static final int COMPARE_LIKE = 0;
 
     protected static final int COMPARE_EQ = 1;
+
+    private static Logger logger = LoggerFactory.getLogger(AbstractHibernateDao.class);
 
     private static final String FEDORA_EXCEPTION_MESSAGE =
         new StringBuffer("Fedora might not be running:\n")
@@ -167,6 +171,7 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport {
      * @throws SqlDatabaseSystemException Thrown if the provided exception contains an <code>FedoraSystemException</code>.
      */
     private static void handleFedoraSystemException(final Throwable e) throws SqlDatabaseSystemException {
+        logger.error("handleFedorasystemException", e);
         if (e.getCause() != null && e.getCause().getCause() != null) {
             final Throwable e1 = e.getCause().getCause();
             if (e1 instanceof FedoraSystemException) {

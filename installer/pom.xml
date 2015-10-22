@@ -35,9 +35,9 @@
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>org.escidoc</groupId>
+      <groupId>org.fcrepo</groupId>
       <artifactId>fcrepo-installer</artifactId>
-      <version>${fcrepo.version}.oracle</version>
+      <version>${fcrepo.version}</version>
       <type>jar</type>
     </dependency>
     <dependency>
@@ -75,6 +75,11 @@
       <groupId>ant-contrib</groupId>
       <artifactId>ant-contrib</artifactId>
       <version>${ant-contrib.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.oopsconsultancy</groupId>
+      <artifactId>xmltask</artifactId>
+      <version>1.14</version>
     </dependency>
     <dependency>
       <groupId>de.escidoc.admintool.wildfly</groupId>
@@ -209,6 +214,15 @@
                   <overWrite>false</overWrite>
                   <outputDirectory>${staging.dir}/lib</outputDirectory>
                 </artifactItem>
+                
+                <artifactItem>
+                  <groupId>xalan</groupId>
+                  <artifactId>xalan</artifactId>
+                  <type>jar</type>
+                  <version>2.7.0</version>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${staging.dir}/lib</outputDirectory>
+                </artifactItem>
 
                 <artifactItem>
                   <groupId>de.escidoc.admintool.wildfly</groupId>
@@ -218,6 +232,8 @@
                   <overWrite>false</overWrite>
                   <outputDirectory>${staging.dir}/packages/admin-tool</outputDirectory>
                 </artifactItem>
+                
+
 
                 <artifactItem>
                   <groupId>mptstore</groupId>
@@ -282,6 +298,64 @@
                   	<type>jar</type>
                   	<overWrite>false</overWrite>
                   	<outputDirectory>${staging.dir}/config/wildfly/modules/system/layers/base/org/apache/openjpa/main</outputDirectory>
+                </artifactItem>
+             
+                <!-- Replace jersey and jackson-mapper with new version in fedora -->
+                <artifactItem>
+                  	<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-bundle</artifactId>
+					<version>1.19</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  	<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-core</artifactId>
+					<version>1.19</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+					<groupId>com.sun.jersey.contribs</groupId>
+					<artifactId>jersey-multipart</artifactId>
+					<version>1.19</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-core-asl</artifactId>
+					<version>1.9.2</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-mapper-asl</artifactId>
+					<version>1.9.2</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
+                </artifactItem>
+                 <artifactItem>
+				   <groupId>xerces</groupId>
+    				<artifactId>xercesImpl</artifactId>
+   					<version>2.11.0</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+					<groupId>xml-apis</groupId>
+   					<artifactId>xml-apis</artifactId>
+    				<version>1.4.01</version>
+                  	<type>jar</type>
+                  	<overWrite>false</overWrite>
+                  	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
                 </artifactItem>
                 
                 
@@ -410,7 +484,7 @@
                   <executable>java</executable>
                   <arguments>
                     <argument>-jar</argument>
-                    <argument>${settings.localRepository}/org/escidoc/fcrepo-installer/${fcrepo.version}.oracle/fcrepo-installer-${fcrepo.version}.oracle.jar</argument>
+                    <argument>${settings.localRepository}/org/fcrepo/fcrepo-installer/${fcrepo.version}/fcrepo-installer-${fcrepo.version}.jar</argument>
                     <argument>src/main/resources/config/fedora/install.properties</argument>
                   </arguments>
                   <outputFile>${project.build.directory}/fcrepo-install-error.log</outputFile>
@@ -438,7 +512,14 @@
                 <configuration>
                   <tasks>
                     <echo message="Preparing Fedora Configuration" />
+                    
                     <taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" classpathref="maven.plugin.classpath" />
+
+					<unzip src="${project.build.directory}/fedora/install/fedora.war" dest="${project.build.directory}/fedora/install">
+					    <patternset>
+					        <include name="WEB-INF/web.xml"/>
+					    </patternset>
+					</unzip>
 
                     <!-- fedora.fcfg -->
                     <xmltask source="${project.build.directory}/fedora/server/config/fedora.fcfg" dest="${project.build.directory}/fedora.fcfg"
@@ -486,11 +567,12 @@
 
                     <!-- web.xml -->
                     
-                    <xmltask source="${project.build.directory}/fedora/install/fedorawar/WEB-INF/web.xml" dest="${project.build.directory}/web.xml"
+                    <xmltask source="${project.build.directory}/fedora/install/WEB-INF/web.xml" dest="${project.build.directory}/web.xml"
                       failWithoutMatch="true">
+                      <!-- 
                       <replace path="//*[local-name()='param-name' and text()='fedora.home']/following-sibling::*[1]/text()"
                         withText="${INSTALL_PATH}${FILE_SEPARATOR}fedora" />
-                       
+                       -->
                        <!-- Remove login-config and security role for WildFly/Undertow compatibility issues --> 
                        <remove path="//*[local-name()='login-config']" />
                        <remove path="//*[local-name()='security-role']" />

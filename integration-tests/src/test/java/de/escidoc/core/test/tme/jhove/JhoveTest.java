@@ -1,22 +1,21 @@
 package de.escidoc.core.test.tme.jhove;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-import java.net.URL;
-
+import de.escidoc.core.common.exceptions.remote.application.invalid.TmeException;
+import de.escidoc.core.common.exceptions.remote.application.invalid.XmlCorruptedException;
+import de.escidoc.core.common.exceptions.remote.application.invalid.XmlSchemaValidationException;
+import de.escidoc.core.common.exceptions.remote.application.missing.MissingMethodParameterException;
+import de.escidoc.core.test.common.resources.PropertiesProvider;
+import de.escidoc.core.test.security.client.PWCallback;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import de.escidoc.core.common.exceptions.application.invalid.TmeException;
-import de.escidoc.core.common.exceptions.application.invalid.XmlCorruptedException;
-import de.escidoc.core.common.exceptions.application.invalid.XmlSchemaValidationException;
-import de.escidoc.core.common.exceptions.application.missing.MissingMethodParameterException;
-import de.escidoc.core.test.common.resources.PropertiesProvider;
-import de.escidoc.core.test.security.client.PWCallback;
+import java.io.File;
+import java.net.URL;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author

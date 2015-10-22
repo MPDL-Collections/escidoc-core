@@ -28,12 +28,12 @@
  */
 package de.escidoc.core.test.sm;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Base class for Scope tests.
