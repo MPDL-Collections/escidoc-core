@@ -155,7 +155,8 @@ public class PoolableTransformerFactory extends BaseKeyedPoolableObjectFactory {
             if (contentModelId.length() > 0 && !"null".equalsIgnoreCase(contentModelId)) {
                 try {
                     // create link to content of DC-MAPPING in content model object
-                    xsltUrl = "/get/" + contentModelId + '/' + CONTENT_MODEL_XSLT_DC_DATASTREAM;
+                    xsltUrl =
+                        "/objects/" + contentModelId + "/datastreams/" + CONTENT_MODEL_XSLT_DC_DATASTREAM + "/content";
                     xslt = FedoraUtility.getInstance().requestFedoraURL(xsltUrl);
                 }
                 catch (final WebserverSystemException e) {

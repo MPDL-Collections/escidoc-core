@@ -309,7 +309,7 @@ public class ItemContentURLTest extends ItemTestBase {
         // content to staging
         String fedoraUrl =
             PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL, "http://localhost:8082/fedora");
-        String url = fedoraUrl + "/get/escidoc:ex6/content";
+        String url = fedoraUrl + "/objects/escidoc:ex6/datastreams/content/content";
 
         deleteElement(this.theItemDoc, "/item/components/component[not(content/@href)]");
         this.theItemXml = toString(this.theItemDoc, false);
@@ -345,7 +345,7 @@ public class ItemContentURLTest extends ItemTestBase {
         // content to staging
         String fedoraUrl =
             PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL, "http://localhost:8082/fedora");
-        String url = fedoraUrl + "/get/escidoc:ex6/content";
+        String url = fedoraUrl + "/objects/escidoc:ex6/datastreams/content/content";
 
         this.theItemDoc = (Document) substitute(this.theItemDoc, "/item/components/component[1]/content/@href", url);
         this.theItemXml = toString(this.theItemDoc, false);

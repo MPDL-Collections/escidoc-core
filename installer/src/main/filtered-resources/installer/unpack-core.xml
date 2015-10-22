@@ -212,6 +212,9 @@
   	  
   	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/jboss-deployment-structure.xml" />
   	
+	<!-- patch fedora.war by adding an empty log4j config file, in order to avoid interference with jboss logging -->
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/classes/log4j.properties" />
+  	
   
     <!-- patch fedora.war by adding the database driver -->
     <!--

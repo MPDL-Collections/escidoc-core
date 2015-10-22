@@ -201,10 +201,10 @@ public class ContentTestBase extends ItemTestBase {
         String protocol = fedoraUrl.substring(0, pos + 3);
         String hostPart = fedoraUrl.substring(pos + 3);
 
-        String contentUrl = protocol + auth + hostPart + "/get/" + componentId + "/content";
+        String contentUrl = protocol + auth + hostPart + "/objects/" + componentId + "/datastreams/content/content";
 
         if (versionDate != null) {
-            contentUrl += "/" + versionDate;
+            contentUrl += "?asOfDateTime=" + versionDate;
         }
 
         return contentUrl;
@@ -249,8 +249,8 @@ public class ContentTestBase extends ItemTestBase {
     protected File retrieveContentFromRepository(final String objectId, final String contentType) throws Exception {
 
         String fedoraUrl =
-            PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL) + "/get/" + objectId
-                + "/content";
+            PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL) + "/objects/" + objectId
+                + "/datastreams/content/content";
 
         String auth =
             PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_USER) + ":"

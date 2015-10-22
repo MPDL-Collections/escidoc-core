@@ -494,6 +494,7 @@
             <file src="config/fedora/jackson-mapper-asl-1.9.2.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
             
             <file src="config/fedora/log4j.properties" targetdir="$INSTALL_PATH/install.tmp/fedora_config" />
+            <file src="config/fedora/log4j.properties" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/classes" />
             <file src="config/fedora/deny-everything-if-not-administrator.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
             
              <file src="config/fedora/env-server.sh" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />

@@ -180,9 +180,9 @@ public class FedoraContentModelHandler extends ContentModelHandlerRetrieve imple
             bin.setRedirectUrl(cs.getLocation());
         }
         else {
-            String fedoraLocalUrl = "/get/" + getContentModel().getId() + '/' + name;
+            String fedoraLocalUrl = "/objects/" + getContentModel().getId() + "/datastreams/" + name + "/content";
             if (getContentModel().getVersionDate() != null) {
-                fedoraLocalUrl += '/' + getContentModel().getVersionDate();
+                fedoraLocalUrl += "?asOfDateTime=" + getContentModel().getVersionDate();
             }
             bin.setContent(getFedoraUtility().requestFedoraURL(fedoraLocalUrl));
         }
@@ -208,9 +208,9 @@ public class FedoraContentModelHandler extends ContentModelHandlerRetrieve imple
             bin.setRedirectUrl(ds.getLocation());
         }
         else {
-            String fedoraLocalUrl = "/get/" + ds.getParentId() + '/' + name;
+            String fedoraLocalUrl = "/objects/" + ds.getParentId() + "/datastreams/" + name + "/content";
             if (getContentModel().getVersionDate() != null) {
-                fedoraLocalUrl += '/' + getContentModel().getVersionDate();
+                fedoraLocalUrl += "?asOfDateTime=" + getContentModel().getVersionDate();
             }
             bin.setContent(getFedoraUtility().requestFedoraURL(fedoraLocalUrl));
         }

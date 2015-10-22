@@ -267,8 +267,8 @@ public class ItemRetrieveContentTest extends ContentTestBase {
 
         // compare it with direct request from Repository ----------------------
         String fedoraUrl =
-            PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL) + "/get/" + componentId
-                + "/content";
+            PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL) + "/objects/" + componentId
+                + "datastreams/content/content";
 
         String auth =
             PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_USER) + ":"
@@ -372,8 +372,8 @@ public class ItemRetrieveContentTest extends ContentTestBase {
 
         // compare it with direct request from Repository ----------------------
         String fedoraUrl =
-            PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL) + "/get/" + componentId
-                + "/content";
+            PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_URL) + "/objects/" + componentId
+                + "datastreams/content/content";
 
         String auth =
             PropertiesProvider.getInstance().getProperty(PropertiesProvider.FEDORA_USER) + ":"

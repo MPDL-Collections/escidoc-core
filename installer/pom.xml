@@ -578,7 +578,9 @@
                        <remove path="//*[local-name()='security-role']" />
                        
                        <!-- Remove LogSetupContextListener in order to let wildfly log --> 
+                       <!-- 
                         <remove path="//*[local-name()='listener' and ./*[local-name()='listener-class' and text()='org.fcrepo.server.utilities.LogSetupContextListener']]" />
+                        -->
                     </xmltask>
                     
                   </tasks>

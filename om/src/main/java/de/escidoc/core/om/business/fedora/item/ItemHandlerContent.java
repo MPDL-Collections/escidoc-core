@@ -168,9 +168,9 @@ public class ItemHandlerContent extends ItemHandlerUpdate {
             try {
                 // bin content can be got with the Datastream (getContent()),
                 // but try to stream
-                String fedoraLocalUrl = "/get/" + component.getId() + "/content";
+                String fedoraLocalUrl = "/objects/" + component.getId() + "/datastreams/content/content";
                 if (getItem().getVersionDate() != null) {
-                    fedoraLocalUrl += '/' + getItem().getVersionDate();
+                    fedoraLocalUrl += "?asOfDateTime=" + getItem().getVersionDate();
                 }
                 // 
                 MimeInputStream mimeInputStream = getFedoraUtility().requestMimeFedoraURL(fedoraLocalUrl);
@@ -571,9 +571,9 @@ public class ItemHandlerContent extends ItemHandlerUpdate {
             bin.setRedirectUrl(cs.getLocation());
         }
         else {
-            String fedoraLocalUrl = "/get/" + getItem().getId() + '/' + name;
+            String fedoraLocalUrl = "/objects/" + getItem().getId() + "/datastreams/" + name + "/content";
             if (getItem().getVersionDate() != null) {
-                fedoraLocalUrl += '/' + getItem().getVersionDate();
+                fedoraLocalUrl += "?asOfDateTime=" + getItem().getVersionDate();
             }
             bin.setContent(getFedoraUtility().requestFedoraURL(fedoraLocalUrl));
         }
@@ -610,7 +610,9 @@ public class ItemHandlerContent extends ItemHandlerUpdate {
         final String protocol = fedoraUrl.substring(0, pos + 3);
         final String hostPart = fedoraUrl.substring(pos + 3);
 
-        final String contentUrl = protocol + auth + hostPart + "/get/" + componentId + "/content" + '/' + versionDate;
+        final String contentUrl =
+            protocol + auth + hostPart + "/objects/" + componentId + "/datastreams/content/content" + "?asOfDateTime="
+                + versionDate;
 
         final URL url;
         if (transformer.equals(TRANSFORM_SERVICE_DIGILIB)) {
