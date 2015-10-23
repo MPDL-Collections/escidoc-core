@@ -24,7 +24,7 @@
         <property name="logCategory" value="de.escidoc.core.index.IndexService.error"/>
     </bean>
 
-    <camelContext id="indexServiceImplCamelContext" xmlns="http://camel.apache.org/schema/spring">
+    <camelContext id="indexServiceImplCamelContext" xmlns="http://camel.apache.org/schema/spring" streamCache="true" allowUseOriginalMessage="false">
 
         <dataFormats>
             <jaxb id="indexServiceJaxb" prettyPrint="false" encoding="UTF-8" contextPath="de.escidoc.core.index.internal" />

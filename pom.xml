@@ -1125,6 +1125,12 @@
 			<artifactId>wildfly-ee</artifactId>
 			<version>8.2.1.Final</version>
 			<scope>provided</scope>
+			    	<exclusions>
+    		<exclusion>
+    			<artifactId>org.wildfly</artifactId>
+    			<groupId>wildfly-cli</groupId>
+    		</exclusion>
+    	</exclusions>
 		</dependency>
 		
 		<!-- Just for overwriting entry in widlfy-ee--> 

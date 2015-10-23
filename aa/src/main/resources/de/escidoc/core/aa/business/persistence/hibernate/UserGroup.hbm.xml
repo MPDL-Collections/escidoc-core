@@ -171,7 +171,7 @@
     <set
         name="members"
         inverse="true"
-        lazy="false"
+        lazy="true"
         cascade="save-update,delete,delete-orphan"
     >
         <meta attribute="generated-class">
@@ -180,7 +180,7 @@
                         ="field-description">
            @hibernate.set
             inverse="true"
-            lazy="false"
+            lazy="true"
             cascade="save-update,delete,delete-orphan"
  
            @hibernate.collection-key
@@ -200,7 +200,7 @@
     </set>
     <set
         name="grants"
-        lazy="false"
+        lazy="true"
         inverse="false"
         cascade="all,delete-orphan"
     >
@@ -209,7 +209,7 @@
                                 <meta attribute
                         ="field-description">
            @hibernate.set
-            lazy="false"
+            lazy="true"
             inverse="false"
             cascade="all,delete-orphan"
  

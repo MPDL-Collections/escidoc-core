@@ -20,7 +20,7 @@
         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"
         default-lazy-init="false">
 
-    <camelContext id="purgeServiceSpecCamelContext" xmlns="http://camel.apache.org/schema/spring">
+    <camelContext id="purgeServiceSpecCamelContext" xmlns="http://camel.apache.org/schema/spring" streamCache="true" allowUseOriginalMessage="false">
 
         <proxy id="de.escidoc.core.purge.PurgeService" serviceInterface="de.escidoc.core.purge.PurgeService"
                serviceUrl="direct:de.escidoc.core.purge.PurgeService"/>

@@ -118,7 +118,7 @@
 
     <set
         name="roleGrants"
-        lazy="false"
+        lazy="true"
         inverse="false"
 		cascade="all,delete-orphan"
 
@@ -128,7 +128,7 @@
 				<meta attribute
 			="field-description">
            @hibernate.set
-            lazy="false"
+            lazy="true"
             inverse="false"
             cascade="all,delete-orphan"
 

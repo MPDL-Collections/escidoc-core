@@ -124,14 +124,14 @@
 
     <set
         name="aggregationDefinitions"
-        lazy="false"
+        lazy="true"
         inverse="false"
 		cascade="all"
 
     >
         <meta attribute="field-description">
            @hibernate.set
-            lazy="false"
+            lazy="true"
             inverse="false"
             cascade="all"
 
@@ -154,14 +154,14 @@
 
     <set
         name="statisticDatas"
-        lazy="false"
+        lazy="true"
         inverse="false"
 		cascade="all"
 
     >
         <meta attribute="field-description">
            @hibernate.set
-            lazy="false"
+            lazy="true"
             inverse="false"
             cascade="all"
 
@@ -184,14 +184,14 @@
 
     <set
         name="reportDefinitions"
-        lazy="false"
+        lazy="true"
         inverse="false"
 		cascade="all"
 
     >
         <meta attribute="field-description">
            @hibernate.set
-            lazy="false"
+            lazy="true"
             inverse="false"
             cascade="all"
 

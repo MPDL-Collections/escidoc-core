@@ -24,7 +24,7 @@
         <property name="logCategory" value="de.escidoc.core.statistic.StatisticService"/>
     </bean>
 
-    <camelContext id="statisticServiceImplCamelContext" xmlns="http://camel.apache.org/schema/spring">
+    <camelContext id="statisticServiceImplCamelContext" xmlns="http://camel.apache.org/schema/spring" streamCache="true" allowUseOriginalMessage="false">
 
         <dataFormats>
             <jaxb id="statisticServiceJaxb" prettyPrint="false" encoding="UTF-8" contextPath="de.escidoc.core.statistic.internal"/>

@@ -20,7 +20,7 @@
         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd"
        default-lazy-init="false">
 
-    <camelContext id="purgeServiceCamelContext" xmlns="http://camel.apache.org/schema/spring">
+    <camelContext id="purgeServiceCamelContext" xmlns="http://camel.apache.org/schema/spring"  streamCache="true" allowUseOriginalMessage="false">
 
         <dataFormats>
             <jaxb id="purgeServiceJaxb" prettyPrint="false" encoding="UTF-8" contextPath="de.escidoc.core.purge.internal" />

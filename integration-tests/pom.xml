@@ -119,7 +119,7 @@
 	              <cargo.servlet.port>8080</cargo.servlet.port>
 	              <cargo.rmi.port>1099</cargo.rmi.port>
 	              <cargo.logging>medium</cargo.logging>
-	              <cargo.jvmargs>-Xmx1024m -Xms312m -XX:MaxPermSize=320m ${cargo.jvmdebug} ${cargo.ucldebug}</cargo.jvmargs>
+	              <cargo.jvmargs>-Xmx2048m -Xms312m -XX:MaxPermSize=320m ${cargo.jvmdebug} ${cargo.ucldebug}</cargo.jvmargs>
 	            </properties>
             </configuration>
             <deployables>

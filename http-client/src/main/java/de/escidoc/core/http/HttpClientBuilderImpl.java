@@ -23,6 +23,7 @@ package de.escidoc.core.http;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.http.HttpVersion;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -38,7 +39,9 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 
 public class HttpClientBuilderImpl extends HttpClientBuilder {
 
@@ -92,6 +95,7 @@ public class HttpClientBuilderImpl extends HttpClientBuilder {
 
     private void initHttpClient() {
         final HttpParams httpParams = new BasicHttpParams();
+        HttpProtocolParams.setVersion(httpParams, HttpVersion.HTTP_1_1);
         ConnManagerParams.setMaxTotalConnections(httpParams, this.maxTotalConnections);
         final ConnPerRoute connPerRoute = new ConnPerRouteBean(this.maxConnectionsPerHost);
         ConnManagerParams.setMaxConnectionsPerRoute(httpParams, connPerRoute);
