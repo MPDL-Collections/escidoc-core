@@ -20,11 +20,16 @@
 
 package de.escidoc.core.common.util.security.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class holding information of an invocation mapping.
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "invocation_mappings", schema = "aa")
 public class InvocationMapping extends InvocationMappingBase {
 
     public static final int SIMPLE_ATTRIBUTE_MAPPING = 0;

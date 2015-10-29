@@ -30,6 +30,8 @@ package de.escidoc.core.aa.business;
 
 import java.io.ByteArrayInputStream;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import de.escidoc.core.aa.business.persistence.ActionDaoInterface;
 import de.escidoc.core.aa.business.persistence.UnsecuredActionList;
 import de.escidoc.core.aa.business.renderer.interfaces.ActionRendererInterface;
@@ -53,6 +55,7 @@ import de.escidoc.core.common.util.xml.stax.StaxParser;
  *
  * @author Torsten Tetteroo
  */
+@Transactional
 public class ActionHandler implements ActionHandlerInterface {
 
     /**

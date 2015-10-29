@@ -48,7 +48,6 @@ import com.sun.xacml.cond.StandardFunctionFactory;
 import de.escidoc.core.aa.business.persistence.EscidocRole;
 import de.escidoc.core.aa.business.persistence.EscidocRoleDaoInterface;
 import de.escidoc.core.aa.business.persistence.ScopeDef;
-import de.escidoc.core.aa.business.persistence.ScopeDefBase;
 import de.escidoc.core.aa.business.stax.handler.RolePropertiesStaxHandler;
 import de.escidoc.core.aa.business.stax.handler.ScopeStaxHandler;
 import de.escidoc.core.aa.business.stax.handler.XacmlStaxHandler;
@@ -161,17 +160,16 @@ public class XacmlParser {
         String result = "";
         final String label = resourceType.getLabel();
 
-        for (final Object scope : role.getScopeDefs()) {
-            if (label.equals(((ScopeDefBase) scope).getObjectType())) {
-                final String rule = values.getScope(((ScopeDefBase) scope).getAttributeId());
+        for (final ScopeDef scope : role.getScopeDefs()) {
+            if (label.equals((scope).getObjectType())) {
+                final String rule = values.getScope((scope).getAttributeId());
 
                 if (rule == null) {
-                    if (values.ignoreScope(((ScopeDefBase) scope).getAttributeId())) {
-                        LOGGER.info("ignore scope definition " + ((ScopeDefBase) scope).getAttributeId());
+                    if (values.ignoreScope((scope).getAttributeId())) {
+                        LOGGER.info("ignore scope definition " + (scope).getAttributeId());
                     }
                     else {
-                        throw new IllegalArgumentException("no translation found for "
-                            + ((ScopeDefBase) scope).getAttributeId());
+                        throw new IllegalArgumentException("no translation found for " + (scope).getAttributeId());
                     }
                 }
                 else {

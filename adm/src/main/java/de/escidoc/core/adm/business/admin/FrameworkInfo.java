@@ -38,6 +38,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.util.IOUtils;
@@ -50,6 +52,7 @@ import de.escidoc.core.common.util.db.Fingerprint;
  * 
  * @author André Schenk
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class FrameworkInfo extends JdbcDaoSupport {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FrameworkInfo.class);

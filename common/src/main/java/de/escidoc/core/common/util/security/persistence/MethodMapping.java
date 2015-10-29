@@ -20,11 +20,16 @@
 
 package de.escidoc.core.common.util.security.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class holding information of a method mapping.
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "method_mappings", schema = "aa")
 public class MethodMapping extends MethodMappingBase {
 
     /**

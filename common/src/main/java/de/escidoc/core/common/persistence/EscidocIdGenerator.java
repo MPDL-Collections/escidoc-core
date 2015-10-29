@@ -23,7 +23,7 @@ package de.escidoc.core.common.persistence;
 import java.io.Serializable;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.SessionImplementor;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
 import de.escidoc.core.common.exceptions.system.SystemException;

@@ -46,6 +46,10 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import com.sun.xacml.Indenter;
 import com.sun.xacml.ParsingException;
@@ -168,6 +172,10 @@ public class PolicyDecisionPoint implements PolicyDecisionPointInterface {
 
     private final Map<String, URI> uriCache = new HashMap<String, URI>();
 
+    private List<EscidocRole> roles = new ArrayList<EscidocRole>();
+
+    private PlatformTransactionManager transactionManager;
+
     /**
      * Default constructor.
      */
@@ -191,9 +199,23 @@ public class PolicyDecisionPoint implements PolicyDecisionPointInterface {
         final Map<String, Object> filter = new HashMap<String, Object>();
 
         filter.put(Constants.FILTER_PATH_NAME, "%");
-        final List<EscidocRole> roles = roleDao.retrieveRoles(filter, 0, 0, null, null);
 
-        roles.add(roleDao.retrieveRole(EscidocRole.DEFAULT_USER_ROLE_ID));
+        TransactionTemplate tmpl = new TransactionTemplate(transactionManager);
+        tmpl.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus status) {
+                try {
+                    roles = roleDao.retrieveRoles(filter, 0, 0, null, null);
+
+                    roles.add(roleDao.retrieveRole(EscidocRole.DEFAULT_USER_ROLE_ID));
+                }
+                catch (SqlDatabaseSystemException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+
         for (final EscidocRole role : roles) {
             xacmlParser.parse(role);
             for (final ResourceType resourceType : ResourceType.values()) {
@@ -796,6 +818,14 @@ public class PolicyDecisionPoint implements PolicyDecisionPointInterface {
     @Override
     public void touch() {
         // do nothing
+    }
+
+    public PlatformTransactionManager getTransactionManager() {
+        return transactionManager;
+    }
+
+    public void setTransactionManager(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
 }

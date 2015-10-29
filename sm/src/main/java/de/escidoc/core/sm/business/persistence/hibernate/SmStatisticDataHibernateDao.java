@@ -33,6 +33,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
@@ -43,6 +45,7 @@ import de.escidoc.core.sm.business.persistence.SmStatisticDataDaoInterface;
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class SmStatisticDataHibernateDao extends AbstractHibernateDao implements SmStatisticDataDaoInterface {
 
     public static final String QUERY_MIN_TIMESTAMP_FOR_SCOPE =

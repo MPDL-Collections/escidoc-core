@@ -33,6 +33,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.sun.xacml.PolicySet;
@@ -47,6 +51,8 @@ import de.escidoc.core.common.util.xml.XmlUtility;
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "escidoc_role", schema = "aa")
 public class EscidocRole extends EscidocRoleBase {
 
     /**
@@ -59,8 +65,10 @@ public class EscidocRole extends EscidocRoleBase {
      */
     public static final String DEFAULT_USER_ROLE_ID = "escidoc:role-default-user";
 
+    @Transient
     private transient PolicySet policySet;
 
+    @Transient
     private List<String> objectTypes;
 
     /**
@@ -68,6 +76,7 @@ public class EscidocRole extends EscidocRoleBase {
      *
      * @return Returns <code>true</code> if this is a limited role, <code>false</code> else.
      */
+    @Transient
     public boolean isLimited() {
         return getScopeDefs() != null && !getScopeDefs().isEmpty();
     }
@@ -80,6 +89,7 @@ public class EscidocRole extends EscidocRoleBase {
      * @return Returns the <code>XacmlRolePolicySet</code> of this role.
      * @throws WebserverSystemException Thrown in case of an internal error.
      */
+    @Transient
     public PolicySet getXacmlPolicySet() throws WebserverSystemException {
 
         if (this.policySet == null) {
@@ -101,6 +111,7 @@ public class EscidocRole extends EscidocRoleBase {
      * @return Returns the policy set id of this role.
      * @throws WebserverSystemException Thrown in case of an internal error.
      */
+    @Transient
     public URI getPolicySetId() throws WebserverSystemException {
 
         return getXacmlPolicySet().getId();
@@ -111,6 +122,7 @@ public class EscidocRole extends EscidocRoleBase {
      *
      * @return Returns the objectTypes in a <code>List</code>.
      */
+    @Transient
     public Collection<String> getObjectTypes() {
         if (this.objectTypes == null) {
             if (isLimited()) {
@@ -133,6 +145,7 @@ public class EscidocRole extends EscidocRoleBase {
      *
      * @return Returns the href of this role.
      */
+    @Transient
     public String getHref() {
 
         return XmlUtility.getRoleHref(this.getId());
@@ -144,6 +157,7 @@ public class EscidocRole extends EscidocRoleBase {
      * @see Object#toString()
      */
     @Override
+    @Transient
     public String toString() {
 
         ToStringBuilder toStringBuilder =

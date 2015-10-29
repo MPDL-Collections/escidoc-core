@@ -104,9 +104,12 @@ public abstract class WriteHandler extends DefaultHandler {
                 namespaceTrace.add(this.deepLevel);
                 namespaceTrace.add(name);
                 namespaceTrace.add(prefix);
+                System.out.println("Writing NS writeElement" + prefix + " --- " + uri + "(" + name + ")");
                 nsuris.put(uri, namespaceTrace);
                 writer.writeStartElement(prefix, name, uri);
+
                 writer.writeNamespace(prefix, uri);
+
             }
         }
         else {
@@ -137,8 +140,11 @@ public abstract class WriteHandler extends DefaultHandler {
                 namespaceTrace.add(elementName);
                 namespaceTrace.add(prefix);
                 nsuris.put(uri, namespaceTrace);
+                System.out.println("Writing NS writeAttribute 1 " + prefix + " --- " + uri + "(" + elementName + ")");
+                if (uri != null && !uri.isEmpty()) {
+                    writer.writeNamespace(prefix, uri);
+                }
 
-                writer.writeNamespace(prefix, uri);
             }
         }
         if (prefix != null) {
@@ -158,7 +164,8 @@ public abstract class WriteHandler extends DefaultHandler {
                                 namespaceTrace.add(elementName);
                                 namespaceTrace.add(prefixValue);
                                 nsuris.put(valueUri, namespaceTrace);
-
+                                System.out.println("Writing NS writeAttribute 2" + prefixValue + " --- " + valueUri
+                                    + "(" + elementName + ")");
                                 writer.writeNamespace(prefixValue, valueUri);
                             }
                         }

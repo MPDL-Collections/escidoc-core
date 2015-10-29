@@ -49,6 +49,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.xml.sax.InputSource;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
@@ -485,6 +487,8 @@ public class AggregationPreprocessor {
      * @param date                      processing-date
      * @throws SqlDatabaseSystemException e
      */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+        de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
     public void persistAggregation(
         final AggregationPreprocessorVo aggregationPreprocessorVo, final String aggregationDefinitionId, final Date date)
         throws SqlDatabaseSystemException {

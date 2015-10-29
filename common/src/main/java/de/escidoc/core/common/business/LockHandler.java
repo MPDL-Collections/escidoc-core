@@ -31,7 +31,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.impl.SessionFactoryImpl;
+import org.hibernate.internal.SessionFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -62,6 +62,7 @@ public class LockHandler extends JdbcDaoSupport {
      */
     public void init() {
         lockedValue = ((SessionFactoryImpl) sessionFactory).getDialect().toBooleanValueString(LOCKED_VALUE);
+
     }
 
     /**

@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.persistence.UserAccountDaoInterface;
 import de.escidoc.core.aa.business.persistence.UserLoginData;
@@ -32,6 +34,7 @@ public class UserHandleCleaner {
     /**
      * Cleans up the login data, i.e. removes each eSciDoc user handle that has been expired a while ago.
      */
+    @Scheduled(fixedRateString = "${escidoc-core.aa.cleanup.period}")
     public void cleanUp() {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Cleaning up the staging file area");

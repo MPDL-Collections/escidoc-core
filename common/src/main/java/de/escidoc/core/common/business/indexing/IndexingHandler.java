@@ -41,6 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ClientConnectionManager;
@@ -51,6 +52,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.apache.xpath.XPathAPI;
@@ -700,6 +702,7 @@ public class IndexingHandler implements ResourceListener {
         try {
 
             final HttpParams params = new BasicHttpParams();
+            HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
             final Scheme http = new Scheme("http", PlainSocketFactory.getSocketFactory(), 80);
             final SchemeRegistry sr = new SchemeRegistry();
             sr.register(http);
@@ -778,6 +781,7 @@ public class IndexingHandler implements ResourceListener {
                 LOGGER.debug("getIds for <" + indexName + ">");
             }
             final HttpParams params = new BasicHttpParams();
+            HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
             final Scheme http = new Scheme("http", PlainSocketFactory.getSocketFactory(), 80);
             final SchemeRegistry sr = new SchemeRegistry();
             sr.register(http);

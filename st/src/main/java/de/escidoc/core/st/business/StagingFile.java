@@ -36,6 +36,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import de.escidoc.core.common.util.IOUtils;
 
 /**
@@ -43,6 +47,8 @@ import de.escidoc.core.common.util.IOUtils;
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "staging_file", schema = "st")
 public class StagingFile extends de.escidoc.core.st.business.persistence.StagingFile {
 
     /**
@@ -51,6 +57,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @return Returns <code>true</code> if an existing file in the file system has been associated to this staging
      *         file, <code>false</code> if there does not exist an associated file.
      */
+    @Transient
     public boolean hasFile() {
 
         if (getReference() == null) {
@@ -65,6 +72,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @return Returns <code>true</code> if an existing, readable file in the file system has been associated to this
      *         staging file.
      */
+    @Transient
     public boolean canRead() {
 
         if (getReference() == null) {
@@ -79,6 +87,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @return Returns <code>true</code> if a reference to a file in the file system has been set and the file system's
      *         file would be writeable.
      */
+    @Transient
     public boolean canWrite() {
 
         if (getReference() == null) {
@@ -92,6 +101,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      *
      * @return Returns <code>true</code> if this staging file has been expired.
      */
+    @Transient
     public boolean isExpired() {
 
         return getExpiryTs() <= System.currentTimeMillis();
@@ -103,6 +113,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @return The file referenced by this staging file.
      * @throws IOException If file cannot be retrieved.
      */
+    @Transient
     private File getFile() throws IOException {
 
         if (!hasFile()) {
@@ -118,6 +129,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @return The file referenced by this staging file.
      * @throws IOException If file cannot be retrieved.
      */
+    @Transient
     public File createFile() throws IOException {
 
         if (getReference() == null) {
@@ -137,6 +149,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @return Returns an input stream to access the file associated to this staging file.
      * @throws IOException If file input stream cannot be retrieved.
      */
+    @Transient
     public FileInputStream getFileInputStream() throws IOException {
 
         try {
@@ -153,6 +166,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @param outputStream The stream to which the file content shall be written.
      * @throws IOException If operation fails.
      */
+    @Transient
     public void write(final OutputStream outputStream) throws IOException {
 
         if (outputStream == null) {
@@ -176,6 +190,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      * @throws IOException If operation fails.
      * @throws java.io.FileNotFoundException
      */
+    @Transient
     public void read(final InputStream inputStream) throws IOException, FileNotFoundException {
 
         if (inputStream == null) {
@@ -199,6 +214,7 @@ public class StagingFile extends de.escidoc.core.st.business.persistence.Staging
      *
      * @throws IOException If clear fails.
      */
+    @Transient
     public void clear() throws IOException {
 
         if (hasFile()) {

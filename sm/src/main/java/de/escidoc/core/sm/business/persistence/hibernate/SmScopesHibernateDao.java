@@ -36,6 +36,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.notfound.ScopeNotFoundException;
@@ -49,6 +52,7 @@ import de.escidoc.core.sm.business.persistence.SmScopesDaoInterface;
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScopesDaoInterface {
 
     /**
@@ -118,7 +122,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         if (result == null) {
@@ -137,7 +141,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
     @Override
     public Collection<Scope> retrieveScopes() throws SqlDatabaseSystemException {
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Scope.class, "s");
-        return getHibernateTemplate().findByCriteria(detachedCriteria);
+        return (Collection<Scope>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
     /**
@@ -156,7 +160,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
 
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Scope.class, "s");
         detachedCriteria.add(Restrictions.in("id", scopeIds));
-        return getHibernateTemplate().findByCriteria(detachedCriteria);
+        return (Collection<Scope>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
     /**
@@ -183,7 +187,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
             detachedCriteria.add(Restrictions.in("id", scopeIds));
 
             final Collection<Scope> scopes =
-                getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                (Collection<Scope>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
 
             if (scopes != null) {
                 return scopes;
@@ -204,7 +208,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
         final Collection<String> scopeIds = new ArrayList<String>();
 
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Scope.class, "s");
-        final Collection<Scope> scopes = getHibernateTemplate().findByCriteria(detachedCriteria);
+        final Collection<Scope> scopes = (Collection<Scope>) getHibernateTemplate().findByCriteria(detachedCriteria);
 
         if (scopes != null) {
             for (final Scope scope : scopes) {

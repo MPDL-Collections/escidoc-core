@@ -43,6 +43,9 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.persistence.UserGroupDaoInterface;
 import de.escidoc.core.common.business.Constants;
@@ -50,6 +53,7 @@ import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryE
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
 import de.escidoc.core.common.util.list.ListSorting;
+import de.escidoc.core.common.util.security.persistence.MethodMapping;
 import de.escidoc.core.oai.business.filter.SetDefinitionFilter;
 import de.escidoc.core.oai.business.persistence.SetDefinition;
 import de.escidoc.core.oai.business.persistence.SetDefinitionDaoInterface;
@@ -57,6 +61,7 @@ import de.escidoc.core.oai.business.persistence.SetDefinitionDaoInterface;
 /**
  * @author Rozita Friedman
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateSetDefinitionDao extends AbstractHibernateDao implements SetDefinitionDaoInterface {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HibernateSetDefinitionDao.class);
@@ -102,7 +107,7 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
         final SetDefinition result;
         try {
             result =
-                (SetDefinition) getUniqueResult(getHibernateTemplate()
+                (SetDefinition) getUniqueResult((List<Object>) getHibernateTemplate()
                     .findByCriteria(
                         DetachedCriteria.forClass(SetDefinition.class).add(
                             Restrictions.eq("specification", specification))));
@@ -112,7 +117,7 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
         }
         catch (final HibernateException e) {
             //noinspection ThrowableResultOfMethodCallIgnored,ThrowableResultOfMethodCallIgnored
-            throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+            throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
         }
         catch (final IllegalStateException e) {
             throw new SqlDatabaseSystemException(e);
@@ -141,7 +146,7 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored,ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -191,7 +196,8 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
         final List<SetDefinition> result;
         if (clonedCriterias.isEmpty()) {
             try {
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result =
+                    (List<SetDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -218,13 +224,15 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
 
         if (criterias != null && criterias.length() > 0) {
             result =
-                getHibernateTemplate().findByCriteria(new SetDefinitionFilter(criterias).toSql(), offset, maxResults);
+                (List<SetDefinition>) getHibernateTemplate().findByCriteria(new SetDefinitionFilter(criterias).toSql(),
+                    offset, maxResults);
         }
         else {
             try {
                 final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(SetDefinition.class);
 
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result =
+                    (List<SetDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);

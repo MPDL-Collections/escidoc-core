@@ -44,6 +44,9 @@ import org.hibernate.criterion.Subqueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.filter.RoleFilter;
 import de.escidoc.core.aa.business.persistence.EscidocRole;
@@ -61,6 +64,7 @@ import de.escidoc.core.common.util.list.ListSorting;
  *
  * @author Torsten Tetteroo
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateEscidocRoleDao extends AbstractHibernateDao implements EscidocRoleDaoInterface {
 
     /**
@@ -118,7 +122,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -149,7 +153,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
                 result = getHibernateTemplate().get(EscidocRole.class, identifier);
                 if (result == null) {
                     result =
-                        (EscidocRole) getUniqueResult(getHibernateTemplate().findByCriteria(
+                        (EscidocRole) getUniqueResult((List<Object>) getHibernateTemplate().findByCriteria(
                             DetachedCriteria.forClass(EscidocRole.class).add(Restrictions.eq("roleName", identifier))));
                 }
             }
@@ -158,7 +162,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
             catch (final IllegalStateException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -243,7 +247,8 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
 
             final List<EscidocRole> result;
             try {
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result =
+                    (List<EscidocRole>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -270,14 +275,17 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
         final List<EscidocRole> result;
 
         if (criterias != null && criterias.length() > 0) {
-            result = getHibernateTemplate().findByCriteria(new RoleFilter(criterias).toSql(), offset, maxResults);
+            result =
+                (List<EscidocRole>) getHibernateTemplate().findByCriteria(new RoleFilter(criterias).toSql(), offset,
+                    maxResults);
         }
         else {
             try {
                 final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(EscidocRole.class, "r");
 
                 detachedCriteria.add(Restrictions.ne("id", EscidocRole.DEFAULT_USER_ROLE_ID));
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result =
+                    (List<EscidocRole>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);

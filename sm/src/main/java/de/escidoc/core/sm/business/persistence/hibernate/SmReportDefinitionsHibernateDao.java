@@ -35,6 +35,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.notfound.ReportDefinitionNotFoundException;
@@ -48,6 +51,7 @@ import de.escidoc.core.sm.business.persistence.SmReportDefinitionsDaoInterface;
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implements SmReportDefinitionsDaoInterface {
 
     /**
@@ -113,7 +117,7 @@ public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implem
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         if (result == null) {
@@ -132,7 +136,7 @@ public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implem
     @Override
     public Collection<ReportDefinition> retrieveReportDefinitions() throws SqlDatabaseSystemException {
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(ReportDefinition.class, "r");
-        return getHibernateTemplate().findByCriteria(detachedCriteria);
+        return (Collection<ReportDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
     /**
@@ -159,7 +163,8 @@ public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implem
                 criteria != null && criteria.length() > 0 ? new ReportDefinitionFilter(criteria).toSql() : DetachedCriteria
                     .forClass(ReportDefinition.class, "r");
             detachedCriteria.add(Restrictions.in("scope.id", scopeIds));
-            return getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+            return (Collection<ReportDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria, offset,
+                maxResults);
 
         }
         return null;

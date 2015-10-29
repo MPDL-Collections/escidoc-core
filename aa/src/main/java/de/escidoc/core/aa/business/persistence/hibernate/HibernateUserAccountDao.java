@@ -45,10 +45,14 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StringType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.cache.PoliciesCache;
 import de.escidoc.core.aa.business.filter.RoleGrantFilter;
@@ -74,6 +78,8 @@ import de.escidoc.core.common.util.service.EscidocUserDetails;
 /**
  * @author Michael Schneider
  */
+
+@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateUserAccountDao extends AbstractHibernateDao implements UserAccountDaoInterface {
 
     /**
@@ -165,7 +171,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -196,7 +202,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -230,7 +236,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -255,7 +261,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -268,8 +274,8 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
     public UserAccount retrieveUserAccountByLoginName(final String loginName) throws SqlDatabaseSystemException {
 
         try {
-            return (UserAccount) getUniqueResult(getHibernateTemplate().find(QUERY_RETRIEVE_USER_ACCOUNT_BY_LOGINNAME,
-                loginName));
+            return (UserAccount) getUniqueResult((List<Object>) getHibernateTemplate().find(
+                QUERY_RETRIEVE_USER_ACCOUNT_BY_LOGINNAME, loginName));
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -279,7 +285,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         }
         catch (final HibernateException e) {
             //noinspection ThrowableResultOfMethodCallIgnored
-            throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+            throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
         }
     }
 
@@ -290,8 +296,8 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
     public UserAccount retrieveUserAccountByHandle(final String handle) throws SqlDatabaseSystemException {
 
         try {
-            return (UserAccount) getUniqueResult(getHibernateTemplate().find(QUERY_RETRIEVE_USER_ACCOUNT_BY_HANDLE,
-                handle, System.currentTimeMillis()));
+            return (UserAccount) getUniqueResult((List<Object>) getHibernateTemplate().find(
+                QUERY_RETRIEVE_USER_ACCOUNT_BY_HANDLE, handle, System.currentTimeMillis()));
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -301,7 +307,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         }
         catch (final HibernateException e) {
             //noinspection ThrowableResultOfMethodCallIgnored
-            throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+            throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
         }
     }
 
@@ -373,7 +379,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             detachedCriteria.add(Restrictions.sqlRestriction("this_.id in (" + "select ua.id from aa.user_account ua, "
                 + "aa.user_attribute atts " + "where ua.id = atts.user_id " + "and atts.name = '" + ouAttributeName
-                + "' and atts.value = ?)", organizationalUnit, Hibernate.STRING));
+                + "' and atts.value = ?)", organizationalUnit, StringType.INSTANCE));
             // detachedCriteria.add(Restrictions.like("ous", StringUtility
             // .concatenateToString("%", organizationalUnit, "|||%")));
         }
@@ -391,7 +397,8 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             final List<UserAccount> result;
 
             try {
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result =
+                    (List<UserAccount>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -419,13 +426,15 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
 
         if (criterias != null && criterias.length() > 0) {
             result =
-                getHibernateTemplate().findByCriteria(new UserAccountFilter(criterias).toSql(), offset, maxResults);
+                (List<UserAccount>) getHibernateTemplate().findByCriteria(new UserAccountFilter(criterias).toSql(),
+                    offset, maxResults);
         }
         else {
             try {
                 final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(UserAccount.class, "user");
 
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result =
+                    (List<UserAccount>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -496,7 +505,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         List<RoleGrant> result = null;
         if (role != null) {
             try {
-                result = getHibernateTemplate().find(QUERY_RETRIEVE_GRANTS_BY_ROLE, role);
+                result = (List<RoleGrant>) getHibernateTemplate().find(QUERY_RETRIEVE_GRANTS_BY_ROLE, role);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -516,7 +525,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         List<RoleGrant> result = null;
         if (userId != null) {
             try {
-                result = getHibernateTemplate().find(QUERY_RETRIEVE_GRANTS_BY_USER_ID, userId);
+                result = (List<RoleGrant>) getHibernateTemplate().find(QUERY_RETRIEVE_GRANTS_BY_USER_ID, userId);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -545,7 +554,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
                 if (objId != null) {
                     criteria = criteria.add(Restrictions.eq("objectId", objId));
                 }
-                result = (RoleGrant) getUniqueResult(getHibernateTemplate().findByCriteria(criteria));
+                result = (RoleGrant) getUniqueResult((List<Object>) getHibernateTemplate().findByCriteria(criteria));
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -555,7 +564,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -585,7 +594,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -681,7 +690,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             final List<RoleGrant> result;
 
             try {
-                result = getHibernateTemplate().findByCriteria(detachedCriteria);
+                result = (List<RoleGrant>) getHibernateTemplate().findByCriteria(detachedCriteria);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -744,13 +753,13 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
                 }
                 filter.setGroupIds(groupIds);
             }
-            result = getHibernateTemplate().findByCriteria(filter.toSql(), offset, maxResults);
+            result = (List<RoleGrant>) getHibernateTemplate().findByCriteria(filter.toSql(), offset, maxResults);
         }
         else {
             try {
                 final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(RoleGrant.class, "roleGrant");
 
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result = (List<RoleGrant>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -804,7 +813,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -823,7 +832,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         detachedCriteria.add(Restrictions.eq("userAccountByUserId", userAccount));
         final List<UserAttribute> result;
         try {
-            result = getHibernateTemplate().findByCriteria(detachedCriteria);
+            result = (List<UserAttribute>) getHibernateTemplate().findByCriteria(detachedCriteria);
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -849,7 +858,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         }
         final List<UserAttribute> result;
         try {
-            result = getHibernateTemplate().findByCriteria(detachedCriteria);
+            result = (List<UserAttribute>) getHibernateTemplate().findByCriteria(detachedCriteria);
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -893,7 +902,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         detachedCriteria.add(criterion);
         final List<UserAttribute> result;
         try {
-            result = getHibernateTemplate().findByCriteria(detachedCriteria);
+            result = (List<UserAttribute>) getHibernateTemplate().findByCriteria(detachedCriteria);
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -945,7 +954,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         final UserLoginData result;
         try {
             result =
-                checkUserLoginData((UserLoginData) getUniqueResult(getHibernateTemplate().find(
+                checkUserLoginData((UserLoginData) getUniqueResult((List<Object>) getHibernateTemplate().find(
                     QUERY_RETRIEVE_LOGINDATA_BY_HANDLE, handle)));
         }
         catch (final DataAccessException e) {
@@ -956,7 +965,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         }
         catch (final HibernateException e) {
             //noinspection ThrowableResultOfMethodCallIgnored
-            throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+            throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
         }
         return result;
     }
@@ -968,8 +977,8 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
     public List<UserLoginData> retrieveUserLoginDataByUserId(final String id) throws SqlDatabaseSystemException {
 
         try {
-            return checkUserLoginData(getHibernateTemplate().find(QUERY_RETRIEVE_LOGINDATA_BY_USER_ID,
-                new Object[] { id }));
+            return checkUserLoginData((List<UserLoginData>) getHibernateTemplate().find(
+                QUERY_RETRIEVE_LOGINDATA_BY_USER_ID, new Object[] { id }));
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -1011,7 +1020,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
 
@@ -1064,7 +1073,7 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         final DetachedCriteria criteria = DetachedCriteria.forClass(UserLoginData.class);
         criteria.add(Restrictions.lt("expiryts", timestamp));
         try {
-            return getHibernateTemplate().findByCriteria(criteria);
+            return (List<UserLoginData>) getHibernateTemplate().findByCriteria(criteria);
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -1172,7 +1181,8 @@ public class HibernateUserAccountDao extends AbstractHibernateDao implements Use
         List<UserPreference> result = null;
         if (userId != null) {
             try {
-                result = getHibernateTemplate().find(QUERY_RETRIEVE_PREFERENCES_BY_USER_ID, userId);
+                result =
+                    (List<UserPreference>) getHibernateTemplate().find(QUERY_RETRIEVE_PREFERENCES_BY_USER_ID, userId);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);

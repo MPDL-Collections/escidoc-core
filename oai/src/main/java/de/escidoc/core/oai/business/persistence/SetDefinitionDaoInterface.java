@@ -40,6 +40,7 @@ import de.escidoc.core.common.util.list.ListSorting;
  *
  * @author André Schenk
  */
+
 public interface SetDefinitionDaoInterface {
 
     /**

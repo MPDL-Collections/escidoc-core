@@ -14,6 +14,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +42,9 @@ import de.escidoc.core.sm.service.interfaces.ReportDefinitionHandlerInterface;
 @Stateless(name = "ReportDefinitionHandler")
 @Remote(ReportDefinitionHandlerRemote.class)
 @Local(ReportDefinitionHandlerLocal.class)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Transactional
 @RunAs("Administrator")
 public class ReportDefinitionHandlerBean implements ReportDefinitionHandlerRemote, ReportDefinitionHandlerLocal {
 

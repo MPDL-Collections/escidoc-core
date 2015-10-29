@@ -14,6 +14,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,8 +55,9 @@ import de.escidoc.core.common.util.service.UserContext;
 @Stateless(name = "UserAccountHandler")
 @Remote(UserAccountHandlerRemote.class)
 @Local(UserAccountHandlerLocal.class)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Transactional
 @RunAs("Administrator")
 public class UserAccountHandlerBean implements UserAccountHandlerRemote, UserAccountHandlerLocal {
 

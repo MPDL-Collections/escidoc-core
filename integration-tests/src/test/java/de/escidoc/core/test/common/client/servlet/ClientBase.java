@@ -35,12 +35,14 @@ import de.escidoc.core.test.common.client.servlet.invocation.exceptions.MethodNo
 import de.escidoc.core.test.common.resources.PropertiesProvider;
 import de.escidoc.core.test.common.resources.ResourceProvider;
 import de.escidoc.core.test.common.service.BeanMapping;
+
 import org.apache.axis.AxisFault;
 import org.apache.axis.EngineConfiguration;
 import org.apache.axis.configuration.FileProvider;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.conn.ClientConnectionManager;
@@ -54,6 +56,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.apache.xerces.dom.AttrImpl;
@@ -77,6 +80,7 @@ import org.w3c.dom.ls.LSSerializer;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -475,6 +479,7 @@ public abstract class ClientBase {
 
     private void initHttpClient() {
         final HttpParams httpParams = new BasicHttpParams();
+        HttpProtocolParams.setVersion(httpParams, HttpVersion.HTTP_1_1);
         ConnManagerParams.setMaxTotalConnections(httpParams, 90);
         final ConnPerRouteBean connPerRoute = new ConnPerRouteBean(30);
         ConnManagerParams.setMaxConnectionsPerRoute(httpParams, connPerRoute);

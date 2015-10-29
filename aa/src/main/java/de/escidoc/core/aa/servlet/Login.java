@@ -54,6 +54,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import de.escidoc.core.aa.business.cache.PoliciesCache;
 import de.escidoc.core.aa.business.persistence.UserAccount;
@@ -185,6 +187,9 @@ public class Login extends HttpServlet {
         try {
             this.dao =
                 (UserAccountDaoInterface) BeanLocator.getBean(BeanLocator.AA_FACTORY_ID, "persistence.UserAccountDao");
+            //WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+            //this.dao = (UserAccountDaoInterface) context.getBean("persistence.UserAccountDao");
+
             initFileContent(AUTHENTICATED_FILENAME);
             initFileContent(AUTHENTICATED_REDIRECT_FILENAME);
             initFileContent(LOGOUT_FILENAME);
@@ -194,6 +199,7 @@ public class Login extends HttpServlet {
         catch (final WebserverSystemException e) {
             throw new ServletException(e.getMessage(), e);
         }
+
         catch (final IOException e) {
             throw new ServletException(e.getMessage(), e);
         }

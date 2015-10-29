@@ -20,9 +20,13 @@
 
 package de.escidoc.core.common.util.service;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import de.escidoc.core.aa.service.interfaces.PolicyDecisionPointInterface;
 import de.escidoc.core.aa.service.interfaces.UserGroupHandlerInterface;
@@ -46,7 +50,7 @@ import de.escidoc.core.tme.service.interfaces.JhoveHandlerInterface;
  *
  * @author Torsten Tetteroo
  */
-public final class BeanLocator {
+public final class BeanLocator implements ApplicationContextAware {
 
     public static final String COMMON_FACTORY_ID = "Common.spring.ejb.context";
 
@@ -66,6 +70,8 @@ public final class BeanLocator {
 
     public static final String TME_FACTORY_ID = "Tme.spring.ejb.context";
 
+    private static ApplicationContext CONTEXT;
+
     /**
      * Private constructor, prevents creation of instances.
      */
@@ -80,7 +86,9 @@ public final class BeanLocator {
     public static Object getBean(final String beanFactoryId, final String beanId) throws WebserverSystemException {
 
         try {
-            return getBeanFactory(beanFactoryId).getBean(beanId);
+
+            return CONTEXT.getBean(beanId);
+            //return getBeanFactory(beanFactoryId).getBean(beanId);
         }
         catch (final Exception e) {
             throw new WebserverSystemException(e.getMessage() + " for BeanFactory " + beanFactoryId, e);
@@ -98,7 +106,7 @@ public final class BeanLocator {
     public static Class<?> getBeanType(final String beanFactoryId, final String beanId) throws WebserverSystemException {
 
         try {
-            return getBeanFactory(beanFactoryId).getType(beanId);
+            return CONTEXT.getType(beanId);
         }
         catch (final Exception e) {
             throw new WebserverSystemException(e.getMessage(), e);
@@ -270,5 +278,11 @@ public final class BeanLocator {
     public static UserGroupHandlerInterface locateUserGroupHandler() throws WebserverSystemException {
 
         return (UserGroupHandlerInterface) getBean(AA_FACTORY_ID, "service.UserGroupHandler");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        CONTEXT = applicationContext;
+
     }
 }

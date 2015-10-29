@@ -45,6 +45,8 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.sm.business.Constants;
@@ -66,6 +68,7 @@ import de.escidoc.core.sm.business.vo.database.table.DatabaseTableVo;
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class DirectOracleDatabaseAccessor extends JdbcDaoSupport implements DirectDatabaseAccessorInterface {
 
     private static final Pattern SPLIT_PATTERN = Pattern.compile(",");

@@ -35,6 +35,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import de.escidoc.core.common.business.fedora.Utility;
 import de.escidoc.core.common.business.filter.DbRequestParameters;
 import de.escidoc.core.common.business.filter.SRURequestParameters;
@@ -99,6 +102,8 @@ public class AggregationDefinitionHandler implements AggregationDefinitionHandle
      * @see de.escidoc.core.sm.business.interfaces .AggregationDefinitionHandlerInterface#create(java.lang.String)
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+        de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
     public String create(final String xmlData) throws MissingMethodParameterException, ScopeNotFoundException,
         SystemException, SqlDatabaseSystemException, WebserverSystemException {
         if (xmlData == null || xmlData.length() == 0) {
@@ -166,6 +171,8 @@ public class AggregationDefinitionHandler implements AggregationDefinitionHandle
      * @see de.escidoc.core.sm.business.interfaces .AggregationDefinitionHandlerInterface #delete(java.lang.String)
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+        de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
     public void delete(final String id) throws AggregationDefinitionNotFoundException, MissingMethodParameterException,
         SqlDatabaseSystemException {
         if (id == null) {

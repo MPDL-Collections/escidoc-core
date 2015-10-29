@@ -36,6 +36,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
 import de.escidoc.core.common.exceptions.application.notfound.AggregationDefinitionNotFoundException;
@@ -51,6 +54,7 @@ import de.escidoc.core.sm.business.persistence.SmAggregationDefinitionsDaoInterf
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
     implements SmAggregationDefinitionsDaoInterface {
 
@@ -136,7 +140,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         if (result == null) {
@@ -156,7 +160,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
     @Override
     public Collection<AggregationDefinition> retrieveAggregationDefinitions() throws SqlDatabaseSystemException {
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(AggregationDefinition.class, "a");
-        return getHibernateTemplate().findByCriteria(detachedCriteria);
+        return (Collection<AggregationDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
     /**
@@ -186,7 +190,8 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
             detachedCriteria.add(Restrictions.in("scope.id", scopeIds));
 
             final Collection<AggregationDefinition> aggregationDefinitions =
-                getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                (Collection<AggregationDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria, offset,
+                    maxResults);
 
             if (aggregationDefinitions != null) {
                 return aggregationDefinitions;
@@ -216,7 +221,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
         detachedCriteria.add(Restrictions.in("scope.id", scopeIds));
 
         final Collection<AggregationDefinition> aggregationDefinitions =
-            getHibernateTemplate().findByCriteria(detachedCriteria);
+            (Collection<AggregationDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria);
         if (aggregationDefinitions != null) {
             return aggregationDefinitions;
         }

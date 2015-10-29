@@ -34,6 +34,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import de.escidoc.core.common.exceptions.application.notfound.ScopeNotFoundException;
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.exceptions.system.StatisticPreprocessingSystemException;
@@ -55,6 +58,8 @@ import de.escidoc.core.sm.business.vo.database.select.SelectFieldVo;
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+    de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
 public class AggregationDataSelector {
 
     private DirectDatabaseAccessorInterface dbAccessor;

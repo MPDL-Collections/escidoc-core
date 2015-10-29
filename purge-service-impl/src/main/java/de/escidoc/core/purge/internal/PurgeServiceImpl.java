@@ -16,7 +16,7 @@ import de.escidoc.core.purge.PurgeService;
 /**
  * Default implementation of {@link PurgeService}.
  */
-public class PurgeServiceImpl implements InitializingBean {
+public class PurgeServiceImpl {
 
     private static final Log LOGGER = LogFactory.getLog(PurgeServiceImpl.class);
 
@@ -61,6 +61,23 @@ public class PurgeServiceImpl implements InitializingBean {
         }
     }
 
+    public FedoraUtility getFedoraUtility() {
+        return fedoraUtility;
+    }
+
+    public void setFedoraUtility(FedoraUtility fedoraUtility) {
+        this.fedoraUtility = fedoraUtility;
+    }
+
+    public TripleStoreUtility getTripleStoreUtility() {
+        return tripleStoreUtility;
+    }
+
+    public void setTripleStoreUtility(TripleStoreUtility tripleStoreUtility) {
+        this.tripleStoreUtility = tripleStoreUtility;
+    }
+
+    /*
     @Override
     public void afterPropertiesSet() throws Exception {
         try {
@@ -76,4 +93,5 @@ public class PurgeServiceImpl implements InitializingBean {
             LOGGER.error("could not localize bean", e);
         }
     }
+     */
 }

@@ -35,6 +35,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.joda.time.DateTime;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.sm.business.Constants;
@@ -56,6 +58,7 @@ import de.escidoc.core.sm.business.vo.database.table.DatabaseTableVo;
  *
  * @author Michael Hoppe
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class DirectMysqlDatabaseAccessor extends JdbcDaoSupport implements DirectDatabaseAccessorInterface {
 
     //Check CREATE INDEX and DROP INDEX Statement

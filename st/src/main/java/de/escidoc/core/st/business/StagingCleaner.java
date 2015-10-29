@@ -31,8 +31,12 @@ package de.escidoc.core.st.business;
 import java.io.IOException;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.util.string.StringUtility;
@@ -43,6 +47,7 @@ import de.escidoc.core.st.business.persistence.StagingFileDao;
  *
  * @author Torsten Tetteroo
  */
+
 public class StagingCleaner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StagingCleaner.class);
@@ -72,6 +77,7 @@ public class StagingCleaner {
      * Cleans up the staging area, i.e. removes each file in the file system associated to an expired staging file
      * object and each expired staging file whose associated file does not exist or could be removed.
      */
+    @Scheduled(fixedRateString = "${escidoc-core.st.cleanup.period}")
     public void cleanUp() {
         final long lastExecutionTime = StagingCleanerTimer.getInstance().getLastExecutionTime();
         if (lastExecutionTime > 0L && System.currentTimeMillis() - lastExecutionTime < 10000L) {

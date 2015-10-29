@@ -28,11 +28,18 @@
  */
 package de.escidoc.core.aa.business.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+
 /**
  * Class representing an escidoc action.
  *
  * @author Torsten Tetteroo
  */
+
+@Entity
+@Table(name = "actions", schema = "aa")
 public class Action extends ActionBase {
 
     private static final long serialVersionUID = -670158485011665031L;

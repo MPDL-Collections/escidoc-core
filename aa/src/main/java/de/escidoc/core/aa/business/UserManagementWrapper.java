@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.aa.business;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import de.escidoc.core.aa.business.interfaces.UserManagementWrapperInterface;
 import de.escidoc.core.aa.business.persistence.UserAccountDaoInterface;
 import de.escidoc.core.aa.business.persistence.UserLoginData;

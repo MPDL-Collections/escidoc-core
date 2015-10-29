@@ -28,7 +28,10 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import de.escidoc.core.common.persistence.hibernate.Hibernate4DaoSupport;
 import de.escidoc.core.common.util.security.persistence.MethodMapping;
 import de.escidoc.core.common.util.security.persistence.RequestMappingDaoInterface;
 
@@ -37,7 +40,8 @@ import de.escidoc.core.common.util.security.persistence.RequestMappingDaoInterfa
  *
  * @author Torsten Tetteroo
  */
-public class HibernateRequestMappingDao extends HibernateDaoSupport implements RequestMappingDaoInterface {
+@Transactional(propagation = Propagation.REQUIRED)
+public class HibernateRequestMappingDao extends Hibernate4DaoSupport implements RequestMappingDaoInterface {
 
     /**
      * Wrapper of setSessionFactory to enable bean stuff generation for this bean.
@@ -67,13 +71,14 @@ public class HibernateRequestMappingDao extends HibernateDaoSupport implements R
         final DetachedCriteria criteria =
             DetachedCriteria.forClass(MethodMapping.class).add(Restrictions.eq("className", className)).add(
                 Restrictions.eq("methodName", methodName)).addOrder(Order.desc("execBefore"));
-        final List<MethodMapping> methodMappings = getHibernateTemplate().findByCriteria(criteria);
+        final List<MethodMapping> methodMappings =
+            (List<MethodMapping>) getHibernateTemplate().findByCriteria(criteria);
 
         // initialize the invocation mappings (as they are always needed but
         // middlegen does not allow to specify it as lazy="false" because it
         // does not store this option in the properties file.
         for (final MethodMapping methodMapping : methodMappings) {
-            getSession().lock(methodMapping, LockMode.NONE);
+            getSessionFactory().getCurrentSession().lock(methodMapping, LockMode.NONE);
             getHibernateTemplate().initialize(methodMapping.getInvocationMappings());
         }
         return methodMappings;

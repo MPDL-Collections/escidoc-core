@@ -28,6 +28,18 @@
  */
 package de.escidoc.core.oai.business.persistence;
 
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
@@ -35,6 +47,8 @@ import de.escidoc.core.common.util.xml.XmlUtility;
  *
  * @author Rozita Friedman
  */
+@Entity
+@Table(name = "set_definition", schema = "oai")
 public class SetDefinition extends SetDefinitionBase {
 
     /**
@@ -45,9 +59,9 @@ public class SetDefinition extends SetDefinitionBase {
     /**
      * @return Returns the href to this SetDefinition object.
      */
+    @Transient
     public String getHref() {
 
         return XmlUtility.getSetDefinitionHref(getId());
     }
-
 }

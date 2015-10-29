@@ -65,6 +65,8 @@
     </camelContext>
 
     <bean id="de.escidoc.core.purge.internal.PurgeServiceImpl" class="de.escidoc.core.purge.internal.PurgeServiceImpl">
+    	<property name="fedoraUtility" ref="escidoc.core.business.FedoraUtility"/>
+    	<property name="tripleStoreUtility" ref="business.TripleStoreUtility"/>
     </bean>
 
 </beans>

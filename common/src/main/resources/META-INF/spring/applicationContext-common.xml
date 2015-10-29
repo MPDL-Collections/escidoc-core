@@ -37,6 +37,12 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
        default-autowire="no" default-lazy-init="true">
+
+
+	<tx:annotation-driven mode="aspectj" transaction-manager="escidoc-core.txManager" />
+	
+	<bean id="beanLocator" class="de.escidoc.core.common.util.service.BeanLocator" lazy-init="false"/>
+	
     <bean id="common.TraceInterceptor" class="de.escidoc.core.common.util.aop.TraceInterceptor"
           factory-method="aspectOf" lazy-init="false">
     </bean>
@@ -84,7 +90,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="service.SoapExceptionGeneration" class="de.escidoc.core.common.service.SoapExceptionGeneration"></bean>
     <bean id="persistence.HibernateRequestMappingDao"
           class="de.escidoc.core.common.util.security.persistence.hibernate.HibernateRequestMappingDao">
-        <property name="requestMappingSessionFactory">
+       <property name="requestMappingSessionFactory">
             <ref bean="common.SessionFactory"/>
         </property>
     </bean>
@@ -190,6 +196,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             </props>
         </property>
     </bean>
+    <!-- 
     <tx:advice id="escidoc-core.txAdvice" transaction-manager="escidoc-core.txManager">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"
@@ -202,10 +209,9 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                        rollback-for="de.escidoc.core.common.exceptions.system.SystemException, java.lang.RuntimeException"/>
         </tx:attributes>
     </tx:advice>
-    <bean id="escidoc-core.txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource">
-            <ref bean="escidoc-core.DataSource"/>
-        </property>
+    -->
+    <bean id="escidoc-core.txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="common.SessionFactory" />
     </bean>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource">
@@ -298,18 +304,37 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
     </bean>
     <!-- security -->
-    <bean id="common.SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="common.SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource">
             <ref bean="escidoc-core.DataSource"/>
         </property>
+        <property name="packagesToScan">
+		    <list>
+		        <value>de.escidoc.core.aa.business.persistence</value>
+		        <value>de.escidoc.core.oai.business.persistence</value>
+		        <value>de.escidoc.core.sm.business.persistence.hibernate</value>
+		        <value>de.escidoc.core.st.business</value>
+		         <value>de.escidoc.core.st.business.persistence</value>
+		        <value>de.escidoc.core.common.util.security.persistence</value>
+		    </list>
+		</property>
         <property name="hibernateProperties">
             <props>
-              	<prop key="hibernate.transaction.factory_class">
+            	
+	            <prop key="hibernate.transaction.jta.platform">
+	            	org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform
+	            </prop>
+           
+				<prop key="hibernate.transaction.factory_class">
                     org.hibernate.transaction.JTATransactionFactory
                 </prop>
+               
+               <prop key="hibernate.current_session_context_class">jta</prop>
+                 <!-- 
                 <prop key="hibernate.transaction.manager_lookup_class">
                     ${escidoc-core.hibernate.transaction.manager_lookup_class}
                 </prop>
+                -->
                 <prop key="hibernate.dialect">
                     ${escidoc-core.hibernate.dialect}
                 </prop>
@@ -318,24 +343,14 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                     org.hibernate.cache.HashtableCacheProvider
                 </prop>
                 <prop key="hibernate.show_sql">false</prop>
-               
+                 <!-- 
                 <prop key="jta.UserTransaction">
                     ${escidoc-core.jta.UserTransaction}
                 </prop>
-               
+               -->
                 <prop key="hibernate.connection.release_mode">auto</prop>
                 
             </props>
-        </property>
-        <property name="mappingResources">
-            <list>
-                <value>
-                    de/escidoc/core/common/util/security/persistence/InvocationMapping.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/common/util/security/persistence/MethodMapping.hbm.xml
-                </value>
-            </list>
         </property>
     </bean>
     <!--

@@ -143,7 +143,7 @@ public final class VelocityXmlReportDefinitionRenderer implements ReportDefiniti
      * @param recordPacking A string to determine how the record should be escaped in the response. Defined values are
      *                      'string' and 'xml'. The default is 'xml'.
      * @see de.escidoc.core.sm.business.renderer.interfaces.ReportDefinitionRendererInterface
-     *      #renderReportDefinitions(de.escidoc.core.sm.business.ReportDefinition)
+     *      #renderReportDefinitions(de.escidoc.core.sm.business.persistence.hibernate.ReportDefinition)
      */
     @Override
     public String renderReportDefinitions(

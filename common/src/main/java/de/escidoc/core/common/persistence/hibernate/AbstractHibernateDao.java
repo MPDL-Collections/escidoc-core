@@ -41,7 +41,7 @@ import de.escidoc.core.common.util.string.StringUtility;
  *
  * @author Torsten Tetteroo
  */
-public abstract class AbstractHibernateDao extends HibernateDaoSupport {
+public abstract class AbstractHibernateDao extends Hibernate4DaoSupport {
 
     protected static final int COMPARE_LIKE = 0;
 

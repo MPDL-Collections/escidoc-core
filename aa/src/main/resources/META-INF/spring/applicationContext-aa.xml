@@ -6,6 +6,7 @@
        xmlns:lang="http://www.springframework.org/schema/lang"
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
@@ -15,9 +16,12 @@ http://www.springframework.org/schema/jms http://www.springframework.org/schema/
 http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd"
        default-autowire="no" default-lazy-init="true">
       
+
+    <tx:annotation-driven mode="aspectj" transaction-manager="escidoc-core.txManager"/>
       
        
     <bean id="eSciDoc.core.aa.ObjectTypeAttributeFinderModule"
@@ -54,7 +58,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             <ref bean="business.TripleStoreUtility"/>
         </property>
     </bean>
-    <bean id="eSciDoc.core.aa.UserHandleCleaner" class="de.escidoc.core.aa.business.UserHandleCleaner">
+    <bean id="eSciDoc.core.aa.UserHandleCleaner" class="de.escidoc.core.aa.business.UserHandleCleaner" lazy-init="false">
         <property name="userAccountDao">
             <ref bean="persistence.UserAccountDao"/>
         </property>
@@ -79,6 +83,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             <ref bean="filter.Values"/>
         </property>
     </bean>
+    <!-- 
     <aop:config>
         <aop:pointcut id="business.UserGroupHandler.addSelectors.TransactionPointcut"
                       expression="execution(* de.escidoc.core.aa.business.UserGroupHandler.addSelectors(..))"/>
@@ -93,6 +98,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <aop:advisor advice-ref="escidoc-core.txAdvice"
                      pointcut-ref="business.UserGroupHandler.revokeGrants.TransactionPointcut"/>
     </aop:config>
+    -->
     <bean id="business.UserGroupHandler" class="de.escidoc.core.aa.business.UserGroupHandler">
         <property name="renderer">
             <ref bean="eSciDoc.core.aa.business.renderer.VelocityXmlUserGroupRenderer"/>
@@ -116,7 +122,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             <ref bean="eSciDoc.core.aa.ObjectAttributeResolver"/>
         </property>
     </bean>
-    <bean id="business.PolicyDecisionPoint" class="de.escidoc.core.aa.business.PolicyDecisionPoint" init-method="init">
+    <bean id="business.PolicyDecisionPoint" class="de.escidoc.core.aa.business.PolicyDecisionPoint" init-method="init" >
         <property name="accessRights">
             <ref bean="resource.AccessRights"/>
         </property>
@@ -141,6 +147,10 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="cache">
             <ref bean="eSciDoc.core.common.SecurityInterceptorCache"/>
         </property>
+         <property name="transactionManager">
+            <ref bean="escidoc-core.txManager"/>
+        </property>
+        
     </bean>
     <bean id="eSciDoc.core.aa.business.renderer.VelocityXmlUserGroupRenderer"
           class="de.escidoc.core.aa.business.renderer.VelocityXmlUserGroupRenderer"/>
@@ -251,8 +261,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </bean>
     <bean id="persistence.UserAccountDao"
           class="de.escidoc.core.aa.business.persistence.hibernate.HibernateUserAccountDao">
-        <property name="mySessionFactory">
-            <ref bean="eSciDoc.core.aa.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="business.UserAccountHandler" class="de.escidoc.core.aa.business.UserAccountHandler">
@@ -303,8 +313,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         </property>
     </bean>
     <bean id="persistence.ActionDao" class="de.escidoc.core.aa.business.persistence.hibernate.HibernateActionDao">
-        <property name="mySessionFactory">
-            <ref bean="eSciDoc.core.aa.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="eSciDoc.core.aa.mbean.AAManager" class="de.escidoc.core.aa.mbean.AAManager">
@@ -319,9 +329,10 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </bean>
     <bean id="persistence.EscidocRoleDao"
           class="de.escidoc.core.aa.business.persistence.hibernate.HibernateEscidocRoleDao">
-        <property name="mySessionFactory">
-            <ref bean="eSciDoc.core.aa.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
+        
     </bean>
     <bean id="resource.AccessRights" class="de.escidoc.core.aa.business.filter.AccessRights" scope="singleton">
         <property name="values">
@@ -378,8 +389,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     <bean id="authorisation.CustomPolicyBuilder" class="de.escidoc.core.aa.business.authorisation.CustomPolicyBuilder"
           lazy-init="true"/>
     <bean id="persistence.UserGroupDao" class="de.escidoc.core.aa.business.persistence.hibernate.HibernateUserGroupDao">
-        <property name="mySessionFactory">
-            <ref bean="eSciDoc.core.aa.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="de.escidoc.core.servlet.Login" class="de.escidoc.core.aa.servlet.Login">
@@ -494,77 +505,9 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             <ref bean="resource.PoliciesCacheProxy"/>
         </property>
     </bean>
-    <bean id="eSciDoc.core.aa.SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource">
-            <ref bean="escidoc-core.DataSource"/>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-				<prop key="hibernate.transaction.factory_class">
-                    org.hibernate.transaction.JTATransactionFactory
-                </prop>
-                <prop key="hibernate.transaction.manager_lookup_class">
-                    ${escidoc-core.hibernate.transaction.manager_lookup_class}
-                </prop>
-                <prop key="hibernate.dialect">
-                    ${escidoc-core.hibernate.dialect}
-                </prop>
-                <!-- ehCache default provider cannot handle two session factories -->
-                <prop key="hibernate.cache.provider_class">
-                    org.hibernate.cache.HashtableCacheProvider
-                </prop>
-                <prop key="hibernate.show_sql">false</prop>
-                 
-                <prop key="jta.UserTransaction">
-                    ${escidoc-core.jta.UserTransaction}
-                </prop>
-               
-                <prop key="hibernate.connection.release_mode">auto</prop>
-                
-            </props>
-        </property>
-        <property name="mappingResources">
-            <list>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/EscidocPolicy.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/Action.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/EscidocRole.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/ScopeDef.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UserAccount.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/RoleGrant.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UserPreference.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UserAttribute.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UnsecuredActionList.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UserLoginData.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UserGroup.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/aa/business/persistence/hibernate/UserGroupMember.hbm.xml
-                </value>
-            </list>
-        </property>
-    </bean>
+    
     <!-- Clean up of login data -->
+    <!-- 
     <bean id="eSciDoc.core.aa.CleanerJob"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="eSciDoc.core.aa.UserHandleCleaner"/>
@@ -584,4 +527,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             </list>
         </property>
     </bean>
+    -->
+    <task:annotation-driven mode="aspectj"/>
+    
 </beans>

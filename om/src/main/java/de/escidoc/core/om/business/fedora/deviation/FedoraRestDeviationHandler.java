@@ -66,6 +66,7 @@ public class FedoraRestDeviationHandler implements FedoraRestDeviationHandlerInt
             LOGGER.debug("PID:" + pid + ", DSID:" + dsID);
         }
         // Try to get EscidocBinaryContent from IndexerResourceCache/////////////////
+        //String decodedDsId = dsID.replaceAll("\\|", "\\/");
         EscidocBinaryContent escidocBinaryContent = null;
         try {
             final MIMETypedStream mimeTypedStream =

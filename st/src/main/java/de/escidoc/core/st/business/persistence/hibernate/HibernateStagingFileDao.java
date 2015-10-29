@@ -36,6 +36,9 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
@@ -47,6 +50,7 @@ import de.escidoc.core.st.business.persistence.StagingFileDao;
  *
  * @author Torsten Tetteroo
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateStagingFileDao extends AbstractHibernateDao implements StagingFileDao {
 
     /**
@@ -84,7 +88,7 @@ public class HibernateStagingFileDao extends AbstractHibernateDao implements Sta
         }
         catch (final HibernateException e) {
             //noinspection ThrowableResultOfMethodCallIgnored
-            throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+            throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
         }
         catch (final IllegalStateException e) {
             throw new SqlDatabaseSystemException(e);
@@ -101,7 +105,7 @@ public class HibernateStagingFileDao extends AbstractHibernateDao implements Sta
         try {
             final DetachedCriteria criteria = DetachedCriteria.forClass(StagingFile.class);
             criteria.add(Restrictions.lt("expiryTs", System.currentTimeMillis()));
-            return getHibernateTemplate().findByCriteria(criteria);
+            return (List<StagingFile>) getHibernateTemplate().findByCriteria(criteria);
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);

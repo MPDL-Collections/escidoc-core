@@ -37,6 +37,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StringType;
 import org.joda.time.DateTime;
 import org.z3950.zing.cql.CQLParser;
 import org.z3950.zing.cql.CQLTermNode;
@@ -196,7 +197,7 @@ public class UserAccountFilter extends CqlFilter {
                     result =
                         Restrictions.sqlRestriction("this_.id in (" + "select ua.id from aa.user_account ua, "
                             + "aa.user_attribute atts " + "where ua.id = atts.user_id " + "and atts.name = '"
-                            + ouAttributeName + "' and atts.value = ?)", value, Hibernate.STRING);
+                            + ouAttributeName + "' and atts.value = ?)", value, StringType.INSTANCE);
                 }
                 else {
                     throw new InvalidSearchQueryException("unknown filter criteria: " + columnName);

@@ -86,7 +86,7 @@ public class StaxParser implements DefaultHandlerStackInterface {
 
     private final StringBuffer curPath = new StringBuffer();
 
-    private final XMLInputFactory factory = XMLInputFactory.newInstance();
+    private final XMLInputFactory factory = XMLInputFactory.newFactory();
 
     private String expectedName;
 
@@ -360,7 +360,9 @@ public class StaxParser implements DefaultHandlerStackInterface {
         TripleStoreSystemException, WebserverSystemException, EncodingSystemException, XmlParserSystemException,
         IntegritySystemException, MissingMdRecordException, TmeException, XmlCorruptedException {
 
+        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
         final XMLStreamReader parser = factory.createXMLStreamReader(in, XmlUtility.CHARACTER_ENCODING);
+
         while (parser.hasNext()) {
             final int event = parser.next();
             switch (event) {

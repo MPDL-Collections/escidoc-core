@@ -28,11 +28,17 @@
  */
 package de.escidoc.core.aa.business.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Class encapsulating the information stored about the scope definition of an {@link EscidocRole}.
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "scope_def", schema = "aa")
 public class ScopeDef extends ScopeDefBase implements Comparable<ScopeDef> {
 
     /**
@@ -70,6 +76,7 @@ public class ScopeDef extends ScopeDefBase implements Comparable<ScopeDef> {
      * See Interface for functional description.
      */
     @Override
+    @Transient
     public int compareTo(final ScopeDef o) {
 
         if (o == null) {
@@ -98,6 +105,7 @@ public class ScopeDef extends ScopeDefBase implements Comparable<ScopeDef> {
      * @see Object#equals(Object)
      */
     @Override
+    @Transient
     public boolean equals(final Object obj) {
 
         boolean ret = false;
@@ -113,6 +121,7 @@ public class ScopeDef extends ScopeDefBase implements Comparable<ScopeDef> {
      * @see Object#hashCode()
      */
     @Override
+    @Transient
     public int hashCode() {
 
         return getId().hashCode();

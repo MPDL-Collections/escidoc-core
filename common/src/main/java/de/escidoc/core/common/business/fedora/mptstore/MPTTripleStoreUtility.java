@@ -48,6 +48,8 @@ import org.nsdl.mptstore.util.NTriplesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
@@ -71,6 +73,7 @@ import de.escidoc.core.common.util.xml.XmlUtility;
  * 
  * @author Frank Schwichtenberg
  */
+@Transactional(propagation = Propagation.REQUIRED)
 public class MPTTripleStoreUtility extends TripleStoreUtility {
 
     private static final Pattern SPLIT_PATTERN = Pattern.compile("\\s");

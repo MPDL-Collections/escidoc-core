@@ -28,6 +28,10 @@
  */
 package de.escidoc.core.aa.business.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
@@ -35,6 +39,8 @@ import de.escidoc.core.common.util.xml.XmlUtility;
  *
  * @author André Schenk
  */
+@Entity
+@Table(name = "user_group_member", schema = "aa")
 public class UserGroupMember extends UserGroupMemberBase {
 
     /**
@@ -52,6 +58,7 @@ public class UserGroupMember extends UserGroupMemberBase {
     /**
      * @return Returns the href to this UserGroupMember object.
      */
+    @Transient
     public String getHref() {
 
         return XmlUtility.getUserGroupMemberHref(getUserGroup().getHref(), getId());

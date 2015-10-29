@@ -28,11 +28,16 @@
  */
 package de.escidoc.core.aa.business.persistence;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * A user attribute.
  *
  * @author Michael Hoppe
  */
+@Entity
+@Table(name = "user_attribute", schema = "aa")
 public class UserAttribute extends UserAttributeBase {
 
     /**

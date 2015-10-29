@@ -16,6 +16,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,8 +46,9 @@ import de.escidoc.core.oai.service.interfaces.SetDefinitionHandlerInterface;
 @LocalHome(SetDefinitionHandlerLocalHome.class)
 @Remote(SetDefinitionHandlerRemote.class)
 @Local(SetDefinitionHandlerLocal.class)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Transactional
 @RunAs("Administrator")
 public class SetDefinitionHandlerBean implements SetDefinitionHandlerRemote, SetDefinitionHandlerLocal {
 

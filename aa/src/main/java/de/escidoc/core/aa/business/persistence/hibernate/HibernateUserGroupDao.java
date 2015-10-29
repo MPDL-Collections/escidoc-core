@@ -43,6 +43,9 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.filter.UserGroupFilter;
 import de.escidoc.core.aa.business.persistence.EscidocRole;
@@ -50,6 +53,7 @@ import de.escidoc.core.aa.business.persistence.RoleGrant;
 import de.escidoc.core.aa.business.persistence.UserGroup;
 import de.escidoc.core.aa.business.persistence.UserGroupDaoInterface;
 import de.escidoc.core.aa.business.persistence.UserGroupMember;
+import de.escidoc.core.aa.business.persistence.UserPreference;
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidSearchQueryException;
@@ -61,6 +65,8 @@ import de.escidoc.core.common.util.xml.XmlUtility;
 /**
  * @author André Schenk
  */
+
+@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateUserGroupDao extends AbstractHibernateDao implements UserGroupDaoInterface {
 
     /**
@@ -112,7 +118,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
         final UserGroup result;
         try {
             result =
-                (UserGroup) getUniqueResult(getHibernateTemplate().findByCriteria(
+                (UserGroup) getUniqueResult((List<Object>) getHibernateTemplate().findByCriteria(
                     DetachedCriteria.forClass(UserGroup.class).add(Restrictions.eq("label", label))));
         }
         catch (final DataAccessException e) {
@@ -120,7 +126,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
         }
         catch (final HibernateException e) {
             //noinspection ThrowableResultOfMethodCallIgnored,ThrowableResultOfMethodCallIgnored
-            throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+            throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
         }
         catch (final IllegalStateException e) {
             throw new SqlDatabaseSystemException(e);
@@ -157,7 +163,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
                 if (objId != null) {
                     criteria = criteria.add(Restrictions.eq("objectId", objId));
                 }
-                result = (RoleGrant) getUniqueResult(getHibernateTemplate().findByCriteria(criteria));
+                result = (RoleGrant) getUniqueResult((List<Object>) getHibernateTemplate().findByCriteria(criteria));
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -167,7 +173,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -194,7 +200,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -212,7 +218,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
 
         if (groupId != null) {
             try {
-                result = getHibernateTemplate().find(QUERY_RETRIEVE_GRANTS_BY_GROUP_ID, groupId);
+                result = (List<RoleGrant>) getHibernateTemplate().find(QUERY_RETRIEVE_GRANTS_BY_GROUP_ID, groupId);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -239,7 +245,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
 
         final List<RoleGrant> roleGrants;
         try {
-            roleGrants = getHibernateTemplate().findByCriteria(detachedCriteria);
+            roleGrants = (List<RoleGrant>) getHibernateTemplate().findByCriteria(detachedCriteria);
         }
         catch (final DataAccessException e) {
             throw new SqlDatabaseSystemException(e);
@@ -277,7 +283,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;
@@ -338,7 +344,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
         final List<UserGroup> result;
         if (clonedCriterias.isEmpty()) {
             try {
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result = (List<UserGroup>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -364,13 +370,15 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
         final List<UserGroup> result;
 
         if (criterias != null && criterias.length() > 0) {
-            result = getHibernateTemplate().findByCriteria(new UserGroupFilter(criterias).toSql(), offset, maxResults);
+            result =
+                (List<UserGroup>) getHibernateTemplate().findByCriteria(new UserGroupFilter(criterias).toSql(), offset,
+                    maxResults);
         }
         else {
             try {
                 final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(UserGroup.class);
 
-                result = getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
+                result = (List<UserGroup>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -429,7 +437,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
         final List<UserGroupMember> result;
         if (clonedCriterias.isEmpty()) {
             try {
-                result = getHibernateTemplate().findByCriteria(detachedCriteria);
+                result = (List<UserGroupMember>) getHibernateTemplate().findByCriteria(detachedCriteria);
             }
             catch (final DataAccessException e) {
                 throw new SqlDatabaseSystemException(e);
@@ -534,7 +542,7 @@ public class HibernateUserGroupDao extends AbstractHibernateDao implements UserG
             }
             catch (final HibernateException e) {
                 //noinspection ThrowableResultOfMethodCallIgnored
-                throw new SqlDatabaseSystemException(convertHibernateAccessException(e)); // Ignore FindBugs
+                throw new SqlDatabaseSystemException(SessionFactoryUtils.convertHibernateAccessException(e)); // Ignore FindBugs
             }
         }
         return result;

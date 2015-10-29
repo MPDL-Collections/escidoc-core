@@ -215,7 +215,6 @@
 						<configuration>
 							<sources>
 								<source>target/generated-sources</source>
-								<source>target/hibernate3/generated-sources</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -467,7 +466,7 @@
 					<dependency>
 						<groupId>xalan</groupId>
 						<artifactId>xalan</artifactId>
-						<version>2.7.0</version><!-- JBoss version (do not change) -->
+						<version>2.7.0</version>
 					</dependency>
 					<dependency>
 						<groupId>woodstox</groupId>
@@ -973,7 +972,7 @@
 		<spring.version>3.2.14.RELEASE</spring.version>
 		<camel.version>2.14.3</camel.version>
 		<activemq.version>5.3.2</activemq.version>
-		<hibernate.version>3.3.2.GA</hibernate.version>
+		<hibernate.version>4.2.11.Final</hibernate.version>
 		<junit.version>4.8.2</junit.version>
 		<xjavadoc.version>1.5-050611</xjavadoc.version>
 		<jdbc.postgresql.version>9.0-801.jdbc4</jdbc.postgresql.version>
@@ -1617,10 +1616,10 @@
 				</exclusions>
 			</dependency>
 			<dependency>
-				<!-- provided by JBoss endorsed (unable to overwrite) -->
+				
 				<groupId>xalan</groupId>
 				<artifactId>xalan</artifactId>
-				<!-- JBoss 4.2.3 xalan version -->
+				
 				<version>2.7.0</version>
 				<exclusions>
 					<exclusion>
@@ -1821,11 +1820,11 @@
 				<version>1.7</version>
 			</dependency>
 			<dependency>
-				<!-- provided by JBoss endorsed (unable to overwrite) -->
+			
 				<groupId>xerces</groupId>
 				<artifactId>xercesImpl</artifactId>
-				<!-- JBoss 4.2.3 xercesImpl version -->
-				<version>2.7.1</version>
+				
+				<version>2.8.1</version>
 				<exclusions>
 					<exclusion>
 						<groupId>xml-apis</groupId>
@@ -1834,9 +1833,9 @@
 				</exclusions>
 			</dependency>
 			<dependency>
-				<groupId>woodstox</groupId>
-				<artifactId>wstx-asl</artifactId>
-				<version>3.2.9</version>
+				<groupId>org.codehaus.woodstox</groupId>
+				<artifactId>woodstox-core-asl</artifactId>
+				<version>4.4.1</version>
 			</dependency>
 			<dependency>
 				<groupId>JhoveApp</groupId>

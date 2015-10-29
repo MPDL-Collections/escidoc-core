@@ -30,6 +30,10 @@ package de.escidoc.core.aa.business.persistence;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import de.escidoc.core.common.util.xml.XmlUtility;
 
 /**
@@ -37,6 +41,8 @@ import de.escidoc.core.common.util.xml.XmlUtility;
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "user_account", schema = "aa")
 public class UserAccount extends UserAccountBase {
 
     /**
@@ -47,11 +53,13 @@ public class UserAccount extends UserAccountBase {
     /**
      * @return Returns the href to this UserAccount object.
      */
+    @Transient
     public String getHref() {
 
         return XmlUtility.getUserAccountHref(getId());
     }
 
+    @Transient
     public void touch() {
         this.setLastModificationDate(new Date());
     }

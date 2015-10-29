@@ -45,6 +45,8 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.cache.PoliciesCache;
 import de.escidoc.core.aa.business.filter.UserGroupFilter;
@@ -528,6 +530,8 @@ public class UserGroupHandler implements UserGroupHandlerInterface {
     /**
      * See Interface for functional description.
      */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+        de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
     @Override
     public String addSelectors(final String groupId, final String taskParam)
         throws OrganizationalUnitNotFoundException, UserAccountNotFoundException, UserGroupNotFoundException,
@@ -625,6 +629,8 @@ public class UserGroupHandler implements UserGroupHandlerInterface {
     /**
      * See Interface for functional description.
      */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+        de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
     @Override
     public String removeSelectors(final String groupId, final String taskParam) throws XmlCorruptedException,
         AuthenticationException, AuthorizationException, SystemException, UserGroupNotFoundException,
@@ -1401,6 +1407,8 @@ public class UserGroupHandler implements UserGroupHandlerInterface {
      * @see de.escidoc.core.aa.service.interfaces.UserGroupHandlerInterface #revokeGrants(java.lang.String,
      *      java.lang.String)
      */
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {
+        de.escidoc.core.common.exceptions.system.SystemException.class, java.lang.RuntimeException.class })
     @Override
     @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = "WMI_WRONG_MAP_ITERATOR")
     public void revokeGrants(final String groupId, final String filterXML) throws UserGroupNotFoundException,

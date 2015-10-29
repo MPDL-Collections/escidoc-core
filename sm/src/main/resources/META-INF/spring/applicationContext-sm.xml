@@ -17,9 +17,11 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
        default-autowire="no" default-lazy-init="true">
+
+	<tx:annotation-driven mode="aspectj" transaction-manager="escidoc-core.txManager"/>
     <bean id="persistence.SmScopesDao" class="de.escidoc.core.sm.business.persistence.hibernate.SmScopesHibernateDao">
-        <property name="mySessionFactory">
-            <ref bean="sm.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="business.StatisticDataHandler" class="de.escidoc.core.sm.business.StatisticDataHandler">
@@ -29,8 +31,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </bean>
     <bean id="persistence.SmStatisticDataDao"
           class="de.escidoc.core.sm.business.persistence.hibernate.SmStatisticDataHibernateDao">
-        <property name="mySessionFactory">
-            <ref bean="sm.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="eSciDoc.core.aa.business.renderer.VelocityXmlReportRenderer"
@@ -121,16 +123,18 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
           class="de.escidoc.core.sm.business.renderer.VelocityXmlAggregationDefinitionRenderer"></bean>
     <bean id="persistence.SmReportDefinitionsDao"
           class="de.escidoc.core.sm.business.persistence.hibernate.SmReportDefinitionsHibernateDao">
-        <property name="mySessionFactory">
-            <ref bean="sm.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
+    <!-- 
     <aop:config>
         <aop:pointcut id="business.AggregationPreprocessor.persistAggregation.TransactionPointcut"
                       expression="execution(* de.escidoc.core.sm.business.preprocessing.AggregationPreprocessor.persistAggregation(..))"/>
         <aop:advisor advice-ref="escidoc-core.txAdvice"
                      pointcut-ref="business.AggregationPreprocessor.persistAggregation.TransactionPointcut"/>
     </aop:config>
+    -->
     <bean id="business.AggregationPreprocessor"
           class="de.escidoc.core.sm.business.preprocessing.AggregationPreprocessor" scope="prototype">
         <property name="directDatabaseAccessor">
@@ -145,6 +149,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             <ref bean="business.PreprocessingHandler"/>
         </property>
     </bean>
+    <!-- 
     <aop:config>
         <aop:pointcut id="business.AggregationDefinitionHandler.create.TransactionPointcut"
                       expression="execution(* de.escidoc.core.sm.business.AggregationDefinitionHandler.create(..))"/>
@@ -155,6 +160,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <aop:advisor advice-ref="escidoc-core.txAdvice"
                      pointcut-ref="business.AggregationDefinitionHandler.delete.TransactionPointcut"/>
     </aop:config>
+    -->
     <bean id="business.AggregationDefinitionHandler" class="de.escidoc.core.sm.business.AggregationDefinitionHandler"
           scope="prototype">
         <property name="dao">
@@ -175,8 +181,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </bean>
     <bean id="persistence.SmPreprocessingLogsDao"
           class="de.escidoc.core.sm.business.persistence.hibernate.SmPreprocessingLogsHibernateDao">
-        <property name="mySessionFactory">
-            <ref bean="sm.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="service.ReportHandler" class="de.escidoc.core.sm.service.ReportHandler" scope="prototype">
@@ -211,12 +217,14 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     </bean>
     <bean id="eSciDoc.core.aa.business.renderer.VelocityXmlScopeRenderer"
           class="de.escidoc.core.sm.business.renderer.VelocityXmlScopeRenderer"></bean>
+    <!-- 
     <aop:config>
         <aop:pointcut id="business.AggregationDataSelector.TransactionPointcut"
                       expression="execution(* de.escidoc.core.sm.business.preprocessing.AggregationDataSelector.*(..))"/>
         <aop:advisor advice-ref="escidoc-core.txAdvice"
                      pointcut-ref="business.AggregationDataSelector.TransactionPointcut"/>
     </aop:config>
+    -->
     <bean id="business.AggregationDataSelector"
           class="de.escidoc.core.sm.business.preprocessing.AggregationDataSelector" scope="prototype">
         <property name="scopesDao">
@@ -231,8 +239,8 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="idProvider">
             <ref bean="escidoc.core.business.EscidocIdProvider"/>
         </property>
-        <property name="mySessionFactory">
-            <ref bean="sm.SessionFactory"/>
+        <property name="sessionFactory">
+            <ref bean="common.SessionFactory"/>
         </property>
     </bean>
     <bean id="mbean.StatisticPreprocessingErrorProcessorService"
@@ -252,73 +260,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
             <ref bean="eSciDoc.core.aa.business.renderer.VelocityXmlReportRenderer"/>
         </property>
     </bean>
-    <bean id="sm.SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource">
-            <ref bean="escidoc-core.DataSource"/>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-				<prop key="hibernate.transaction.factory_class">
-                    org.hibernate.transaction.JTATransactionFactory
-                </prop>
-                <prop key="hibernate.transaction.manager_lookup_class">
-                    ${escidoc-core.hibernate.transaction.manager_lookup_class}
-                </prop>
-                <prop key="hibernate.dialect">
-                    ${escidoc-core.hibernate.dialect}
-                </prop>
-                <!-- ehCache default provider cannot handle two session factories -->
-                <prop key="hibernate.cache.provider_class">
-                    org.hibernate.cache.HashtableCacheProvider
-                </prop>
-                <prop key="hibernate.show_sql">false</prop>
-                 
-                <prop key="jta.UserTransaction">
-                    ${escidoc-core.jta.UserTransaction}
-                </prop>
-                
-                <prop key="hibernate.connection.release_mode">auto</prop>
-                
-            </props>
-        </property>
-        <property name="mappingResources">
-            <list>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/StatisticData.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/AggregationDefinition.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/AggregationTable.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/AggregationTableIndexe.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/AggregationTableIndexField.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/AggregationTableField.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/AggregationStatisticDataSelector.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/Scope.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/ReportDefinition.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/ReportDefinitionRole.hbm.xml
-                </value>
-                <value>
-                    de/escidoc/core/sm/business/persistence/hibernate/PreprocessingLog.hbm.xml
-                </value>
-            </list>
-        </property>
-    </bean>
+   
     <bean id="sm.persistence.DirectDatabaseAccessor" parent="escidoc-core.txProxyTemplate">
         <property name="target">
             <bean class="de.escidoc.core.sm.business.persistence.sql.${escidoc-core.sm.DirectDatabaseAccessor}">

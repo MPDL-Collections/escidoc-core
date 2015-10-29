@@ -33,6 +33,8 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.persistence.ActionDaoInterface;
 import de.escidoc.core.aa.business.persistence.UnsecuredActionList;
@@ -44,6 +46,8 @@ import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
  *
  * @author Torsten Tetteroo
  */
+
+@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateActionDao extends AbstractHibernateDao implements ActionDaoInterface {
 
     /**
@@ -55,7 +59,7 @@ public class HibernateActionDao extends AbstractHibernateDao implements ActionDa
         UnsecuredActionList ret = null;
         if (contextId != null) {
             final List<UnsecuredActionList> list =
-                getHibernateTemplate().findByCriteria(
+                (List<UnsecuredActionList>) getHibernateTemplate().findByCriteria(
                     DetachedCriteria.forClass(UnsecuredActionList.class).add(Restrictions.eq("contextId", contextId)));
             if (list != null && !list.isEmpty()) {
                 ret = list.get(0);

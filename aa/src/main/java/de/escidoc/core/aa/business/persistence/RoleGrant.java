@@ -30,6 +30,10 @@ package de.escidoc.core.aa.business.persistence;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import de.escidoc.core.common.util.date.Iso8601Util;
 import de.escidoc.core.common.util.xml.XmlUtility;
 
@@ -38,6 +42,8 @@ import de.escidoc.core.common.util.xml.XmlUtility;
  *
  * @author Torsten Tetteroo
  */
+@Entity
+@Table(name = "role_grant", schema = "aa")
 public class RoleGrant extends RoleGrantBase {
 
     /**
@@ -57,6 +63,7 @@ public class RoleGrant extends RoleGrantBase {
      *
      * @return Returns the title.
      */
+    @Transient
     public String getTitle() {
 
         final String objectTitle = getObjectTitle();
@@ -69,6 +76,7 @@ public class RoleGrant extends RoleGrantBase {
      *
      * @return Returns the Href
      */
+    @Transient
     public String getHref() {
         return this.getUserAccountByUserId() != null ? XmlUtility.getUserAccountGrantHref(this
             .getUserAccountByUserId().getId(), this.getId()) : XmlUtility.getUserGroupGrantHref(this
@@ -80,6 +88,7 @@ public class RoleGrant extends RoleGrantBase {
      *
      * @return Returns the creation date in ISO8601 format.
      */
+    @Transient
     public String getIso8601CreationDate() {
 
         if (getCreationDate() == null) {
@@ -93,6 +102,7 @@ public class RoleGrant extends RoleGrantBase {
      *
      * @return Returns the creation date in ISO8601 format.
      */
+    @Transient
     public String getIso8601RevocationDate() {
 
         if (getRevocationDate() == null) {
@@ -107,6 +117,7 @@ public class RoleGrant extends RoleGrantBase {
      *
      * @return Returns the creation date in ISO8601 format.
      */
+    @Transient
     public String getIso8601LastModificationDate() {
 
         final Date lastModificationDate = getLastModificationDate();
@@ -121,6 +132,7 @@ public class RoleGrant extends RoleGrantBase {
      *
      * @return Returns the date of last modification.
      */
+    @Transient
     public Date getLastModificationDate() {
 
         return getRevocationDate() != null ? getRevocationDate() : getCreationDate();
