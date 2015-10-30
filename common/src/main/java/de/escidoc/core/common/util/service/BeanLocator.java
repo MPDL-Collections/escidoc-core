@@ -285,4 +285,8 @@ public final class BeanLocator implements ApplicationContextAware {
         CONTEXT = applicationContext;
 
     }
+
+    public static ApplicationContext getApplicationContext() {
+        return CONTEXT;
+    }
 }

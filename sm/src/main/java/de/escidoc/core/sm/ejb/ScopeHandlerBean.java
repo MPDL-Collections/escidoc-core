@@ -31,7 +31,9 @@ import de.escidoc.core.common.exceptions.application.notfound.ScopeNotFoundExcep
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.sm.ejb.interfaces.ScopeHandlerLocal;
 import de.escidoc.core.sm.ejb.interfaces.ScopeHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.ScopeHandlerInterface;
@@ -53,10 +55,9 @@ public class ScopeHandlerBean implements ScopeHandlerRemote, ScopeHandlerLocal {
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ScopeHandler.spring.ejb.context").getFactory();
-            this.service = (ScopeHandlerInterface) factory.getBean("service.ScopeHandler");
+
+            this.service =
+                (ScopeHandlerInterface) BeanLocator.getBean("ScopeHandler.spring.ejb.context", "service.ScopeHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ScopeHandlerComponent: " + e);

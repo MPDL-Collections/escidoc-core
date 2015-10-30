@@ -32,7 +32,9 @@ import de.escidoc.core.common.exceptions.application.notfound.ScopeNotFoundExcep
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.sm.ejb.interfaces.AggregationDefinitionHandlerLocal;
 import de.escidoc.core.sm.ejb.interfaces.AggregationDefinitionHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.AggregationDefinitionHandlerInterface;
@@ -55,11 +57,10 @@ public class AggregationDefinitionHandlerBean
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("AggregationDefinitionHandler.spring.ejb.context").getFactory();
+
             this.service =
-                (AggregationDefinitionHandlerInterface) factory.getBean("service.AggregationDefinitionHandler");
+                (AggregationDefinitionHandlerInterface) BeanLocator.getBean(
+                    "AggregationDefinitionHandler.spring.ejb.context", "service.AggregationDefinitionHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception AggregationDefinitionHandlerComponent: " + e);

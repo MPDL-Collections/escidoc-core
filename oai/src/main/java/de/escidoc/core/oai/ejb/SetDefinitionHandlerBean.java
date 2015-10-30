@@ -34,12 +34,14 @@ import de.escidoc.core.common.exceptions.application.security.AuthorizationExcep
 import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingException;
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerLocal;
 import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerLocalHome;
 import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerRemote;
 import de.escidoc.core.oai.ejb.interfaces.SetDefinitionHandlerRemoteHome;
 import de.escidoc.core.oai.service.interfaces.SetDefinitionHandlerInterface;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 
 @Stateless(name = "SetDefinitionHandler")
 @RemoteHome(SetDefinitionHandlerRemoteHome.class)
@@ -60,10 +62,10 @@ public class SetDefinitionHandlerBean implements SetDefinitionHandlerRemote, Set
     @PermitAll
     public void ejbCreate() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("SetDefinitionHandler.spring.ejb.context").getFactory();
-            this.service = (SetDefinitionHandlerInterface) factory.getBean("service.SetDefinitionHandler");
+
+            this.service =
+                (SetDefinitionHandlerInterface) BeanLocator.getBean("SetDefinitionHandler.spring.ejb.context",
+                    "service.SetDefinitionHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception SetDefinitionHandlerComponent: " + e);

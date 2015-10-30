@@ -140,7 +140,9 @@ import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.exceptions.system.XmlParserSystemException;
 import de.escidoc.core.common.service.interfaces.SoapExceptionGenerationInterface;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 
 @Stateless(name = "SoapExceptionGeneration")
 @Remote(SoapExceptionGenerationRemote.class)
@@ -159,10 +161,10 @@ public class SoapExceptionGenerationBean implements SoapExceptionGenerationRemot
     @PermitAll
     public void ejbCreate() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("SoapExceptionGeneration.spring.ejb.context").getFactory();
-            this.service = (SoapExceptionGenerationInterface) factory.getBean("service.SoapExceptionGeneration");
+
+            this.service =
+                (SoapExceptionGenerationInterface) BeanLocator.getBean("SoapExceptionGeneration.spring.ejb.context",
+                    "service.SoapExceptionGeneration");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception SoapExceptionGenerationComponent: " + e);

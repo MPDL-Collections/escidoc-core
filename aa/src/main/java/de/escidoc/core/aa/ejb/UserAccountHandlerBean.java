@@ -50,6 +50,7 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 
 @Stateless(name = "UserAccountHandler")
@@ -69,10 +70,10 @@ public class UserAccountHandlerBean implements UserAccountHandlerRemote, UserAcc
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("UserAccountHandler.spring.ejb.context").getFactory();
-            this.service = (UserAccountHandlerInterface) factory.getBean("service.UserAccountHandler");
+
+            this.service =
+                (UserAccountHandlerInterface) BeanLocator.getBean("UserAccountHandler.spring.ejb.context",
+                    "service.UserAccountHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception UserAccountHandlerComponent: " + e);

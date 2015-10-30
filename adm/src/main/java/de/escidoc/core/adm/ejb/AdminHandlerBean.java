@@ -33,7 +33,9 @@ import de.escidoc.core.common.exceptions.application.invalid.InvalidXmlException
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 
 @Stateless(name = "AdminHandler")
 @RemoteHome(AdminHandlerRemoteHome.class)
@@ -54,10 +56,9 @@ public class AdminHandlerBean implements AdminHandlerRemote, AdminHandlerLocal {
     @PermitAll
     public void ejbCreate() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("AdminHandler.spring.ejb.context").getFactory();
-            this.service = (AdminHandlerInterface) factory.getBean("service.AdminHandler");
+
+            this.service =
+                (AdminHandlerInterface) BeanLocator.getBean("AdminHandler.spring.ejb.context", "service.AdminHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception AdminHandlerComponent: " + e);

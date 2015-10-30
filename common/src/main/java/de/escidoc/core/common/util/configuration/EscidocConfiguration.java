@@ -35,6 +35,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 
 /**
  * Handles properties.
@@ -525,7 +526,7 @@ public final class EscidocConfiguration {
      * @throws FileNotFoundException If access to the specified file fails.
      */
     private static InputStream getInputStream(final String filename) throws IOException, FileNotFoundException {
-        final ResourcePatternResolver applicationContext = new ClassPathXmlApplicationContext(new String[] {});
+        final ResourcePatternResolver applicationContext = BeanLocator.getApplicationContext();
         final Resource[] resource = applicationContext.getResources("classpath*:" + filename);
         if (resource.length == 0) {
             throw new FileNotFoundException("Unable to find file '" + filename + "' in classpath.");

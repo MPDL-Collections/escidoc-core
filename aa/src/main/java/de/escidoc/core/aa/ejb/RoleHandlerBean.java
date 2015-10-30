@@ -38,6 +38,7 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.RoleInUseViolationException;
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 
 @Stateless(name = "RoleHandler")
@@ -57,10 +58,9 @@ public class RoleHandlerBean implements RoleHandlerRemote, RoleHandlerLocal {
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("RoleHandler.spring.ejb.context").getFactory();
-            this.service = (RoleHandlerInterface) factory.getBean("service.RoleHandler");
+
+            this.service =
+                (RoleHandlerInterface) BeanLocator.getBean("RoleHandler.spring.ejb.context", "service.RoleHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception RoleHandlerComponent: " + e);

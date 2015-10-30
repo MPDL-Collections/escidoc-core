@@ -39,7 +39,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
        default-autowire="no" default-lazy-init="true">
 
 
-	<tx:annotation-driven mode="aspectj" transaction-manager="escidoc-core.txManager" />
+	<tx:annotation-driven mode="aspectj" transaction-manager="escidoc-core.txManager"/>
 	
 	<bean id="beanLocator" class="de.escidoc.core.common.util.service.BeanLocator" lazy-init="false"/>
 	
@@ -320,7 +320,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		</property>
         <property name="hibernateProperties">
             <props>
-            	
+            	<!-- 
 	            <prop key="hibernate.transaction.jta.platform">
 	            	org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform
 	            </prop>
@@ -330,6 +330,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
                 </prop>
                
                <prop key="hibernate.current_session_context_class">jta</prop>
+               -->
                  <!-- 
                 <prop key="hibernate.transaction.manager_lookup_class">
                     ${escidoc-core.hibernate.transaction.manager_lookup_class}

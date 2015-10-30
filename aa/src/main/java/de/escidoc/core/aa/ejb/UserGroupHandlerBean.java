@@ -25,6 +25,7 @@ import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.aa.ejb.interfaces.UserGroupHandlerLocal;
 import de.escidoc.core.aa.ejb.interfaces.UserGroupHandlerRemote;
+import de.escidoc.core.aa.service.interfaces.UserAccountHandlerInterface;
 import de.escidoc.core.aa.service.interfaces.UserGroupHandlerInterface;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidScopeException;
@@ -48,6 +49,7 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.UniqueConstraintViolationException;
 import de.escidoc.core.common.exceptions.application.violated.UserGroupHierarchyViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 
 @Stateless(name = "UserGroupHandler")
@@ -67,10 +69,10 @@ public class UserGroupHandlerBean implements UserGroupHandlerRemote, UserGroupHa
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("UserGroupHandler.spring.ejb.context").getFactory();
-            this.service = (UserGroupHandlerInterface) factory.getBean("service.UserGroupHandler");
+
+            this.service =
+                (UserGroupHandlerInterface) BeanLocator.getBean("UserGroupHandler.spring.ejb.context",
+                    "service.UserGroupHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception UserGroupHandlerComponent: " + e);

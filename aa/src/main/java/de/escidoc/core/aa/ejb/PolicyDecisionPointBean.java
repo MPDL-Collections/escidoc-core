@@ -33,6 +33,7 @@ import de.escidoc.core.common.exceptions.application.notfound.ResourceNotFoundEx
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 
 @Stateless(name = "PolicyDecisionPoint")
@@ -52,10 +53,10 @@ public class PolicyDecisionPointBean implements PolicyDecisionPointRemote, Polic
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("PolicyDecisionPoint.spring.ejb.context").getFactory();
-            this.service = (PolicyDecisionPointInterface) factory.getBean("service.PolicyDecisionPoint");
+
+            this.service =
+                (PolicyDecisionPointInterface) BeanLocator.getBean("PolicyDecisionPoint.spring.ejb.context",
+                    "service.PolicyDecisionPoint");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception PolicyDecisionPointComponent: " + e);

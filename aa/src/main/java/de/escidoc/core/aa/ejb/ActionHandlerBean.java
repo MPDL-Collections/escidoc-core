@@ -30,6 +30,7 @@ import de.escidoc.core.common.exceptions.application.notfound.ContextNotFoundExc
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 
 @Stateless(name = "ActionHandler")
@@ -49,10 +50,10 @@ public class ActionHandlerBean implements ActionHandlerRemote, ActionHandlerLoca
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ActionHandler.spring.ejb.context").getFactory();
-            this.service = (ActionHandlerInterface) factory.getBean("service.ActionHandler");
+
+            this.service =
+                (ActionHandlerInterface) BeanLocator.getBean("ActionHandler.spring.ejb.context",
+                    "service.ActionHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ActionHandlerComponent: " + e);

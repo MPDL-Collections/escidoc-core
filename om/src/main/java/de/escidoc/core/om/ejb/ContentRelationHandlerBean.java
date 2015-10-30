@@ -40,9 +40,11 @@ import de.escidoc.core.common.exceptions.application.violated.LockingException;
 import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingException;
 import de.escidoc.core.common.exceptions.application.violated.PidAlreadyAssignedException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.ContentRelationHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.ContentRelationHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContainerHandlerInterface;
 import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 
 @Stateless(name = "ContentRelationHandler")
@@ -62,10 +64,10 @@ public class ContentRelationHandlerBean implements ContentRelationHandlerRemote,
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ContentRelationHandler.spring.ejb.context").getFactory();
-            this.service = (ContentRelationHandlerInterface) factory.getBean("service.ContentRelationHandler");
+
+            this.service =
+                (ContentRelationHandlerInterface) BeanLocator.getBean("ContentRelationHandler.spring.ejb.context",
+                    "service.ContentRelationHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ContentRelationHandlerComponent: " + e);

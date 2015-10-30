@@ -43,6 +43,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.exceptions.system.WebserverSystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 
 /**
  * @author Frank Schwichtenberg
@@ -281,8 +282,12 @@ public class LockHandler extends JdbcDaoSupport {
      */
     public static LockHandler getInstance() {
 
-        final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-        final BeanFactory factory = beanFactoryLocator.useBeanFactory("Om.spring.ejb.context").getFactory();
-        return (LockHandler) factory.getBean("business.LockHandler");
+        try {
+            return (LockHandler) BeanLocator.getBean("Om.spring.ejb.context", "business.LockHandler");
+        }
+        catch (WebserverSystemException e) {
+            LoggerFactory.getLogger(LockHandler.class).error("Error while retrieving LockHandler", e);
+        }
+        return null;
     }
 }

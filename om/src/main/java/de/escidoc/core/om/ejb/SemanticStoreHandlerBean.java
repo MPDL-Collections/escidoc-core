@@ -28,9 +28,11 @@ import de.escidoc.core.common.exceptions.application.missing.MissingElementValue
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.SemanticStoreHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.SemanticStoreHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.om.service.interfaces.SemanticStoreHandlerInterface;
 
 @Stateless(name = "SemanticStoreHandler")
@@ -50,10 +52,10 @@ public class SemanticStoreHandlerBean implements SemanticStoreHandlerRemote, Sem
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("SemanticStoreHandler.spring.ejb.context").getFactory();
-            this.service = (SemanticStoreHandlerInterface) factory.getBean("service.SemanticStoreHandler");
+
+            this.service =
+                (SemanticStoreHandlerInterface) BeanLocator.getBean("SemanticStoreHandler.spring.ejb.context",
+                    "service.SemanticStoreHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception SemanticStoreHandlerComponent: " + e);

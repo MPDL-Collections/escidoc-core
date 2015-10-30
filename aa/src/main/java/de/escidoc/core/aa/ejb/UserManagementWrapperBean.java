@@ -23,9 +23,11 @@ import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.aa.ejb.interfaces.UserManagementWrapperLocal;
 import de.escidoc.core.aa.ejb.interfaces.UserManagementWrapperRemote;
+import de.escidoc.core.aa.service.interfaces.UserGroupHandlerInterface;
 import de.escidoc.core.aa.service.interfaces.UserManagementWrapperInterface;
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 
 @Stateless(name = "UserManagementWrapper")
@@ -45,10 +47,10 @@ public class UserManagementWrapperBean implements UserManagementWrapperRemote, U
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("UserManagementWrapper.spring.ejb.context").getFactory();
-            this.service = (UserManagementWrapperInterface) factory.getBean("service.UserManagementWrapper");
+
+            this.service =
+                (UserManagementWrapperInterface) BeanLocator.getBean("UserManagementWrapper.spring.ejb.context",
+                    "service.UserManagementWrapper");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception UserManagementWrapperComponent: " + e);

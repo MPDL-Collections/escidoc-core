@@ -47,9 +47,11 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeViolationException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.ContextHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.ContextHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.om.service.interfaces.ContextHandlerInterface;
 
 @Stateless(name = "ContextHandler")
@@ -69,10 +71,10 @@ public class ContextHandlerBean implements ContextHandlerRemote, ContextHandlerL
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ContextHandler.spring.ejb.context").getFactory();
-            this.service = (ContextHandlerInterface) factory.getBean("service.ContextHandler");
+
+            this.service =
+                (ContextHandlerInterface) BeanLocator.getBean("ContextHandler.spring.ejb.context",
+                    "service.ContextHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ContextHandlerComponent: " + e);

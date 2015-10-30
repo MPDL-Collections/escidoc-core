@@ -25,9 +25,11 @@ import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.FedoraRestDeviationHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.FedoraRestDeviationHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.om.service.interfaces.FedoraRestDeviationHandlerInterface;
 
 @Stateless(name = "FedoraRestDeviationHandler")
@@ -48,10 +50,10 @@ public class FedoraRestDeviationHandlerBean
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("FedoraRestDeviationHandler.spring.ejb.context").getFactory();
-            this.service = (FedoraRestDeviationHandlerInterface) factory.getBean("service.FedoraRestDeviationHandler");
+
+            this.service =
+                (FedoraRestDeviationHandlerInterface) BeanLocator.getBean(
+                    "FedoraRestDeviationHandler.spring.ejb.context", "service.FedoraRestDeviationHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception FedoraRestDeviationHandlerComponent: " + e);

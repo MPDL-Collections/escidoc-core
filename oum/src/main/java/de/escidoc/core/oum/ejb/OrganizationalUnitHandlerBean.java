@@ -43,7 +43,9 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.OrganizationalUnitHasChildrenException;
 import de.escidoc.core.common.exceptions.application.violated.OrganizationalUnitHierarchyViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.oum.ejb.interfaces.OrganizationalUnitHandlerLocal;
 import de.escidoc.core.oum.ejb.interfaces.OrganizationalUnitHandlerRemote;
 import de.escidoc.core.oum.service.interfaces.OrganizationalUnitHandlerInterface;
@@ -65,10 +67,10 @@ public class OrganizationalUnitHandlerBean implements OrganizationalUnitHandlerR
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("OrganizationalUnitHandler.spring.ejb.context").getFactory();
-            this.service = (OrganizationalUnitHandlerInterface) factory.getBean("service.OrganizationalUnitHandler");
+
+            this.service =
+                (OrganizationalUnitHandlerInterface) BeanLocator.getBean(
+                    "OrganizationalUnitHandler.spring.ejb.context", "service.OrganizationalUnitHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception OrganizationalUnitHandlerComponent: " + e);

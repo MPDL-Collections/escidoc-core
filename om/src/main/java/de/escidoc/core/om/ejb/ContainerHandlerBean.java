@@ -23,6 +23,7 @@ import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
+import de.escidoc.core.aa.service.interfaces.UserManagementWrapperInterface;
 import de.escidoc.core.common.business.fedora.EscidocBinaryContent;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContentException;
 import de.escidoc.core.common.exceptions.application.invalid.InvalidContextException;
@@ -58,6 +59,7 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyAttributeV
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementViolationException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.ContainerHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.ContainerHandlerRemote;
@@ -80,10 +82,10 @@ public class ContainerHandlerBean implements ContainerHandlerRemote, ContainerHa
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ContainerHandler.spring.ejb.context").getFactory();
-            this.service = (ContainerHandlerInterface) factory.getBean("service.ContainerHandler");
+
+            this.service =
+                (ContainerHandlerInterface) BeanLocator.getBean("ContainerHandler.spring.ejb.context",
+                    "service.ContainerHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ContainerHandlerComponent: " + e);

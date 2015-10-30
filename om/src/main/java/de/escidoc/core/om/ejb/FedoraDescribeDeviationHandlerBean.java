@@ -24,9 +24,11 @@ import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
 import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.FedoraDescribeDeviationHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.om.service.interfaces.FedoraDescribeDeviationHandlerInterface;
 
 @Stateless(name = "FedoraDescribeDeviationHandler")
@@ -47,11 +49,10 @@ public class FedoraDescribeDeviationHandlerBean
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("FedoraDescribeDeviationHandler.spring.ejb.context").getFactory();
+
             this.service =
-                (FedoraDescribeDeviationHandlerInterface) factory.getBean("service.FedoraDescribeDeviationHandler");
+                (FedoraDescribeDeviationHandlerInterface) BeanLocator.getBean(
+                    "FedoraDescribeDeviationHandler.spring.ejb.context", "service.FedoraDescribeDeviationHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception FedoraDescribeDeviationHandlerComponent: " + e);

@@ -27,7 +27,9 @@ import de.escidoc.core.common.exceptions.application.missing.MissingMethodParame
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.sm.ejb.interfaces.PreprocessingHandlerLocal;
 import de.escidoc.core.sm.ejb.interfaces.PreprocessingHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.PreprocessingHandlerInterface;
@@ -49,10 +51,10 @@ public class PreprocessingHandlerBean implements PreprocessingHandlerRemote, Pre
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("PreprocessingHandler.spring.ejb.context").getFactory();
-            this.service = (PreprocessingHandlerInterface) factory.getBean("service.PreprocessingHandler");
+
+            this.service =
+                (PreprocessingHandlerInterface) BeanLocator.getBean("PreprocessingHandler.spring.ejb.context",
+                    "service.PreprocessingHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception PreprocessingHandlerComponent: " + e);

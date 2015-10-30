@@ -44,6 +44,7 @@ import javax.xml.transform.TransformerException;
 import org.apache.xpath.XPathAPI;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.access.BeanFactoryLocator;
 import org.springframework.beans.factory.access.SingletonBeanFactoryLocator;
@@ -53,6 +54,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import de.escidoc.core.common.business.Constants;
+import de.escidoc.core.common.business.LockHandler;
 import de.escidoc.core.common.business.PropertyMapKeys;
 import de.escidoc.core.common.business.fedora.datastream.Datastream;
 import de.escidoc.core.common.business.fedora.resources.Container;
@@ -277,9 +279,16 @@ public class Utility {
      * @return An Utility instance.
      */
     public static Utility getInstance() {
-        final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-        final BeanFactory factory = beanFactoryLocator.useBeanFactory(BeanLocator.COMMON_FACTORY_ID).getFactory();
-        return (Utility) factory.getBean("business.Utility");
+
+        try {
+            return (Utility) BeanLocator.getBean(BeanLocator.COMMON_FACTORY_ID, "business.Utility");
+        }
+        catch (WebserverSystemException e) {
+
+            LoggerFactory.getLogger(Utility.class).error("Error while retrieving LockHandler", e);
+        }
+        return null;
+
     }
 
     /**

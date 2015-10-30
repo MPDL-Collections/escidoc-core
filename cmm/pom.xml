@@ -63,8 +63,6 @@
 							<groupId>org.springframework</groupId>
 							<artifactId>spring-aspects</artifactId>
 						</aspectLibrary>
-					</aspectLibraries>
- 					<aspectLibraries>
                         <aspectLibrary>
                             <groupId>org.escidoc.core.wildfly</groupId>
                             <artifactId>common</artifactId>

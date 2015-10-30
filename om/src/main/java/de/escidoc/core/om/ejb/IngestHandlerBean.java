@@ -24,9 +24,11 @@ import org.springframework.security.core.context.SecurityContext;
 
 import de.escidoc.core.common.exceptions.EscidocException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.IngestHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.IngestHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.om.service.interfaces.IngestHandlerInterface;
 
 @Stateless(name = "IngestHandler")
@@ -48,10 +50,10 @@ public class IngestHandlerBean implements IngestHandlerRemote, IngestHandlerLoca
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("IngestHandler.spring.ejb.context").getFactory();
-            this.service = (IngestHandlerInterface) factory.getBean("service.IngestHandler");
+
+            this.service =
+                (IngestHandlerInterface) BeanLocator.getBean("IngestHandler.spring.ejb.context",
+                    "service.IngestHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception IngestHandlerComponent: " + e);

@@ -28,7 +28,9 @@ import de.escidoc.core.common.exceptions.application.missing.MissingMethodParame
 import de.escidoc.core.common.exceptions.application.security.AuthenticationException;
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.tme.ejb.interfaces.JhoveHandlerLocal;
 import de.escidoc.core.tme.ejb.interfaces.JhoveHandlerRemote;
 import de.escidoc.core.tme.service.interfaces.JhoveHandlerInterface;
@@ -50,10 +52,9 @@ public class JhoveHandlerBean implements JhoveHandlerRemote, JhoveHandlerLocal {
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("JhoveHandler.spring.ejb.context").getFactory();
-            this.service = (JhoveHandlerInterface) factory.getBean("service.JhoveHandler");
+
+            this.service =
+                (JhoveHandlerInterface) BeanLocator.getBean("JhoveHandler.spring.ejb.context", "service.JhoveHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception JhoveHandlerComponent: " + e);

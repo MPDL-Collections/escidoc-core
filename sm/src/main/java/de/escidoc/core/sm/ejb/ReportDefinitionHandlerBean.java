@@ -34,7 +34,9 @@ import de.escidoc.core.common.exceptions.application.security.AuthenticationExce
 import de.escidoc.core.common.exceptions.application.security.AuthorizationException;
 import de.escidoc.core.common.exceptions.application.violated.ScopeContextViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.sm.ejb.interfaces.ReportDefinitionHandlerLocal;
 import de.escidoc.core.sm.ejb.interfaces.ReportDefinitionHandlerRemote;
 import de.escidoc.core.sm.service.interfaces.ReportDefinitionHandlerInterface;
@@ -56,10 +58,10 @@ public class ReportDefinitionHandlerBean implements ReportDefinitionHandlerRemot
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ReportDefinitionHandler.spring.ejb.context").getFactory();
-            this.service = (ReportDefinitionHandlerInterface) factory.getBean("service.ReportDefinitionHandler");
+
+            this.service =
+                (ReportDefinitionHandlerInterface) BeanLocator.getBean("ReportDefinitionHandler.spring.ejb.context",
+                    "service.ReportDefinitionHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ReportDefinitionHandlerComponent: " + e);

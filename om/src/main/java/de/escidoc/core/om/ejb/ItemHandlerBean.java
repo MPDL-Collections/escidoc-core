@@ -63,9 +63,11 @@ import de.escidoc.core.common.exceptions.application.violated.ReadonlyElementVio
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionException;
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyViolationException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
 import de.escidoc.core.om.ejb.interfaces.ItemHandlerLocal;
 import de.escidoc.core.om.ejb.interfaces.ItemHandlerRemote;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 import de.escidoc.core.om.service.interfaces.EscidocServiceRedirectInterface;
 import de.escidoc.core.om.service.interfaces.ItemHandlerInterface;
 
@@ -90,6 +92,8 @@ public class ItemHandlerBean implements ItemHandlerRemote, ItemHandlerLocal {
             final BeanFactory factory =
                 beanFactoryLocator.useBeanFactory("ItemHandler.spring.ejb.context").getFactory();
             this.service = (ItemHandlerInterface) factory.getBean("service.ItemHandler");
+            this.service =
+                (ItemHandlerInterface) BeanLocator.getBean("ItemHandler.spring.ejb.context", "service.ItemHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ItemHandlerComponent: " + e);

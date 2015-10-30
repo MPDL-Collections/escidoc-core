@@ -51,7 +51,9 @@ import de.escidoc.core.common.exceptions.application.violated.OptimisticLockingE
 import de.escidoc.core.common.exceptions.application.violated.ReadonlyVersionException;
 import de.escidoc.core.common.exceptions.application.violated.ResourceInUseException;
 import de.escidoc.core.common.exceptions.system.SystemException;
+import de.escidoc.core.common.util.service.BeanLocator;
 import de.escidoc.core.common.util.service.UserContext;
+import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 
 @Stateless(name = "ContentModelHandler")
 @RemoteHome(ContentModelHandlerRemoteHome.class)
@@ -72,10 +74,10 @@ public class ContentModelHandlerBean implements ContentModelHandlerRemote, Conte
     @PermitAll
     public void ejbCreate() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ContentModelHandler.spring.ejb.context").getFactory();
-            this.service = (ContentModelHandlerInterface) factory.getBean("service.ContentModelHandler");
+
+            this.service =
+                (ContentModelHandlerInterface) BeanLocator.getBean("ContentModelHandler.spring.ejb.context",
+                    "service.ContentModelHandler");
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ContentModelHandlerComponent: " + e);
