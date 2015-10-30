@@ -39,8 +39,6 @@ import de.escidoc.core.om.service.interfaces.SemanticStoreHandlerInterface;
 @Remote(SemanticStoreHandlerRemote.class)
 @Local(SemanticStoreHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class SemanticStoreHandlerBean implements SemanticStoreHandlerRemote, SemanticStoreHandlerLocal {
 

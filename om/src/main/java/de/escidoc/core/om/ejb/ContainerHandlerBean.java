@@ -69,8 +69,6 @@ import de.escidoc.core.om.service.interfaces.ContainerHandlerInterface;
 @Remote(ContainerHandlerRemote.class)
 @Local(ContainerHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ContainerHandlerBean implements ContainerHandlerRemote, ContainerHandlerLocal {
 

@@ -35,8 +35,6 @@ import de.escidoc.core.om.service.interfaces.FedoraDescribeDeviationHandlerInter
 @Remote(FedoraDescribeDeviationHandlerRemote.class)
 @Local(FedoraDescribeDeviationHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class FedoraDescribeDeviationHandlerBean
     implements FedoraDescribeDeviationHandlerRemote, FedoraDescribeDeviationHandlerLocal {

@@ -43,8 +43,6 @@ import de.escidoc.core.sm.service.interfaces.AggregationDefinitionHandlerInterfa
 @Remote(AggregationDefinitionHandlerRemote.class)
 @Local(AggregationDefinitionHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class AggregationDefinitionHandlerBean
     implements AggregationDefinitionHandlerRemote, AggregationDefinitionHandlerLocal {

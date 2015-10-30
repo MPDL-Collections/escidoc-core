@@ -54,8 +54,6 @@ import de.escidoc.core.oum.service.interfaces.OrganizationalUnitHandlerInterface
 @Remote(OrganizationalUnitHandlerRemote.class)
 @Local(OrganizationalUnitHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class OrganizationalUnitHandlerBean implements OrganizationalUnitHandlerRemote, OrganizationalUnitHandlerLocal {
 

@@ -40,8 +40,6 @@ import de.escidoc.core.common.util.service.UserContext;
 @Remote(PolicyDecisionPointRemote.class)
 @Local(PolicyDecisionPointLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class PolicyDecisionPointBean implements PolicyDecisionPointRemote, PolicyDecisionPointLocal {
 

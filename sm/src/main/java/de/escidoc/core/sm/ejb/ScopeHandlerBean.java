@@ -42,8 +42,6 @@ import de.escidoc.core.sm.service.interfaces.ScopeHandlerInterface;
 @Remote(ScopeHandlerRemote.class)
 @Local(ScopeHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ScopeHandlerBean implements ScopeHandlerRemote, ScopeHandlerLocal {
 

@@ -40,8 +40,6 @@ import de.escidoc.core.sm.service.interfaces.ReportHandlerInterface;
 @Remote(ReportHandlerRemote.class)
 @Local(ReportHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ReportHandlerBean implements ReportHandlerRemote, ReportHandlerLocal {
 

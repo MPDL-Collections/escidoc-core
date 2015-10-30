@@ -75,8 +75,6 @@ import de.escidoc.core.om.service.interfaces.ItemHandlerInterface;
 @Remote(ItemHandlerRemote.class)
 @Local(ItemHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ItemHandlerBean implements ItemHandlerRemote, ItemHandlerLocal {
 
@@ -88,12 +86,9 @@ public class ItemHandlerBean implements ItemHandlerRemote, ItemHandlerLocal {
     @PostConstruct
     public void create() throws CreateException {
         try {
-            final BeanFactoryLocator beanFactoryLocator = SingletonBeanFactoryLocator.getInstance();
-            final BeanFactory factory =
-                beanFactoryLocator.useBeanFactory("ItemHandler.spring.ejb.context").getFactory();
-            this.service = (ItemHandlerInterface) factory.getBean("service.ItemHandler");
             this.service =
                 (ItemHandlerInterface) BeanLocator.getBean("ItemHandler.spring.ejb.context", "service.ItemHandler");
+
         }
         catch (Exception e) {
             LOGGER.error("ejbCreate(): Exception ItemHandlerComponent: " + e);

@@ -38,8 +38,6 @@ import de.escidoc.core.st.service.interfaces.StagingFileHandlerInterface;
 @Remote(StagingFileHandlerRemote.class)
 @Local(StagingFileHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class StagingFileHandlerBean implements StagingFileHandlerRemote, StagingFileHandlerLocal {
 
@@ -62,6 +60,8 @@ public class StagingFileHandlerBean implements StagingFileHandlerRemote, Staging
     }
 
     @PermitAll
+    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public String create(final EscidocBinaryContent binaryContent, final SecurityContext securityContext)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {
@@ -74,6 +74,8 @@ public class StagingFileHandlerBean implements StagingFileHandlerRemote, Staging
     }
 
     @PermitAll
+    @Transactional
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public String create(final EscidocBinaryContent binaryContent, final String authHandle, final Boolean restAccess)
         throws MissingMethodParameterException, AuthenticationException, AuthorizationException, SystemException {
         try {

@@ -50,6 +50,7 @@ import de.escidoc.core.common.exceptions.system.WebserverSystemException;
 import de.escidoc.core.common.util.string.StringUtility;
 import de.escidoc.core.common.util.xml.XmlUtility;
 import de.escidoc.core.st.business.interfaces.StagingFileHandlerInterface;
+import de.escidoc.core.st.business.persistence.StagingFile;
 import de.escidoc.core.st.business.persistence.StagingFileDao;
 
 /**

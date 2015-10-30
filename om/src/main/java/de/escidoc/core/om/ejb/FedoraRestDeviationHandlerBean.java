@@ -36,8 +36,6 @@ import de.escidoc.core.om.service.interfaces.FedoraRestDeviationHandlerInterface
 @Remote(FedoraRestDeviationHandlerRemote.class)
 @Local(FedoraRestDeviationHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class FedoraRestDeviationHandlerBean
     implements FedoraRestDeviationHandlerRemote, FedoraRestDeviationHandlerLocal {

@@ -58,8 +58,6 @@ import de.escidoc.core.om.service.interfaces.ContextHandlerInterface;
 @Remote(ContextHandlerRemote.class)
 @Local(ContextHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ContextHandlerBean implements ContextHandlerRemote, ContextHandlerLocal {
 

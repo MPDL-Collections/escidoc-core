@@ -43,8 +43,6 @@ import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 @Remote(AdminHandlerRemote.class)
 @Local(AdminHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class AdminHandlerBean implements AdminHandlerRemote, AdminHandlerLocal {
 

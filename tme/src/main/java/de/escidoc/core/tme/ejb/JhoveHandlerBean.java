@@ -39,8 +39,6 @@ import de.escidoc.core.tme.service.interfaces.JhoveHandlerInterface;
 @Remote(JhoveHandlerRemote.class)
 @Local(JhoveHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class JhoveHandlerBean implements JhoveHandlerRemote, JhoveHandlerLocal {
 

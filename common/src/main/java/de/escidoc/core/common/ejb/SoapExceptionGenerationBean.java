@@ -148,8 +148,6 @@ import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 @Remote(SoapExceptionGenerationRemote.class)
 @Local(SoapExceptionGenerationLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class SoapExceptionGenerationBean implements SoapExceptionGenerationRemote, SoapExceptionGenerationLocal {
 

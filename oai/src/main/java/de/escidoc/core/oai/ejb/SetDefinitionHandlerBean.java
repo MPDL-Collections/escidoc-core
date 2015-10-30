@@ -49,8 +49,6 @@ import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 @Remote(SetDefinitionHandlerRemote.class)
 @Local(SetDefinitionHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class SetDefinitionHandlerBean implements SetDefinitionHandlerRemote, SetDefinitionHandlerLocal {
 

@@ -42,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
-import de.escidoc.core.st.business.StagingFile;
+import de.escidoc.core.st.business.persistence.StagingFile;
 import de.escidoc.core.st.business.persistence.StagingFileDao;
 
 /**

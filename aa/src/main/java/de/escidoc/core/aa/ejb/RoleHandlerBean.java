@@ -45,8 +45,6 @@ import de.escidoc.core.common.util.service.UserContext;
 @Remote(RoleHandlerRemote.class)
 @Local(RoleHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class RoleHandlerBean implements RoleHandlerRemote, RoleHandlerLocal {
 

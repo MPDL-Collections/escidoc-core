@@ -51,8 +51,6 @@ import de.escidoc.core.om.service.interfaces.ContentRelationHandlerInterface;
 @Remote(ContentRelationHandlerRemote.class)
 @Local(ContentRelationHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ContentRelationHandlerBean implements ContentRelationHandlerRemote, ContentRelationHandlerLocal {
 

@@ -35,8 +35,6 @@ import de.escidoc.core.om.service.interfaces.IngestHandlerInterface;
 @Remote(IngestHandlerRemote.class)
 @Local(IngestHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class IngestHandlerBean implements IngestHandlerRemote, IngestHandlerLocal {
 

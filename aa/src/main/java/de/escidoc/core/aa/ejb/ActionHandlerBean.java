@@ -37,8 +37,6 @@ import de.escidoc.core.common.util.service.UserContext;
 @Remote(ActionHandlerRemote.class)
 @Local(ActionHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class ActionHandlerBean implements ActionHandlerRemote, ActionHandlerLocal {
 

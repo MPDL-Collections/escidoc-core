@@ -36,8 +36,6 @@ import de.escidoc.core.sm.service.interfaces.StatisticDataHandlerInterface;
 @Remote(StatisticDataHandlerRemote.class)
 @Local(StatisticDataHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class StatisticDataHandlerBean implements StatisticDataHandlerRemote, StatisticDataHandlerLocal {
 

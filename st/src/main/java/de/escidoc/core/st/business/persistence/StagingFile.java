@@ -1,168 +1,225 @@
+/*
+ * CDDL HEADER START
+ *
+ * The contents of this file are subject to the terms of the
+ * Common Development and Distribution License, Version 1.0 only
+ * (the "License").  You may not use this file except in compliance
+ * with the License.
+ *
+ * You can obtain a copy of the license at license/ESCIDOC.LICENSE
+ * or http://www.escidoc.de/license.
+ * See the License for the specific language governing permissions
+ * and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL HEADER in each
+ * file and include the License file at license/ESCIDOC.LICENSE.
+ * If applicable, add the following below this CDDL HEADER, with the
+ * fields enclosed by brackets "[]" replaced with your own identifying
+ * information: Portions Copyright [yyyy] [name of copyright owner]
+ *
+ * CDDL HEADER END
+ */
+
+/*
+ * Copyright 2006-2008 Fachinformationszentrum Karlsruhe Gesellschaft
+ * fuer wissenschaftlich-technische Information mbH and Max-Planck-
+ * Gesellschaft zur Foerderung der Wissenschaft e.V.  
+ * All rights reserved.  Use is subject to license terms.
+ */
 package de.escidoc.core.st.business.persistence;
 
-// Generated 26.10.2015 15:34:52 by Hibernate Tools 3.2.2.GA
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import de.escidoc.core.common.util.IOUtils;
 
 /**
- * 			@hibernate.class
- * 			table="staging_file"
- * 			@hibernate.mapping
- * 			schema="st"
- * 	    
+ * This class represents a file in the staging area.
+ *
+ * @author Torsten Tetteroo
  */
-@MappedSuperclass
-public class StagingFile implements java.io.Serializable {
+@Entity
+@Table(name = "staging_file", schema = "st")
+public class StagingFile extends StagingFileBase {
 
     /**
-     * 				@hibernate.id
-     * 				generator-class="de.escidoc.core.st.business.persistence.hibernate.TokenGenerator"
-     * 				type="java.lang.String"
-     * 				column="token"
-     *     	    
+     * Checks if this staging file has an associated file in the file system.
+     *
+     * @return Returns <code>true</code> if an existing file in the file system has been associated to this staging
+     *         file, <code>false</code> if there does not exist an associated file.
      */
-    private String token;
+    @Transient
+    public boolean hasFile() {
+
+        if (getReference() == null) {
+            return false;
+        }
+        return new File(getReference()).exists();
+    }
 
     /**
-     * 				@hibernate.property
-     * 				column="expiry_ts"
-     * 				length="19"
-     * 				not-null="true"
-     *         	
+     * Checks if this file has an associated file in the file system that is readable.
+     *
+     * @return Returns <code>true</code> if an existing, readable file in the file system has been associated to this
+     *         staging file.
      */
-    private long expiryTs;
+    @Transient
+    public boolean canRead() {
+
+        if (getReference() == null) {
+            return false;
+        }
+        return new File(getReference()).canRead();
+    }
 
     /**
-     * 				@hibernate.property
-     * 				column="reference"
-     * 				length="2147483647"
-     *         	
+     * Checks if this file has a reference set and this file would be writeable.
+     *
+     * @return Returns <code>true</code> if a reference to a file in the file system has been set and the file system's
+     *         file would be writeable.
      */
-    private String reference;
+    @Transient
+    public boolean canWrite() {
+
+        if (getReference() == null) {
+            return false;
+        }
+        return new File(getReference()).canWrite();
+    }
 
     /**
-     * 				@hibernate.property
-     * 				column="mime_type"
-     * 				length="255"
-     *         	
+     * Checks if this staging file has been expired.
+     *
+     * @return Returns <code>true</code> if this staging file has been expired.
      */
-    private String mimeType;
+    @Transient
+    public boolean isExpired() {
+
+        return getExpiryTs() <= System.currentTimeMillis();
+    }
 
     /**
-     * 				@hibernate.property
-     * 				column="upload"
-     * 				length="1"
-     * 				not-null="true"
-     *         	
+     * Gets the file referenced by this staging file.
+     *
+     * @return The file referenced by this staging file.
+     * @throws IOException If file cannot be retrieved.
      */
-    private boolean upload;
+    @Transient
+    private File getFile() throws IOException {
 
-    public StagingFile() {
+        if (!hasFile()) {
+            throw new IOException();
+        }
+        return new File(getReference());
     }
 
-    public StagingFile(long expiryTs, boolean upload) {
-        this.expiryTs = expiryTs;
-        this.upload = upload;
-    }
-
-    public StagingFile(long expiryTs, String reference, String mimeType, boolean upload) {
-        this.expiryTs = expiryTs;
-        this.reference = reference;
-        this.mimeType = mimeType;
-        this.upload = upload;
-    }
-
-    /**       
-     *      * 				@hibernate.id
-     * 				generator-class="de.escidoc.core.st.business.persistence.hibernate.TokenGenerator"
-     * 				type="java.lang.String"
-     * 				column="token"
-     *     	    
+    /**
+     * Creates the file referenced by this staging file.<br> If the destination directory does not exists, it will be
+     * created.<br> If the file does exist, it will be overridden.
+     *
+     * @return The file referenced by this staging file.
+     * @throws IOException If file cannot be retrieved.
      */
-    @GenericGenerator(name = "generator", strategy = "de.escidoc.core.st.business.persistence.hibernate.TokenGenerator", parameters = @Parameter(name = "schema", value = "st"))
-    @Id
-    @GeneratedValue(generator = "generator")
-    @Column(name = "token", nullable = false)
-    public String getToken() {
-        return this.token;
+    @Transient
+    public File createFile() throws IOException {
+
+        if (getReference() == null) {
+            throw new IOException();
+        }
+        final File file = new File(getReference());
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        return file;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    /**       
-     *      * 				@hibernate.property
-     * 				column="expiry_ts"
-     * 				length="19"
-     * 				not-null="true"
-     *         	
+    /**
+     * Gets a input stream from this staging file.
+     *
+     * @return Returns an input stream to access the file associated to this staging file.
+     * @throws IOException If file input stream cannot be retrieved.
      */
+    @Transient
+    public FileInputStream getFileInputStream() throws IOException {
 
-    @Column(name = "expiry_ts", nullable = false, length = 19)
-    public long getExpiryTs() {
-        return this.expiryTs;
+        try {
+            return new FileInputStream(getFile());
+        }
+        catch (final FileNotFoundException e) {
+            throw new IOException(e);
+        }
     }
 
-    public void setExpiryTs(long expiryTs) {
-        this.expiryTs = expiryTs;
-    }
-
-    /**       
-     *      * 				@hibernate.property
-     * 				column="reference"
-     * 				length="2147483647"
-     *         	
+    /**
+     * Writes file content to given output stream.
+     *
+     * @param outputStream The stream to which the file content shall be written.
+     * @throws IOException If operation fails.
      */
+    @Transient
+    public void write(final OutputStream outputStream) throws IOException {
 
-    @Column(name = "reference", length = 2147483647)
-    public String getReference() {
-        return this.reference;
+        if (outputStream == null) {
+            throw new IOException();
+        }
+        try {
+            InputStream inputStream = getFileInputStream();
+            IOUtils.copyAndCloseInput(inputStream, outputStream);
+        }
+        finally {
+            IOUtils.closeStream(outputStream);
+        }
     }
 
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    /**       
-     *      * 				@hibernate.property
-     * 				column="mime_type"
-     * 				length="255"
-     *         	
+    /**
+     * Reads file content from given output stream and stores it as File in the file system using the reference value of
+     * this staging file.<br> If the referenced destination directory does not exists, it will be created.<br> If the
+     * referenced destination file exists, it will be overridden.
+     *
+     * @param inputStream The input stream to read the content from.
+     * @throws IOException If operation fails.
+     * @throws java.io.FileNotFoundException
      */
+    @Transient
+    public void read(final InputStream inputStream) throws IOException, FileNotFoundException {
 
-    @Column(name = "mime_type")
-    public String getMimeType() {
-        return this.mimeType;
+        if (inputStream == null) {
+            throw new IOException();
+        }
+        OutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(createFile());
+            IOUtils.copyAndCloseInput(inputStream, outputStream);
+        }
+        finally {
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
     }
 
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
-    }
-
-    /**       
-     *      * 				@hibernate.property
-     * 				column="upload"
-     * 				length="1"
-     * 				not-null="true"
-     *         	
+    /**
+     * Removes the associated file from the file system and sets the internal file reference to <code>null</code>.<br>
+     * If this staging file does not have an associated staging file, nothing is done.
+     *
+     * @throws IOException If clear fails.
      */
+    @Transient
+    public void clear() throws IOException {
 
-    @Column(name = "upload", nullable = false, length = 1)
-    public boolean isUpload() {
-        return this.upload;
+        if (hasFile()) {
+            getFile().delete();
+            setReference(null);
+        }
     }
-
-    public void setUpload(boolean upload) {
-        this.upload = upload;
-    }
-
 }

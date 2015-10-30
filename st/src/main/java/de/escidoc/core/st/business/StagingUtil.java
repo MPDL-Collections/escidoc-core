@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.util.configuration.EscidocConfiguration;
+import de.escidoc.core.st.business.persistence.StagingFile;
 import de.escidoc.core.st.business.persistence.StagingFileDao;
 
 /**

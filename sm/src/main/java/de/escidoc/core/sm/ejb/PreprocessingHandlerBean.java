@@ -38,8 +38,6 @@ import de.escidoc.core.sm.service.interfaces.PreprocessingHandlerInterface;
 @Remote(PreprocessingHandlerRemote.class)
 @Local(PreprocessingHandlerLocal.class)
 @TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
-@Transactional
 @RunAs("Administrator")
 public class PreprocessingHandlerBean implements PreprocessingHandlerRemote, PreprocessingHandlerLocal {
 
