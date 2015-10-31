@@ -47,13 +47,13 @@ import de.escidoc.core.common.persistence.hibernate.AbstractHibernateDao;
  * @author Torsten Tetteroo
  */
 
-@Transactional(propagation = Propagation.REQUIRED)
 public class HibernateActionDao extends AbstractHibernateDao implements ActionDaoInterface {
 
     /**
      * See Interface for functional description.
      */
     @Override
+    @Transactional(readOnly = true)
     public UnsecuredActionList retrieveUnsecuredActionList(final String contextId) throws SqlDatabaseSystemException {
 
         UnsecuredActionList ret = null;
@@ -72,6 +72,7 @@ public class HibernateActionDao extends AbstractHibernateDao implements ActionDa
      * See Interface for functional description.
      */
     @Override
+    @Transactional
     public void saveOrUpdate(final UnsecuredActionList unsecuredActionList) throws SqlDatabaseSystemException {
 
         super.saveOrUpdate(unsecuredActionList);
@@ -83,6 +84,7 @@ public class HibernateActionDao extends AbstractHibernateDao implements ActionDa
      * @see ActionDaoInterface #delete(de.escidoc.core.aa.business.persistence.UnsecuredActionList)
      */
     @Override
+    @Transactional
     public void delete(final UnsecuredActionList unsecuredActionList) throws SqlDatabaseSystemException {
 
         super.delete(unsecuredActionList);

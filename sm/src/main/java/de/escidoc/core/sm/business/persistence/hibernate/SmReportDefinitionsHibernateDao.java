@@ -51,7 +51,7 @@ import de.escidoc.core.sm.business.persistence.SmReportDefinitionsDaoInterface;
  *
  * @author Michael Hoppe
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true)
 public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implements SmReportDefinitionsDaoInterface {
 
     /**
@@ -62,6 +62,7 @@ public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implem
      * @see de.escidoc.core.sm.business .persistence.SmReportDefinitionsDaoInterface #save(de.escidoc.core.sm.business.persistence.hibernate.ReportDefinition)
      */
     @Override
+    @Transactional
     public void save(final ReportDefinition reportDefinition) throws SqlDatabaseSystemException {
         super.save(reportDefinition);
     }
@@ -75,6 +76,7 @@ public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implem
      *      de.escidoc.core.sm.business.persistence.hibernate.ReportDefinition)
      */
     @Override
+    @Transactional
     public void update(final ReportDefinition reportDefinition) throws SqlDatabaseSystemException {
         super.update(reportDefinition);
     }
@@ -87,6 +89,7 @@ public class SmReportDefinitionsHibernateDao extends AbstractHibernateDao implem
      * @see de.escidoc.core.sm.business .persistence.SmReportDefinitionsDaoInterface #delete( java.lang.Integer)
      */
     @Override
+    @Transactional
     public void delete(final ReportDefinition reportDefinition) throws SqlDatabaseSystemException {
         super.delete(reportDefinition);
     }

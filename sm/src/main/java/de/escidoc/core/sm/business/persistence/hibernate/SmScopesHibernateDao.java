@@ -52,7 +52,7 @@ import de.escidoc.core.sm.business.persistence.SmScopesDaoInterface;
  *
  * @author Michael Hoppe
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true)
 public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScopesDaoInterface {
 
     /**
@@ -63,6 +63,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
      * @see SmScopesDaoInterface #save(de.escidoc.core.sm.business.persistence.hibernate.Scope)
      */
     @Override
+    @Transactional
     public void save(final Scope scope) throws SqlDatabaseSystemException {
         super.save(scope);
     }
@@ -75,6 +76,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
      * @see SmScopesDaoInterface #update(de.escidoc.core.sm.business.persistence.hibernate.Scope)
      */
     @Override
+    @Transactional
     public void update(final Scope scope) throws SqlDatabaseSystemException {
         super.update(scope);
     }
@@ -87,6 +89,7 @@ public class SmScopesHibernateDao extends AbstractHibernateDao implements SmScop
      * @see SmScopesDaoInterface #delete(de.escidoc.core.sm.business.persistence.hibernate.Scope)
      */
     @Override
+    @Transactional
     public void delete(final Scope scope) throws SqlDatabaseSystemException {
         if (scope != null
             && (scope.getAggregationDefinitions() != null && !scope.getAggregationDefinitions().isEmpty()

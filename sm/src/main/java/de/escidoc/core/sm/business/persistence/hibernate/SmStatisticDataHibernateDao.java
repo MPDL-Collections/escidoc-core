@@ -45,7 +45,7 @@ import de.escidoc.core.sm.business.persistence.SmStatisticDataDaoInterface;
  *
  * @author Michael Hoppe
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true)
 public class SmStatisticDataHibernateDao extends AbstractHibernateDao implements SmStatisticDataDaoInterface {
 
     public static final String QUERY_MIN_TIMESTAMP_FOR_SCOPE =
@@ -60,6 +60,7 @@ public class SmStatisticDataHibernateDao extends AbstractHibernateDao implements
      * @see SmStatisticDataDaoInterface #saveStatisticData(java.lang.String, java.lang.String)
      */
     @Override
+    @Transactional
     public void saveStatisticData(final String xmlData, final String scopeId) throws SqlDatabaseSystemException {
         final Scope scope = new Scope();
         scope.setId(scopeId);

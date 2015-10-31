@@ -192,7 +192,7 @@ public class InvocationMappingBase implements java.io.Serializable {
      *         
      */
 
-    @Column(name = "position", nullable = false, length = 2)
+    @Column(name = "position", nullable = false, precision = 2, scale = 0)
     public int getPosition() {
         return this.position;
     }
@@ -226,7 +226,7 @@ public class InvocationMappingBase implements java.io.Serializable {
      *         
      */
 
-    @Column(name = "mapping_type", nullable = false, length = 2)
+    @Column(name = "mapping_type", nullable = false, precision = 2, scale = 0)
     public int getMappingType() {
         return this.mappingType;
     }

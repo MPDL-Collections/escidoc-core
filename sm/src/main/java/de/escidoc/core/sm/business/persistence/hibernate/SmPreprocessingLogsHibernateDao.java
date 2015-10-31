@@ -44,7 +44,7 @@ import de.escidoc.core.sm.business.persistence.SmPreprocessingLogsDaoInterface;
  *
  * @author Michael Hoppe
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true)
 public class SmPreprocessingLogsHibernateDao extends AbstractHibernateDao implements SmPreprocessingLogsDaoInterface {
 
     public static final String QUERY_LOGS_BY_AGG_DEF_ID =
@@ -74,6 +74,7 @@ public class SmPreprocessingLogsHibernateDao extends AbstractHibernateDao implem
      * @see SmPreprocessingLogsDaoInterface #savePreprocessingLog(PreprocessingLog)
      */
     @Override
+    @Transactional
     public String savePreprocessingLog(final PreprocessingLog preprocessingLog) throws SqlDatabaseSystemException {
         final String savedPreprocessingLog = (String) save(preprocessingLog);
         flush();

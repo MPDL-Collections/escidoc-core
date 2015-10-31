@@ -61,7 +61,7 @@ import de.escidoc.core.oai.business.persistence.SetDefinitionDaoInterface;
 /**
  * @author Rozita Friedman
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true)
 public class HibernateSetDefinitionDao extends AbstractHibernateDao implements SetDefinitionDaoInterface {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HibernateSetDefinitionDao.class);
@@ -98,6 +98,7 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
      * @see UserGroupDaoInterface #delete(de.escidoc.core.aa.business.persistence.UserGroup)
      */
     @Override
+    @Transactional
     public void delete(final SetDefinition setDefinition) throws SqlDatabaseSystemException {
         super.delete(setDefinition);
     }
@@ -247,6 +248,7 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
      * @see UserGroupDaoInterface #save(de.escidoc.core.aa.business.persistence.UserGroup)
      */
     @Override
+    @Transactional
     public void save(final SetDefinition setDefinition) throws SqlDatabaseSystemException {
         super.save(setDefinition);
     }
@@ -257,6 +259,7 @@ public class HibernateSetDefinitionDao extends AbstractHibernateDao implements S
      * @see UserGroupDaoInterface #update(de.escidoc.core.aa.business.persistence.UserGroup)
      */
     @Override
+    @Transactional
     public void update(final SetDefinition setDefinition) throws SqlDatabaseSystemException {
         super.update(setDefinition);
     }

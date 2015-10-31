@@ -40,7 +40,7 @@ import de.escidoc.core.common.util.security.persistence.RequestMappingDaoInterfa
  *
  * @author Torsten Tetteroo
  */
-@Transactional(propagation = Propagation.REQUIRED)
+
 public class HibernateRequestMappingDao extends Hibernate4DaoSupport implements RequestMappingDaoInterface {
 
     /**
@@ -62,6 +62,7 @@ public class HibernateRequestMappingDao extends Hibernate4DaoSupport implements 
      */
     @Override
     @SuppressWarnings("unchecked")
+    @Transactional(readOnly = true)
     public List<MethodMapping> retrieveMethodMappings(final String className, final String methodName) {
 
         if (methodName == null) {

@@ -64,7 +64,8 @@ import de.escidoc.core.common.util.list.ListSorting;
  *
  * @author Torsten Tetteroo
  */
-@Transactional(propagation = Propagation.REQUIRED)
+
+@Transactional(readOnly = true)
 public class HibernateEscidocRoleDao extends AbstractHibernateDao implements EscidocRoleDaoInterface {
 
     /**
@@ -134,6 +135,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
      * @see EscidocRoleDaoInterface #deleteRole(de.escidoc.core.aa.business.persistence.EscidocRole)
      */
     @Override
+    @Transactional
     public void deleteRole(final EscidocRole role) throws SqlDatabaseSystemException {
 
         delete(role);
@@ -300,6 +302,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
      * @see EscidocRoleDaoInterface #saveOrUpdate(de.escidoc.core.aa.business.persistence.EscidocRole)
      */
     @Override
+    @Transactional
     public void saveOrUpdate(final EscidocRole role) throws SqlDatabaseSystemException {
 
         super.saveOrUpdate(role);
@@ -311,6 +314,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
      * @see EscidocRoleDaoInterface #deleteScopeDef(de.escidoc.core.aa.business.persistence.ScopeDef)
      */
     @Override
+    @Transactional
     public void deleteScopeDef(final ScopeDef scopeDef) throws SqlDatabaseSystemException {
 
         delete(scopeDef);

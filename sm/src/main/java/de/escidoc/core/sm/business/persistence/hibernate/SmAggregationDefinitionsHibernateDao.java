@@ -54,7 +54,7 @@ import de.escidoc.core.sm.business.persistence.SmAggregationDefinitionsDaoInterf
  *
  * @author Michael Hoppe
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(readOnly = true)
 public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
     implements SmAggregationDefinitionsDaoInterface {
 
@@ -69,6 +69,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
      *      #save(de.escidoc.core.sm.business.persistence.hibernate.AggregationDefinition)
      */
     @Override
+    @Transactional
     public void save(final AggregationDefinition aggregationDefinition) throws SqlDatabaseSystemException {
         super.save(aggregationDefinition);
     }
@@ -82,6 +83,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
      *      #save(de.escidoc.core.sm.business.persistence.hibernate.AggregationTable)
      */
     @Override
+    @Transactional
     public void save(final AggregationTable aggregationTable) throws SqlDatabaseSystemException {
         super.save(aggregationTable);
     }
@@ -96,6 +98,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
      *      #save(de.escidoc.core.sm.business.persistence.hibernate.AggregationStatisticDataSelector)
      */
     @Override
+    @Transactional
     public void save(final AggregationStatisticDataSelector aggregationStatisticDataSelector)
         throws SqlDatabaseSystemException {
         super.save(aggregationStatisticDataSelector);
@@ -110,6 +113,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
      *      #delete(de.escidoc.core.sm.business.persistence.hibernate.AggregationDefinition)
      */
     @Override
+    @Transactional
     public void delete(final AggregationDefinition aggregationDefinition) throws SqlDatabaseSystemException {
         super.delete(aggregationDefinition);
     }
