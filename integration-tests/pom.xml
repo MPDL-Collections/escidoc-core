@@ -115,7 +115,6 @@
 	            <properties>
 	              <cargo.hostname>localhost</cargo.hostname>
 	              <cargo.protocol>http</cargo.protocol>
-	
 	              <cargo.servlet.port>8080</cargo.servlet.port>
 	              <cargo.rmi.port>1099</cargo.rmi.port>
 	              <cargo.logging>medium</cargo.logging>

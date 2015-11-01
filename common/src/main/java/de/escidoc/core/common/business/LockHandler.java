@@ -26,6 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -48,6 +49,7 @@ import de.escidoc.core.common.util.service.BeanLocator;
 /**
  * @author Frank Schwichtenberg
  */
+@Transactional
 public class LockHandler extends JdbcDaoSupport {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LockHandler.class);

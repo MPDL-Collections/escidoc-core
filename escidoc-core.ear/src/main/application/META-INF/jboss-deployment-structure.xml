@@ -25,6 +25,7 @@
           	<module name="javaee.api" />  
             <module name="org.hibernate" />
             <module name="org.apache.xalan" />
+            <module name="org.apache.httpcomponents" />
         </exclusions>
 	    <dependencies>
 	    	<module name="escidoc" export="true" />

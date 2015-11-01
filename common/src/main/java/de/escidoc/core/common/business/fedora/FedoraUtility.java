@@ -1168,11 +1168,14 @@ public class FedoraUtility implements InitializingBean {
             fc = borrowFedoraClient();
             final HttpInputStream httpInStr = fc.get(this.syncRestQuery, true);
             if (httpInStr.getStatusCode() != HTTP_OK) {
+                httpInStr.finalize();
                 throw new FedoraSystemException("Triplestore sync failed.");
             }
+            httpInStr.finalize();
             tripleStoreUtility.reinitialize();
         }
         finally {
+
             returnFedoraClient(fc);
         }
     }
@@ -1240,8 +1243,10 @@ public class FedoraUtility implements InitializingBean {
             fc = borrowFedoraClient();
             result = fc.get(queryString, true);
             if (result.getStatusCode() != HTTP_OK) {
+                result.finalize();
                 throw new FedoraSystemException("GET request to Fedora failed with error " + result.getStatusCode());
             }
+
         }
         finally {
             returnFedoraClient(fc);
