@@ -129,7 +129,8 @@ public class FedoraSemanticStoreHandler implements SemanticStoreHandlerInterface
             else if ("RDF/XML".equals(format)) {
                 // TODO revise, move
                 try {
-                    final XMLInputFactory inf = XMLInputFactory.newInstance();
+                    final XMLInputFactory inf = XMLInputFactory.newFactory();
+                    inf.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
                     final XMLEventReader reader =
                         inf.createFilteredReader(inf.createXMLEventReader(new StringReader(result)),
                             new RDFRegisteredOntologyFilter());

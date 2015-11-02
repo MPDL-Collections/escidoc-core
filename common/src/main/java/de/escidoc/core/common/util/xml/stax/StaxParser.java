@@ -64,7 +64,7 @@ public class StaxParser implements DefaultHandlerStackInterface {
 
     private final StringBuffer curPath = new StringBuffer();
 
-    private final XMLInputFactory factory = XMLInputFactory.newInstance();
+    private final XMLInputFactory factory;
 
     /**
      * The constructor.
@@ -74,6 +74,8 @@ public class StaxParser implements DefaultHandlerStackInterface {
      */
     public StaxParser(final String rootElementName) {
 
+        this.factory = XMLInputFactory.newFactory();
+        factory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
         this.expectedName = rootElementName;
     }
 

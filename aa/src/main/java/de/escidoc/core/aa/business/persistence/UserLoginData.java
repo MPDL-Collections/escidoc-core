@@ -2,6 +2,8 @@ package de.escidoc.core.aa.business.persistence;
 
 // Generated 26.10.2015 15:12:10 by Hibernate Tools 3.2.2.GA
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -60,17 +64,6 @@ public class UserLoginData implements java.io.Serializable {
     private UserAccount userAccount;
 
     public UserLoginData() {
-    }
-
-    public UserLoginData(String handle, long expiryts) {
-        this.handle = handle;
-        this.expiryts = expiryts;
-    }
-
-    public UserLoginData(String handle, long expiryts, UserAccount userAccount) {
-        this.handle = handle;
-        this.expiryts = expiryts;
-        this.userAccount = userAccount;
     }
 
     /**       

@@ -28,10 +28,12 @@
  */
 package de.escidoc.core.aa.business.filter;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
@@ -118,6 +120,7 @@ public class RoleFilter extends CqlFilter {
 
                 this.detachedCriteria = DetachedCriteria.forClass(EscidocRole.class, "r");
                 detachedCriteria.add(Restrictions.ne("id", EscidocRole.DEFAULT_USER_ROLE_ID));
+                detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
                 final Criterion criterion = evaluate(parser.parse(query));
 
@@ -162,7 +165,9 @@ public class RoleFilter extends CqlFilter {
                     subQuery.setProjection(Projections.rowCount());
                     subQuery.add(Restrictions.eqProperty("escidocRole.id", "r.id"));
 
-                    result = Boolean.parseBoolean(value) ? Subqueries.lt(0, subQuery) : Subqueries.eq(0, subQuery);
+                    result =
+                        Boolean.parseBoolean(value) ? Subqueries.lt(Long.valueOf(0), subQuery) : Subqueries.eq(Long
+                            .valueOf(0), subQuery);
                 }
                 else if (columnName.equals(Constants.FILTER_CREATION_DATE)
                     || columnName.equals(Constants.FILTER_PATH_CREATION_DATE)) {

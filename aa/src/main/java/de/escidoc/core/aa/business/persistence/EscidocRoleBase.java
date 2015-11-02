@@ -279,6 +279,7 @@ public class EscidocRoleBase implements java.io.Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", updatable = false)
     @Cascade( { org.hibernate.annotations.CascadeType.DELETE_ORPHAN })
+    @Fetch(value = FetchMode.SUBSELECT)
     public Collection<ScopeDef> getScopeDefs() {
         return this.scopeDefs;
     }

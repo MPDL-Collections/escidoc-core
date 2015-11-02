@@ -119,6 +119,7 @@ public class PIDManagerRESTService implements PIDSystem {
                 pidResult = obtainPidResult(httpPostRes.getEntity().getContent());
             }
             else if (status == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                EntityUtils.consumeQuietly(httpPostRes.getEntity());
                 throw new Exception("Authorization at PIDManager fails.");
             }
             else {

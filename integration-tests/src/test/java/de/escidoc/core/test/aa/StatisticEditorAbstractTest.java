@@ -143,6 +143,9 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
         disallowedScopeReportDefinitionId =
             doTestCreateReportDefinition(PWCallback.DEFAULT_HANDLE, REPORT_DEFINITION_TEMPLATE_NAME, disallowedScope,
                 disallowedScopeAggregationDefinitionId, null);
+        
+        allowedScopeAggregationDefinitionId =
+                doTestCreateAggregationDefinition(HANDLE, AGGREGATION_DEFINITION_TEMPLATE_NAME, ALLOWED_SCOPE, null);
 
     }
 
@@ -198,8 +201,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
     @Test
     public void testCreateAggregationDefinition() throws Exception {
 
-        allowedScopeAggregationDefinitionId =
-            doTestCreateAggregationDefinition(HANDLE, AGGREGATION_DEFINITION_TEMPLATE_NAME, ALLOWED_SCOPE, null);
+       doTestCreateAggregationDefinition(HANDLE, AGGREGATION_DEFINITION_TEMPLATE_NAME, ALLOWED_SCOPE, null);
     }
 
     /**
@@ -208,6 +210,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
      * @throws Exception If anything fails.
      */
     @Test
+    
     public void testRetrieveAggregationDefinition() throws Exception {
 
         doTestRetrieveAggregationDefinition(HANDLE, allowedScopeAggregationDefinitionId, null);

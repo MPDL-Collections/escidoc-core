@@ -28,6 +28,8 @@
  */
 package de.escidoc.core.aa.business;
 
+import java.math.BigInteger;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import de.escidoc.core.aa.business.interfaces.UserManagementWrapperInterface;
