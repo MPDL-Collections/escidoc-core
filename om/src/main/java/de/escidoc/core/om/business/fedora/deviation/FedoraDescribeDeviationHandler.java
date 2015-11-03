@@ -70,7 +70,7 @@ public class FedoraDescribeDeviationHandler implements FedoraDescribeDeviationHa
 
         String describeUrl = null;
         try {
-            describeUrl = baseURL + "objects" + urlParams;
+            describeUrl = baseURL + "describe" + urlParams;
             return connectionUtility.getRequestURLAsString(new URL(describeUrl), user, pass);
         }
         finally {
