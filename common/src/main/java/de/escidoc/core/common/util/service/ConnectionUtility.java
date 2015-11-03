@@ -104,6 +104,19 @@ public class ConnectionUtility {
 
     private final Logger logger = LoggerFactory.getLogger(ConnectionUtility.class);
 
+    private static EscidocConfiguration configuration;
+
+    static {
+
+        try {
+
+            configuration = EscidocConfiguration.getInstance();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Get a response-string for the URL. If the URL contains an Authentication part then is this used and stored for
      * this connection. Be aware to reset the authentication if the user name and password should not be reused for
@@ -200,13 +213,11 @@ public class ConnectionUtility {
             password = loginValues[1];
         }
 
-        /*
         else {
-            username = EscidocConfiguration.FEDORA_USER;
-           password = EscidocConfiguration.FEDORA_PASSWORD;
-        	
+            username = "";//configuration.get(EscidocConfiguration.FEDORA_USER);
+            password = "";//configuration.get(EscidocConfiguration.FEDORA_PASSWORD);
+
         }
-         */
 
         return getRequestURL(url, username, password);
     }
@@ -227,6 +238,7 @@ public class ConnectionUtility {
         if (username != null) {
             setAuthentication(url, username, password);
         }
+
         return get(url.toString());
     }
 
@@ -486,10 +498,8 @@ public class ConnectionUtility {
     private HttpHost getProxyHost() throws WebserverSystemException {
         try {
             if (!this.proxyConfigured) {
-                final String proxyHostName =
-                    EscidocConfiguration.getInstance().get(EscidocConfiguration.ESCIDOC_CORE_PROXY_HOST);
-                final String proxyPort =
-                    EscidocConfiguration.getInstance().get(EscidocConfiguration.ESCIDOC_CORE_PROXY_PORT);
+                final String proxyHostName = configuration.get(EscidocConfiguration.ESCIDOC_CORE_PROXY_HOST);
+                final String proxyPort = configuration.get(EscidocConfiguration.ESCIDOC_CORE_PROXY_PORT);
                 if (proxyHostName != null && proxyHostName.trim().length() != 0) {
                     this.proxyHost =
                         proxyPort != null && proxyPort.trim().length() != 0 ? new HttpHost(proxyHostName, Integer
@@ -500,7 +510,7 @@ public class ConnectionUtility {
             return this.proxyHost;
 
         }
-        catch (final IOException e) {
+        catch (final Exception e) {
             throw new WebserverSystemException(e);
         }
     }
