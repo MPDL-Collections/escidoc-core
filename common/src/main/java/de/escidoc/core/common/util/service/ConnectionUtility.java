@@ -213,10 +213,6 @@ public class ConnectionUtility {
             password = loginValues[1];
         }
 
-        
-        
-        
-
         return getRequestURL(url, username, password);
     }
 
@@ -233,13 +229,10 @@ public class ConnectionUtility {
      */
     public HttpResponse getRequestURL(final URL url, final String username, final String password)
         throws WebserverSystemException {
-        
-    	if(username!=null)
-    	{
-    		setAuthentication(url, username, password);
-    	}
-        
-    
+
+        if (username != null) {
+            setAuthentication(url, username, password);
+        }
 
         return get(url.toString());
     }

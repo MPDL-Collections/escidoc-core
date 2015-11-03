@@ -360,7 +360,7 @@ public class StaxParser implements DefaultHandlerStackInterface {
         TripleStoreSystemException, WebserverSystemException, EncodingSystemException, XmlParserSystemException,
         IntegritySystemException, MissingMdRecordException, TmeException, XmlCorruptedException {
 
-        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true);
+        factory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
         final XMLStreamReader parser = factory.createXMLStreamReader(in, XmlUtility.CHARACTER_ENCODING);
 
         while (parser.hasNext()) {
@@ -490,6 +490,7 @@ public class StaxParser implements DefaultHandlerStackInterface {
         MissingMdRecordException, TmeException, XmlCorruptedException, TripleStoreSystemException,
         WebserverSystemException, EncodingSystemException, IntegritySystemException, XmlParserSystemException {
 
+        factory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
         final XMLEventReader parser = factory.createXMLEventReader(in);
 
         while (parser.hasNext()) {

@@ -689,6 +689,7 @@
 								<groupId>wsdl4j</groupId>
 								<artifactId>wsdl4j</artifactId>
 							</exclusion>
+							
 						</exclusions>
 					</dependency>
 					<dependency>
@@ -1811,6 +1812,14 @@
 					<exclusion>
 						<groupId>org.apache.lucene</groupId>
 						<artifactId>lucene-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.fcrepo</groupId>
+						<artifactId>saxon</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.fcrepo</groupId>
+						<artifactId>saxon-dom</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>

@@ -25,6 +25,7 @@ public class DeviationRestTest extends DeviationTestBase {
      */
     @Test
     public void testDescribe() throws Exception {
+
         String describe = getDescribe();
         assertTrue(describe.contains("repositoryName"));
     }
@@ -36,7 +37,6 @@ public class DeviationRestTest extends DeviationTestBase {
      */
     @Test
     public void testExport() throws Exception {
-
         String toBeCreatedXml =
             EscidocRestSoapTestBase.getTemplateAsString(TEMPLATE_ITEM_PATH + "/" + getTransport(false),
                 "escidoc_test_item0.xml");

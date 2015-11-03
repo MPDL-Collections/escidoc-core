@@ -573,9 +573,11 @@
                       <replace path="//*[local-name()='param-name' and text()='fedora.home']/following-sibling::*[1]/text()"
                         withText="${INSTALL_PATH}${FILE_SEPARATOR}fedora" />
                        -->
-                       <!-- Remove login-config and security role for WildFly/Undertow compatibility issues --> 
+                       <!-- Remove login-config and security role for WildFly/Undertow compatibility issues -->
+                        
                        <remove path="//*[local-name()='login-config']" />
                        <remove path="//*[local-name()='security-role']" />
+                      
                        
                        <!-- Remove LogSetupContextListener in order to let wildfly log --> 
                        <!-- 
