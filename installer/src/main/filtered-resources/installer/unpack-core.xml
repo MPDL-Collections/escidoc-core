@@ -322,9 +322,15 @@
 
 	
 	 <target name="saxon" depends="init" description="Installs Saxon Webservice">
-    <!-- add isolation -->
+	 	<jar basedir="${install.dir}/install.tmp/saxon_config" update="yes" destfile="${install.dir}/install.tmp/saxon.war" includes="WEB-INF/jboss-deployment-structure.xml" />
+	 	
+	 	<antcall target="move-file-with-save">
+	 	    <param name="source" value="${install.dir}/install.tmp/saxon.war" />
+	 		<param name="target" value="${install.dir}/wildfly/standalone/deployments/saxon.war" />
+	 	</antcall>
+	 	<!-- add isolation -->
 	 <!--
-  	<jar basedir="${install.dir}/install.tmp/saxon" update="yes" destfile="${install.dir}/services/saxon-${escidoc.saxon.version}.war" includes="WEB-INF/jboss-web.xml" />
+  	
     <antcall target="move-file-with-save">
       <param name="source" value="${install.dir}/services/saxon-${escidoc.saxon.version}.war" />
       <param name="target" value="${install.dir}/jboss/server/default/deploy/saxon.war" />

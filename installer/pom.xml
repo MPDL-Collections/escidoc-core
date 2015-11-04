@@ -272,7 +272,7 @@
                   <outputDirectory>${staging.dir}/packages/srw</outputDirectory>
                   <destFileName>srw-${escidoc.srw.version}.war</destFileName>
                 </artifactItem>
-                
+                <!-- 
                 <artifactItem>
                   <groupId>fedora.localservice</groupId>
                   <artifactId>saxon</artifactId>
@@ -281,8 +281,9 @@
                   <overWrite>false</overWrite>
                   <outputDirectory>${staging.dir}/packages/saxon</outputDirectory>
                 </artifactItem>
-                
+                 -->
                 <!-- Required for fedora as wildfly module -->
+                <!-- 
                 <artifactItem>
                   	<groupId>org.apache.openjpa</groupId>
 					<artifactId>openjpa</artifactId>
@@ -299,8 +300,9 @@
                   	<overWrite>false</overWrite>
                   	<outputDirectory>${staging.dir}/config/wildfly/modules/system/layers/base/org/apache/openjpa/main</outputDirectory>
                 </artifactItem>
-             
+             -->
                 <!-- Replace jersey and jackson-mapper with new version in fedora -->
+                <!-- 
                 <artifactItem>
                   	<groupId>com.sun.jersey</groupId>
 					<artifactId>jersey-bundle</artifactId>
@@ -357,7 +359,7 @@
                   	<overWrite>false</overWrite>
                   	<outputDirectory>${staging.dir}/config/fedora</outputDirectory>
                 </artifactItem>
-                
+                -->
                 
               </artifactItems>
               <!-- other configurations here -->
