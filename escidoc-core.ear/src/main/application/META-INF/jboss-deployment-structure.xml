@@ -26,6 +26,9 @@
             <module name="org.hibernate" />
             <module name="org.apache.xalan" />
             <module name="org.apache.httpcomponents" />
+			<module name="org.apache.xalan" />
+			<module name="org.apache.xerces" />
+			<module name="org.apache.lucene" />			
         </exclusions>
 	    <dependencies>
 	    	<module name="escidoc" export="true" />

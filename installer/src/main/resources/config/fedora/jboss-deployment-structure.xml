@@ -9,9 +9,12 @@
 	        <subsystem name="webservices" />
 	    </exclude-subsystems>
 	     <exclusions>
+			<module name="org.apache.xalan" />
+			<module name="org.apache.xerces" />
+			<module name="org.apache.lucene" />			
           	<module name="javaee.api" />
-          	 <module name="org.slf4j"/> 
-          	 <module name="org.slf4j.impl"/>    
+          	<module name="org.slf4j"/> 
+          	<module name="org.slf4j.impl"/>    
         </exclusions>
          
          <dependencies>
