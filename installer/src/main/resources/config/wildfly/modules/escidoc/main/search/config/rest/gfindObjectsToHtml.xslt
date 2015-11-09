@@ -307,7 +307,7 @@
 									<xsl:when test="$REPOSNAME = 'SindapAtDtu' "><xsl:value-of select="'SINDAPATDTUSOAPHOSTPORT'"/></xsl:when>
 								</xsl:choose>
 							</xsl:variable>
-							<xsl:attribute name="href"><xsl:value-of select="$REPOS"/>/fedora/objects/<xsl:value-of select="$PIDVALUE"/>
+							<xsl:attribute name="href"><xsl:value-of select="$REPOS"/>/fedora/get/<xsl:value-of select="$PIDVALUE"/>
 							</xsl:attribute>
 							<xsl:value-of select="$PIDVALUE"/>
 						</a>

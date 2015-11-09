@@ -666,7 +666,6 @@
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
-			<version>1.5.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

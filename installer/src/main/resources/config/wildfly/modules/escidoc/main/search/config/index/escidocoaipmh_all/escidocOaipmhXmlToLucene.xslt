@@ -478,35 +478,7 @@ Notes:
                     <xsl:value-of select="concat(./@name,'@',namespace-uri(./*))"/>
                 </element>
             </xsl:for-each>
-	    </userdefined-index>
-	
-		<xsl:for-each select="//*[local-name()='component']">
-			<xsl:variable name="storage" select="*[local-name()='content']/@storage" />
-			<xsl:if test="$storage='internal-managed'">
-					
-					<userdefined-index name="component.internal-managed.visibility">
-						<xsl:attribute name="context">
-		                	<xsl:value-of select="$CONTEXTNAME" />
-		                </xsl:attribute>
-		
-						<element index="TOKENIZED" store="NO" sortfield="NO">
-							<xsl:value-of select="*[local-name()='properties']/*[local-name()='visibility']" />
-						</element>
-					</userdefined-index>
-		
-					<userdefined-index name="component.internal-managed.content-category">
-						<xsl:attribute name="context">
-		                	<xsl:value-of select="$CONTEXTNAME" />
-		                </xsl:attribute>
-		                
-						<element index="TOKENIZED" store="NO" sortfield="NO">
-							<xsl:value-of select="*[local-name()='properties']/*[local-name()='content-category']" />
-						</element>
-		
-					</userdefined-index>
-			</xsl:if>
-		</xsl:for-each>
-
+        </userdefined-index>
     </xsl:variable>
 
 </xsl:stylesheet>   

@@ -289,7 +289,7 @@ Run the fedoragsearch.war and srw.war on a different server (in the following ca
 -copy the directory containing the configuration below the search-servers config-directory
 -make sure that config-directory of search-server is in classpath
  (Tomcat: edit catalina.properties in conf-dir of Tomcat:
-  add ${catalina.home}/conf to property common.loader)
+  add ${jboss.home.dir}/standalone/conf to property common.loader)
 -on the search-server, you can remove the index.object-types.properties-files in the index directories
 -on the core-framework server you have to keep the search-config-directory-structure and the index.object-types.properties-files,
  you can remove the rest.
