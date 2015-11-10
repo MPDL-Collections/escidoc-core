@@ -491,7 +491,9 @@ public class FedoraUtility implements InitializingBean {
         final FedoraAPIM apim = borrowApim();
         try {
             ArrayOfString aos = new ArrayOfString();
-            aos.getItem().addAll(Arrays.asList(altIDs));
+            if (altIDs != null) {
+                aos.getItem().addAll(Arrays.asList(altIDs));
+            }
             timestamp =
                 apim.modifyDatastreamByReference(pid, datastreamName, aos, datastreamLabel, mimeType, null, url,
                     checksumType, null, "Modified by reference.", true);
@@ -541,7 +543,9 @@ public class FedoraUtility implements InitializingBean {
         final FedoraAPIM apim = borrowApim();
         try {
             ArrayOfString aos = new ArrayOfString();
-            aos.getItem().addAll(Arrays.asList(alternateIDs));
+            if (alternateIDs != null) {
+                aos.getItem().addAll(Arrays.asList(alternateIDs));
+            }
             timestamp =
                 apim.modifyDatastreamByValue(pid, datastreamName, aos, datastreamLabel, mimeType, null, datastream,
                     null, null, null, true);

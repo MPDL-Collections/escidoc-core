@@ -2116,11 +2116,16 @@ public class MPTTripleStoreUtility extends TripleStoreUtility {
                 }
                 else {
                     getLogger().debug("found " + res.size() + " records");
-                    for (final String item : res) {
-                        getLogger().debug("item: " + item);
-                        result = item;
-                    }
+
                 }
+            }
+
+            for (final String item : res) {
+                if (getLogger().isDebugEnabled()) {
+                    getLogger().debug("item: " + item);
+                }
+
+                result = item;
             }
         }
         return result;

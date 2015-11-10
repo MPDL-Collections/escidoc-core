@@ -1,9 +1,12 @@
 package de.escidoc.core.test.om.deviation.rest;
 
+import java.net.URLEncoder;
+
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.om.OmTestBase;
 import de.escidoc.core.test.om.deviation.DeviationTestBase;
+
 import org.junit.Test;
 import org.w3c.dom.Document;
 
@@ -65,7 +68,7 @@ public class DeviationRestTest extends DeviationTestBase {
         String id = getObjidValue(createdXml);
         String componentId = getObjidValue(document, OmTestBase.XPATH_ITEM_COMPONENTS + "/" + NAME_COMPONENT);
         String content =
-            (String) getDatastreamDissimination(id, Constants.ITEM_BASE_URI + "/" + id + "/" + Constants.SUB_COMPONENT
+            (String) getDatastreamDissimination(id, Constants.ITEM_BASE_URI.replaceFirst("/", URLEncoder.encode("/", "UTF-8")) + "/" + id + "/" + Constants.SUB_COMPONENT
                 + "/" + componentId + "/" + Constants.SUB_CONTENT);
         assertTrue(content.contains("Antriebsvorrichtung"));
 

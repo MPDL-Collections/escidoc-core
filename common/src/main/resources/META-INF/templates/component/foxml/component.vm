@@ -21,7 +21,7 @@
 ##parse("component/foxml/content.vm")
 <foxml:datastream CONTROL_GROUP="${CONTROL_GROUP}" ID="content">
 <foxml:datastreamVersion ID="content.0" MIMETYPE="${DEFAULT_MIME_TYPE}" LABEL="">
-<foxml:contentDigest TYPE="${CHECKSUM_ALGORITHM}"/>
+<foxml:contentDigest TYPE="${CHECKSUM_ALGORITHM}" DIGEST="none"/>
 <foxml:contentLocation REF="#escA(${REF})" TYPE="${REF_TYPE}" />
 </foxml:datastreamVersion>
 </foxml:datastream>
