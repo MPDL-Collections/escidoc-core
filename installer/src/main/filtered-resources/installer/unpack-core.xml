@@ -205,16 +205,25 @@
   	</jar>
   	-->
   		
+  	<zip destfile="${install.dir}/install.tmp/fedora_patched.war">
+  		<zipfileset src="${install.dir}/install.tmp/fedora.war" excludes="WEB-INF/lib/mptstore-0.9.5.jar"/>
+  	</zip>
+  	
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/lib/mptstore-0.9.4.jar" />
+  	
     <!-- patch fedora.war by replacing web.xml with customized version -->
     
-    <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/web.xml" />
+    <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/web.xml" />
   	<!-- patch fedora.war by adding a jboss-deployment-structure.xml -->
   	  
-  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/jboss-deployment-structure.xml" />
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/jboss-deployment-structure.xml" />
   	
 	<!-- patch fedora.war by adding an empty log4j config file, in order to avoid interference with jboss logging -->
-  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora.war" includes="WEB-INF/classes/log4j.properties" />
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/classes/log4j.properties" />
   	
+  	
+  	
+
   
     <!-- patch fedora.war by adding the database driver -->
     <!--
@@ -239,7 +248,7 @@
   		-->
     <!-- deploy fedora.war in JBoss -->
     <antcall target="move-file-with-save">
-      <param name="source" value="${install.dir}/install.tmp/fedora.war" />
+      <param name="source" value="${install.dir}/install.tmp/fedora_patched.war" />
       <param name="target" value="${install.dir}/wildfly/standalone/deployments/fedora.war" />
     </antcall>
     <antcall target="move-file-with-save">

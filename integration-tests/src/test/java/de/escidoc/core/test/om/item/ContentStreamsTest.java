@@ -389,7 +389,8 @@ public class ContentStreamsTest extends ItemTestBase {
         update(createdItemId, toString(updateDoc, false));
         updateDoc = getDocument(retrieve(createdItemId));
 
-        Node storage = selectSingleNode(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@storage");
+        Node storage =
+            selectSingleNode(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@storage");
 
         assertEquals("read only attribute storage type has changed", storage.getTextContent(), "external-url");
 
@@ -398,7 +399,8 @@ public class ContentStreamsTest extends ItemTestBase {
         update(createdItemId, toString(updateDoc, false));
         updateDoc = getDocument(retrieve(createdItemId));
 
-        Node mimeType = selectSingleNode(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@mime-type");
+        Node mimeType =
+            selectSingleNode(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@mime-type");
 
         assertEquals("changeable attribute mime-type hasn't changed", mimeType.getTextContent(), "test/escidoc");
     }

@@ -2047,10 +2047,10 @@ public abstract class UserAccountTest extends UserAccountTestBase {
         assertEquals("Unexpected number of user accounts.", 3, userAccountNodes.getLength());
         assertRdfDescriptions(retrievedDocument, RDF_RESOURCE_USER_ACCOUNT);
 
-        assertXmlExists("Missing user System Inspector User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[2]"
+        assertXmlExists("Missing user System Inspector User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[3]"
             + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_INSPECTOR_NAME
             + "']");
-        assertXmlExists("Missing user System Administrator User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[3]"
+        assertXmlExists("Missing user System Administrator User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[2]"
             + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_ADMINISTRATOR_NAME
             + "']");
         assertXmlExists("Missing user Depositor User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
@@ -2088,10 +2088,10 @@ public abstract class UserAccountTest extends UserAccountTestBase {
         assertEquals("Unexpected number of user accounts.", 3, userAccountNodes.getLength());
         assertRdfDescriptions(retrievedDocument, RDF_RESOURCE_USER_ACCOUNT);
 
-        assertXmlExists("Missing user System Inspector User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[2]"
+        assertXmlExists("Missing user System Inspector User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
             + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_INSPECTOR_NAME
             + "']");
-        assertXmlExists("Missing user System Administrator User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
+        assertXmlExists("Missing user System Administrator User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[2]"
             + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_ADMINISTRATOR_NAME
             + "']");
         assertXmlExists("Missing user Depositor User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[3]"
@@ -2130,10 +2130,10 @@ public abstract class UserAccountTest extends UserAccountTestBase {
         assertEquals("Unexpected number of user accounts.", 2, userAccountNodes.getLength());
         assertRdfDescriptions(retrievedDocument, RDF_RESOURCE_USER_ACCOUNT);
 
-        assertXmlExists("Missing user System Inspector User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
-            + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_INSPECTOR_NAME
+        assertXmlExists("Missing user System Administrator User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
+            + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_ADMINISTRATOR_NAME
             + "']");
-        assertXmlExists("Missing user Depositor User", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[2]"
+        assertXmlExists("Missing user Depositor User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[2]"
             + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + DEPOSITOR_NAME + "']");
     }
 
@@ -2171,8 +2171,8 @@ public abstract class UserAccountTest extends UserAccountTestBase {
         assertEquals("Unexpected number of user accounts.", 1, userAccountNodes.getLength());
         assertRdfDescriptions(retrievedDocument, RDF_RESOURCE_USER_ACCOUNT);
 
-        assertXmlExists("Missing user System Inspector User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
-            + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_INSPECTOR_NAME
+        assertXmlExists("Missing user System Administrator User.", retrievedDocument, XPATH_SRW_RESPONSE_RECORD + "[1]"
+            + XPATH_SRW_RESPONSE_OBJECT_SUBPATH + NAME_USER_ACCOUNT + "/properties[name='" + SYSTEM_ADMINISTRATOR_NAME
             + "']");
     }
 

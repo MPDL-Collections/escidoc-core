@@ -68,8 +68,9 @@ public class DeviationRestTest extends DeviationTestBase {
         String id = getObjidValue(createdXml);
         String componentId = getObjidValue(document, OmTestBase.XPATH_ITEM_COMPONENTS + "/" + NAME_COMPONENT);
         String content =
-            (String) getDatastreamDissimination(id, Constants.ITEM_BASE_URI.replaceFirst("/", URLEncoder.encode("/", "UTF-8")) + "/" + id + "/" + Constants.SUB_COMPONENT
-                + "/" + componentId + "/" + Constants.SUB_CONTENT);
+            (String) getDatastreamDissimination(id, Constants.ITEM_BASE_URI.replaceFirst("/", URLEncoder.encode("/",
+                "UTF-8"))
+                + "/" + id + "/" + Constants.SUB_COMPONENT + "/" + componentId + "/" + Constants.SUB_CONTENT);
         assertTrue(content.contains("Antriebsvorrichtung"));
 
     }

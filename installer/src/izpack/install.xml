@@ -483,6 +483,9 @@
             <file src="config/fedora/jboss-deployment-structure.xml" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/jboss-deployment-structure.xml" />
             
+            <file src="config/fedora/mptstore-0.9.4.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
+           
+            
             <!-- 
             <file src="config/fedora/jaxp-ri-1.4.5.jar" targetdir="$INSTALL_PATH/install.tmp/fedora_config/WEB-INF/lib" />
             -->
