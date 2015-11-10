@@ -384,21 +384,21 @@ public class ContentStreamsTest extends ItemTestBase {
 
         // modify storage
         updateDoc = itemDoc;
-        substitute(updateDoc, "/item/content-streams/content-stream[@storage='external-url']/@storage",
+        substitute(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@storage",
             "internal-managed");
         update(createdItemId, toString(updateDoc, false));
         updateDoc = getDocument(retrieve(createdItemId));
 
-        Node storage = selectSingleNode(updateDoc, "/item/content-streams/content-stream/@storage");
+        Node storage = selectSingleNode(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@storage");
 
-        assertEquals("read only attribute storage type has changed", storage.getTextContent(), "internal-managed");
+        assertEquals("read only attribute storage type has changed", storage.getTextContent(), "external-url");
 
         // modify mime-type
-        substitute(updateDoc, "/item/content-streams/content-stream[1]/@mime-type", "test/escidoc");
+        substitute(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@mime-type", "test/escidoc");
         update(createdItemId, toString(updateDoc, false));
         updateDoc = getDocument(retrieve(createdItemId));
 
-        Node mimeType = selectSingleNode(updateDoc, "/item/content-streams/content-stream/@mime-type");
+        Node mimeType = selectSingleNode(updateDoc, "/item/content-streams/content-stream[@name='redirect_image']/@mime-type");
 
         assertEquals("changeable attribute mime-type hasn't changed", mimeType.getTextContent(), "test/escidoc");
     }
