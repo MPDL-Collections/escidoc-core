@@ -869,6 +869,7 @@ public class ItemHandlerRetrieve extends ItemHandlerBase implements ItemRenderer
             values.put(XmlTemplateProvider.VAR_ITEM_ORIGIN_HREF,
                 de.escidoc.core.common.business.Constants.ITEM_URL_BASE + getOriginId());
             values.put(XmlTemplateProvider.VAR_ITEM_ORIGIN_TITLE, getOriginItem().getTitle());
+
         }
 
         try {

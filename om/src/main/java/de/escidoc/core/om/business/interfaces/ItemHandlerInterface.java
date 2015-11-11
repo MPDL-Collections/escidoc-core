@@ -756,7 +756,8 @@ public interface ItemHandlerInterface extends IngestableResource {
      */
     String release(final String id, final String taskParam) throws ItemNotFoundException, ComponentNotFoundException,
         LockingException, InvalidStatusException, MissingMethodParameterException, SystemException,
-        OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException;
+        OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException,
+        AuthorizationException;
 
     /**
      * Submit an Item.
@@ -778,7 +779,8 @@ public interface ItemHandlerInterface extends IngestableResource {
      */
     String submit(final String id, final String taskParam) throws ItemNotFoundException, ComponentNotFoundException,
         LockingException, InvalidStatusException, MissingMethodParameterException, SystemException,
-        OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException;
+        OptimisticLockingException, ReadonlyViolationException, ReadonlyVersionException, InvalidXmlException,
+        AuthorizationException;
 
     /**
      * Set an Item in revision.
@@ -904,7 +906,8 @@ public interface ItemHandlerInterface extends IngestableResource {
      */
     String assignVersionPid(final String id, final String taskParam) throws ItemNotFoundException,
         ComponentNotFoundException, LockingException, MissingMethodParameterException, SystemException,
-        OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException;
+        OptimisticLockingException, InvalidStatusException, XmlCorruptedException, ReadonlyVersionException,
+        AuthorizationException;
 
     /**
      * Assign a Persistent Identifier with objectPID to Item.
@@ -925,7 +928,8 @@ public interface ItemHandlerInterface extends IngestableResource {
      */
     String assignObjectPid(final String id, final String taskParam) throws ItemNotFoundException,
         ComponentNotFoundException, LockingException, MissingMethodParameterException, SystemException,
-        OptimisticLockingException, PidSystemException, InvalidStatusException, XmlCorruptedException;
+        OptimisticLockingException, PidSystemException, InvalidStatusException, XmlCorruptedException,
+        AuthorizationException;
 
     /**
      * Assigns a Persistent Identifier to the Content.
@@ -949,7 +953,7 @@ public interface ItemHandlerInterface extends IngestableResource {
     String assignContentPid(final String id, final String componentId, final String taskParam)
         throws ItemNotFoundException, LockingException, MissingMethodParameterException, SystemException,
         OptimisticLockingException, PidSystemException, InvalidStatusException, XmlCorruptedException,
-        ComponentNotFoundException, ReadonlyVersionException;
+        ComponentNotFoundException, ReadonlyVersionException, AuthorizationException;
 
     /**
      * Retrieves the subresource relations.
@@ -988,7 +992,8 @@ public interface ItemHandlerInterface extends IngestableResource {
         ItemNotFoundException, ComponentNotFoundException, OptimisticLockingException,
         ReferencedResourceNotFoundException, RelationPredicateNotFoundException, AlreadyExistsException,
         InvalidStatusException, InvalidXmlException, ReadonlyAttributeViolationException, MissingElementValueException,
-        LockingException, ReadonlyViolationException, InvalidContentException, ReadonlyVersionException;
+        LockingException, ReadonlyViolationException, InvalidContentException, ReadonlyVersionException,
+        AuthorizationException;
 
     /**
      * @param id

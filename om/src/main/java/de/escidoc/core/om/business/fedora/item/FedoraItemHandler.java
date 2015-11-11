@@ -61,6 +61,7 @@ import de.escidoc.core.common.business.fedora.resources.create.ItemCreate;
 import de.escidoc.core.common.business.fedora.resources.create.MdRecordCreate;
 import de.escidoc.core.common.business.fedora.resources.create.RelationCreate;
 import de.escidoc.core.common.business.fedora.resources.item.Component;
+import de.escidoc.core.common.business.fedora.resources.listener.ResourceListener.CalledFrom;
 import de.escidoc.core.common.business.filter.LuceneRequestParameters;
 import de.escidoc.core.common.business.filter.SRURequest;
 import de.escidoc.core.common.business.filter.SRURequestParameters;
@@ -108,6 +109,7 @@ import de.escidoc.core.common.exceptions.system.ApplicationServerSystemException
 import de.escidoc.core.common.exceptions.system.EncodingSystemException;
 import de.escidoc.core.common.exceptions.system.FedoraSystemException;
 import de.escidoc.core.common.exceptions.system.IntegritySystemException;
+import de.escidoc.core.common.exceptions.system.PidSystemException;
 import de.escidoc.core.common.exceptions.system.SqlDatabaseSystemException;
 import de.escidoc.core.common.exceptions.system.SystemException;
 import de.escidoc.core.common.exceptions.system.TripleStoreSystemException;
@@ -1238,7 +1240,7 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
         InvalidStatusException, MissingMethodParameterException, SystemException, OptimisticLockingException,
         ReadonlyViolationException, ReadonlyVersionException, ComponentNotFoundException, XmlCorruptedException,
         EncodingSystemException, IntegritySystemException, FedoraSystemException, TripleStoreSystemException,
-        WebserverSystemException, XmlParserSystemException, ApplicationServerSystemException {
+        WebserverSystemException, XmlParserSystemException, ApplicationServerSystemException, AuthorizationException {
 
         long start = System.currentTimeMillis();
 
@@ -1250,6 +1252,19 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
         checkLatestVersion();
         checkReleased();
         checkPid();
+
+        String originId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN);
+        if (originId != null) {
+            final String originVersionId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN_VERSION);
+            if (originVersionId != null) {
+                originId = originId + ':' + originVersionId;
+            }
+            final boolean origin =
+                loadOrigin("You cannot release a full surrogate Item representation "
+                    + "because you have no access rights on the Item '" + originId
+                    + "'. Subressources which are part of the surrogate Item "
+                    + "(and not the origin Item) are still accessible. Try " + "using subresource methods.");
+        }
 
         if (getUtility().checkOptimisticLockingCriteria(getItem().getLastModificationDate(),
             taskParameter.getLastModificationDate(), "Item " + getItem().getId())) {
@@ -1319,7 +1334,7 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
         InvalidStatusException, MissingMethodParameterException, SystemException, OptimisticLockingException,
         ReadonlyViolationException, ReadonlyVersionException, ComponentNotFoundException, XmlCorruptedException,
         EncodingSystemException, IntegritySystemException, FedoraSystemException, TripleStoreSystemException,
-        WebserverSystemException, XmlParserSystemException {
+        WebserverSystemException, XmlParserSystemException, AuthorizationException {
 
         long start = System.currentTimeMillis();
 
@@ -1330,6 +1345,19 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
         checkLatestVersion();
         checkLocked();
         checkReleased();
+
+        String originId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN);
+        if (originId != null) {
+            final String originVersionId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN_VERSION);
+            if (originVersionId != null) {
+                originId = originId + ':' + originVersionId;
+            }
+            final boolean origin =
+                loadOrigin("You cannot submit a full surrogate Item representation "
+                    + "because you have no access rights on the Item '" + originId
+                    + "'. Subressources which are part of the surrogate Item "
+                    + "(and not the origin Item) are still accessible. Try " + "using subresource methods.");
+        }
 
         if (getUtility().checkOptimisticLockingCriteria(getItem().getLastModificationDate(),
             taskParameter.getLastModificationDate(), "Item " + getItem().getId())) {
@@ -1344,6 +1372,7 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
             // set status "submited"
             // only renew the timestamp and set status with version entry
             makeVersion(taskParameter.getComment(), Constants.STATUS_SUBMITTED);
+
             getItem().persist();
 
             fireItemModified(getItem().getId());
@@ -2524,4 +2553,255 @@ public class FedoraItemHandler extends ItemHandlerPid implements ItemHandlerInte
 
         return newMdRecord;
     }
+
+    /**
+     * Assign persistent identifier to Content of Item.
+     *
+     * @param id          The object Id of item.
+     * @param componentId The objectId of the Component.
+     * @param taskParam   The parameter for the Persistent Identifier Service as XML snippet.
+     * @return The assigned PID as XML snippet.
+     * @throws ItemNotFoundException      Thrown if the object with id is does not exist or is no Item.
+     * @throws LockingException           Thrown if the Resource is locked.
+     * @throws MissingMethodParameterException
+     *                                    Thrown if a parameter is missing within <code>taskParam</code>.
+     * @throws OptimisticLockingException Thrown if Item was altered in the mean time.
+     * @throws InvalidStatusException     Thrown if Item has the wrong status.
+     * @throws XmlCorruptedException      Thrown if taskParam is invalid XML.
+     * @throws ComponentNotFoundException Thrown if the object with componentId does not exist or is no Component.
+     * @throws ReadonlyVersionException   Thrown if a provided item version id is not a latest version.
+     * @throws SystemException            Thrown in case of internal error.
+     * @see ItemHandlerInterface #assignContentPid(java.lang.String,java.lang.String, java.lang.String)
+     * @throws de.escidoc.core.common.exceptions.system.WebserverSystemException
+     * @throws de.escidoc.core.common.exceptions.system.PidSystemException
+     * @throws de.escidoc.core.common.exceptions.system.XmlParserSystemException
+     * @throws de.escidoc.core.common.exceptions.system.TripleStoreSystemException
+     * @throws de.escidoc.core.common.exceptions.system.FedoraSystemException
+     * @throws de.escidoc.core.common.exceptions.system.IntegritySystemException
+     * @throws de.escidoc.core.common.exceptions.system.EncodingSystemException
+     */
+    public String assignContentPid(final String id, final String componentId, final String taskParam)
+        throws ItemNotFoundException, LockingException, MissingMethodParameterException, OptimisticLockingException,
+        InvalidStatusException, ComponentNotFoundException, SystemException, XmlCorruptedException,
+        ReadonlyVersionException, EncodingSystemException, FedoraSystemException, TripleStoreSystemException,
+        XmlParserSystemException, PidSystemException, WebserverSystemException, IntegritySystemException,
+        AuthorizationException {
+
+        long start = System.currentTimeMillis();
+
+        setItem(id);
+
+        // we can only update the latest version
+        if (!getItem().isLatestVersion()) {
+            throw new ReadonlyVersionException("Version " + getItem().getVersionNumber()
+                + " is not a latest version of the item. " + "Assignment of version PID is restricted"
+                + " to the latest version.");
+        }
+
+        final TaskParamHandler taskParameter = XmlUtility.parseTaskParam(taskParam);
+        checkLocked();
+        checkContentPidAssignable(componentId);
+
+        String originId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN);
+        if (originId != null) {
+            final String originVersionId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN_VERSION);
+            if (originVersionId != null) {
+                originId = originId + ':' + originVersionId;
+            }
+            final boolean origin =
+                loadOrigin("You cannot assign a pid to a full surrogate Item representation "
+                    + "because you have no access rights on the Item '" + originId
+                    + "'. Subressources which are part of the surrogate Item "
+                    + "(and not the origin Item) are still accessible. Try " + "using subresource methods.");
+        }
+
+        getUtility().checkOptimisticLockingCriteria(getItem().getLastModificationDate(),
+            taskParameter.getLastModificationDate(), "Item " + getItem().getId());
+
+        final Component component = getItem().getComponent(componentId);
+
+        String pid = taskParameter.getPid();
+        if (pid == null) {
+            // get PID from external PID System
+            pid = getPid(component.getId(), taskParam);
+        }
+        else if (!getItem().validPidStructure(pid)) {
+            throw new XmlCorruptedException("Empty pid element of taskParam.");
+        }
+        component.setObjectPid(pid);
+
+        getItem().persist();
+
+        String ret = prepareResponse(pid);
+
+        long end = System.currentTimeMillis();
+        LOGGER.info("assignContentPid of <" + getItem().getId() + "> needed <" + (end - start) + "> msec");
+
+        return ret;
+    }
+
+    /**
+     * Assign persistent identifier to Item object.
+     *
+     * @param id        The Id of the Item witch is to assign with an ObjectPid.
+     * @param taskParam XML snippet with parameter for the persistent identifier system.
+     * @return The assigned persistent identifier for the Item.
+     * @throws ComponentNotFoundException Thrown if the Component was not found.
+     * @throws ItemNotFoundException      Thrown if the object with id is does not exist or is no Item.
+     * @throws LockingException           Thrown if the Item is locked
+     * @throws MissingMethodParameterException
+     *                                    Thrown if a parameter is missing within <code>taskParam</code>.
+     * @throws OptimisticLockingException Thrown if Item was altered in the mean time.
+     * @throws InvalidStatusException     Thrown if Item has the wrong status.
+     * @throws XmlCorruptedException      Thrown if taskParam has invalid XML.
+     * @throws SystemException            Thrown in case of internal error.
+     * @see ItemHandlerInterface #assignObjectPid(java.lang.String,java.lang.String)
+     * @throws de.escidoc.core.common.exceptions.system.WebserverSystemException
+     * @throws de.escidoc.core.common.exceptions.system.PidSystemException
+     * @throws de.escidoc.core.common.exceptions.system.XmlParserSystemException
+     * @throws de.escidoc.core.common.exceptions.system.TripleStoreSystemException
+     * @throws de.escidoc.core.common.exceptions.system.FedoraSystemException
+     * @throws de.escidoc.core.common.exceptions.system.IntegritySystemException
+     * @throws de.escidoc.core.common.exceptions.system.EncodingSystemException
+     */
+    public String assignObjectPid(final String id, final String taskParam) throws InvalidStatusException,
+        ItemNotFoundException, ComponentNotFoundException, LockingException, MissingMethodParameterException,
+        OptimisticLockingException, XmlCorruptedException, SystemException, EncodingSystemException,
+        IntegritySystemException, FedoraSystemException, TripleStoreSystemException, PidSystemException,
+        WebserverSystemException, XmlParserSystemException, AuthorizationException {
+
+        long start = System.currentTimeMillis();
+
+        setItem(id);
+        final TaskParamHandler taskParameter = XmlUtility.parseTaskParam(taskParam);
+        checkLocked();
+        checkObjectPidAssignable();
+
+        String originId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN);
+        if (originId != null) {
+            final String originVersionId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN_VERSION);
+            if (originVersionId != null) {
+                originId = originId + ':' + originVersionId;
+            }
+            final boolean origin =
+                loadOrigin("You cannot assign a pid to a full surrogate Item representation "
+                    + "because you have no access rights on the Item '" + originId
+                    + "'. Subressources which are part of the surrogate Item "
+                    + "(and not the origin Item) are still accessible. Try " + "using subresource methods.");
+        }
+
+        getUtility().checkOptimisticLockingCriteria(getItem().getLastModificationDate(),
+            taskParameter.getLastModificationDate(), "Item " + getItem().getId());
+
+        String pid = taskParameter.getPid();
+        if (pid == null) {
+            // get PID from external PID System
+            pid = getPid(id, taskParam);
+        }
+        else if (!getItem().validPidStructure(pid)) {
+            throw new XmlCorruptedException("Empty pid element of taskParam.");
+        }
+
+        getItem().setObjectPid(pid);
+        getItem().persist();
+
+        if (getItem().isLatestVersion()) {
+            fireItemModified(getItem().getId(), CalledFrom.ASSIGN_OBJECT_PID);
+        }
+
+        String ret = prepareResponse(pid);
+
+        long end = System.currentTimeMillis();
+        LOGGER.info("assignObjectPid of <" + getItem().getId() + "> needed <" + (end - start) + "> msec");
+
+        return ret;
+    }
+
+    /**
+     * Assign persistent identifier to a defined version of Item.
+     *
+     * @param id        The Id of the Item witch is to assign with a VersionPid. This id must contain the version
+     *                  number.
+     * @param taskParam XML snippet with parameter for the persistent identifier system.
+     * @return The assigned persistent identifier for the version of the Item.
+     * @throws ComponentNotFoundException Thrown if the Component was not found.
+     * @throws ItemNotFoundException      Thrown if the Item was not found.
+     * @throws LockingException           Thrown if the Item is locked.
+     * @throws MissingMethodParameterException
+     *                                    Thrown if method parameter are missing.
+     * @throws OptimisticLockingException Thrown in case of optimistic locking failure.
+     * @throws InvalidStatusException     Thrown if Item has the wrong status.
+     * @throws XmlCorruptedException      Thrown in case of invalid XML
+     * @throws SystemException            Thrown in case of internal error.
+     * @throws ReadonlyVersionException   Thrown if a provided item version id is not a latest version.
+     * @see ItemHandlerInterface #assignVersionPid(java.lang.String,java.lang.String)
+     * @throws de.escidoc.core.common.exceptions.system.WebserverSystemException
+     * @throws de.escidoc.core.common.exceptions.system.PidSystemException
+     * @throws de.escidoc.core.common.exceptions.system.XmlParserSystemException
+     * @throws de.escidoc.core.common.exceptions.system.TripleStoreSystemException
+     * @throws de.escidoc.core.common.exceptions.system.FedoraSystemException
+     * @throws de.escidoc.core.common.exceptions.system.IntegritySystemException
+     * @throws de.escidoc.core.common.exceptions.system.EncodingSystemException
+     */
+    public String assignVersionPid(final String id, final String taskParam) throws ItemNotFoundException,
+        LockingException, MissingMethodParameterException, OptimisticLockingException, InvalidStatusException,
+        XmlCorruptedException, SystemException, ComponentNotFoundException, ReadonlyVersionException,
+        EncodingSystemException, IntegritySystemException, FedoraSystemException, TripleStoreSystemException,
+        PidSystemException, WebserverSystemException, XmlParserSystemException, AuthorizationException {
+
+        long start = System.currentTimeMillis();
+
+        setItem(id);
+
+        // we can only update the latest version
+        if (!getItem().isLatestVersion()) {
+            throw new ReadonlyVersionException("Version " + getItem().getVersionNumber()
+                + " is not a latest version of the item. " + "Assignment of version PID is restricted"
+                + " to the latest version.");
+        }
+
+        final TaskParamHandler taskParameter = XmlUtility.parseTaskParam(taskParam);
+        checkLocked();
+        checkItemVersionPidAssignable();
+
+        String originId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN);
+        if (originId != null) {
+            final String originVersionId = getItem().getResourceProperties().get(PropertyMapKeys.ORIGIN_VERSION);
+            if (originVersionId != null) {
+                originId = originId + ':' + originVersionId;
+            }
+            final boolean origin =
+                loadOrigin("You cannot assign a pid to a full surrogate Item representation "
+                    + "because you have no access rights on the Item '" + originId
+                    + "'. Subressources which are part of the surrogate Item "
+                    + "(and not the origin Item) are still accessible. Try " + "using subresource methods.");
+        }
+
+        getUtility().checkOptimisticLockingCriteria(getItem().getLastModificationDate(),
+            taskParameter.getLastModificationDate(), "Item " + getItem().getId());
+
+        String pid = taskParameter.getPid();
+        if (pid == null) {
+            // get PID from external PID System
+            pid = getPid(id, taskParam);
+        }
+        else if (!getItem().validPidStructure(pid)) {
+            throw new XmlCorruptedException("Empty pid element of taskParam.");
+        }
+
+        getItem().setVersionPid(pid);
+        getItem().persist();
+
+        if (getItem().isLatestVersion()) {
+            fireItemModified(getItem().getId(), CalledFrom.ASSIGN_VERSION_PID);
+        }
+
+        String ret = prepareResponse(pid);
+
+        long end = System.currentTimeMillis();
+        LOGGER.info("assignVersionPid of <" + getItem().getId() + "> needed <" + (end - start) + "> msec");
+
+        return ret;
+    }
+
 }
