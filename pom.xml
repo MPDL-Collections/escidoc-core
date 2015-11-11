@@ -974,7 +974,7 @@
 		<camel.version>2.14.3</camel.version>
 		<activemq.version>5.3.2</activemq.version>
 		<hibernate.version>4.2.11.Final</hibernate.version>
-		<junit.version>4.8.2</junit.version>
+		<junit.version>4.12</junit.version>
 		<xjavadoc.version>1.5-050611</xjavadoc.version>
 		<jdbc.postgresql.version>9.0-801.jdbc4</jdbc.postgresql.version>
 		<jdbc.oracle.version>14</jdbc.oracle.version>

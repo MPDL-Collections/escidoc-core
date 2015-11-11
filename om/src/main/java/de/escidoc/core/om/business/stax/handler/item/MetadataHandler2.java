@@ -108,7 +108,9 @@ public class MetadataHandler2 extends DefaultHandler {
 
             // extract namespace and attributes 'type' from payload root element
             if (this.payloadRootElement) {
-                this.metadataRecord.setNameSpace(element.getNamespace());
+                this.metadataRecord
+                    .setNameSpace((element.getNamespace() != null && element.getNamespace().isEmpty()) ? null : element
+                        .getNamespace());
                 this.payloadRootElement = false;
             }
         }

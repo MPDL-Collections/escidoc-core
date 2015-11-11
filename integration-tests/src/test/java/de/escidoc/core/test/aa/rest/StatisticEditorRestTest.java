@@ -31,6 +31,8 @@ package de.escidoc.core.test.aa.rest;
 import de.escidoc.core.test.aa.StatisticEditorAbstractTest;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.security.client.PWCallback;
+
+import org.junit.FixMethodOrder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
