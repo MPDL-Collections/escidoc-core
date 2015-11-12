@@ -30,10 +30,13 @@ package de.escidoc.core.test.om.context;
 
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.security.client.PWCallback;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -51,6 +54,7 @@ import static org.junit.Assert.assertTrue;
  * @author Michael Schneider
  */
 @RunWith(value = Parameterized.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RetrieveContextsTest extends ContextTestBase {
 
     public static final String XPATH_SRW_CONTEXT_LIST_CONTEXT =
@@ -234,7 +238,7 @@ public class RetrieveContextsTest extends ContextTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testRetrieveAdminDescriptors() throws Exception {
+    public void testXRetrieveAdminDescriptors() throws Exception {
 
         Document context = EscidocRestSoapTestBase.getTemplateAsDocument(this.path, "context_create.xml");
         substitute(context, "/context/properties/name", getUniqueName("PubMan Context "));
@@ -281,7 +285,7 @@ public class RetrieveContextsTest extends ContextTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testRetrieveEmptyAdminDescriptors() throws Exception {
+    public void testXRetrieveEmptyAdminDescriptors() throws Exception {
 
         Document context =
             EscidocRestSoapTestBase.getTemplateAsDocument(this.path, "context_create_without_admindescriptor.xml");
