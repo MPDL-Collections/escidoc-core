@@ -56,6 +56,9 @@
 		<antcall target="execute-sqls">
 			<param name="script" value="aa.init.user-accounts.common.sql" />
 		</antcall>
+		<antcall target="execute-sqls">
+			<param name="script" value="aa.init.user-accounts.pubman.sql" />
+		</antcall>
 
 		<!-- creates necessary system roles -->
 		<echo level="info">Creating necessary system roles</echo>
@@ -73,6 +76,9 @@
 		<echo level="info">Granting newly created user accounts with necessary policies</echo>
 		<antcall target="execute-sqls">
 			<param name="script" value="aa.init.grants.common.sql" />
+		</antcall>
+		<antcall target="execute-sqls">
+			<param name="script" value="aa.init.grants.pubman.sql" />
 		</antcall>
 
                 <!-- creates necessary actions -->

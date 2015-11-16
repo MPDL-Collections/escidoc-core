@@ -7,6 +7,7 @@
     </antcall>
   </pack>
 
+  
   <pack name="Admin Tool">
     <antcall order="afterpacks" messageid="admintool.service" logfile="${INSTALL_PATH}/install.log/escidoc-app-services.log" buildfile="${INSTALL_PATH}/install.tmp/unpack-core.xml">
       <target name="admintool" />
@@ -18,6 +19,8 @@
       <target name="digilib" />
     </antcall>
   </pack>
+  
+
 
   <!-- pack name="Sources">
     <antcall order="afterpacks" id="source.code" logfile="${INSTALL_PATH}/install.log/escidoc-sources.log" buildfile="${INSTALL_PATH}/install.tmp/unpack-core.xml">
@@ -44,8 +47,18 @@
     <antcall order="afterpacks" id="database.userroles" logfile="${INSTALL_PATH}/install.log/db-roles.log" buildfile="${INSTALL_PATH}/install.tmp/unpack-core.xml">
       <target name="create-roles" />
     </antcall>
-    <antcall order="afterpacks" messageid="database.userroles" logfile="${INSTALL_PATH}/install.log/cleanup.log" buildfile="${INSTALL_PATH}/install.tmp/unpack-core.xml">
+
+  </pack>
+  
+  <pack name="Pubman Dataset">
+    <antcall order="afterpacks" id="pubman" logfile="${INSTALL_PATH}/install.log/pubman.log" buildfile="${INSTALL_PATH}/install.tmp/unpack-core.xml">
+      <target name="pubman" />
+    </antcall>
+   <antcall order="afterpacks" messageid="database.userroles" logfile="${INSTALL_PATH}/install.log/cleanup.log" buildfile="${INSTALL_PATH}/install.tmp/unpack-core.xml">
       <target name="cleanup" />
     </antcall>
+
   </pack>
+  
+  
 </antactions>

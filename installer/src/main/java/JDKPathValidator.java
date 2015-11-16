@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-import com.izforge.izpack.installer.AutomatedInstallData;
+import com.izforge.izpack.api.data.InstallData;
 
 public class JDKPathValidator extends AbstractValidator {
 
@@ -14,7 +14,7 @@ public class JDKPathValidator extends AbstractValidator {
      * will not notify the current running JVM to change its properties.
      */
     @Override
-    public Status validateData(final AutomatedInstallData data) {
+    public Status validateData(final InstallData data) {
 
         final boolean isJavaHome = new Boolean(data.getVariable("JdkUseJavaHome")).booleanValue();
         String javaHome = null;

@@ -1,3 +1,5 @@
+import com.izforge.izpack.api.installer.DataValidator;
+
 /*
  * CDDL HEADER START
  *
@@ -26,7 +28,7 @@
  * Gesellschaft zur Foerderung der Wissenschaft e.V.
  * All rights reserved.  Use is subject to license terms.
  */
-import com.izforge.izpack.installer.DataValidator;
+
 
 /**
  * Basic class for all validators.

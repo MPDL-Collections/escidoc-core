@@ -8,6 +8,7 @@
   Common Development and Distribution License, Version 1.0 only
   (the "License").  You may not use this file except in compliance
   with the License.
+Database
 
   You can obtain a copy of the license at license/ESCIDOC.LICENSE
   or http://www.escidoc.org/license.
@@ -30,7 +31,7 @@
 
 -->
 
-<installation version="1.0">
+<installation version="5.0">
 
     <!-- 
         The info section.
@@ -55,7 +56,7 @@
     -->
     <guiprefs width="640" height="480" resizable="yes">
       <modifier key="useButtonIcons" value="no" />
-      <modifier key="labelGap" value="2"/>
+      <modifier key="labelGap" value="2"/>o
       <modifier key="layoutAnchor" value="NORTHWEST"/>
       <modifier key="useHeadingPanel" value="yes"/>
       <modifier key="headingImageOnLeft" value="yes"/>
@@ -96,11 +97,6 @@
     </resources>
 
     <variables>
-    <!-- TODO del -->
-     <variable name="JBossPassword" value="admin" />
-      <variable name="JBossUsername" value="admin" />
-     
-    
       <!-- Short Installer uses form-based authentication as default -->
       <variable name="ShortInstaller" value="true" />
 
@@ -111,7 +107,7 @@
       <variable name="ShowCreateDirectoryMessage" value="false" />
 
       <!-- Hostname of the installation server -->
-      <variable name="EscidocHost" value="localhost" />
+      <variable name="EscidocHost" value="localhost"  />
       <!-- Bind port for JBoss Application Server -->
       <variable name="EscidocPort" value="8080" />
       <!-- Bind address for JBoss Application Server -->
@@ -129,9 +125,6 @@
       <!-- Postgres -->
       <variable name="jdbc.driver.postgres" value="lib/postgresql-${jdbc.postgresql.version}.jar" />
       <variable name="DatabaseAdminUsernamePostgres" value="postgres" />
-      
-     
-      
       <variable name="DatabaseDriverClassPostgres" value="org.postgresql.Driver" />
       <variable name="DatabasePortPostgres" value="5432" />
       <variable name="SqlScriptDelimiterPostgres" value=";" />
@@ -163,8 +156,7 @@
       <variable name="RootDatabaseNameOracle" value="oraesci01" />
       <variable name="DatabaseMaxStatementsOracle" value="0" />
       <variable name="DatabaseMaxStatementsPerConnectionOracle" value="0" />
-	 <!-- TODO del -->
-      <variable name="DatabaseAdminPassword" value="postgres" />
+      <variable name="DatabaseAdminPassword" value="" />
       <variable name="DatabaseUsername" value="escidoc" />
       <variable name="DatabasePassword" value="escidoc" />
       <variable name="DatabaseDefaultTablespace" value="escidoc" />
@@ -177,10 +169,7 @@
       <!-- Fedora admin user -->
       <variable name="FedoraUsername" value="fedoraAdmin" />
       <variable name="FedoraPassword" value="fedoraAdmin" />
-      
-      <!-- TODO del -->
-      <variable name="FedoraAdminMailAddress" value="a@b.de" />
-      
+      <variable name="FedoraAdminMailAddress" value="" />
       <variable name="FedoraDefaultTablespace" value="fedora" />
       <variable name="FedoraTempTablespace" value="TEMP" />
       <!-- triplestore database user -->
@@ -192,20 +181,14 @@
       <variable name="sid-prefix" value="escidoc" />
       <!-- Infrastructure administrator user -->
       <variable name="AdminUsername" value="sysadmin" />
-      
-      <!-- TODO del -->
-      <variable name="AdminPassword" value="sysadmin" />
+      <variable name="AdminPassword" value="" />
       <!-- variable name="AdminEmail" value="" / -->
       <!-- Infrastructure inspector user -->
       <variable name="InspectorUsername" value="inspector" />
-      
-      <!-- TODO del -->
-      <variable name="InspectorPassword" value="inspector" />
+      <variable name="InspectorPassword" value="" />
       <!-- Infrastructure depositor user -->
       <variable name="DepositorUsername" value="depositor" />
-      
-      <!-- TODO del -->
-      <variable name="DepositorPassword" value="depositor" />
+      <variable name="DepositorPassword" value="" />
       <!-- Creator Id used in migration SQL scripts -->
       <variable name="CreatorUserid" value="escidoc:exuser1" />
     </variables>
@@ -305,6 +288,7 @@
       <variable name="UpgradeEscidoc" value="true" condition="upgradeEscidoc" />
       <variable name="DatabaseIsOracle" value="true" condition="databaseIsOracle" />
       <variable name="RemoveJmxConsole" value="true" condition="removeJmxConsole" />
+      <variable name="InstallPubman" value="true" condition="installPubman"/>
       <!-- static texts dependent on install/upgrade for user input panels -->
       <variable name="EscidocDatabaseUserText" value="The datebase user specified here will be created by the installer and will be used at runtime for eSciDoc. This user should not have administrative privileges. Please take care not to re-use an existing user, as the installer will drop pre-existing users with the same name!" condition="installEscidoc" />
       <variable name="EscidocDatabaseUserText" value="The datebase user specified here will be used at runtime for eSciDoc. This user should not have administrative privileges." condition="upgradeEscidoc" />
@@ -364,6 +348,10 @@
         <name>DoRemoveJmxConsole</name>
         <value>true</value>
       </condition>
+      <condition type="packselection" id="installPubman">
+      	<name>Pubman Dataset</name>
+      </condition>
+      
     </conditions>
     <!-- 
         The panels section.
@@ -373,38 +361,38 @@
         <panel classname="HTMLHelloPanel" />
         <panel classname="HTMLLicencePanel" id="HTMLLicencePanel.licence" />
         <panel classname="HTMLInfoPanel" id="info" />
-        <panel classname="UserInputPanel" id="UserInputPanel.0" condition="askForUpgrade" />
-        <panel classname="UserInputPanel" id="UserInputPanel.1" />
-        <panel classname="UserInputPanel" id="UserInputPanel.2" />
-        <panel classname="UserInputPanel" id="UserInputPanel.3" condition="installEscidoc+databaseIsOracle" />
-        <panel classname="UserInputPanel" id="UserInputPanel.4" condition="databaseIsPostgres" />
-        <panel classname="UserInputPanel" id="UserInputPanel.5" condition="databaseIsOracle" />
-        <panel classname="UserInputPanel" id="UserInputPanel.6" condition="installEscidoc+databaseIsPostgres">
+        <panel classname="UserInputPanel" id="Install or upgrade eSciDoc" condition="askForUpgrade" />
+        <panel classname="UserInputPanel" id="Select eSciDoc host name and port number" />
+        <panel classname="UserInputPanel" id="Select RDBMS for eSciDoc and Fedora" />
+        <panel classname="UserInputPanel" id="Oracle JDBC driver" condition="installEscidoc+databaseIsOracle" />
+        <panel classname="UserInputPanel" id="Postgres connection" condition="databaseIsPostgres" />
+        <panel classname="UserInputPanel" id="Oracle connection" condition="databaseIsOracle" />
+        <panel classname="UserInputPanel" id="Postgres admin user" condition="installEscidoc+databaseIsPostgres">
           <validator classname="JDBCValidator" />
         </panel>
-        <panel classname="UserInputPanel" id="UserInputPanel.7" condition="installEscidoc+databaseIsOracle" />
-        <panel classname="UserInputPanel" id="UserInputPanel.8" condition="databaseIsPostgres" />
-        <panel classname="UserInputPanel" id="UserInputPanel.9" condition="databaseIsOracle" />
-        <panel classname="UserInputPanel" id="UserInputPanel.10" condition="databaseIsPostgres" />
-        <panel classname="UserInputPanel" id="UserInputPanel.11" condition="databaseIsOracle" />
-        <panel classname="UserInputPanel" id="UserInputPanel.12" condition="databaseIsOracle" />
-        <panel classname="UserInputPanel" id="UserInputPanel.13" condition="fullDialog" />
-        <panel classname="UserInputPanel" id="UserInputPanel.14">
+        <panel classname="UserInputPanel" id="Oracle admin user" condition="installEscidoc+databaseIsOracle" />
+        <panel classname="UserInputPanel" id="eSciDoc database user for Postgres" condition="databaseIsPostgres" />
+        <panel classname="UserInputPanel" id="eSciDoc database user for Oracle" condition="databaseIsOracle" />
+        <panel classname="UserInputPanel" id="Fedora admin/database user for Postgres" condition="databaseIsPostgres" />
+        <panel classname="UserInputPanel" id="Fedora admin/database user for Oracle" condition="databaseIsOracle" />
+        <panel classname="UserInputPanel" id="riTriples database user" condition="databaseIsOracle" />
+        <panel classname="UserInputPanel" id="Select authentication method" condition="fullDialog" />
+        <panel classname="UserInputPanel" id="JDK Setting">
           <validator classname="JDKPathValidator" />
         </panel>
         <!-- panel classname="JDKPathPanel" id="CommonJDKPath" / -->
         <panel classname="TargetPanel" id="EscidocTarget" />
         <panel classname="TreePacksPanel" id="EscidocPacks" />
-        <panel classname="UserInputPanel" id="UserInputPanel.15" condition="installEscidoc+authMethodIsFormBased" />
-        <panel classname="UserInputPanel" id="UserInputPanel.16" condition="authMethodIsFormBased" />
-        <panel classname="UserInputPanel" id="UserInputPanel.17" condition="installEscidoc+authMethodIsFormBased" />
-        <panel classname="UserInputPanel" id="UserInputPanel.18" />
-        <panel classname="UserInputPanel" id="UserInputPanel.19" condition="!removeJmxConsole" />
-        <panel classname="UserInputPanel" id="UserInputPanel.20" condition="!removeJmxConsole" />
+        <panel classname="UserInputPanel" id="System administrator user" condition="installEscidoc+authMethodIsFormBased" />
+        <panel classname="UserInputPanel" id="System inspector user" condition="authMethodIsFormBased" />
+        <panel classname="UserInputPanel" id="Depositor user" condition="installEscidoc+authMethodIsFormBased" />
+        <panel classname="UserInputPanel" id="Remove JMX- + Management Console" />
+        <panel classname="UserInputPanel" id="JBoss Security" condition="!removeJmxConsole" />
+        <panel classname="UserInputPanel" id="JBoss HTTPS" condition="!removeJmxConsole" />
         <!-- panel classname="DataCheckPanel" id="Debug" / -->
         <panel classname="InstallPanel" id="EscidocInstall" />
-        <panel classname="UserInputPanel" id="UserInputPanel.21" condition="upgradeEscidoc" />
-        <panel classname="UserInputPanel" id="UserInputPanel.22" condition="upgradeEscidoc" />
+        <panel classname="UserInputPanel" id="Database backup" condition="upgradeEscidoc" />
+        <panel classname="UserInputPanel" id="Database migration" condition="upgradeEscidoc" />
         <panel classname="ProcessPanel" condition="runDatabaseMigration" />
         <panel classname="HTMLInfoPanel" id="installInfo" condition="installEscidoc" />
         <panel classname="HTMLInfoPanel" id="upgradeInfo" condition="upgradeEscidoc" />
@@ -435,7 +423,7 @@
         <pack name="WildFly Application Server" parent="eSciDoc" required="yes">
             <description>WildFly Application Server ${wildfly.version}</description>
             <file src="packages/wildfly/wildfly-${wildfly.version}.zip" targetdir="$INSTALL_PATH/install.tmp" />
-            <file src="config/wildfly" targetdir="$INSTALL_PATH/install.tmp/wildfly_config" />
+            <fileset dir="config/wildfly" targetdir="$INSTALL_PATH/install.tmp/wildfly_config" />
             <file src="${jdbc.driver.postgres}" targetdir="$INSTALL_PATH/install.tmp" condition="installEscidoc+databaseIsPostgres" />
             <!-- 
             <file src="../../../assembly/target/escidoc-core-${project.version}-jboss-patch.zip" targetdir="$INSTALL_PATH/install.tmp" />
@@ -509,7 +497,9 @@
              <parsable targetfile="$INSTALL_PATH/install.tmp/fedora_config/env-server.bat" />
              
              <!-- Tomcat for running Fedora tools -->
+             <!-- 
              <file src="packages/tomcat/apache-tomcat-8.0.28.zip" targetdir="$INSTALL_PATH/install.tmp/fedora_config/" />
+             -->
         </pack>
         
         <pack name="eSciDoc Infrastructure" parent="eSciDoc" required="yes">
@@ -544,15 +534,14 @@
             <file src="tools/escidoc-pid-manager-release.zip" targetdir="$INSTALL_PATH/tools" />
         </pack-->
 
-        <pack name="Admin Tool" parent="Additional Services and Tools" required="no">
-            <description>Administration Client for the eSciDoc Infrastructure</description>
-            <file src="packages/admin-tool/AdminTool-${admin-tool.version}.war" targetdir="$INSTALL_PATH/tools" />
-        </pack>
-
         <pack name="Migration Tool" parent="Additional Services and Tools" required="yes" condition="upgradeEscidoc">
             <description>Migration Tool for the eSciDoc Infrastructure</description>
             <file src="packages/migration-tool/migration-tool-${migration-tool.version}.zip" targetdir="$INSTALL_PATH/tools" />
         </pack>
+
+
+
+
         
         <pack name="Fedora GSearch" parent="Additional Services and Tools" required="yes">
             <description/>
@@ -575,6 +564,11 @@
               <!-- 
             <file src="packages/saxon/saxon-${escidoc.saxon.version}.war" targetdir="$INSTALL_PATH/services" />
           -->
+        </pack>
+        
+        <pack name="Admin Tool" parent="Additional Services and Tools" required="no">
+            <description>Administration Client for the eSciDoc Infrastructure</description>
+            <file src="packages/admin-tool/AdminTool-${admin-tool.version}.war" targetdir="$INSTALL_PATH/tools" />
         </pack>
 
         <!--pack name="Documentation" required="no">
@@ -606,9 +600,13 @@
             <file src="packages/escidoc/core/escidoc-core-src-${EscidocVersion}.zip" targetdir="$INSTALL_PATH/install.tmp" />
         </pack-->
         
+        
+          
+        
         <pack name="Configuration and Initialization" required="yes" condition="installEscidoc">
             <description>Scripts and procedures to configure the system, initialize the database, and a first set of user accounts.</description>
         </pack>
+        
         
         <pack name="Database Creation" id="db.create" parent="Configuration and Initialization" required="yes" condition="installEscidoc">
             <description>Creates the necessary databases and system roles</description>
@@ -619,6 +617,10 @@
             <file src="config/escidoc/core/aa.init.user-accounts.common.sql" targetdir="$INSTALL_PATH/install.tmp" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/aa.init.user-accounts.common.sql" />
             <file src="config/escidoc/core/aa.init.grants.common.sql" targetdir="$INSTALL_PATH/install.tmp" />
+            
+            <file src="config/pubman/aa.init.user-accounts.pubman.sql" targetdir="$INSTALL_PATH/install.tmp" condition="installPubman"/>
+            <parsable targetfile="$INSTALL_PATH/install.tmp/aa.init.user-accounts.pubman.sql"  condition="installPubman"/>
+            <file src="config/pubman/aa.init.grants.pubman.sql" targetdir="$INSTALL_PATH/install.tmp" condition="installPubman"/>
         </pack>
         
         <pack name="Database Initialization" id="db.init" parent="Configuration and Initialization" required="yes" condition="installEscidoc">
@@ -631,11 +633,41 @@
             <depends packname="Database Creation" />
             <depends packname="Database Initialization" />
         </pack>
+        
+        
+
+		<pack name="Pubman Dataset" id="pubman.dataset.ingest" required="no" preselected="true">
+            <description>Creates the necessary databases and system roles</description>
+            <depends packname="Fedora Repository" />
+
+            <file src="config/pubman/escidoc_pubman-content-model" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-content-model" />
+            
+             <file src="config/pubman/escidoc_pubman-context-simple" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-context-simple" />
+            
+            <file src="config/pubman/escidoc_pubman-context-standard" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-context-standard" />
+            
+           <file src="config/pubman/escidoc_pubman-ou-ext" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-ou-ext" />
+            
+           <file src="config/pubman/escidoc_pubman-ou-main" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-ou-main" />
+            
+            <file src="config/pubman/escidoc_pubman-ou-sub" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-ou-sub" />
+            
+            
+        </pack>
+        
+      
+        
     </packs>
     
     <listeners>
-        <listener installer="SummaryLoggerInstallerListener" />
-        <listener installer="AntActionInstallerListener" />
+        <listener stage="install" classname="com.izforge.izpack.event.SummaryLoggerInstallerListener" />
+        <listener stage="install" classname="com.izforge.izpack.event.AntActionInstallerListener" />
     </listeners>
     
     <jar src="lib/ant-${ant.version}.jar" stage="install" />
@@ -646,8 +678,11 @@
     <jar src="lib/xalan-2.7.0.jar" stage="install" />
     <jar src="lib/postgresql-${jdbc.postgresql.version}.jar" stage="install" />
     <jar src="escidoc-validators.jar" stage="install" />
+    <jar src="lib/commons-io-2.4.jar" stage="install" />
 
-    <native type="3rdparty" name="COIOSHelper.dll" stage="both">
-        <os family="windows"/>
-    </native>
+	<natives>
+	    <native type="3rdparty" name="COIOSHelper.dll" stage="both">
+	        <os family="windows"/>
+	    </native>
+    </natives>
 </installation>

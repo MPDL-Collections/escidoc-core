@@ -82,11 +82,15 @@
 							<executable>java</executable>
 							<arguments>
 								<argument>-Dskip.validation=true</argument>
+								
+								<!-- <argument>-DDEBUG=true</argument>-->
+								
 								<argument>-jar</argument>
-								<argument>${project.basedir}/../installer/target/installer-${project.version}-standard.jar
+								<argument>${project.basedir}/../installer/target/installer-${project.version}.jar
 								</argument>
 								<argument>${project.build.directory}/${escidoc.installer.config}
 								</argument>
+								
 							</arguments>
 							<outputFile>${project.build.directory}/escidoc-installer.log
 							</outputFile>

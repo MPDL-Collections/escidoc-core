@@ -31,7 +31,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.izforge.izpack.installer.AutomatedInstallData;
+import com.izforge.izpack.api.data.InstallData;
 
 /**
  * Check if a HTTP URL is reachable and return an error if it does.
@@ -48,7 +48,7 @@ public class HTTPValidator extends AbstractValidator {
      * @see com.izforge.izpack.installer.DataValidator#validateData (com.izforge.izpack.installer.AutomatedInstallData)
      */
     @Override
-    public Status validateData(AutomatedInstallData data) {
+    public Status validateData(InstallData data) {
         Status status = Status.ERROR;
         final String host = data.getVariable("EscidocHost");
         final String port = data.getVariable("EscidocPort");

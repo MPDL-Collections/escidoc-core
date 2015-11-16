@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
 
-<userInput>
+<userInput version="5.0"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://izpack.org/schema/userinput"
+                  xsi:schemaLocation="http://izpack.org/schema/userinput http://izpack.org/schema/5.0/izpack-userinput-5.0.xsd">
 
   <panel order="0" id="Install or upgrade eSciDoc">
     <createForPack name="eSciDoc" />
@@ -15,7 +18,7 @@
       </spec>
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="1" id="Select eSciDoc host name and port number">
@@ -28,16 +31,16 @@
     <field type="staticText" align="left"
       txt="Alternativly, you may provide the IP address instead of host name and domain name. Keeping the default value 'localhost' will prohibit access from remote hosts." />
     <field type="text" align="left" variable="EscidocHost">
-      <spec txt="Host name:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Host name must not be empty string." />
+      <spec txt="Host name:" size="25" set="${EscidocHost}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Host name must not be empty string." />
     </field>
     <!-- Port number of the system onto which eSciDoc will be installed -->
     <field type="space" />
     <field type="staticText" align="left"
       txt="The port number of the server you are about to install the eSciDoc Infrastructure onto." />
-    <field type="text" align="left" variable="EscidocPort">
-      <spec txt="Port number:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.PortValidator" txt="Port number must be a free port on localhost." />
+    <field type="text" align="left" variable="EscidocPort" >
+      <spec txt="Port number:" size="25" set="${EscidocPort}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PortValidator" txt="Port number must be a free port on localhost." />
     </field>
     <!-- Bind address of the system onto which eSciDoc will be installed -->
     <!-- field type="space"/>
@@ -49,7 +52,7 @@
       <field type="check" variable="jboss.bind.address">
       <spec txt="Bind to all network interfaces" true="0.0.0.0" false="localhost" set="true"/>
       </field -->
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="2" id="Select RDBMS for eSciDoc and Fedora">
@@ -66,7 +69,7 @@
       </spec>
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="3" id="Oracle JDBC driver">
@@ -76,10 +79,10 @@
     <field type="staticText"
       txt="You have chosen to use an Oracle database. Please configure where to find the Oracle JDBC driver." />
     <field type="file" align="left" variable="jdbc.driver.oracle">
-      <spec txt="Oracle JDBC driver jar:" size="25" set="" fileext="jar" fileextdesc="Oracle JDBC driver jar" />
+      <spec txt="Oracle JDBC driver jar:" size="25" set="${jdbc.driver.oracle}" fileext="jar" fileextdesc="Oracle JDBC driver jar" />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="4" id="Postgres connection">
@@ -88,18 +91,18 @@
     <field type="divider" align="top" />
     <field type="space" />
     <field type="text" align="left" variable="DatabaseHost">
-      <spec txt="JDBC Database Host:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database host must not be empty string." />
+      <spec txt="JDBC Database Host:" size="25" set="${DatabaseHost}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database host must not be empty string." />
     </field>
     <field type="text" align="left" variable="DatabasePortPostgres">
-      <spec txt="JDBC Database Port:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database port must not be empty string." />
+      <spec txt="JDBC Database Port:" size="25" set="${DatabasePortPostgres}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database port must not be empty string." />
     </field>
     <field type="space" />
     <!-- Database Driver Class -->
     <field type="text" align="left" variable="DatabaseDriverClassPostgres">
-      <spec txt="JDBC Database Driver Class:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database driver class must not be empty string." />
+      <spec txt="JDBC Database Driver Class:" size="25" set="${DatabaseDriverClassPostgres}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database driver class must not be empty string." />
     </field>
     <field type="space" />
     <!-- Default Database Name -->
@@ -107,10 +110,10 @@
       <description>During the installation of PostgreSQL, you have set a name for the root database. If you accepted the
         default value, you do not need to edit this field.</description>
       <spec txt="Root Database Name:" size="25" set="${RootDatabaseNamePostgres}" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Default database name must not be empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Default database name must not be empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="5" id="Oracle connection">
@@ -119,18 +122,18 @@
     <field type="divider" align="top" />
     <field type="space" />
     <field type="text" align="left" variable="DatabaseHost">
-      <spec txt="JDBC Database Host:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database host must not be empty string." />
+      <spec txt="JDBC Database Host:" size="25" set="${DatabaseHost}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database host must not be empty string." />
     </field>
     <field type="text" align="left" variable="DatabasePortOracle">
-      <spec txt="JDBC Database Port:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database port must not be empty string." />
+      <spec txt="JDBC Database Port:" size="25" set="${DatabasePortOracle}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database port must not be empty string." />
     </field>
     <field type="space" />
     <!-- Database Driver Class -->
     <field type="text" align="left" variable="DatabaseDriverClassOracle">
-      <spec txt="JDBC Database Driver Class:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database driver class must not be empty string." />
+      <spec txt="JDBC Database Driver Class:" size="25" set="${DatabaseDriverClassOracle}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database driver class must not be empty string." />
     </field>
     <field type="space" />
     <!-- Default Database Name -->
@@ -138,10 +141,10 @@
       <description>During the installation of Oracle, you have set a name for the database (SID). If you accepted the
         default value, you do not need to edit this field.</description>
       <spec txt="Database SID:" size="25" set="${RootDatabaseNameOracle}" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database name must not be empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database name must not be empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="6" id="Postgres admin user">
@@ -156,21 +159,21 @@
       txt="Please provide the user creadentials of an appropriate database user with sufficient privileges. This user will not be stored in any configuration file and will not be used once the necessary databases and roles have been created." />
     <field type="space" />
     <field type="text" align="left" variable="DatabaseAdminUsernamePostgres">
-      <spec txt="Database Admin Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database admin username must not be an empty string." />
+      <spec txt="Database Admin Username:" size="25" set="${DatabaseAdminUsernamePostgres}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database admin username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="DatabaseAdminPassword">
       <spec>
-        <pwd txt="Database Admin Password:" size="25" set="" />
-        <pwd txt="Retype Admin Password:" size="25" set="" />
+        <pwd txt="Database Admin Password:" size="25" set="${DatabaseAdminPassword}" />
+        <pwd txt="Retype Admin Password:" size="25" set="${DatabaseAdminPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database admin password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both database admin passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database admin password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both database admin passwords must match." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="7" id="Oracle admin user">
@@ -185,21 +188,21 @@
       txt="Please provide the user creadentials of an appropriate database user with sufficient privileges. This user will not be stored in any configuration file and will not be used once the necessary databases and roles have been created." />
     <field type="space" />
     <field type="text" align="left" variable="DatabaseAdminUsernameOracle">
-      <spec txt="Database Admin Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database admin username must not be an empty string." />
+      <spec txt="Database Admin Username:" size="25" set="${DatabaseAdminUsernameOracle}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database admin username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="DatabaseAdminPassword">
       <spec>
-        <pwd txt="Database Admin Password:" size="25" set="" />
-        <pwd txt="Retype Admin Password:" size="25" set="" />
+        <pwd txt="Database Admin Password:" size="25" set="${DatabaseAdminPassword}" />
+        <pwd txt="Retype Admin Password:" size="25" set="${DatabaseAdminPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database admin password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both database admin passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database admin password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both database admin passwords must match." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="8" id="eSciDoc database user for Postgres">
@@ -210,21 +213,21 @@
     <field type="space" />
     <!-- Username -->
     <field type="text" align="left" variable="DatabaseUsername">
-      <spec txt="Database Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database username must not be empty string." />
+      <spec txt="Database Username:" size="25" set="${DatabaseUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database username must not be empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="DatabasePassword">
       <spec>
-        <pwd txt="Database Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="Database Password:" size="25" set="${DatabasePassword}" />
+        <pwd txt="Retype Password:" size="25" set="${DatabasePassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database password must not be empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both database passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database password must not be empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both database passwords must match." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="9" id="eSciDoc database user for Oracle">
@@ -235,33 +238,33 @@
     <field type="space" />
     <!-- Username -->
     <field type="text" align="left" variable="DatabaseUsername">
-      <spec txt="Database Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database username must not be empty string." />
+      <spec txt="Database Username:" size="25" set="${DatabaseUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database username must not be empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="DatabasePassword">
       <spec>
-        <pwd txt="Database Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="Database Password:" size="25" set="${DatabasePassword}" />
+        <pwd txt="Retype Password:" size="25" set="${DatabasePassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database password must not be empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both database passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database password must not be empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both database passwords must match." />
     </field>
     <field type="space" />
     <!-- Default tablespace -->
     <field type="text" align="left" variable="DatabaseDefaultTablespace">
-      <spec txt="Database Default Tablespace:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database default tablespace must not be empty string." />
+      <spec txt="Database Default Tablespace:" size="25" set="${DatabaseDefaultTablespace}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database default tablespace must not be empty string." />
     </field>
     <field type="space" />
     <!-- Temporary tablespace -->
     <field type="text" align="left" variable="DatabaseTempTablespace">
-      <spec txt="Database Temporary Tablespace:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database temporary tablespace must not be empty string." />
+      <spec txt="Database Temporary Tablespace:" size="25" set="${DatabaseTempTablespace}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database temporary tablespace must not be empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="10" id="Fedora admin/database user for Postgres">
@@ -276,27 +279,27 @@
     <field type="space" />
     <!-- Username -->
     <field type="text" align="left" variable="FedoraUsername">
-      <spec txt="Fedora Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora username must not be an empty string." />
+      <spec txt="Fedora Username:" size="25" set="${FedoraUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="FedoraPassword">
       <spec>
-        <pwd txt="Fedora Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="Fedora Password:" size="25" set="${FedoraPassword}" />
+        <pwd txt="Retype Password:" size="25" set="${FedoraPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora admin password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both Fedora passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora admin password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both Fedora passwords must match." />
     </field>
     <field type="space" />
     <!-- eMail Address -->
     <field type="text" align="left" variable="FedoraAdminMailAddress">
-      <spec txt="eMail Address:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora administrator email addess must not be an empty string." />
+      <spec txt="eMail Address:" size="25" set="${FedoraAdminMailAddress}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora administrator email addess must not be an empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="11" id="Fedora admin/database user for Oracle">
@@ -311,39 +314,39 @@
     <field type="space" />
     <!-- Username -->
     <field type="text" align="left" variable="FedoraUsername">
-      <spec txt="Fedora Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora username must not be an empty string." />
+      <spec txt="Fedora Username:" size="25" set="${FedoraUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="FedoraPassword">
       <spec>
-        <pwd txt="Fedora Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="Fedora Password:" size="25" set="${FedoraPassword}" />
+        <pwd txt="Retype Password:" size="25" set="${FedoraPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora admin password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both Fedora passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora admin password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both Fedora passwords must match." />
     </field>
     <field type="space" />
     <!-- Default tablespace -->
     <field type="text" align="left" variable="FedoraDefaultTablespace">
-      <spec txt="Fedora Default Tablespace:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora default tablespace must not be empty string." />
+      <spec txt="Fedora Default Tablespace:" size="25" set="${FedoraDefaultTablespace}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora default tablespace must not be empty string." />
     </field>
     <field type="space" />
     <!-- Temporary tablespace -->
     <field type="text" align="left" variable="FedoraTempTablespace">
-      <spec txt="Fedora Temporary Tablespace:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora temporary tablespace must not be empty string." />
+      <spec txt="Fedora Temporary Tablespace:" size="25" set="${FedoraTempTablespace}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora temporary tablespace must not be empty string." />
     </field>
     <field type="space" />
     <!-- eMail Address -->
     <field type="text" align="left" variable="FedoraAdminMailAddress">
-      <spec txt="eMail Address:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Fedora administrator email addess must not be an empty string." />
+      <spec txt="eMail Address:" size="25" set="${FedoraAdminMailAddress}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Fedora administrator email addess must not be an empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="12" id="riTriples database user">
@@ -355,33 +358,33 @@
     <field type="space" />
     <!-- Username -->
     <field type="text" align="left" variable="TriplestoreUsernameOracle">
-      <spec txt="Database Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database username must not be an empty string." />
+      <spec txt="Database Username:" size="25" set="${TriplestoreUsernameOracle}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="TriplestorePasswordOracle">
       <spec>
-        <pwd txt="Database Password:" size="25" set="" />
-        <pwd txt="Database Password:" size="25" set="" />
+        <pwd txt="Database Password:" size="25" set="${TriplestorePasswordOracle}" />
+        <pwd txt="Database Password:" size="25" set="${TriplestorePasswordOracle}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both database passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both database passwords must match." />
     </field>
     <field type="space" />
     <!-- Default tablespace -->
     <field type="text" align="left" variable="TriplestoreDefaultTablespace">
-      <spec txt="Database Default Tablespace:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database default tablespace must not be empty string." />
+      <spec txt="Database Default Tablespace:" size="25" set="${TriplestoreDefaultTablespace}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database default tablespace must not be empty string." />
     </field>
     <field type="space" />
     <!-- Temporary tablespace -->
     <field type="text" align="left" variable="TriplestoreTempTablespace">
-      <spec txt="Database Temporary Tablespace:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Database temporary tablespace must not be empty string." />
+      <spec txt="Database Temporary Tablespace:" size="25" set="${TriplestoreTempTablespace}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Database temporary tablespace must not be empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="13" id="Select authentication method">
@@ -400,7 +403,7 @@
       </spec>
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="14" id="JDK Setting">
@@ -419,7 +422,7 @@
     <field type="dir" align="left" variable="JdkHome">
       <spec txt="" size="40" set="${ENV[JAVA_HOME]}" allowEmptyValue="true"/>
     </field>
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="15" id="System administrator user">
@@ -431,28 +434,28 @@
       txt="The System Administrator user has access to all resources in the eSciDoc Infrastructure. He can create other users and grant roles and privileges to them." />
     <field type="space" />
     <field type="text" align="left" variable="AdminUsername">
-      <spec txt="System Administrator Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="System administrator username must not be an empty string." />
+      <spec txt="System Administrator Username:" size="25" set="${AdminUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="System administrator username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="AdminPassword">
       <spec>
-        <pwd txt="System Administrator Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="System Administrator Password:" size="25" set="${AdminPassword}" />
+        <pwd txt="Retype Password:" size="25" set="${AdminPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="System administrator password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both system administrator passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="System administrator password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both system administrator passwords must match." />
     </field>
     <field type="space" />
     <!-- eMail Address -->
     <!-- field type="text" align="left" variable="AdminEmail">
-      <spec txt="eMail Address:" size="25" set=""/>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="The eSciDoc Infrastructure System Administrator's 
+      <spec txt="eMail Address:" size="25" set="${}"/>
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="The eSciDoc Infrastructure System Administrator's 
       email addess must not be an empty string."/>
       </field>
       <field type="space"/ -->
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="16" id="System inspector user">
@@ -463,28 +466,28 @@
     <field type="staticText" align="left" txt="$SystemInspectorText" />
     <field type="space" />
     <field type="text" align="left" variable="InspectorUsername">
-      <spec txt="System Inspector Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="System Inspector username must not be an empty string." />
+      <spec txt="System Inspector Username:" size="25" set="${InspectorUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="System Inspector username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="InspectorPassword">
       <spec>
-        <pwd txt="System Inspector Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="System Inspector Password:" size="25" set="${InspectorPassword}" />
+        <pwd txt="Retype Password:" size="25" set="${InspectorPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="System Inspector password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both System Inspector passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="System Inspector password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both System Inspector passwords must match." />
     </field>
     <field type="space" />
     <!-- eMail Address -->
     <!-- field type="text" align="left" variable="InspectorEmail">
-      <spec txt="eMail Address:" size="25" set=""/>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="The eSciDoc Infrastructure System Inspector's email 
+      <spec txt="eMail Address:" size="25" set="${}"/>
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="The eSciDoc Infrastructure System Inspector's email 
       addess must not be an empty string."/>
       </field>
       <field type="space"/ -->
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="17" id="Depositor user">
@@ -496,21 +499,21 @@
       txt="The Depositor user is entitles to create new resources within the eSciDoc Infrastructure. This is the user for most of the day-to-day work." />
     <field type="space" />
     <field type="text" align="left" variable="DepositorUsername">
-      <spec txt="Depositor Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Depositor username must not be an empty string." />
+      <spec txt="Depositor Username:" size="25" set="${DepositorUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Depositor username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- Password -->
     <field type="password" align="left" variable="DepositorPassword">
       <spec>
-        <pwd txt="Depositor Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="Depositor Password:" size="25" set="${DepositorPassword}" />
+        <pwd txt="Retype Password:" size="25" set="${DepositorPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Depositor password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both Depositor passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Depositor password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both Depositor passwords must match." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="18" id="Remove JMX- + Management Console">
@@ -527,7 +530,7 @@
       </spec>
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
   
   <panel order="19" id="JBoss Security">
@@ -539,21 +542,21 @@
       txt="Please choose the username and password to use to secure the JBoss JMX-Console and the JBoss Web Console." />
     <field type="space" />
     <field type="text" align="left" variable="JBossUsername">
-      <spec txt="JBoss Username:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="JBoss username must not be an empty string." />
+      <spec txt="JBoss Username:" size="25" set="${JBossUsername}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="JBoss username must not be an empty string." />
     </field>
     <field type="space" />
     <!-- password -->
     <field type="password" align="left" variable="JBossPassword">
       <spec>
-        <pwd txt="JBoss Password:" size="25" set="" />
-        <pwd txt="Retype Password:" size="25" set="" />
+        <pwd txt="JBoss Password:" size="25" set="${JBossPassword}" />
+        <pwd txt="Retype Password:" size="25" set="${JBossPassword}" />
       </spec>
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="JBoss password must not be an empty string." />
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" txt="Both JBoss passwords must match." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="JBoss password must not be an empty string." />
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" txt="Both JBoss passwords must match." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
   
   <panel order="20" id="JBoss HTTPS">
@@ -569,12 +572,12 @@
     <field type="divider" align="top" />
     <field type="password" align="left" variable="JBossKeystorePassword">
       <spec>
-        <pwd txt="Keystore Password:" size="25" set=""/>
-        <pwd txt="Retype Password:" size="25" set=""/>
+        <pwd txt="Keystore Password:" size="25" set="${JBossKeystorePassword}"/>
+        <pwd txt="Retype Password:" size="25" set="${JBossKeystorePassword}"/>
       </spec>
-      <validator class="com.izforge.izpack.util.PasswordEqualityValidator" 
+      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordEqualityValidator" 
         txt="Both keystore passwords must match."/>
-<!--      <validator class="com.izforge.izpack.util.PasswordKeystoreValidator" -->
+<!--      <validator class="com.izforge.izpack.panels.userinput.validator.PasswordKeystoreValidator" -->
 <!--        txt="Could not validate keystore with password and alias provided.">-->
 <!--        <param name="keystoreFile" value="${JBossKeystore}"/>-->
 <!--        <param name="keystorePassword" value="${JBossKeystorePassword}"/>        -->
@@ -589,7 +592,7 @@
     <field type="staticText" align="left"
       txt="If you don't have a recent backup of your database we strongly recommend to stop here and make a backup now. This ensures you will not loose data if the database migration fails." />
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
   <panel order="22" id="Database migration">
@@ -608,11 +611,11 @@
       txt="The database scripts contain a placeholder for the id of the creator's user account." />
     <field type="space" />
     <field type="text" align="left" variable="CreatorUserid">
-      <spec txt="Creator Userid:" size="25" set="" />
-      <validator class="com.izforge.izpack.util.NotEmptyValidator" txt="Creator userid must not be an empty string." />
+      <spec txt="Creator Userid:" size="25" set="${CreatorUserid}" />
+      <validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Creator userid must not be an empty string." />
     </field>
     <field type="space" />
-    <field type="divider" align="bottom" />
+    <field type="divider"  />
   </panel>
 
 </userInput>

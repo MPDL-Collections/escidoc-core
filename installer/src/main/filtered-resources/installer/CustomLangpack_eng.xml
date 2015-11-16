@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="5.0" encoding="UTF-8" standalone="yes" ?>
 <langpack>
     <str id="data.validation.error.title" txt="Validating error"/>
 </langpack>

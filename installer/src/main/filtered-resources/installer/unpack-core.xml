@@ -15,6 +15,10 @@
   <condition property="removeJmxConsole">
     <istrue value="${RemoveJmxConsole}" />
   </condition>
+	
+  <condition property="installPubman">
+    <istrue value="${InstallPubman}" />
+  </condition>
 
   <taskdef resource="net/sf/antcontrib/antlib.xml" />
 
@@ -31,14 +35,17 @@
     <antcall target="fedora" />
     <antcall target="escidoc-core" />
     <!-- antcall target="escidoc-examples" / -->
-    <antcall target="escidoc-admin" />
+    
+  	<antcall target="escidoc-admin" />
     <!-- Following line is commented out because it will be invoked as separate Ant call -->
     <!-- Initializing the database is an optional task, therefore it should not be part  -->
     <!-- of the default build target. See EscidocAntAction.xml for further details       -->
     <!--antcall target="db-create-scripts" /-->
+  	
     <antcall target="fedoragsearch" />
     <antcall target="srw" />
     <antcall target="saxon" />
+   
   </target>
 
   <target name="init" description="Intialize runtime environment">
@@ -80,16 +87,31 @@
     <!-- copy WildFly config -->
     <echo level="info">Copy WildFly configuration</echo>
   	
+  	
     <antcall target="move-with-save">
       <param name="sourceDir" value="${install.dir}/install.tmp/wildfly_config" />
-      <param name="targetDir" value="${install.dir}" />
+      <param name="targetDir" value="${install.dir}/wildfly" />
     </antcall>
-    
+   
+	<!--  	
+    <antcall target="move-file-with-save">
+      <param name="source" value="${install.dir}/install.tmp/wildfly_config/wildfly/bin/standalone.conf" />
+      <param name="target" value="${install.dir}/wildfly/bin/standalone.conf" />
+    </antcall>
+  
+  	
+    <antcall target="move-file-with-save">
+      <param name="source" value="${install.dir}/install.tmp/wildfly_config/wildfly/bin/standalone.conf.bat" />
+      <param name="target" value="${install.dir}/wildfly/bin/standalone.conf.bat" />
+    </antcall>
+	 -->
+  	
     <antcall target="move-file-with-save">
       <param name="source" value="${install.dir}/install.tmp/escidoc-core.custom.properties" />
       <param name="target" value="${install.dir}/wildfly/modules/escidoc/main/escidoc-core.custom.properties" />
     </antcall>
 
+  	
   	<delete dir="${install.dir}/install.tmp/wildfly_config" />
   	
     <chmod dir="${install.dir}/wildfly/bin" perm="ugo+rx" includes="*.sh" />
@@ -209,18 +231,22 @@
   		<zipfileset src="${install.dir}/install.tmp/fedora.war" excludes="WEB-INF/lib/mptstore-0.9.5.jar"/>
   	</zip>
   	
-  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/lib/mptstore-0.9.4.jar" />
+  	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/lib/mptstore-0.9.4.jar WEB-INF/web.xml WEB-INF/jboss-deployment-structure.xml WEB-INF/classes/log4j.properties" />
+  	
   	
     <!-- patch fedora.war by replacing web.xml with customized version -->
-    
+    <!--
     <jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/web.xml" />
+    -->
   	<!-- patch fedora.war by adding a jboss-deployment-structure.xml -->
   	  
+  	<!--
   	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/jboss-deployment-structure.xml" />
-  	
+  	-->
 	<!-- patch fedora.war by adding an empty log4j config file, in order to avoid interference with jboss logging -->
+  	<!--
   	<jar basedir="${install.dir}/install.tmp/fedora_config" update="yes" destfile="${install.dir}/install.tmp/fedora_patched.war" includes="WEB-INF/classes/log4j.properties" />
-  	
+  	-->
   	
   	
 
@@ -247,10 +273,13 @@
   	<jar destfile="${install.dir}/install.tmp/fedora.war" excludesfile="WEB-INF/lib/jackson-mapper-asl-1.5.2.jar" update="yes"/>
   		-->
     <!-- deploy fedora.war in JBoss -->
+  	<copy file="${install.dir}/install.tmp/fedora_patched.war" tofile="${install.dir}/wildfly/standalone/deployments/fedora.war" />
+  	<!--
     <antcall target="move-file-with-save">
       <param name="source" value="${install.dir}/install.tmp/fedora_patched.war" />
       <param name="target" value="${install.dir}/wildfly/standalone/deployments/fedora.war" />
     </antcall>
+    -->
     <antcall target="move-file-with-save">
       <param name="source" value="${install.dir}/install.tmp/fedora_config/fedora-users.xml" />
       <param name="target" value="${install.dir}/fedora/server/config/fedora-users.xml" />
@@ -270,6 +299,7 @@
       <param name="target" value="${install.dir}/fedora/data/fedora-xacml-policies/repository-policies/deny-everything-if-not-administrator.xml" />
     </antcall>
   	
+  	
   	<antcall target="move-file-with-save">
   	  <param name="source" value="${install.dir}/install.tmp/fedora_config/env-server.sh" />
   	  <param name="target" value="${install.dir}/fedora/server/bin/env-server.sh" />
@@ -280,21 +310,27 @@
   	  <param name="target" value="${install.dir}/fedora/server/bin/env-server.bat" />
   	</antcall>
   	
+  	<!--
     <antcall target="unpack">
         <param name="zipfile" value="${install.dir}/install.tmp/fedora_config/apache-tomcat-8.0.28.zip" />
         <param name="target.dir" value="${install.dir}/fedora" />
     </antcall>
+  
     <antcall target="rename">
         <param name="source" value="${install.dir}/fedora/apache-tomcat-8.0.28" />
         <param name="target" value="${install.dir}/fedora/tomcat" />
     </antcall>
+  	  -->
   	
+  	<unzip src="${install.dir}/install.tmp/fedora_patched.war"  dest="${install.dir}/fedora/fedora.war_exploded"></unzip>
+  
     <delete file="${install.dir}/install.tmp/fedora-fedora.zip" />
     <delete dir="${install.dir}/install.tmp/fedora_config" />
     <chmod dir="${install.dir}/fedora/client/bin" perm="ugo+rx" includes="*.sh" />
     <chmod dir="${install.dir}/fedora/server/bin" perm="ugo+rx" includes="*.sh" />
+  	<!--
   	<chmod dir="${install.dir}/fedora/tomcat/bin" perm="ugo+rx" includes="*.sh" />
-  	
+  	-->
   	<!-- Move complete fedora dir to wildfly/modules -->
   	<!--
   	<antcall target="move-dir-without-save">
@@ -304,6 +340,9 @@
   	-->
   </target>
 
+	
+	
+	
   <target name="admintool" depends="init" description="Installs Admin Tool">
     <antcall target="move-file-with-save">
       <param name="source" value="${install.dir}/tools/AdminTool-${admin-tool.version}.war" />
@@ -436,10 +475,21 @@
     <move file="${install.dir}/install.tmp/aa.init.user-accounts.common.sql" todir="${install.dir}/core/sql" />
     <move file="${install.dir}/install.tmp/aa.init.grants.common.sql" todir="${install.dir}/core/sql" />
     <move file="${install.dir}/install.tmp/${DatabaseDriverFile}" todir="${install.dir}/core/lib" />
+  	
+  	<if>
+  		<equals arg1="${installPubman}" arg2="true"/>
+  		<then>
+  		    <move file="${install.dir}/install.tmp/aa.init.user-accounts.pubman.sql" todir="${install.dir}/core/sql" />
+  		    <move file="${install.dir}/install.tmp/aa.init.grants.pubman.sql" todir="${install.dir}/core/sql" />		
+  		</then>
+  	</if>
+
+  	
     <delete dir="${install.dir}/install.tmp/staging" />
     <delete dir="${install.dir}/install.tmp/WEB-INF" />
     <!--delete dir="${install.dir}/install.tmp" /-->
   </target>
+	
 
   <target name="create-db" description="create database escidoc-core" unless="upgradeEscidoc">
     <ant antfile="${INSTALL_PATH}/core/bin/database-init.xml" target="create-db">
@@ -500,6 +550,26 @@
       <param name="target" value="${install.dir}/wildfly/standalone/deployments/${digilib.client.war}" />
     </antcall>
   </target>
+
+	
+	<target name="pubman" if="${installPubman}" depends="init">
+
+		<move todir="${install.dir}/fedora/data/objects/2015/08/11/14/00" >
+			<fileset dir="${install.dir}/install.tmp/pubman">
+				<include name="escidoc_*" />
+			</fileset>
+		</move>
+
+
+		<antcall target="rebuild-fedora">
+			<param name="rebuilder" value="org.fcrepo.server.utilities.rebuild.SQLRebuilder"/>
+		</antcall>
+		
+		<antcall target="rebuild-fedora" >
+			<param name="rebuilder" value="org.fcrepo.server.resourceIndex.ResourceIndexRebuilder"/>
+		</antcall>
+	  	
+	</target>
 
   <!-- Following target is commented out for debugging purposes only.    -->
   <!-- Remove comments before releasing the installer!                   -->
@@ -589,5 +659,30 @@
     <echo level="debug">move ${source} to ${target}</echo>
     <move file="${source}" tofile="${target}" />
   </target>
+	
+	<target name="rebuild-fedora" description="Rebuilds the Fedora database">
+			<java fork="true" dir="${install.dir}/fedora/server/bin" classname="org.fcrepo.server.utilities.rebuild.Rebuild">
+				<classpath>
+	  				<pathelement path="${install.dir}/fedora/server/bin" />
+					<pathelement path="${install.dir}/fedora/fedora.war_exploded/WEB-INF/classes" />
+					<pathelement path="${install.dir}/fedora/fedora.war_exploded/WEB-INF/lib/*" />
+				</classpath>
+				
+				
+				<!--
+				<jvmarg value="-Djava.endorsed.dirs=${install.dir}/fedora/tomcat/lib" />
+				-->
+				<jvmarg line="-server -Xmn64m -Xms256m -Xmx256m"/>
+				<jvmarg value="-Djavax.net.ssl.trustStore=${install.dir}/fedora/server/truststore" />
+				<jvmarg value="-Djavax.net.ssl.trustStorePassword=tomcat" />
+				<jvmarg value="-Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl" />
+				<jvmarg value="-Djavax.xml.parsers.SAXParserFactory=org.apache.xerces.jaxp.SAXParserFactoryImpl" />
+				<jvmarg value="-Dcom.sun.xacml.PolicySchema=${install.dir}/fedora/server/xsd/cs-xacml-schema-policy-01.xsd" />
+				<jvmarg value="-Dfedora.home=${install.dir}/fedora" />
+				<jvmarg value="-Dfedora.web.inf.lib=${install.dir}/fedora/fedora.war_exploded/WEB-INF/lib" />
+				<jvmarg value="-Drebuilder=${rebuilder}" />
+				<!-- org.fcrepo.server.resourceIndex.ResourceIndexRebuilder or org.fcrepo.server.utilities.rebuild.SQLRebuilder-->
+			</java>
+		</target>
 
 </project>

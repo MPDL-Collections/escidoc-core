@@ -30,7 +30,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.izforge.izpack.installer.AutomatedInstallData;
+import com.izforge.izpack.api.data.InstallData;
 
 /**
  * Check if a database exists and return an error if it does.
@@ -49,7 +49,7 @@ public class JDBCValidator extends AbstractValidator {
 	 * (com.izforge.izpack.installer.AutomatedInstallData)
 	 */
 	@Override
-	public Status validateData(AutomatedInstallData data) {
+	public Status validateData(InstallData data) {
 		Status status = Status.ERROR;
 		boolean skipValidation = Boolean.valueOf(data
 				.getVariable("SYSTEM_skip_validation"));

@@ -21,9 +21,6 @@ if not "x%JAVA_OPTS%" == "x" (
   goto JAVA_OPTS_SET
 )
 
-set "FEDORA_HOME=%JBOSS_HOME%\..\fedora"
-echo "Setting FEDORA_HOME to: %FEDORA_HOME%"
-
 rem #
 rem # Specify the JBoss Profiler configuration file to load.
 rem #
@@ -67,5 +64,8 @@ rem set "JAVA_OPTS=%JAVA_OPTS% -agentlib:jdwp=transport=dt_shmem,address=jboss,s
 
 rem # Use JBoss Modules lockless mode
 rem set "JAVA_OPTS=%JAVA_OPTS% -Djboss.modules.lockless=true"
+
+rem # Set fedora.home
+set "JAVA_OPTS=%JAVA_OPTS% -Dfedora.home=%JBOSS_HOME%/../fedora"
 
 :JAVA_OPTS_SET
