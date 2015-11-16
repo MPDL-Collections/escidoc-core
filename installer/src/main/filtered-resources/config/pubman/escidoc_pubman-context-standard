@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="escidoc:pubman-context-standard"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="PubMan Default Context Standard Workflow"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE=""/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2015-08-11T14:28:52.557Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2015-08-12T09:42:13.460Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2015-08-11T14:28:52.557Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-08-11T14:28:52.557Z</audit:date>
+<audit:justification>eSciDoc object created</audit:justification>                                                                                                 
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>RELS-EXT</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-08-12T09:42:13.460Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="" CREATED="2015-08-11T14:28:52.597Z" MIMETYPE="text/xml" SIZE="1060">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:prop="http://escidoc.de/core/01/properties/" xmlns:srel="http://escidoc.de/core/01/structural-relations/" xmlns:system="http://escidoc.de/core/01/system/">
+<rdf:Description rdf:about="info:fedora/escidoc:pubman-context-standard">
+<system:build>1.3.10-SNAPSHOT</system:build>
+<prop:public-status>created</prop:public-status>
+<prop:public-status-comment>Object escidoc:pubman-context-standard created.</prop:public-status-comment>
+<prop:created-by-title>System Administrator User</prop:created-by-title>
+<prop:modified-by-title>System Administrator User</prop:modified-by-title>
+<prop:type>PubMan</prop:type>
+<srel:created-by rdf:resource="info:fedora/escidoc:exuser1"></srel:created-by>
+<srel:modified-by rdf:resource="info:fedora/escidoc:exuser1"></srel:modified-by>
+<rdf:type rdf:resource="http://escidoc.de/core/01/resources/Context"></rdf:type>
+<srel:organizational-unit rdf:resource="info:fedora/escidoc:pubman-ou-main"></srel:organizational-unit>
+</rdf:Description>
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="RELS-EXT.1" LABEL="" CREATED="2015-08-12T09:42:13.460Z" MIMETYPE="text/xml">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="info:fedora/escidoc:pubman-context-standard">
+    <system:build xmlns:system="http://escidoc.de/core/01/system/">1.3.10-SNAPSHOT</system:build>
+    <prop:public-status xmlns:prop="http://escidoc.de/core/01/properties/">opened</prop:public-status>
+    <prop:public-status-comment xmlns:prop="http://escidoc.de/core/01/properties/">Context escidoc:pubman-context-standard opened.</prop:public-status-comment>
+    <prop:created-by-title xmlns:prop="http://escidoc.de/core/01/properties/">System Administrator User</prop:created-by-title>
+    <prop:modified-by-title xmlns:prop="http://escidoc.de/core/01/properties/">System Administrator User</prop:modified-by-title>
+    <prop:type xmlns:prop="http://escidoc.de/core/01/properties/">PubMan</prop:type>
+    <srel:created-by rdf:resource="info:fedora/escidoc:exuser1" xmlns:srel="http://escidoc.de/core/01/structural-relations/"/>
+    <srel:modified-by rdf:resource="info:fedora/escidoc:exuser1" xmlns:srel="http://escidoc.de/core/01/structural-relations/"/>
+    <rdf:type rdf:resource="http://escidoc.de/core/01/resources/Context"/>
+    <srel:organizational-unit rdf:resource="info:fedora/escidoc:pubman-ou-main" xmlns:srel="http://escidoc.de/core/01/structural-relations/"/>
+  </rdf:Description>
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC.0" LABEL="" CREATED="2015-08-11T14:28:52.597Z" MIMETYPE="text/xml" SIZE="483">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>PubMan Default Context Standard Workflow</dc:title>
+  <dc:description>Default PubMan Context Standard Workflow created by the System Administrator.</dc:description>
+  <dc:identifier>escidoc:pubman-context-standard</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="pubman" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="pubman.0" LABEL="pubman" CREATED="2015-08-11T14:28:52.598Z" ALT_IDS="admin-descriptor" MIMETYPE="text/xml" SIZE="5024">
+<foxml:xmlContent>
+<pubman-admin-descriptor>
+  <allowed-genres>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/article</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/Book</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/BookItem</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/proceedings</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/ConferencePaper</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/talk-at-event</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/conference-report</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/ConferencePoster</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/courseware-lecture</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/Thesis</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/paper</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/Report</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/journal</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/issue</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/series</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/other</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/meeting-abstract</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/newspaper-article</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/manuscript</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/manual</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/editorial</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/contribution-to-handbook</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/contribution-to-encyclopedia</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/contribution-to-festschrift</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/contribution-to-commentary</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/contribution-to-collected-edition</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/book-review</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/opinion</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/case-study</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/case-note</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/monograph</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/newspaper</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/encyclopedia</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/multi-volume</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/commentary</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/handbook</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/collected-edition</allowed-genre>
+    <allowed-genre>http://purl.org/escidoc/metadata/ves/publication-types/festschrift</allowed-genre>
+    <allowed-genre>http://purl.org/eprint/type/Patent</allowed-genre>
+  </allowed-genres>
+  <template-item></template-item>
+  <validation-schema>publication</validation-schema>
+  <workflow>standard</workflow>
+  <allowed-subject-classifications>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/DDC</allowed-subject-classification>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/MPIPKS</allowed-subject-classification>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/ISO639-3</allowed-subject-classification>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/MPINP</allowed-subject-classification>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/MPIRG</allowed-subject-classification>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/MPIS_GROUPS</allowed-subject-classification>
+    <allowed-subject-classification>http://purl.org/escidoc/metadata/terms/0.1/MPIS_PROJECTS</allowed-subject-classification>
+  </allowed-subject-classifications>
+  <contact-email>default-context@support.org</contact-email>
+</pubman-admin-descriptor>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>
