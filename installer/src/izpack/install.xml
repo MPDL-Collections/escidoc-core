@@ -636,12 +636,18 @@ Database
         
         
 
-		<pack name="Pubman Dataset" id="pubman.dataset.ingest" required="no" preselected="true">
+		<pack name="Pubman Dataset" id="pubman.dataset.ingest" required="no" preselected="false">
             <description>Creates the necessary databases and system roles</description>
             <depends packname="Fedora Repository" />
 
             <file src="config/pubman/escidoc_pubman-content-model" targetdir="$INSTALL_PATH/install.tmp/pubman" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-content-model" />
+            
+            <file src="config/pubman/escidoc_pubman-content-model-import" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-content-model-import" />
+            
+            <file src="config/pubman/escidoc_pubman-content-model-yearbook" targetdir="$INSTALL_PATH/install.tmp/pubman" />
+            <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-content-model-yearbook" />
             
              <file src="config/pubman/escidoc_pubman-context-simple" targetdir="$INSTALL_PATH/install.tmp/pubman" />
             <parsable targetfile="$INSTALL_PATH/install.tmp/pubman/escidoc_pubman-context-simple" />

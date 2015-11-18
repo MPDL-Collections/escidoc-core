@@ -14,6 +14,10 @@
 #                  unspecified, then will use CATALINA_HOME/webapps/$webapp_name.
 #------------------------------------------------------------------------------
 
+FEDORA_HOME=${INSTALL_PATH}\fedora
+CATALINA_HOME=$FEDORA_HOME\tomcat
+FEDORA_WEBAPP_HOME=$FEDORA_HOME\fedora.war_exploded
+
 if [ -z "$WEBAPP_NAME" ]; then
   webapp_name="fedora"
 else 

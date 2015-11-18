@@ -18,6 +18,10 @@ REM                  unspecified, then will use
 REM                  CATALINA_HOME\webapps\%WEBAPP_NAME%
 REM ---------------------------------------------------------------------------
 
+set FEDORA_HOME=${INSTALL_PATH}\fedora
+set CATALINA_HOME=%FEDORA_HOME%\tomcat
+set FEDORA_WEBAPP_HOME=%FEDORA_HOME%\fedora.war_exploded
+
 if not "%WEBAPP_NAME%" == "" goto gotWebappName
 set WEBAPP_NAME=fedora
 :gotWebappName
