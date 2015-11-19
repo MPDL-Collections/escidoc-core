@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="escidoc:pubman-content-model-import"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="Content Model escidoc:pubman-content-model-import"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE=""/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2015-08-11T14:23:16.224Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2015-08-11T14:23:16.514Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2015-08-11T14:23:16.224Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-08-11T14:23:16.224Z</audit:date>
+<audit:justification>eSciDoc object created</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>version-history</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-08-11T14:23:16.428Z</audit:date>
+<audit:justification>created</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC3">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>RELS-EXT</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2015-08-11T14:23:16.514Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC.0" LABEL="" CREATED="2015-08-11T14:23:16.269Z" MIMETYPE="text/xml" SIZE="465">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>Import Content Model</dc:title>
+  <dc:description>eSciDoc content model for import items in multiple import database</dc:description>
+  <dc:identifier>escidoc:pubman-content-model-import</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DS-COMPOSITE-MODEL" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DS-COMPOSITE-MODEL.0" LABEL="" CREATED="2015-08-11T14:23:16.269Z" MIMETYPE="text/xml" SIZE="179">
+<foxml:xmlContent>
+<dsCompositeModel xmlns="info:fedora/fedora-system:def/dsCompositeModel#" xmlns:schema="http://ecm.sourceforge.net/types/dscompositeschema/0/1/#">
+        			</dsCompositeModel>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC-MAPPING" STATE="A" CONTROL_GROUP="E" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC-MAPPING.0" LABEL="" CREATED="2015-08-11T14:23:16.269Z" ALT_IDS="content-stream" MIMETYPE="text/xml">
+<foxml:contentLocation TYPE="URL" REF="http://pubman.mpdl.mpg.de/dc_stylesheet_escidoc.xsl"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="" CREATED="2015-08-11T14:23:16.270Z" MIMETYPE="text/xml" SIZE="1434">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+          <rdf:Description xmlns:srel="http://escidoc.de/core/01/structural-relations/" xmlns:prop="http://escidoc.de/core/01/properties/" xmlns:version="http://escidoc.de/core/01/properties/version/" rdf:about="info:fedora/escidoc:pubman-content-model-import">
+			<system:build xmlns:system="http://escidoc.de/core/01/system/">1.3.10-SNAPSHOT</system:build>
+            <rdf:type rdf:resource="http://escidoc.de/core/01/resources/ContentModel"></rdf:type>
+            <hasModel xmlns="info:fedora/fedora-system:def/model#" rdf:resource="info:fedora/fedora-system:ContentModel-3.0"></hasModel>
+            <srel:created-by rdf:resource="info:fedora/escidoc:exuser1"></srel:created-by>
+            <prop:public-status>pending</prop:public-status>
+            <prop:public-status-comment>Object created.</prop:public-status-comment>
+            <prop:created-by-title>System Administrator User</prop:created-by-title>
+            <version:number>1</version:number>
+            <version:date>---</version:date>
+            <version:status>pending</version:status>
+            <srel:modified-by rdf:resource="info:fedora/escidoc:exuser1"></srel:modified-by>
+            <prop:modified-by-title>System Administrator User</prop:modified-by-title>
+            <version:comment>Object created. Content Model escidoc:pubman-content-model-import created.</version:comment>
+          </rdf:Description>
+        </rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="RELS-EXT.1" LABEL="RELS_EXT DATASTREAM" CREATED="2015-08-11T14:23:16.514Z" MIMETYPE="text/xml">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="info:fedora/escidoc:pubman-content-model-import" xmlns:prop="http://escidoc.de/core/01/properties/"
+    xmlns:srel="http://escidoc.de/core/01/structural-relations/" xmlns:version="http://escidoc.de/core/01/properties/version/">
+    <system:build xmlns:system="http://escidoc.de/core/01/system/">1.3.10-SNAPSHOT</system:build>
+    <rdf:type rdf:resource="http://escidoc.de/core/01/resources/ContentModel"/>
+    <hasModel rdf:resource="info:fedora/fedora-system:ContentModel-3.0" xmlns="info:fedora/fedora-system:def/model#"/>
+    <srel:created-by rdf:resource="info:fedora/escidoc:exuser1"/>
+    <prop:public-status>pending</prop:public-status>
+    <prop:public-status-comment>Object created.</prop:public-status-comment>
+    <prop:created-by-title>System Administrator User</prop:created-by-title>
+    <version:number>1</version:number>
+    <version:date>2015-08-11T14:23:16.270Z</version:date>
+    <version:status>pending</version:status>
+    <srel:modified-by rdf:resource="info:fedora/escidoc:exuser1"/>
+    <prop:modified-by-title>System Administrator User</prop:modified-by-title>
+    <version:comment>Object created. Content Model escidoc:pubman-content-model-import created.</version:comment>
+  </rdf:Description>
+</rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="version-history" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="version-history.0" LABEL="whole object versioning datastream" CREATED="2015-08-11T14:23:16.428Z" MIMETYPE="text/xml" SIZE="2032">
+<foxml:xmlContent>
+<escidocVersions:version-history xmlns:escidocVersions="http://www.escidoc.de/schemas/versionhistory/0.3">
+  <escidocVersions:version xmlns:xlink="http://www.w3.org/1999/xlink" objid="escidoc:pubman-content-model-import:1" timestamp="2015-08-11T14:23:16.270Z" xlink:href="/cmm/content-model/escidoc:pubman-content-model-import:1" xlink:title="Publication Content Model" xlink:type="simple">
+    <escidocVersions:version-number>1</escidocVersions:version-number>
+    <escidocVersions:timestamp>2015-08-11T14:23:16.270Z</escidocVersions:timestamp>
+    <escidocVersions:version-status>pending</escidocVersions:version-status>
+    <escidocVersions:comment>Object created.</escidocVersions:comment>
+    <escidocVersions:events>
+      <premis:event xmlns:premis="http://www.loc.gov/standards/premis/v1" xmlID="v1e1439302996400">
+        <premis:eventIdentifier>
+          <premis:eventIdentifierType>URL</premis:eventIdentifierType>
+          <premis:eventIdentifierValue>/cmm/content-model/escidoc:pubman-content-model-import:1/version-history#v1e1439302996400</premis:eventIdentifierValue>
+        </premis:eventIdentifier>
+        <premis:eventType>create</premis:eventType>
+        <premis:eventDateTime>2015-08-11T14:23:16.270Z</premis:eventDateTime>
+        <premis:eventDetail>Object created.</premis:eventDetail>
+        <premis:linkingAgentIdentifier xlink:href="/aa/user-account/escidoc:exuser1" xlink:title="System Administrator User" xlink:type="simple">
+          <premis:linkingAgentIdentifierType>escidoc-internal</premis:linkingAgentIdentifierType>
+          <premis:linkingAgentIdentifierValue>escidoc:exuser1</premis:linkingAgentIdentifierValue>
+        </premis:linkingAgentIdentifier>
+        <premis:linkingObjectIdentifier>
+          <premis:linkingObjectIdentifierType>escidoc-internal</premis:linkingObjectIdentifierType>
+          <premis:linkingObjectIdentifierValue>escidoc:pubman-content-model-import</premis:linkingObjectIdentifierValue>
+        </premis:linkingObjectIdentifier>
+      </premis:event>
+    </escidocVersions:events>
+  </escidocVersions:version>
+</escidocVersions:version-history>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>
