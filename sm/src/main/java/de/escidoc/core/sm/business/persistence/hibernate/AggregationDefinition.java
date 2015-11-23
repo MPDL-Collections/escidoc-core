@@ -5,6 +5,7 @@ package de.escidoc.core.sm.business.persistence.hibernate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -197,6 +201,7 @@ public class AggregationDefinition implements java.io.Serializable {
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "aggregation_definition_id", updatable = false)
+    @Fetch(value = FetchMode.SUBSELECT)
     public Set<AggregationStatisticDataSelector> getAggregationStatisticDataSelectors() {
         return this.aggregationStatisticDataSelectors;
     }
@@ -219,6 +224,7 @@ public class AggregationDefinition implements java.io.Serializable {
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "aggregation_definition_id", updatable = false)
+    @Fetch(value = FetchMode.SUBSELECT)
     public Set<AggregationTable> getAggregationTables() {
         return this.aggregationTables;
     }

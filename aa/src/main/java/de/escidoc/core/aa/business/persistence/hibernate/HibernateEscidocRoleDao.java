@@ -158,9 +158,8 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
                 if (result == null) {
                     result =
                         (EscidocRole) getUniqueResult((List<Object>) getHibernateTemplate().findByCriteria(
-                            DetachedCriteria
-                                .forClass(EscidocRole.class).add(Restrictions.eq("roleName", identifier))
-                                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)));
+                            DetachedCriteria.forClass(EscidocRole.class).add(Restrictions.eq("roleName", identifier))));
+                    //.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)));
                 }
             }
             catch (final DataAccessException e) {
@@ -189,7 +188,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
         final ListSorting sorting) throws SqlDatabaseSystemException {
 
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(EscidocRole.class, "r");
-        detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        //detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         detachedCriteria.add(Restrictions.ne("id", EscidocRole.DEFAULT_USER_ROLE_ID));
 
         if (criterias != null && !criterias.isEmpty()) {
@@ -292,7 +291,7 @@ public class HibernateEscidocRoleDao extends AbstractHibernateDao implements Esc
                 final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(EscidocRole.class, "r");
 
                 detachedCriteria.add(Restrictions.ne("id", EscidocRole.DEFAULT_USER_ROLE_ID));
-                detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+                //detachedCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
                 result =
                     (List<EscidocRole>) getHibernateTemplate().findByCriteria(detachedCriteria, offset, maxResults);
             }

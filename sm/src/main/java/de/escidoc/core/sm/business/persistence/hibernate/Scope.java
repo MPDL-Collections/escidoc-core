@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -280,6 +282,7 @@ public class Scope implements java.io.Serializable {
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "scope_id", updatable = false)
+    @Fetch(value = FetchMode.SUBSELECT)
     public Set<AggregationDefinition> getAggregationDefinitions() {
         return this.aggregationDefinitions;
     }

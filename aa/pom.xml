@@ -56,7 +56,7 @@
 					<source>${java.source.version}</source>
 					<complianceLevel>${java.target.version}</complianceLevel>
 					<outxml>true</outxml>
-                    <showWeaveInfo>true</showWeaveInfo>
+                    <showWeaveInfo>false</showWeaveInfo>
 					<aspectLibraries>
                   		<aspectLibrary>
                     		<groupId>org.springframework</groupId>

@@ -31,9 +31,11 @@ package de.escidoc.core.sm.business.persistence.hibernate;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
@@ -164,6 +166,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
     @Override
     public Collection<AggregationDefinition> retrieveAggregationDefinitions() throws SqlDatabaseSystemException {
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(AggregationDefinition.class, "a");
+        //detachedCriteria.setProjection(Projections.distinct(Projections.property("id")));
         return (Collection<AggregationDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria);
     }
 
@@ -192,6 +195,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
                 criteria != null && criteria.length() > 0 ? new AggregationDefinitionFilter(criteria).toSql() : DetachedCriteria
                     .forClass(AggregationDefinition.class, "a");
             detachedCriteria.add(Restrictions.in("scope.id", scopeIds));
+            //detachedCriteria.setProjection(Projections.distinct(Projections.property("id")));
 
             final Collection<AggregationDefinition> aggregationDefinitions =
                 (Collection<AggregationDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria, offset,
@@ -223,6 +227,7 @@ public class SmAggregationDefinitionsHibernateDao extends AbstractHibernateDao
 
         final DetachedCriteria detachedCriteria = DetachedCriteria.forClass(AggregationDefinition.class, "a");
         detachedCriteria.add(Restrictions.in("scope.id", scopeIds));
+        //detachedCriteria.setProjection(Projections.distinct(Projections.property("id")));
 
         final Collection<AggregationDefinition> aggregationDefinitions =
             (Collection<AggregationDefinition>) getHibernateTemplate().findByCriteria(detachedCriteria);
