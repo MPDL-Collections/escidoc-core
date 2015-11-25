@@ -967,6 +967,7 @@
 	</pluginRepositories>
 
 	<distributionManagement>
+	<!--  
 		<repository>
 			<id>org.escidoc.core</id>
 			<name>org.escidoc.core-releases</name>
@@ -976,6 +977,17 @@
 			<id>org.escidoc.core</id>
 			<name>org.escidoc.core-snapshots</name>
 			<url>https://www.escidoc.org/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	-->	
+		<repository>
+			<id>releases</id>
+			<name>Nexus Managed Releases</name>
+			<url>http://rd.mpdl.mpg.de/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Nexus Managed Snapshots</name>
+			<url>http://rd.mpdl.mpg.de/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
