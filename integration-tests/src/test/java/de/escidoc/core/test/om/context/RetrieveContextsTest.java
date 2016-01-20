@@ -30,11 +30,15 @@ package de.escidoc.core.test.om.context;
 
 import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.security.client.PWCallback;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -51,6 +55,7 @@ import static org.junit.Assert.assertTrue;
  * @author Michael Schneider
  */
 @RunWith(value = Parameterized.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RetrieveContextsTest extends ContextTestBase {
 
     public static final String XPATH_SRW_CONTEXT_LIST_CONTEXT =
