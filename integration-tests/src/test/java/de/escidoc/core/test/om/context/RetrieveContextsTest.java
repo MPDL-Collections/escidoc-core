@@ -239,7 +239,7 @@ public class RetrieveContextsTest extends ContextTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testRetrieveAdminDescriptors() throws Exception {
+    public void testXRetrieveAdminDescriptors() throws Exception {
 
         Document context = EscidocRestSoapTestBase.getTemplateAsDocument(this.path, "context_create.xml");
         substitute(context, "/context/properties/name", getUniqueName("PubMan Context "));
@@ -286,7 +286,7 @@ public class RetrieveContextsTest extends ContextTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testRetrieveEmptyAdminDescriptors() throws Exception {
+    public void testXRetrieveEmptyAdminDescriptors() throws Exception {
 
         Document context =
             EscidocRestSoapTestBase.getTemplateAsDocument(this.path, "context_create_without_admindescriptor.xml");

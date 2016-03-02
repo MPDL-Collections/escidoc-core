@@ -32,9 +32,12 @@ import de.escidoc.core.common.exceptions.remote.application.security.Authorizati
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.common.client.servlet.aa.GrantClient;
 import de.escidoc.core.test.security.client.PWCallback;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  * Test suite for the role ou-administrator. ou-administrator may -create, retrieve, delete, update, open, close
@@ -46,6 +49,7 @@ import org.junit.Test;
  *
  * @author Michael Hoppe
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OrgUnitAdminAbstractTest extends GrantTestBase {
 
     protected static final String HANDLE = PWCallback.TEST_HANDLE;

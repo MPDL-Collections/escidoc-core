@@ -31,9 +31,12 @@ package de.escidoc.core.test.aa;
 import de.escidoc.core.common.exceptions.remote.application.security.AuthorizationException;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.security.client.PWCallback;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ import java.util.List;
  *
  * @author Michael Hoppe
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StatisticEditorAbstractTest extends GrantTestBase {
 
     private static final String HANDLE = PWCallback.TEST_HANDLE;
@@ -144,6 +148,9 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
             doTestCreateReportDefinition(PWCallback.DEFAULT_HANDLE, REPORT_DEFINITION_TEMPLATE_NAME, disallowedScope,
                 disallowedScopeAggregationDefinitionId, null);
 
+        allowedScopeAggregationDefinitionId =
+            doTestCreateAggregationDefinition(HANDLE, AGGREGATION_DEFINITION_TEMPLATE_NAME, ALLOWED_SCOPE, null);
+
     }
 
     /**
@@ -198,8 +205,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
     @Test
     public void testCreateAggregationDefinition() throws Exception {
 
-        allowedScopeAggregationDefinitionId =
-            doTestCreateAggregationDefinition(HANDLE, AGGREGATION_DEFINITION_TEMPLATE_NAME, ALLOWED_SCOPE, null);
+        doTestCreateAggregationDefinition(HANDLE, AGGREGATION_DEFINITION_TEMPLATE_NAME, ALLOWED_SCOPE, null);
     }
 
     /**
@@ -277,7 +283,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testDeleteReportDefinition() throws Exception {
+    public void testXDeleteReportDefinition() throws Exception {
 
         doTestDeleteReportDefinition(HANDLE, allowedScopeReportDefinitionId, null);
     }
@@ -288,7 +294,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testDeleteAggregationDefinition() throws Exception {
+    public void testXDeleteAggregationDefinition() throws Exception {
 
         doTestDeleteAggregationDefinition(HANDLE, allowedScopeAggregationDefinitionId, null);
     }
@@ -299,7 +305,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testRetrieveDisallowedScope() throws Exception {
+    public void testXRetrieveDisallowedScope() throws Exception {
 
         doTestRetrieveScope(HANDLE, disallowedScope, AuthorizationException.class);
     }
@@ -391,7 +397,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testDeleteDisallowedReportDefinition() throws Exception {
+    public void testXDeleteDisallowedReportDefinition() throws Exception {
 
         doTestDeleteReportDefinition(HANDLE, disallowedScopeReportDefinitionId, AuthorizationException.class);
     }
@@ -402,7 +408,7 @@ public class StatisticEditorAbstractTest extends GrantTestBase {
      * @throws Exception If anything fails.
      */
     @Test
-    public void testDeleteDisallowedAggregationDefinition() throws Exception {
+    public void testXDeleteDisallowedAggregationDefinition() throws Exception {
 
         doTestDeleteAggregationDefinition(HANDLE, disallowedScopeAggregationDefinitionId, AuthorizationException.class);
     }
