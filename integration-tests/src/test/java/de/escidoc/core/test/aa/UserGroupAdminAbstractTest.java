@@ -33,9 +33,12 @@ import de.escidoc.core.test.EscidocRestSoapTestBase;
 import de.escidoc.core.test.common.client.servlet.Constants;
 import de.escidoc.core.test.common.client.servlet.aa.GrantClient;
 import de.escidoc.core.test.security.client.PWCallback;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -49,6 +52,7 @@ import java.util.Vector;
  *
  * @author Michael Hoppe
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserGroupAdminAbstractTest extends GrantTestBase {
 
     protected static final String HANDLE = PWCallback.TEST_HANDLE;
