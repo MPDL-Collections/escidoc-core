@@ -376,7 +376,7 @@
     <!-- move file="${install.dir}/jboss/server/default/deploy/escidoc-core.ear" tofile="${install.dir}/jboss/server/default/deploy/escidoc-core.ear-${timestamp}" /-->
     <move tofile="${install.dir}/jboss/server/default/deploy/escidoc-core.ear">
       <fileset dir="${install.dir}/core/ear">
-        <include name="escidoc-core*.ear" />
+        <include name="escidoc-core-build*.ear" />
       </fileset>
     </move>
     <move file="${install.dir}/core/license/ESCIDOC.LICENSE" todir="${install.dir}" />
