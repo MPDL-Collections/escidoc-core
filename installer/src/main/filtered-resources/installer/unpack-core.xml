@@ -25,7 +25,7 @@
   <taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask" />
 
   <target name="build" description="Installs JBoss with patches, Fedora, and escidoc-core">
-    <echo level="info">Unpack and install eSciDoc Infrastructure</echo>
+    <echo level="debug">Unpack and install eSciDoc Infrastructure</echo>
     <antcall target="jboss" />
     <antcall target="jboss-patch" />
     <antcall target="jboss-jmx-console" />
