@@ -1437,18 +1437,6 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- Override version of Apache CXF with that is called by spring security 3.0.8.RELEASE -->
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-asm</artifactId>
-				<version>3.0.6.RELEASE</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aspects</artifactId>
@@ -1806,6 +1794,11 @@
 						<groupId>org.fcrepo</groupId>
 						<artifactId>saxon-dom</artifactId>
 					</exclusion>
+
+						<exclusion>
+							<groupId>org.springframework</groupId>
+							<artifactId>spring-asm</artifactId>
+						</exclusion>
 				</exclusions>
 			</dependency>
 			<dependency>
