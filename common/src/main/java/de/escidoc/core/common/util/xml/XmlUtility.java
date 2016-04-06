@@ -2431,8 +2431,8 @@ public final class XmlUtility {
      */
     private static XMLOutputFactory getInitilizedXmlOutputFactory(final boolean repairing) {
 
-        final XMLOutputFactory xmlof = XMLOutputFactory.newFactory();
-        //final XMLOutputFactory xmlof = new WstxOutputFactory();
+        //final XMLOutputFactory xmlof = XMLOutputFactory.newFactory();
+        final XMLOutputFactory xmlof = new WstxOutputFactory();
 
         xmlof.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, repairing);
         if (repairing) {
