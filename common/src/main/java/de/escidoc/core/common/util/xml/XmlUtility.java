@@ -2633,10 +2633,12 @@ public final class XmlUtility {
                 t.clearParameters();
             }
 
-            LOGGER.info("create DC Parameter PID set to <" + t.getParameter("PID") + ">");
-            LOGGER.info("create DC Parameter COMPONENT_IDS set to <" + t.getParameter("COMPONENT_IDS") + ">");
-            LOGGER.info("create DC Parameter VISIBILITY set to <" + t.getParameter("VISIBILITY") + ">");
-            LOGGER.info("create DC Parameter ID set to <" + t.getParameter("ID") + ">");
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("create DC Parameter PID set to <" + t.getParameter("PID") + ">");
+                LOGGER.debug("create DC Parameter COMPONENT_IDS set to <" + t.getParameter("COMPONENT_IDS") + ">");
+                LOGGER.debug("create DC Parameter VISIBILITY set to <" + t.getParameter("VISIBILITY") + ">");
+                LOGGER.debug("create DC Parameter ID set to <" + t.getParameter("ID") + ">");
+            }
 
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             t.transform(new StreamSource(new ByteArrayInputStream(mdRecordXml.getBytes(CHARACTER_ENCODING))),
