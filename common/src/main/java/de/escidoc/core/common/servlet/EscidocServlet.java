@@ -716,7 +716,7 @@ public class EscidocServlet extends HttpServlet {
             }
         }
         else {
-            LOGGER.info("No handle in cookie received, assuming  anonymous access.");
+            LOGGER.debug("No handle in cookie received, assuming  anonymous access.");
             return new String[] { "", "" };
         }
     }
