@@ -951,14 +951,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>org.escidoc.core</id>
-			<name>org.escidoc.core-releases</name>
-			<url>https://www.escidoc.org/artifactory/libs-release-local</url>
+			<id>releases</id>
+			<name>Nexus Managed Releases</name>
+			<url>http://rd.mpdl.mpg.de/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>org.escidoc.core</id>
-			<name>org.escidoc.core-snapshots</name>
-			<url>https://www.escidoc.org/artifactory/libs-snapshot-local</url>
+			<id>snapshots</id>
+			<name>Nexus Managed Snapshots</name>
+			<url>http://rd.mpdl.mpg.de/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
