@@ -2918,6 +2918,8 @@ public abstract class EscidocTestBase {
             validator.validate(new SAXSource(new InputSource(in)));
         }
         catch (final Exception e) {
+        	LOGGER.info("\nassertXmlValid invalid xml \n"  + xmlData);
+        	LOGGER.info("\nassertXmlValid schema \n"  + schema.toString());
             final StringBuffer errorMsg = new StringBuffer("XML invalid. ");
             errorMsg.append(e.getMessage());
             if (LOGGER.isDebugEnabled()) {
