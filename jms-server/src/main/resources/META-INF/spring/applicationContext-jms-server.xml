@@ -23,7 +23,7 @@
         default-lazy-init="false">
 
     <broker xmlns="http://activemq.apache.org/schema/core"
-            id="broker" brokerName="localhost" persistent="true" start="true" useJmx="false"  dataDirectory="${activemq.store.dir}/activemq-data">
+            id="broker" brokerName="localhost" persistent="true" start="true" useJmx="false">
         <transportConnectors>
             <transportConnector name="vm" uri="vm://localhost" />
             <transportConnector name="tcp" uri="${jms.url}" />
