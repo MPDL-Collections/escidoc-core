@@ -2637,10 +2637,10 @@ public final class XmlUtility {
             }
 
             if (LOGGER.isDebugEnabled()) {
-	            LOGGER.debug("create DC Parameter PID set to <" + t.getParameter("PID") + ">");
-	            LOGGER.debug("create DC Parameter COMPONENT_IDS set to <" + t.getParameter("COMPONENT_IDS") + ">");
-	            LOGGER.debug("create DC Parameter VISIBILITY set to <" + t.getParameter("VISIBILITY") + ">");
-	            LOGGER.debug("create DC Parameter ID set to <" + t.getParameter("ID") + ">");
+                LOGGER.debug("create DC Parameter PID set to <" + t.getParameter("PID") + ">");
+                LOGGER.debug("create DC Parameter COMPONENT_IDS set to <" + t.getParameter("COMPONENT_IDS") + ">");
+                LOGGER.debug("create DC Parameter VISIBILITY set to <" + t.getParameter("VISIBILITY") + ">");
+                LOGGER.debug("create DC Parameter ID set to <" + t.getParameter("ID") + ">");
             }
 
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
