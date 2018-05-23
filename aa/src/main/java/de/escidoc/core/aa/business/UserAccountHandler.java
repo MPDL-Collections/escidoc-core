@@ -53,6 +53,8 @@ import de.escidoc.core.aa.business.stax.handler.RevokeStaxHandler;
 import de.escidoc.core.aa.business.stax.handler.UserAccountPropertiesStaxHandler;
 import de.escidoc.core.aa.business.stax.handler.UserAttributeReadHandler;
 import de.escidoc.core.aa.business.stax.handler.UserPreferenceReadHandler;
+import de.escidoc.core.aa.springsecurity.BCrypt;
+import de.escidoc.core.aa.springsecurity.BCryptPasswordEncoder;
 import de.escidoc.core.common.business.Constants;
 import de.escidoc.core.common.business.fedora.TripleStoreUtility;
 import de.escidoc.core.common.business.fedora.Utility;
@@ -190,6 +192,8 @@ public class UserAccountHandler implements UserAccountHandlerInterface {
 
     private TripleStoreUtility tripleStoreUtility;
 
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     /**
      * See Interface for functional description.
      *
@@ -286,7 +290,7 @@ public class UserAccountHandler implements UserAccountHandlerInterface {
         // Bulatovic). Once the identity management has been integrated, this
         // should be removed, because after that, user passwords will not be
         // used, anymore.
-        userAccount.setPassword("PubManR2");
+        userAccount.setPassword(passwordEncoder.encodePassword("PubManR2", null));
 
         dao.save(userAccount);
 
@@ -414,7 +418,7 @@ public class UserAccountHandler implements UserAccountHandlerInterface {
         if (password == null || "".equals(password)) {
             throw new MissingMethodParameterException("Password must not be null or empty!");
         }
-        userAccount.setPassword(password);
+        userAccount.setPassword(passwordEncoder.encodePassword(password, null));
         final ByteArrayInputStream in = XmlUtility.convertToByteArrayInputStream(taskParam);
         final StaxParser sp = new StaxParser("param");
         final OptimisticLockingStaxHandler optimisticLockingHandler =
